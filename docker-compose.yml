@@ -1,0 +1,3 @@
+# Reserved for the server/database phase.
+# Do not add PostgreSQL/Mosquitto services until the corresponding project phase begins.
+services: {}

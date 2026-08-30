@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.idea/
+.vscode/
+.DS_Store
+
+# Generated/raw project data
+data/raw/*
+data/processed/*
+data/splits/*
+data/metadata/*
+!data/**/.gitkeep
+
+# ML artifacts
+*.tflite
+*.keras
+*.h5
+*.npz
+*.npy
+
+# Secrets
+.env
+.env.*

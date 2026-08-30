@@ -1,0 +1,14 @@
+feature_version: features-v1
+input_features: 10
+classes: 5
+
+blocks:
+  b1: 64
+  b2: 48
+  b3: 32
+  cloud_b4: 64
+  cloud_b5: 32
+
+mc_dropout:
+  passes: 5
+  dropout_rate: 0.2

@@ -1,0 +1,12 @@
+version: gestures-v1
+gestures:
+  - id: 0
+    name: IDLE
+  - id: 1
+    name: SWIPE_LEFT
+  - id: 2
+    name: SWIPE_RIGHT
+  - id: 3
+    name: ROTATE_CW
+  - id: 4
+    name: SHAKE

@@ -1,0 +1,17 @@
+dataset_version: dataset-v1
+runtime:
+  window_ms: 1000
+  step_ms: 500
+
+cost_weights:
+  error: 0.50
+  latency: 0.25
+  communication: 0.15
+  energy: 0.10
+
+evaluation_modes:
+  - all_local
+  - all_cloud
+  - fixed_split
+  - rule_based
+  - learned_adaptive

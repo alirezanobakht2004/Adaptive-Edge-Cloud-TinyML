@@ -1,0 +1,20 @@
+board:
+  family: ESP32-S3
+  module: ESP32-S3-WROOM-1-N8R2
+  flash_mb: 8
+  psram_mb: 2
+
+imu:
+  model: MPU6050_GY521
+  i2c_frequency_hz: 400000
+  sampling_rate_hz: 100
+  accel_range_g: 4
+  gyro_range_dps: 500
+
+pins:
+  sda: 8
+  scl: 9
+
+notes:
+  - "GPIO8/GPIO9 are planned I2C pins and must be verified on the physical development board."
+  - "Power GY-521 from the ESP32-S3 3.3V pin."
