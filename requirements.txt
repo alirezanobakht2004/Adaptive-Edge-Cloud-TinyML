@@ -1,3 +1,4 @@
 numpy>=1.26,<3
 PyYAML>=6,<7
 pytest>=8,<9
+pyserial>=3.5,<4
