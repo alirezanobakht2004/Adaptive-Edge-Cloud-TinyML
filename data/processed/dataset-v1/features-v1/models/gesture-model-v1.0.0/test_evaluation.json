@@ -1,0 +1,68 @@
+{
+  "evaluation_type": "final-held-out-test",
+  "model_version": "gesture-model-v1.0.0",
+  "model_sha256": "2a103e4785b10d73932576e2240c06115f146e8740d5f875f5f63563efd40261",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "test_split": "session_03",
+  "test_split_used": true,
+  "sample_count": 200,
+  "class_to_id": {
+    "IDLE": 0,
+    "SWIPE_LEFT": 1,
+    "SWIPE_RIGHT": 2,
+    "ROTATE_CW": 3,
+    "SHAKE": 4
+  },
+  "training_validation_metrics": {
+    "accuracy": 0.985,
+    "macro_precision": 0.9852439024390243,
+    "macro_recall": 0.9850000000000001,
+    "macro_f1": 0.9850609470229724
+  },
+  "test_metrics": {
+    "loss": 0.06658870726823807,
+    "accuracy": 0.985,
+    "macro_precision": 0.9849937460913072,
+    "macro_recall": 0.985,
+    "macro_f1": 0.9849359274886702
+  },
+  "test_confusion_matrix": [
+    [
+      40,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      39,
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      38,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      40,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      40
+    ]
+  ],
+  "post_test_tuning_allowed": false
+}
