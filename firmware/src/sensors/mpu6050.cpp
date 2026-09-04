@@ -13,8 +13,16 @@ constexpr uint8_t REG_ACCEL_XOUT_H = 0x3B;
 constexpr uint8_t REG_PWR_MGMT_1   = 0x6B;
 constexpr uint8_t REG_WHO_AM_I     = 0x75;
 
-constexpr float ACCEL_SCALE = 8192.0f;  // +/-4 g
-constexpr float GYRO_SCALE  = 65.5f;    // +/-500 dps
+constexpr float ACCEL_LSB_PER_G = 8192.0f;
+constexpr float GYRO_LSB_PER_DPS = 65.5f;
+
+constexpr float ACCEL_OFFSET_X_G = 0.014300f;
+constexpr float ACCEL_OFFSET_Y_G = 0.019846f;
+constexpr float ACCEL_OFFSET_Z_G = 0.114024f;
+
+constexpr float ACCEL_AXIS_SCALE_X = 0.995437f;
+constexpr float ACCEL_AXIS_SCALE_Y = 1.000465f;
+constexpr float ACCEL_AXIS_SCALE_Z = 1.009354f;
 
 constexpr uint32_t CALIBRATION_SAMPLE_PERIOD_US = 10000UL;
 
@@ -140,25 +148,37 @@ bool mpu6050Read(ImuSample& sample) {
             (Wire.read() << 8) | Wire.read()
         );
 
+    const float axMeasured =
+    static_cast<float>(axRaw) / ACCEL_LSB_PER_G;
+
+    const float ayMeasured =
+        static_cast<float>(ayRaw) / ACCEL_LSB_PER_G;
+
+    const float azMeasured =
+        static_cast<float>(azRaw) / ACCEL_LSB_PER_G;
+
     sample.ax =
-        static_cast<float>(axRaw) / ACCEL_SCALE;
+        (axMeasured - ACCEL_OFFSET_X_G)
+        / ACCEL_AXIS_SCALE_X;
 
     sample.ay =
-        static_cast<float>(ayRaw) / ACCEL_SCALE;
+        (ayMeasured - ACCEL_OFFSET_Y_G)
+        / ACCEL_AXIS_SCALE_Y;
 
     sample.az =
-        static_cast<float>(azRaw) / ACCEL_SCALE;
+        (azMeasured - ACCEL_OFFSET_Z_G)
+        / ACCEL_AXIS_SCALE_Z;
 
     sample.gx =
-        (static_cast<float>(gxRaw) / GYRO_SCALE)
+        (static_cast<float>(gxRaw) / GYRO_LSB_PER_DPS)
         - gyroBias.x;
 
     sample.gy =
-        (static_cast<float>(gyRaw) / GYRO_SCALE)
+        (static_cast<float>(gyRaw) / GYRO_LSB_PER_DPS)
         - gyroBias.y;
 
     sample.gz =
-        (static_cast<float>(gzRaw) / GYRO_SCALE)
+        (static_cast<float>(gzRaw) / GYRO_LSB_PER_DPS)
         - gyroBias.z;
 
     return true;
