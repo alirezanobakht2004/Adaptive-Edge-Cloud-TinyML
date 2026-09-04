@@ -11,10 +11,10 @@ __pycache__/
 firmware/.pio/
 
 # Generated/raw project data
-data/raw/*
-data/processed/*
-data/splits/*
-data/metadata/*
+#data/raw/*
+#data/processed/*
+#data/splits/*
+#data/metadata/*
 !data/**/.gitkeep
 
 # ML artifacts

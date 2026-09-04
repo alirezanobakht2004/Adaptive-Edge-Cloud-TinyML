@@ -1,0 +1,17 @@
+{
+  "dataset_version": "dataset-v1",
+  "gesture": "SWIPE_RIGHT",
+  "user": "user_01",
+  "session": "session_01",
+  "sample_rate_hz": 100,
+  "window_ms": 1000,
+  "sample_count": 100,
+  "accel_range_g": 4,
+  "gyro_range_dps": 500,
+  "firmware_version": "0.1.0",
+  "accel_calibration_version": "accel-cal-v1",
+  "orientation_version": "orientation-v1",
+  "source_csv": "data/raw/user_01/session_01/swipe_right_011.csv",
+  "malformed_lines_during_capture": 0,
+  "notes": ""
+}
