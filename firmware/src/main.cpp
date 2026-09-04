@@ -1,100 +1,161 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-constexpr uint8_t SDA_PIN  = 8;
-constexpr uint8_t SCL_PIN  = 9;
-constexpr uint8_t MPU_ADDR = 0x68;
+#include "sensors/mpu6050.h"
 
-constexpr uint8_t REG_CONFIG       = 0x1A;
-constexpr uint8_t REG_GYRO_CONFIG  = 0x1B;
-constexpr uint8_t REG_ACCEL_CONFIG = 0x1C;
-constexpr uint8_t REG_PWR_MGMT_1   = 0x6B;
-constexpr uint8_t REG_ACCEL_XOUT_H = 0x3B;
+constexpr uint8_t SDA_PIN = 8;
+constexpr uint8_t SCL_PIN = 9;
 
-constexpr float ACCEL_SCALE = 8192.0f;  // ±4g
-constexpr float GYRO_SCALE  = 65.5f;    // ±500 deg/s
+constexpr uint32_t I2C_FREQUENCY_HZ = 400000;
 
-bool writeReg(uint8_t reg, uint8_t value) {
-    Wire.beginTransmission(MPU_ADDR);
-    Wire.write(reg);
-    Wire.write(value);
-    return Wire.endTransmission() == 0;
-}
+constexpr uint32_t SAMPLE_RATE_HZ = 100;
+constexpr uint32_t SAMPLE_PERIOD_US =
+    1000000UL / SAMPLE_RATE_HZ;
 
-bool readSensor(
-    int16_t &ax, int16_t &ay, int16_t &az,
-    int16_t &gx, int16_t &gy, int16_t &gz
-) {
-    Wire.beginTransmission(MPU_ADDR);
-    Wire.write(REG_ACCEL_XOUT_H);
+constexpr uint16_t GYRO_CALIBRATION_SAMPLES = 200;
 
-    if (Wire.endTransmission(false) != 0)
-        return false;
-
-    // accel(6) + temp(2) + gyro(6) = 14 bytes
-    if (Wire.requestFrom(MPU_ADDR, (uint8_t)14) != 14)
-        return false;
-
-    ax = (int16_t)((Wire.read() << 8) | Wire.read());
-    ay = (int16_t)((Wire.read() << 8) | Wire.read());
-    az = (int16_t)((Wire.read() << 8) | Wire.read());
-
-    // temperature فعلاً لازم نداریم
-    Wire.read();
-    Wire.read();
-
-    gx = (int16_t)((Wire.read() << 8) | Wire.read());
-    gy = (int16_t)((Wire.read() << 8) | Wire.read());
-    gz = (int16_t)((Wire.read() << 8) | Wire.read());
-
-    return true;
-}
+uint32_t nextSampleUs = 0;
+uint32_t sampleCount = 0;
+uint32_t readFailures = 0;
 
 void setup() {
     Serial.begin(115200);
     delay(1500);
 
     Serial.println();
-    Serial.println("=== Phase 1 / M2 - Stable IMU Stream ===");
+    Serial.println(
+        "=== Phase 2 / Boot Gyroscope Calibration ==="
+    );
 
-    // حالا به مقدار اصلی معماری برمی‌گردیم
-    Wire.begin(SDA_PIN, SCL_PIN, 400000);
+    if (!Wire.begin(
+            SDA_PIN,
+            SCL_PIN,
+            I2C_FREQUENCY_HZ
+        )) {
+        Serial.println(
+            "FATAL: I2C initialization failed."
+        );
 
-    bool ok = true;
+        while (true) {
+            delay(1000);
+        }
+    }
 
-    ok &= writeReg(REG_PWR_MGMT_1, 0x00);
-    delay(100);
+    const uint8_t whoAmI = mpu6050WhoAmI();
 
-    ok &= writeReg(REG_CONFIG, 0x04);        // DLPF
-    ok &= writeReg(REG_GYRO_CONFIG, 0x08);   // +/-500 dps
-    ok &= writeReg(REG_ACCEL_CONFIG, 0x08);  // +/-4 g
+    Serial.printf(
+        "WHO_AM_I: 0x%02X\n",
+        whoAmI
+    );
 
-    Serial.println(ok ? "Configuration OK" : "Configuration FAILED");
+    if (whoAmI == 0x68) {
+        Serial.println(
+            "Sensor identity: standard MPU6050"
+        );
+    } else if (whoAmI == 0x74) {
+        Serial.println(
+            "WARNING: non-standard WHO_AM_I=0x74; "
+            "register compatibility previously verified."
+        );
+    } else {
+        Serial.println(
+            "FATAL: unsupported sensor identity."
+        );
+
+        while (true) {
+            delay(1000);
+        }
+    }
+
+    if (!mpu6050Begin()) {
+        Serial.println(
+            "FATAL: sensor configuration failed."
+        );
+
+        while (true) {
+            delay(1000);
+        }
+    }
+
+    Serial.println("Sensor configuration OK.");
+    Serial.println("I2C frequency: 400 kHz");
+    Serial.println("Accelerometer range: +/-4 g");
+    Serial.println("Gyroscope range: +/-500 dps");
+
+    Serial.println();
+    Serial.println("Gyro calibration starting...");
+    Serial.println(
+        "KEEP THE DEVICE COMPLETELY STILL."
+    );
+
+    GyroBias bias;
+
+    if (!mpu6050CalibrateGyro(
+            bias,
+            GYRO_CALIBRATION_SAMPLES
+        )) {
+        Serial.println(
+            "FATAL: gyro calibration failed."
+        );
+
+        while (true) {
+            delay(1000);
+        }
+    }
+
+    Serial.printf(
+        "Gyro bias: gx=%.4f, gy=%.4f, gz=%.4f dps\n",
+        bias.x,
+        bias.y,
+        bias.z
+    );
+
+    Serial.println(
+        "Gyro calibration complete."
+    );
+
+    Serial.println();
+    Serial.println("Sampling rate: 100 Hz");
+    Serial.println(
+        "timestamp_ms,ax,ay,az,gx,gy,gz"
+    );
+
+    nextSampleUs =
+        micros() + SAMPLE_PERIOD_US;
 }
 
 void loop() {
-    int16_t axRaw, ayRaw, azRaw;
-    int16_t gxRaw, gyRaw, gzRaw;
+    const uint32_t nowUs = micros();
 
-    if (!readSensor(axRaw, ayRaw, azRaw, gxRaw, gyRaw, gzRaw)) {
-        Serial.println("READ FAILED");
-        delay(100);
+    if (
+        static_cast<int32_t>(
+            nowUs - nextSampleUs
+        ) < 0
+    ) {
         return;
     }
 
-    float ax = axRaw / ACCEL_SCALE;
-    float ay = ayRaw / ACCEL_SCALE;
-    float az = azRaw / ACCEL_SCALE;
+    nextSampleUs += SAMPLE_PERIOD_US;
 
-    float gx = gxRaw / GYRO_SCALE;
-    float gy = gyRaw / GYRO_SCALE;
-    float gz = gzRaw / GYRO_SCALE;
+    ImuSample sample;
+
+    if (!mpu6050Read(sample)) {
+        readFailures++;
+        return;
+    }
+
+    const uint32_t timestampMs = millis();
 
     Serial.printf(
-        "ax=%+.3f g ay=%+.3f g az=%+.3f g | "
-        "gx=%+.2f dps gy=%+.2f dps gz=%+.2f dps\n",
-        ax, ay, az, gx, gy, gz
+        "%lu,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n",
+        static_cast<unsigned long>(timestampMs),
+        sample.ax,
+        sample.ay,
+        sample.az,
+        sample.gx,
+        sample.gy,
+        sample.gz
     );
 
-    delay(100);
+    sampleCount++;
 }

@@ -180,4 +180,5 @@
  C:/Users/alire/.platformio/packages/framework-arduinoespressif32/cores/esp32/io_pin_remap.h \
  C:/Users/alire/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
  C:/Users/alire/.platformio/packages/framework-arduinoespressif32/libraries/Wire/src/Wire.h \
- C:/Users/alire/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal.h
+ C:/Users/alire/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal.h \
+ src/sensors/mpu6050.h
