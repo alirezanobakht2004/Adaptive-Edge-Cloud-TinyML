@@ -1,0 +1,5047 @@
+{
+  "dataset_version": "dataset-v1",
+  "user": "user_01",
+  "split_strategy": "session-based",
+  "splits": {
+    "train": {
+      "session": "session_01",
+      "count": 600,
+      "class_counts": {
+        "IDLE": 120,
+        "SWIPE_LEFT": 120,
+        "SWIPE_RIGHT": 120,
+        "ROTATE_CW": 120,
+        "SHAKE": 120
+      },
+      "samples": [
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_002.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_002.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_003.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_003.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_004.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_004.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_005.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_005.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_006.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_006.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_007.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_007.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_008.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_008.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_009.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_009.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_010.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_010.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_011.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_011.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_012.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_012.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_013.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_013.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_014.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_014.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_015.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_015.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_016.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_016.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_017.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_017.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_018.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_018.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_019.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_019.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_020.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_020.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_021.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_021.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_022.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_022.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_023.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_023.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_024.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_024.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_025.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_025.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_026.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_026.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_027.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_027.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_028.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_028.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_029.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_029.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_030.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_030.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_031.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_031.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_032.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_032.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_033.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_033.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_034.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_034.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_035.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_035.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_036.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_036.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_037.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_037.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_038.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_038.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_039.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_039.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_040.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_040.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_041.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_041.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_042.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_042.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_043.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_043.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_044.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_044.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_045.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_045.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_046.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_046.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_047.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_047.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_048.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_048.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_049.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_049.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_050.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_050.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_051.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_051.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_052.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_052.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_053.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_053.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_054.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_054.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_055.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_055.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_056.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_056.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_057.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_057.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_058.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_058.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_059.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_059.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_060.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_060.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_061.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_061.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_062.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_062.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_063.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_063.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_064.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_064.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_065.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_065.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_066.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_066.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_067.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_067.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_068.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_068.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_069.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_069.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_070.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_070.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_071.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_071.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_072.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_072.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_073.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_073.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_074.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_074.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_075.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_075.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_076.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_076.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_077.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_077.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_078.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_078.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_079.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_079.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_080.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_080.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_081.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_081.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_082.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_082.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_083.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_083.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_084.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_084.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_085.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_085.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_086.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_086.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_087.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_087.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_088.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_088.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_089.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_089.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_090.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_090.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_091.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_091.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_092.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_092.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_093.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_093.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_094.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_094.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_095.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_095.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_096.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_096.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_097.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_097.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_098.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_098.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_099.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_099.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_100.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_100.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_101.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_101.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_102.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_102.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_103.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_103.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_104.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_104.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_105.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_105.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_106.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_106.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_107.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_107.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_108.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_108.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_109.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_109.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_110.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_110.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_111.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_111.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_112.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_112.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_113.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_113.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_114.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_114.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_115.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_115.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_116.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_116.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_117.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_117.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_118.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_118.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_119.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_119.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_120.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_120.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_01/idle_121.csv",
+          "metadata": "data/metadata/user_01/session_01/idle_121.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_001.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_001.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_002.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_002.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_003.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_003.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_004.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_004.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_005.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_005.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_006.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_006.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_007.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_007.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_008.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_008.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_009.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_009.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_010.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_010.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_011.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_011.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_012.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_012.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_013.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_013.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_014.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_014.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_015.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_015.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_016.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_016.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_017.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_017.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_018.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_018.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_019.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_019.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_020.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_020.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_021.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_021.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_022.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_022.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_023.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_023.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_024.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_024.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_025.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_025.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_026.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_026.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_027.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_027.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_028.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_028.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_029.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_029.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_030.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_030.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_031.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_031.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_032.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_032.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_033.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_033.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_034.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_034.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_035.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_035.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_036.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_036.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_037.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_037.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_038.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_038.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_039.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_039.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_040.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_040.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_041.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_041.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_042.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_042.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_043.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_043.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_044.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_044.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_045.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_045.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_046.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_046.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_047.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_047.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_048.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_048.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_049.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_049.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_050.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_050.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_051.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_051.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_052.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_052.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_053.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_053.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_054.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_054.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_055.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_055.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_056.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_056.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_057.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_057.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_058.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_058.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_059.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_059.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_060.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_060.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_061.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_061.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_062.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_062.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_063.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_063.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_064.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_064.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_065.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_065.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_066.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_066.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_067.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_067.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_068.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_068.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_069.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_069.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_070.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_070.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_071.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_071.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_072.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_072.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_073.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_073.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_074.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_074.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_075.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_075.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_076.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_076.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_077.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_077.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_078.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_078.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_079.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_079.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_080.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_080.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_081.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_081.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_082.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_082.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_083.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_083.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_084.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_084.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_085.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_085.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_086.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_086.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_087.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_087.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_088.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_088.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_089.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_089.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_090.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_090.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_091.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_091.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_092.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_092.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_093.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_093.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_094.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_094.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_095.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_095.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_096.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_096.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_097.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_097.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_098.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_098.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_099.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_099.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_100.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_100.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_101.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_101.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_102.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_102.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_103.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_103.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_104.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_104.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_105.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_105.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_106.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_106.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_107.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_107.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_108.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_108.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_110.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_110.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_111.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_111.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_112.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_112.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_113.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_113.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_114.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_114.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_115.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_115.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_116.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_116.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_117.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_117.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_118.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_118.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_119.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_119.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_120.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_120.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_01/rotate_cw_121.csv",
+          "metadata": "data/metadata/user_01/session_01/rotate_cw_121.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_001.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_001.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_002.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_002.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_003.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_003.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_004.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_004.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_005.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_005.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_006.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_006.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_007.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_007.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_008.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_008.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_009.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_009.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_010.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_010.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_011.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_011.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_012.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_012.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_013.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_013.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_014.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_014.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_015.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_015.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_016.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_016.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_017.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_017.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_018.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_018.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_019.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_019.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_020.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_020.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_021.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_021.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_022.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_022.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_023.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_023.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_024.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_024.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_025.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_025.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_026.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_026.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_027.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_027.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_028.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_028.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_029.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_029.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_030.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_030.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_031.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_031.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_032.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_032.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_033.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_033.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_034.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_034.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_035.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_035.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_036.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_036.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_037.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_037.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_038.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_038.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_039.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_039.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_040.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_040.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_041.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_041.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_042.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_042.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_043.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_043.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_044.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_044.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_045.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_045.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_046.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_046.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_047.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_047.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_048.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_048.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_049.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_049.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_050.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_050.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_051.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_051.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_052.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_052.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_053.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_053.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_054.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_054.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_055.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_055.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_056.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_056.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_057.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_057.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_058.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_058.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_059.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_059.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_060.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_060.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_061.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_061.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_062.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_062.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_063.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_063.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_064.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_064.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_065.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_065.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_066.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_066.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_067.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_067.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_068.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_068.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_069.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_069.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_070.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_070.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_071.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_071.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_072.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_072.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_073.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_073.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_074.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_074.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_075.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_075.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_076.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_076.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_077.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_077.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_078.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_078.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_079.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_079.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_080.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_080.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_081.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_081.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_082.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_082.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_083.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_083.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_084.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_084.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_085.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_085.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_086.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_086.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_087.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_087.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_088.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_088.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_089.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_089.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_090.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_090.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_091.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_091.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_092.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_092.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_093.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_093.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_094.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_094.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_095.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_095.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_096.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_096.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_097.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_097.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_098.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_098.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_099.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_099.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_100.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_100.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_101.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_101.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_102.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_102.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_103.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_103.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_104.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_104.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_105.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_105.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_106.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_106.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_107.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_107.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_108.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_108.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_109.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_109.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_110.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_110.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_111.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_111.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_112.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_112.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_113.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_113.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_114.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_114.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_115.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_115.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_116.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_116.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_117.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_117.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_118.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_118.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_119.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_119.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_01/shake_120.csv",
+          "metadata": "data/metadata/user_01/session_01/shake_120.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_001.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_001.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_002.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_002.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_003.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_003.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_004.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_004.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_005.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_005.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_006.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_006.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_007.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_007.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_008.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_008.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_009.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_009.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_012.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_012.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_013.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_013.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_014.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_014.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_015.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_015.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_016.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_016.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_017.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_017.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_018.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_018.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_019.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_019.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_020.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_020.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_021.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_021.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_022.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_022.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_023.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_023.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_024.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_024.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_025.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_025.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_026.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_026.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_028.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_028.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_029.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_029.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_030.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_030.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_031.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_031.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_032.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_032.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_033.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_033.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_034.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_034.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_035.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_035.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_036.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_036.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_037.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_037.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_038.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_038.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_039.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_039.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_040.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_040.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_041.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_041.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_042.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_042.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_043.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_043.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_044.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_044.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_045.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_045.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_046.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_046.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_047.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_047.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_048.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_048.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_049.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_049.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_050.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_050.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_051.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_051.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_052.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_052.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_053.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_053.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_054.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_054.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_055.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_055.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_056.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_056.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_057.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_057.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_058.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_058.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_059.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_059.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_060.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_060.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_061.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_061.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_062.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_062.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_063.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_063.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_064.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_064.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_065.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_065.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_066.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_066.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_067.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_067.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_068.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_068.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_069.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_069.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_070.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_070.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_071.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_071.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_072.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_072.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_073.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_073.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_074.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_074.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_075.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_075.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_076.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_076.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_077.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_077.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_078.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_078.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_079.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_079.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_080.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_080.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_081.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_081.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_082.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_082.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_083.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_083.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_084.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_084.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_085.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_085.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_086.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_086.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_087.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_087.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_088.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_088.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_089.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_089.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_090.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_090.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_091.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_091.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_092.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_092.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_093.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_093.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_094.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_094.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_095.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_095.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_096.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_096.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_097.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_097.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_098.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_098.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_099.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_099.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_100.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_100.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_101.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_101.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_102.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_102.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_103.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_103.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_104.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_104.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_105.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_105.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_106.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_106.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_107.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_107.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_108.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_108.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_109.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_109.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_110.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_110.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_111.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_111.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_112.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_112.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_113.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_113.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_114.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_114.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_115.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_115.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_116.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_116.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_117.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_117.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_118.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_118.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_119.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_119.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_120.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_120.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_121.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_121.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_122.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_122.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_01/swipe_left_123.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_left_123.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_001.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_001.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_002.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_002.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_003.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_003.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_004.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_004.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_005.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_005.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_006.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_006.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_007.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_007.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_008.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_008.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_009.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_009.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_010.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_010.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_011.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_011.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_012.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_012.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_013.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_013.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_014.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_014.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_015.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_015.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_016.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_016.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_017.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_017.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_018.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_018.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_019.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_019.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_020.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_020.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_021.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_021.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_022.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_022.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_023.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_023.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_025.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_025.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_026.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_026.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_028.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_028.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_030.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_030.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_031.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_031.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_032.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_032.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_033.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_033.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_034.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_034.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_035.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_035.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_036.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_036.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_037.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_037.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_038.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_038.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_039.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_039.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_040.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_040.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_041.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_041.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_042.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_042.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_043.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_043.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_044.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_044.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_045.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_045.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_047.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_047.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_048.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_048.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_049.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_049.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_050.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_050.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_051.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_051.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_052.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_052.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_053.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_053.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_054.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_054.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_055.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_055.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_056.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_056.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_057.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_057.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_058.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_058.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_059.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_059.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_060.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_060.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_061.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_061.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_062.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_062.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_063.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_063.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_064.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_064.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_065.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_065.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_066.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_066.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_067.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_067.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_068.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_068.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_069.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_069.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_070.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_070.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_071.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_071.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_072.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_072.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_073.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_073.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_074.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_074.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_075.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_075.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_076.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_076.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_077.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_077.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_078.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_078.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_079.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_079.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_080.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_080.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_081.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_081.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_082.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_082.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_083.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_083.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_084.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_084.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_085.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_085.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_086.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_086.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_087.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_087.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_088.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_088.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_089.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_089.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_090.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_090.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_091.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_091.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_092.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_092.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_093.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_093.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_094.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_094.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_095.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_095.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_096.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_096.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_097.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_097.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_098.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_098.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_099.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_099.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_100.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_100.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_101.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_101.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_102.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_102.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_103.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_103.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_104.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_104.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_105.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_105.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_106.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_106.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_107.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_107.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_108.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_108.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_109.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_109.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_110.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_110.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_111.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_111.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_112.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_112.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_113.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_113.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_114.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_114.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_115.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_115.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_116.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_116.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_117.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_117.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_118.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_118.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_119.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_119.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_120.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_120.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_121.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_121.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_122.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_122.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_123.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_123.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_01/swipe_right_124.csv",
+          "metadata": "data/metadata/user_01/session_01/swipe_right_124.json"
+        }
+      ]
+    },
+    "validation": {
+      "session": "session_02",
+      "count": 200,
+      "class_counts": {
+        "IDLE": 40,
+        "SWIPE_LEFT": 40,
+        "SWIPE_RIGHT": 40,
+        "ROTATE_CW": 40,
+        "SHAKE": 40
+      },
+      "samples": [
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_001.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_001.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_002.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_002.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_003.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_003.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_004.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_004.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_005.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_005.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_006.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_006.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_007.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_007.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_008.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_008.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_009.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_009.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_010.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_010.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_011.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_011.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_012.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_012.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_013.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_013.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_014.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_014.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_015.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_015.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_016.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_016.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_017.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_017.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_018.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_018.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_019.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_019.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_020.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_020.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_021.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_021.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_022.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_022.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_023.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_023.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_024.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_024.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_025.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_025.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_026.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_026.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_027.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_027.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_028.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_028.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_029.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_029.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_030.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_030.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_031.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_031.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_032.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_032.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_033.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_033.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_034.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_034.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_035.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_035.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_036.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_036.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_037.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_037.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_038.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_038.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_039.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_039.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_02/idle_040.csv",
+          "metadata": "data/metadata/user_01/session_02/idle_040.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_001.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_001.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_002.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_002.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_003.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_003.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_004.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_004.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_005.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_005.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_006.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_006.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_007.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_007.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_008.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_008.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_009.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_009.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_010.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_010.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_011.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_011.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_012.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_012.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_013.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_013.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_014.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_014.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_015.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_015.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_016.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_016.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_017.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_017.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_018.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_018.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_019.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_019.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_020.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_020.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_021.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_021.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_022.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_022.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_023.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_023.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_024.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_024.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_025.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_025.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_026.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_026.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_027.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_027.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_028.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_028.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_029.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_029.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_030.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_030.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_031.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_031.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_032.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_032.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_033.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_033.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_034.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_034.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_035.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_035.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_036.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_036.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_037.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_037.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_038.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_038.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_039.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_039.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_02/rotate_cw_040.csv",
+          "metadata": "data/metadata/user_01/session_02/rotate_cw_040.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_001.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_001.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_002.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_002.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_003.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_003.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_004.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_004.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_005.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_005.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_006.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_006.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_007.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_007.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_008.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_008.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_009.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_009.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_010.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_010.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_011.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_011.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_012.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_012.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_013.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_013.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_014.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_014.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_015.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_015.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_016.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_016.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_017.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_017.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_018.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_018.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_019.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_019.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_020.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_020.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_021.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_021.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_022.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_022.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_023.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_023.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_024.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_024.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_025.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_025.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_026.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_026.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_027.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_027.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_028.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_028.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_029.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_029.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_030.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_030.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_031.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_031.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_032.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_032.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_033.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_033.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_034.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_034.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_035.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_035.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_036.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_036.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_037.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_037.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_038.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_038.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_039.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_039.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_02/shake_040.csv",
+          "metadata": "data/metadata/user_01/session_02/shake_040.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_001.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_001.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_002.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_002.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_003.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_003.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_004.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_004.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_005.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_005.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_006.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_006.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_007.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_007.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_008.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_008.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_009.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_009.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_010.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_010.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_011.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_011.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_012.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_012.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_013.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_013.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_014.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_014.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_015.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_015.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_016.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_016.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_017.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_017.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_018.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_018.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_019.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_019.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_020.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_020.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_021.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_021.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_022.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_022.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_023.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_023.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_024.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_024.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_025.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_025.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_026.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_026.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_027.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_027.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_028.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_028.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_029.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_029.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_030.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_030.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_031.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_031.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_032.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_032.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_033.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_033.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_034.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_034.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_035.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_035.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_036.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_036.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_037.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_037.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_038.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_038.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_039.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_039.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_02/swipe_left_040.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_left_040.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_001.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_001.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_002.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_002.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_003.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_003.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_004.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_004.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_005.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_005.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_006.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_006.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_007.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_007.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_008.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_008.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_009.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_009.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_010.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_010.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_011.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_011.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_012.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_012.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_013.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_013.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_014.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_014.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_015.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_015.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_016.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_016.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_017.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_017.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_018.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_018.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_019.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_019.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_020.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_020.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_021.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_021.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_022.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_022.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_023.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_023.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_024.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_024.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_025.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_025.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_026.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_026.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_027.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_027.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_028.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_028.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_029.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_029.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_030.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_030.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_031.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_031.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_032.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_032.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_033.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_033.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_034.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_034.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_035.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_035.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_036.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_036.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_037.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_037.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_038.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_038.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_039.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_039.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_02/swipe_right_040.csv",
+          "metadata": "data/metadata/user_01/session_02/swipe_right_040.json"
+        }
+      ]
+    },
+    "test": {
+      "session": "session_03",
+      "count": 200,
+      "class_counts": {
+        "IDLE": 40,
+        "SWIPE_LEFT": 40,
+        "SWIPE_RIGHT": 40,
+        "ROTATE_CW": 40,
+        "SHAKE": 40
+      },
+      "samples": [
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_001.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_001.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_002.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_002.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_003.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_003.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_004.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_004.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_005.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_005.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_006.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_006.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_007.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_007.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_008.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_008.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_009.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_009.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_010.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_010.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_011.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_011.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_012.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_012.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_013.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_013.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_014.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_014.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_015.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_015.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_016.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_016.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_017.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_017.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_018.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_018.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_019.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_019.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_020.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_020.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_021.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_021.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_022.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_022.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_023.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_023.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_024.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_024.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_025.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_025.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_026.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_026.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_027.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_027.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_028.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_028.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_029.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_029.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_030.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_030.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_031.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_031.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_032.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_032.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_033.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_033.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_034.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_034.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_035.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_035.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_036.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_036.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_037.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_037.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_038.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_038.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_039.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_039.json"
+        },
+        {
+          "gesture": "IDLE",
+          "csv": "data/raw/user_01/session_03/idle_040.csv",
+          "metadata": "data/metadata/user_01/session_03/idle_040.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_001.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_001.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_002.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_002.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_003.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_003.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_004.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_004.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_005.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_005.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_006.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_006.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_007.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_007.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_008.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_008.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_009.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_009.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_010.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_010.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_011.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_011.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_012.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_012.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_013.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_013.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_014.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_014.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_015.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_015.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_016.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_016.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_017.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_017.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_018.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_018.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_019.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_019.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_020.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_020.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_021.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_021.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_022.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_022.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_023.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_023.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_024.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_024.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_025.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_025.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_026.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_026.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_027.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_027.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_028.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_028.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_029.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_029.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_030.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_030.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_031.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_031.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_032.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_032.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_033.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_033.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_034.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_034.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_035.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_035.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_036.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_036.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_037.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_037.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_038.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_038.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_039.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_039.json"
+        },
+        {
+          "gesture": "ROTATE_CW",
+          "csv": "data/raw/user_01/session_03/rotate_cw_040.csv",
+          "metadata": "data/metadata/user_01/session_03/rotate_cw_040.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_001.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_001.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_002.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_002.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_003.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_003.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_004.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_004.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_005.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_005.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_006.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_006.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_007.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_007.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_008.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_008.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_009.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_009.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_010.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_010.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_011.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_011.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_012.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_012.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_013.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_013.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_014.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_014.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_015.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_015.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_016.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_016.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_017.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_017.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_018.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_018.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_019.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_019.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_020.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_020.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_021.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_021.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_022.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_022.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_023.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_023.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_024.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_024.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_025.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_025.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_026.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_026.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_027.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_027.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_028.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_028.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_029.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_029.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_030.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_030.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_031.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_031.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_032.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_032.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_033.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_033.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_034.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_034.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_035.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_035.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_036.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_036.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_037.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_037.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_038.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_038.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_039.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_039.json"
+        },
+        {
+          "gesture": "SHAKE",
+          "csv": "data/raw/user_01/session_03/shake_040.csv",
+          "metadata": "data/metadata/user_01/session_03/shake_040.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_001.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_001.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_002.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_002.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_003.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_003.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_004.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_004.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_005.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_005.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_006.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_006.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_007.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_007.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_008.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_008.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_009.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_009.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_010.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_010.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_011.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_011.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_012.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_012.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_013.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_013.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_014.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_014.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_015.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_015.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_016.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_016.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_017.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_017.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_018.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_018.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_019.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_019.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_020.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_020.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_021.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_021.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_022.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_022.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_023.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_023.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_024.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_024.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_025.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_025.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_026.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_026.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_027.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_027.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_028.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_028.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_029.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_029.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_030.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_030.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_031.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_031.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_032.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_032.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_033.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_033.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_034.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_034.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_035.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_035.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_036.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_036.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_037.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_037.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_038.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_038.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_039.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_039.json"
+        },
+        {
+          "gesture": "SWIPE_LEFT",
+          "csv": "data/raw/user_01/session_03/swipe_left_040.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_left_040.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_001.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_001.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_002.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_002.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_003.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_003.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_004.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_004.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_005.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_005.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_006.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_006.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_007.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_007.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_008.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_008.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_009.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_009.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_010.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_010.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_011.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_011.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_012.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_012.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_013.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_013.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_014.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_014.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_015.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_015.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_016.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_016.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_017.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_017.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_018.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_018.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_019.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_019.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_020.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_020.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_021.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_021.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_022.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_022.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_023.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_023.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_024.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_024.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_025.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_025.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_026.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_026.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_027.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_027.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_028.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_028.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_029.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_029.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_030.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_030.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_031.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_031.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_032.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_032.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_033.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_033.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_034.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_034.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_035.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_035.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_036.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_036.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_037.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_037.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_038.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_038.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_039.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_039.json"
+        },
+        {
+          "gesture": "SWIPE_RIGHT",
+          "csv": "data/raw/user_01/session_03/swipe_right_040.csv",
+          "metadata": "data/metadata/user_01/session_03/swipe_right_040.json"
+        }
+      ]
+    }
+  },
+  "total_samples": 1000
+}
