@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
+#include "version.h"
 #include "sensors/mpu6050.h"
 
 constexpr uint8_t SDA_PIN = 8;
@@ -26,6 +27,13 @@ void setup() {
     Serial.println(
         "=== Phase 2 / Boot Gyroscope Calibration ==="
     );
+    Serial.printf("Firmware version: %s\n", FIRMWARE_VERSION);
+    Serial.printf(
+        "Accelerometer calibration: %s\n",
+        ACCEL_CALIBRATION_VERSION
+    );
+    Serial.printf("Orientation protocol: %s\n", ORIENTATION_VERSION);
+    Serial.printf("Dataset target: %s\n", DATASET_VERSION);
 
     if (!Wire.begin(
             SDA_PIN,

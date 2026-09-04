@@ -5,16 +5,55 @@ board:
   psram_mb: 2
 
 imu:
-  model: MPU6050_GY521
+  model: MPU6050_COMPATIBLE_GY521
+  who_am_i: "0x74"
+  identity_status: non_standard_register_compatible
   i2c_frequency_hz: 400000
   sampling_rate_hz: 100
   accel_range_g: 4
   gyro_range_dps: 500
+
+accel_calibration:
+  version: accel-cal-v1
+  status: frozen_for_dataset_v1
+  method: six_position_static
+  correction: "(measured_g - offset_g) / axis_scale"
+  applied_in_firmware: true
+
+  offset_g:
+    x: 0.014300
+    y: 0.019846
+    z: 0.114024
+
+  axis_scale:
+    x: 0.995437
+    y: 1.000465
+    z: 1.009354
+
+  validation:
+    date: "2026-09-04"
+    method: six_position_static_post_correction
+    active_axis_mean_g:
+      x_pos: 1.001801
+      x_neg: -1.008400
+      y_pos: 1.000596
+      y_neg: -0.998428
+      z_pos: 0.999007
+      z_neg: -1.007722
+
+orientation:
+  version: orientation-v1
+  status: frozen_for_dataset_v1
+  home_pose:
+    component_side: up
+    esp32_usb_end: toward_user
+    gy521_end: away_from_user
 
 pins:
   sda: 8
   scl: 9
 
 notes:
-  - "GPIO8/GPIO9 are planned I2C pins and must be verified on the physical development board."
+  - "GPIO8/GPIO9 are the verified I2C pins used by the current project hardware."
   - "Power GY-521 from the ESP32-S3 3.3V pin."
+  - "The current IMU reports WHO_AM_I=0x74; do not claim standard MPU6050 identity."

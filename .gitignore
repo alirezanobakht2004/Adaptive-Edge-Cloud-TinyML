@@ -6,6 +6,10 @@ __pycache__/
 .vscode/
 .DS_Store
 
+# PlatformIO build artifacts
+.pio/
+firmware/.pio/
+
 # Generated/raw project data
 data/raw/*
 data/processed/*

@@ -2,9 +2,10 @@
 ## Canonical Project Architecture & Execution Plan
 
 > **Status:** Canonical architecture document for the project  
+> **Current implementation checkpoint:** Phase 2 / pre-M3 — calibrated IMU stream stable; dataset-v1 not yet collected  
 > **Purpose:** This file is the main technical source of truth for the project. Any implementation, code organization, experiment, report section, or design decision should be checked against this document first.  
 > **Core project title:** سامانه هوشمند تطبیقی لبه–ابر مبتنی بر TinyML  
-> **Case study:** Handheld Movement / Gesture Recognition using ESP32-S3 + MPU6050
+> **Case study:** Handheld Movement / Gesture Recognition using ESP32-S3 + GY-521 IMU
 
 ---
 
@@ -168,7 +169,9 @@ Target hardware characteristics:
 - 3.3 V GPIO logic
 
 ### 4.2 IMU
-**Sensor module:** MPU6050 GY-521
+**Sensor module:** GY-521 with an MPU6050-compatible register interface
+
+Current project hardware reports a non-standard `WHO_AM_I=0x74`. The register behavior required by this project has been verified on the current unit, but the report and firmware should not claim a confirmed standard MPU6050 identity.
 
 Relevant characteristics:
 
@@ -187,8 +190,8 @@ Relevant characteristics:
   - ±1000 °/s
   - ±2000 °/s
 
-### 4.3 Initial electrical connection
-Planned connection:
+### 4.3 Verified electrical connection
+Current project connection:
 
 ```text
 GY-521              ESP32-S3
@@ -201,8 +204,7 @@ SCL       --------> GPIO9
 
 Important:
 
-- GPIO8/GPIO9 are the **planned project pins**.
-- Verify the exact dev-board silkscreen/pinout after the physical board arrives.
+- GPIO8/GPIO9 are the **verified project I2C pins** on the current physical development board.
 - Avoid using ESP32-S3 strapping pins for the IMU unless necessary:
   - GPIO0
   - GPIO3
@@ -212,8 +214,8 @@ Important:
 - The development board is powered through 5 V USB.
 - The GY-521 should be powered from the board’s 3.3 V pin for clean 3.3 V logic compatibility.
 
-### 4.4 Initial sensor configuration
-Project default:
+### 4.4 Current sensor configuration
+Dataset-v1 baseline:
 
 ```text
 I2C frequency          400 kHz
@@ -222,7 +224,7 @@ Accelerometer range    ±4 g
 Gyroscope range        ±500 °/s
 ```
 
-These are initial engineering choices and may be changed only after actual data inspection.
+These settings are verified on the current hardware and are frozen for dataset-v1. Any intentional change requires documentation and, when it affects recorded data, a new dataset version.
 
 ### 4.5 Hardware not required initially
 Do not expand hardware unless the project later proves it necessary.
@@ -271,13 +273,16 @@ These are optional extensions, not initial requirements.
 ### 5.2 Device orientation protocol
 Dataset consistency requires a fixed handheld orientation.
 
-Before collection begins, define a physical convention, for example:
+The frozen dataset-v1 convention is `orientation-v1`:
 
-- USB connectors toward the user
-- board front side upward
+- component side upward
+- ESP32 / USB end toward the user
+- GY-521 end away from the user
 - same grip orientation for all planned sessions
 
-Document this orientation with a photo once hardware arrives.
+Static gravity measurements define the authoritative sign reference: `+Z` gives `az≈+1 g`, `-Z` gives `az≈-1 g`, `+X` gives `ax≈+1 g`, `-X` gives `ax≈-1 g`, `+Y` gives `ay≈+1 g`, and `-Y` gives `ay≈-1 g`.
+
+Document this orientation with the project reference image/photo and keep it unchanged while collecting dataset-v1.
 
 ---
 
@@ -363,6 +368,8 @@ Optional later calibration:
 
 - accelerometer offset correction
 - per-axis scale correction
+
+Current pre-M3 status: `accel-cal-v1` is applied in firmware and has been validated with six static orientations after correction. The active-axis means were `X+=+1.001801 g`, `X-=-1.008400 g`, `Y+=+1.000596 g`, `Y-=-0.998428 g`, `Z+=+0.999007 g`, and `Z-=-1.007722 g`. These validation measurements are not raw calibration coefficients.
 
 Calibration parameters should be stored in configuration and logged with datasets when relevant.
 
