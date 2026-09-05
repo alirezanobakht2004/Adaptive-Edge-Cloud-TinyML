@@ -1,0 +1,27 @@
+{
+  "purpose": "isolate first fully-connected layer on TFLM",
+  "source_model_sha256": "2a103e4785b10d73932576e2240c06115f146e8740d5f875f5f63563efd40261",
+  "full_int8_model_sha256": "50221c98a62c546cb37dcf3537433aa2fb9f0050a37aaa833bc4b1c256ac4dd9",
+  "fc1_diagnostic_sha256": "e5bd9b4d56a245c5c9d42bec9d13631de0a6217a22f8b152a56d2aeebe1e3b83",
+  "fc1_diagnostic_bytes": 3752,
+  "source_split": "validation",
+  "source_session": "session_02",
+  "test_split_used": false,
+  "float_fc1_parity": true,
+  "float_fc1_max_abs_difference": 0.0,
+  "desktop_int8_fc1_exact": true,
+  "desktop_int8_fc1_mismatch_count": 0,
+  "desktop_int8_fc1_max_lsb_difference": 0,
+  "input_quantization": {
+    "scale": 0.05004466325044632,
+    "zero_point": -12
+  },
+  "fc1_output_quantization": {
+    "scale": 0.024020357057452202,
+    "zero_point": -128
+  },
+  "probe_indices": [
+    82,
+    119
+  ]
+}

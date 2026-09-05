@@ -21,4 +21,7 @@ constexpr float NORMALIZATION_STD[FEATURE_COUNT] = {
 constexpr float INPUT_SCALE = 0.0500446633f;
 constexpr int32_t INPUT_ZERO_POINT = -12;
 
+constexpr float OUTPUT_SCALE = 0.00390625f;
+constexpr int32_t OUTPUT_ZERO_POINT = -128;
+
 }  // namespace deployment_preprocessing

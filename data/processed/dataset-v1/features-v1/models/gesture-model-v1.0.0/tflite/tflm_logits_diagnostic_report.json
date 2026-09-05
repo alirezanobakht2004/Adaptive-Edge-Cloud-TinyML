@@ -1,0 +1,62 @@
+{
+  "purpose": "diagnose TFLM Dense stack vs Softmax",
+  "model_version": "gesture-model-v1.0.0",
+  "source_model_sha256": "2a103e4785b10d73932576e2240c06115f146e8740d5f875f5f63563efd40261",
+  "diagnostic_model_sha256": "1850107c898b70572cd444b306b660f91ec7cae34db2ce45bd278d05177428e1",
+  "diagnostic_model_bytes": 12688,
+  "source_split": "validation",
+  "representative_split": "train",
+  "test_split_used": false,
+  "float_softmax_parity": true,
+  "float_max_probability_difference": 0.0,
+  "float_class_matches": 200,
+  "source_validation_accuracy": 0.985,
+  "int8_logits_validation_accuracy": 0.985,
+  "int8_logits_class_matches_source": 200,
+  "input_quantization": {
+    "scale": 0.05004466325044632,
+    "zero_point": -12
+  },
+  "logits_output_quantization": {
+    "scale": 0.1998313069343567,
+    "zero_point": -25
+  },
+  "vector_82": {
+    "true_class": 4,
+    "source_class": 4,
+    "int8_logits_class": 4,
+    "raw_int8_logits": [
+      -53,
+      -1,
+      -21,
+      -46,
+      1
+    ],
+    "dequantized_logits": [
+      -5.595276832580566,
+      4.7959513664245605,
+      0.7993252277374268,
+      -4.196457386016846,
+      5.195613861083984
+    ]
+  },
+  "vector_119": {
+    "true_class": 4,
+    "source_class": 4,
+    "int8_logits_class": 4,
+    "raw_int8_logits": [
+      -76,
+      -10,
+      15,
+      -50,
+      33
+    ],
+    "dequantized_logits": [
+      -10.191396713256836,
+      2.997469663619995,
+      7.993252277374268,
+      -4.995782852172852,
+      11.590215682983398
+    ]
+  }
+}

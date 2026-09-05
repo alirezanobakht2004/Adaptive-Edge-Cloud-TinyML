@@ -1,0 +1,17 @@
+{
+  "purpose": "evaluate float32 TFLM runtime as controlled INT8 fallback",
+  "source_model_sha256": "2a103e4785b10d73932576e2240c06115f146e8740d5f875f5f63563efd40261",
+  "float32_tflite_sha256": "9b561335a7904f04fdf18ab359aa8d88c8c90f02929288ea084d121eeea5fd56",
+  "float32_tflite_bytes": 25344,
+  "normalization_fit_split": "train",
+  "evaluation_split": "validation",
+  "evaluation_session": "session_02",
+  "test_split_used": false,
+  "keras_core_class_matches": 200,
+  "keras_core_max_abs_difference": 0.0,
+  "desktop_tflite_class_matches": 200,
+  "desktop_tflite_max_abs_difference": 1.564621925354004e-07,
+  "desktop_tflite_mean_abs_difference": 6.657424389544531e-09,
+  "desktop_validation_correct": 197,
+  "desktop_validation_accuracy": 0.985
+}
