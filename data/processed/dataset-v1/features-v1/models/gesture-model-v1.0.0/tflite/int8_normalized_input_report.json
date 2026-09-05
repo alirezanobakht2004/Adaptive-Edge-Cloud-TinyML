@@ -1,0 +1,86 @@
+{
+  "model_version": "gesture-model-v1.0.0",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "export_type": "full-integer-int8",
+  "deployment_input": "train-standardized-features-v1",
+  "source_model_sha256": "2a103e4785b10d73932576e2240c06115f146e8740d5f875f5f63563efd40261",
+  "int8_tflite_sha256": "50221c98a62c546cb37dcf3537433aa2fb9f0050a37aaa833bc4b1c256ac4dd9",
+  "int8_model_bytes": 12928,
+  "representative_split": "train",
+  "evaluation_split": "validation",
+  "test_split_used": false,
+  "normalization_parity": {
+    "passed": true,
+    "max_abs_difference": 0.0
+  },
+  "float_core_parity": {
+    "passed": true,
+    "class_matches": 200,
+    "max_abs_probability_difference": 0.0
+  },
+  "input_quantization": {
+    "dtype": "<class 'numpy.int8'>",
+    "scale": 0.05004466325044632,
+    "zero_point": -12
+  },
+  "output_quantization": {
+    "dtype": "<class 'numpy.int8'>",
+    "scale": 0.00390625,
+    "zero_point": -128
+  },
+  "keras_validation_metrics": {
+    "accuracy": 0.985,
+    "macro_precision": 0.9852439024390243,
+    "macro_recall": 0.9850000000000001,
+    "macro_f1": 0.9850609470229724
+  },
+  "int8_validation_metrics": {
+    "accuracy": 0.985,
+    "macro_precision": 0.9852439024390243,
+    "macro_recall": 0.9850000000000001,
+    "macro_f1": 0.9850609470229724
+  },
+  "accuracy_delta": 0.0,
+  "keras_int8_class_matches": 200,
+  "keras_int8_class_match_rate": 1.0,
+  "max_abs_probability_difference": 0.06998246908187866,
+  "mean_abs_probability_difference": 0.0015071191592141986,
+  "int8_confusion_matrix": [
+    [
+      40,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      39,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      39,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      39,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      40
+    ]
+  ]
+}
