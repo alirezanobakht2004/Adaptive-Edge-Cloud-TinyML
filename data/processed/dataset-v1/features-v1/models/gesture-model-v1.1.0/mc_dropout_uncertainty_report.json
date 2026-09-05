@@ -1,0 +1,66 @@
+{
+  "model_version": "gesture-model-v1.1.0",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "evaluation_split": "validation",
+  "evaluation_session": "session_02",
+  "test_split_used": false,
+  "source_passes_filename": "mc_dropout_validation_passes.npz",
+  "source_passes_sha256": "fabd046a850913c5a5dc607ad58080239f1e9f775cc17564b68a7911b348dbd1",
+  "source_stochastic_report_sha256": "27933d94d628210c42a33e73609c29c1cca6d0c7928c6c5366bd4348190ca359",
+  "mc_dropout": {
+    "passes": 5,
+    "dropout_rate": 0.2
+  },
+  "sample_count": 200,
+  "class_count": 5,
+  "definitions": {
+    "mean_probability": "mean over 5 stochastic class probabilities",
+    "predictive_entropy": "-sum(mean_p * ln(mean_p)), in nats",
+    "normalized_predictive_entropy": "predictive_entropy / ln(class_count)",
+    "class_probability_variance": "population variance across the 5 passes, per class",
+    "mean_class_variance": "mean per-class probability variance for each sample",
+    "max_class_variance": "maximum per-class probability variance for each sample",
+    "max_mean_confidence": "maximum mean class probability"
+  },
+  "mean_prediction_accuracy": 0.985,
+  "predictive_entropy_nats": {
+    "min": 4.600476799510034e-08,
+    "mean": 0.057182200857361656,
+    "median": 0.021720776334404945,
+    "p95": 0.22592048868536904,
+    "max": 0.7693176865577698
+  },
+  "normalized_predictive_entropy": {
+    "min": 2.858437042618789e-08,
+    "mean": 0.03552929910674427,
+    "median": 0.013495876919478178,
+    "p95": 0.14037228897213908,
+    "max": 0.47800394892692566
+  },
+  "mean_class_variance": {
+    "min": 1.6737149766931117e-18,
+    "mean": 0.0005862625355671166,
+    "median": 3.224078568564437e-06,
+    "p95": 0.000677683381945826,
+    "max": 0.043514810502529144
+  },
+  "max_class_variance": {
+    "min": 4.355033546788092e-18,
+    "mean": 0.0014894496359248743,
+    "median": 8.304510629386641e-06,
+    "p95": 0.0017382107733283178,
+    "max": 0.10976970195770264
+  },
+  "max_mean_confidence": {
+    "min": 0.7232206463813782,
+    "mean": 0.9869006773829461,
+    "median": 0.9969968497753143,
+    "p95": 0.9999998807907104,
+    "max": 1.0
+  },
+  "threshold_selected": false,
+  "calibration_completed": false,
+  "ambiguous_gesture_test_completed": false,
+  "final_policy_feature_contract_frozen": false
+}
