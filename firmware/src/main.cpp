@@ -9,7 +9,8 @@
 #include "sensors/mpu6050.h"
 #include "feature_extractor.h"
 #include "input_preprocessor.h"
-#include "local_model.h"
+#include "prefix_runner.h"
+#include "uncertainty.h"
 #include "window_buffer.h"
 
 
@@ -25,6 +26,12 @@ constexpr uint32_t SAMPLE_PERIOD_US =
     1000000UL / SAMPLE_RATE_HZ;
 
 constexpr uint16_t GYRO_CALIBRATION_SAMPLES = 200;
+
+constexpr const char* FEATURE_VERSION =
+    "features-v1";
+
+constexpr const char* UNCERTAINTY_MODEL_VERSION =
+    "gesture-model-v1.1.0";
 
 
 static_assert(
@@ -45,15 +52,34 @@ static_assert(
 static_assert(
     features::FEATURE_COUNT
         == inference::MODEL_INPUT_FEATURES,
-    "Feature count must match model input."
+    "Feature count must match normalization input."
+);
+
+static_assert(
+    inference::MODEL_INPUT_FEATURES
+        == inference::PREFIX_INPUT_FEATURES,
+    "Normalization output must match prefix input."
+);
+
+static_assert(
+    inference::PREFIX_OUTPUT_UNITS
+        == inference::EDGE_HEAD_INPUT_UNITS,
+    "B3 output must match Edge Head input."
+);
+
+static_assert(
+    inference::UNCERTAINTY_PASS_COUNT == 5,
+    "Phase-5 runtime requires exactly five stochastic passes."
 );
 
 
 sampling::WindowBuffer runtimeBuffer;
 
-float inferenceWindow
-    [sampling::WINDOW_SAMPLES]
-    [sampling::SENSOR_CHANNELS];
+float inferenceWindow[
+    sampling::WINDOW_SAMPLES
+][
+    sampling::SENSOR_CHANNELS
+];
 
 
 uint32_t nextSampleUs = 0;
@@ -81,6 +107,30 @@ void fatal(const char* message) {
     while (true) {
         delay(1000);
     }
+}
+
+
+const char* gestureClassName(
+    size_t classIndex
+) {
+    static const char* const names[
+        inference::EDGE_HEAD_CLASS_COUNT
+    ] = {
+        "IDLE",
+        "SWIPE_LEFT",
+        "SWIPE_RIGHT",
+        "ROTATE_CW",
+        "SHAKE",
+    };
+
+    if (
+        classIndex
+        >= inference::EDGE_HEAD_CLASS_COUNT
+    ) {
+        return "UNKNOWN";
+    }
+
+    return names[classIndex];
 }
 
 
@@ -112,7 +162,8 @@ void updatePeriodStats(
         }
     }
 
-    previousSampleUs = sampleTimestampUs;
+    previousSampleUs =
+        sampleTimestampUs;
 }
 
 
@@ -138,11 +189,20 @@ void runWindowInference(
         inference::MODEL_INPUT_FEATURES
     ] = {};
 
-    float probabilities[
-        inference::LOCAL_CLASS_COUNT
+    float embedding[
+        inference::PREFIX_OUTPUT_UNITS
     ] = {};
 
+    inference::UncertaintyResult
+        uncertaintyResult = {};
 
+    inference::UncertaintyRuntimeDiagnostics
+        uncertaintyDiagnostics = {};
+
+
+    // Same timing convention used in Phase 4:
+    // window-buffer copy is intentionally outside the measured
+    // compute pipeline.
     const uint32_t pipelineStartUs =
         micros();
 
@@ -180,30 +240,45 @@ void runWindowInference(
 
 
     if (
-        !inference::runLocalModel(
+        !inference::runPrefixB3(
             normalized,
-            probabilities
+            embedding
         )
     ) {
         fatal(
-            "local Float32 inference failed."
+            "B1/B2/B3 Float32 prefix inference failed."
         );
     }
 
-    const uint32_t invokeEndUs =
+    const uint32_t prefixEndUs =
+        micros();
+
+
+    if (
+        !inference::
+            runStochasticUncertaintyFromEmbedding(
+                embedding,
+                uncertaintyResult,
+                &uncertaintyDiagnostics
+            )
+    ) {
+        fatal(
+            "five-pass uncertainty inference failed."
+        );
+    }
+
+    const uint32_t uncertaintyEndUs =
         micros();
 
 
     const int predictedClass =
-        inference::localModelArgmax(
-            probabilities
-        );
+        uncertaintyResult.predictedClass;
 
     if (
         predictedClass < 0
         || predictedClass
             >= static_cast<int>(
-                inference::LOCAL_CLASS_COUNT
+                inference::EDGE_HEAD_CLASS_COUNT
             )
     ) {
         fatal(
@@ -216,16 +291,24 @@ void runWindowInference(
 
 
     const uint32_t featureUs =
-        featureEndUs - featureStartUs;
+        featureEndUs
+        - featureStartUs;
 
     const uint32_t normalizeUs =
-        normalizeEndUs - featureEndUs;
+        normalizeEndUs
+        - featureEndUs;
 
-    const uint32_t invokeUs =
-        invokeEndUs - normalizeEndUs;
+    const uint32_t prefixUs =
+        prefixEndUs
+        - normalizeEndUs;
+
+    const uint32_t uncertaintyUs =
+        uncertaintyEndUs
+        - prefixEndUs;
 
     const uint32_t pipelineUs =
-        invokeEndUs - pipelineStartUs;
+        uncertaintyEndUs
+        - pipelineStartUs;
 
 
     float meanPeriodMs = 0.0f;
@@ -271,28 +354,42 @@ void runWindowInference(
         windowReadyUs;
 
 
-    // Keep runtime logging intentionally compact so Serial output
-    // is less likely to disturb 100 Hz acquisition.
+    // Keep one compact line per 0.5 s inference step.
+    //
+    // "unc" is normalized predictive entropy in [0,1].
+    // "var" is mean population variance across the 5 class
+    // probabilities and 5 stochastic passes.
+    // "masks" and "prange" are diagnostics only; they do not
+    // participate in any LOCAL/OFFLOAD decision.
     Serial.printf(
         "W=%lu S=%lu "
-        "gesture=%s class=%d conf=%.6f "
-        "step_ms=%.3f "
-        "period_ms(mean/min/max)=%.3f/%.3f/%.3f "
-        "pipe_us=%lu feat_us=%lu norm_us=%lu invoke_us=%lu "
-        "overruns=%lu read_fail=%lu\n",
+        "g=%s c=%d conf=%.6f unc=%.6f var=%.7f "
+        "masks=%u prange=%.6f "
+        "step_ms=%.3f per_ms=%.3f/%.3f/%.3f "
+        "pipe_us=%lu feat=%lu norm=%lu prefix=%lu mc=%lu "
+        "ov=%lu rf=%lu\n",
         static_cast<unsigned long>(
             windowCount
         ),
         static_cast<unsigned long>(
             successfulSamples
         ),
-        inference::localClassName(
+        gestureClassName(
             static_cast<size_t>(
                 predictedClass
             )
         ),
         predictedClass,
-        probabilities[predictedClass],
+        uncertaintyResult.confidence,
+        uncertaintyResult.
+            normalizedPredictiveEntropy,
+        uncertaintyResult.meanClassVariance,
+        static_cast<unsigned>(
+            uncertaintyDiagnostics.
+                uniqueMaskCount
+        ),
+        uncertaintyDiagnostics.
+            maxPassProbabilityRange,
         stepMs,
         meanPeriodMs,
         minPeriodMs,
@@ -307,7 +404,10 @@ void runWindowInference(
             normalizeUs
         ),
         static_cast<unsigned long>(
-            invokeUs
+            prefixUs
+        ),
+        static_cast<unsigned long>(
+            uncertaintyUs
         ),
         static_cast<unsigned long>(
             fullPeriodOverruns
@@ -437,6 +537,7 @@ void initializeSensor() {
 
 void calibrateGyroscope() {
     Serial.println();
+
     Serial.println(
         "Gyro calibration starting..."
     );
@@ -474,20 +575,50 @@ void calibrateGyroscope() {
 }
 
 
-void initializeModel() {
+void initializeUncertaintyModel() {
     Serial.println();
+
     Serial.println(
-        "Initializing production Float32 model..."
+        "Initializing Phase-5 B1/B2/B3 Float32 prefix..."
     );
 
-    if (!inference::initLocalModel()) {
+    if (!inference::initPrefixRunner()) {
         fatal(
-            "production Float32 model initialization failed."
+            "Phase-5 prefix initialization failed."
         );
     }
 
+    Serial.printf(
+        "Prefix tensor arena: %u / %u bytes\n",
+        static_cast<unsigned>(
+            inference::
+                prefixRunnerTensorArenaUsedBytes()
+        ),
+        static_cast<unsigned>(
+            inference::
+                prefixRunnerTensorArenaCapacityBytes()
+        )
+    );
+
+
+    const uint32_t prngSeed =
+        inference::
+            seedUncertaintyMaskPrngFromDevice();
+
+    Serial.printf(
+        "MC-Dropout PRNG seed: 0x%08lX\n",
+        static_cast<unsigned long>(
+            prngSeed
+        )
+    );
+
     Serial.println(
-        "Production Float32 model ready."
+        "Mask generator: xorshift32; "
+        "device-derived seed; true-randomness claim: NO"
+    );
+
+    Serial.println(
+        "Phase-5 uncertainty inference ready."
     );
 }
 
@@ -501,8 +632,9 @@ void setup() {
 
 
     Serial.println();
+
     Serial.println(
-        "=== Phase 4 / M5 — Continuous Local TinyML Runtime ==="
+        "=== Phase 5 / M6 — Continuous On-Device Uncertainty Runtime ==="
     );
 
     Serial.printf(
@@ -513,6 +645,16 @@ void setup() {
     Serial.printf(
         "Dataset version: %s\n",
         DATASET_VERSION
+    );
+
+    Serial.printf(
+        "Feature version: %s\n",
+        FEATURE_VERSION
+    );
+
+    Serial.printf(
+        "Model version: %s\n",
+        UNCERTAINTY_MODEL_VERSION
     );
 
     Serial.printf(
@@ -540,10 +682,23 @@ void setup() {
         )
     );
 
+    Serial.printf(
+        "Uncertainty contract: %u stochastic passes; "
+        "score=normalized predictive entropy\n",
+        static_cast<unsigned>(
+            inference::
+                UNCERTAINTY_PASS_COUNT
+        )
+    );
+
+    Serial.println(
+        "Offload threshold/policy: NONE"
+    );
+
 
     initializeSensor();
     calibrateGyroscope();
-    initializeModel();
+    initializeUncertaintyModel();
 
 
     runtimeBuffer.reset();
@@ -559,28 +714,30 @@ void setup() {
 
 
     Serial.println();
+
     Serial.println(
-        "Continuous runtime starting."
+        "Continuous uncertainty runtime starting."
     );
 
     Serial.println(
-        "First prediction after 100 successful samples;"
+        "First inference after 100 successful samples;"
     );
 
     Serial.println(
-        "then one prediction every 50 new successful samples."
+        "then one inference every 50 new successful samples."
     );
 
     Serial.println(
-        "For the first validation run, keep the device IDLE "
-        "for at least 10 prediction windows."
+        "For the stability run, keep the device IDLE "
+        "for at least 20 inference windows."
     );
 
     Serial.println();
 
 
     nextSampleUs =
-        micros() + SAMPLE_PERIOD_US;
+        micros()
+        + SAMPLE_PERIOD_US;
 }
 
 
@@ -590,7 +747,8 @@ void loop() {
 
     if (
         static_cast<int32_t>(
-            nowUs - nextSampleUs
+            nowUs
+            - nextSampleUs
         ) < 0
     ) {
         delayMicroseconds(100);
@@ -599,7 +757,8 @@ void loop() {
 
 
     const uint32_t latenessUs =
-        nowUs - nextSampleUs;
+        nowUs
+        - nextSampleUs;
 
     if (
         latenessUs
@@ -610,11 +769,13 @@ void loop() {
         // Do not burst-read stale "catch-up" samples.
         // Re-anchor after a full-period miss.
         nextSampleUs =
-            nowUs + SAMPLE_PERIOD_US;
+            nowUs
+            + SAMPLE_PERIOD_US;
     } else {
-        // Preserve the 100 Hz schedule while runtime work fits
-        // inside the available 10 ms period.
-        nextSampleUs += SAMPLE_PERIOD_US;
+        // Preserve the 100 Hz schedule while the complete
+        // Phase-5 uncertainty pipeline fits inside the 10 ms period.
+        nextSampleUs +=
+            SAMPLE_PERIOD_US;
     }
 
 
