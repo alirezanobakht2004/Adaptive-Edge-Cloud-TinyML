@@ -1,0 +1,103 @@
+{
+  "model_version": "gesture-model-v1.1.0",
+  "model_purpose": "phase5-mc-dropout-candidate",
+  "model_sha256": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "train_split": "session_01",
+  "validation_split": "session_02",
+  "test_split_used": false,
+  "class_to_id": {
+    "IDLE": 0,
+    "SWIPE_LEFT": 1,
+    "SWIPE_RIGHT": 2,
+    "ROTATE_CW": 3,
+    "SHAKE": 4
+  },
+  "seed": 42,
+  "mc_dropout": {
+    "passes": 5,
+    "dropout_rate": 0.2,
+    "training_dropout_active": true,
+    "deterministic_validation_dropout_active": false
+  },
+  "training": {
+    "max_epochs": 200,
+    "epochs_ran": 65,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "early_stopping_patience": 20
+  },
+  "normalization": {
+    "fit_split": "train",
+    "mean": [
+      0.06585895270109177,
+      0.22886571288108826,
+      0.007989675737917423,
+      0.021229658275842667,
+      0.015449597500264645,
+      0.01806703954935074,
+      -5.230025768280029,
+      7.0733642578125,
+      10.744436264038086,
+      22.134586334228516
+    ],
+    "variance": [
+      0.0069986749440431595,
+      0.07015544921159744,
+      0.0012575829168781638,
+      0.0006142539205029607,
+      0.00028046619263477623,
+      0.0005419903318397701,
+      136.76138305664062,
+      120.59063720703125,
+      233.32369995117188,
+      740.3778686523438
+    ]
+  },
+  "deterministic_validation_metrics": {
+    "accuracy": 0.985,
+    "macro_precision": 0.9852439024390243,
+    "macro_recall": 0.9850000000000001,
+    "macro_f1": 0.9850609470229724
+  },
+  "deterministic_validation_confusion_matrix": [
+    [
+      40,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      39,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      39,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      39,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      40
+    ]
+  ],
+  "mc_uncertainty_evaluation_completed": false,
+  "esp32_uncertainty_deployment_completed": false
+}
