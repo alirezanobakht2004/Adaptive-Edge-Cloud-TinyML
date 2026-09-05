@@ -18,11 +18,11 @@ firmware/.pio/
 !data/**/.gitkeep
 
 # ML artifacts
-*.tflite
-*.keras
-*.h5
-*.npz
-*.npy
+#*.tflite
+#*.keras
+#*.h5
+#*.npz
+#*.npy
 
 # Secrets
 .env
