@@ -1,0 +1,112 @@
+{
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "source_split": "validation",
+  "source_session": "session_02",
+  "test_split_used": false,
+  "vector_count": 5,
+  "feature_names": [
+    "std_ax",
+    "max_abs_ax",
+    "ax_half_mean_delta",
+    "std_ay",
+    "std_az",
+    "rms_acc_mag_deviation",
+    "mean_gz",
+    "std_gz",
+    "rms_gyro_mag",
+    "max_gyro_mag"
+  ],
+  "vectors": [
+    {
+      "vector_index": 0,
+      "validation_index": 0,
+      "gesture": "IDLE",
+      "source_csv": "C:/Users/alire/OneDrive/Desktop/Final Project/Project Source/Adaptive-Edge-Cloud-TinyML/data/raw/user_01/session_02/idle_001.csv",
+      "expected_features": [
+        0.001923969597555697,
+        0.010700000450015068,
+        0.00041799998143687844,
+        0.0022523931693285704,
+        0.0035573062486946583,
+        0.003551384899765253,
+        0.003137000370770693,
+        0.04658722132444382,
+        0.07529700547456741,
+        0.14513541758060455
+      ]
+    },
+    {
+      "vector_index": 1,
+      "validation_index": 120,
+      "gesture": "SWIPE_LEFT",
+      "source_csv": "C:/Users/alire/OneDrive/Desktop/Final Project/Project Source/Adaptive-Edge-Cloud-TinyML/data/raw/user_01/session_02/swipe_left_001.csv",
+      "expected_features": [
+        0.03492477908730507,
+        0.1062999963760376,
+        -0.023415999487042427,
+        0.007592171896249056,
+        0.009568273089826107,
+        0.009630244225263596,
+        2.231600046157837,
+        1.7987428903579712,
+        2.938953161239624,
+        5.708785533905029
+      ]
+    },
+    {
+      "vector_index": 2,
+      "validation_index": 160,
+      "gesture": "SWIPE_RIGHT",
+      "source_csv": "C:/Users/alire/OneDrive/Desktop/Final Project/Project Source/Adaptive-Edge-Cloud-TinyML/data/raw/user_01/session_02/swipe_right_001.csv",
+      "expected_features": [
+        0.03458249196410179,
+        0.09679999947547913,
+        0.030455999076366425,
+        0.007052277680486441,
+        0.007299989461898804,
+        0.007323006633669138,
+        -0.04778299853205681,
+        1.3494670391082764,
+        1.446640133857727,
+        3.1163885593414307
+      ]
+    },
+    {
+      "vector_index": 3,
+      "validation_index": 40,
+      "gesture": "ROTATE_CW",
+      "source_csv": "C:/Users/alire/OneDrive/Desktop/Final Project/Project Source/Adaptive-Edge-Cloud-TinyML/data/raw/user_01/session_02/rotate_cw_001.csv",
+      "expected_features": [
+        0.02567277103662491,
+        0.148499995470047,
+        0.02270600013434887,
+        0.01587427593767643,
+        0.006499382201582193,
+        0.007331588305532932,
+        -13.104734420776367,
+        26.250102996826172,
+        29.46242332458496,
+        48.953697204589844
+      ]
+    },
+    {
+      "vector_index": 4,
+      "validation_index": 80,
+      "gesture": "SHAKE",
+      "source_csv": "C:/Users/alire/OneDrive/Desktop/Final Project/Project Source/Adaptive-Edge-Cloud-TinyML/data/raw/user_01/session_02/shake_001.csv",
+      "expected_features": [
+        0.14536990225315094,
+        0.31209999322891235,
+        0.07469400018453598,
+        0.027068370953202248,
+        0.01790514960885048,
+        0.021055923774838448,
+        1.1289299726486206,
+        5.51104736328125,
+        5.990304946899414,
+        13.304275512695312
+      ]
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+#ifndef PIO_UNIT_TESTING
 #include <Arduino.h>
 #include <Wire.h>
 
@@ -167,3 +168,5 @@ void loop() {
 
     sampleCount++;
 }
+
+#endif
