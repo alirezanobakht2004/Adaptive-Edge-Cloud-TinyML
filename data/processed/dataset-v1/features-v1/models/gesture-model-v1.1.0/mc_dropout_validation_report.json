@@ -1,0 +1,40 @@
+{
+  "model_version": "gesture-model-v1.1.0",
+  "model_sha256": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "evaluation_split": "validation",
+  "evaluation_session": "session_02",
+  "test_split_used": false,
+  "seed": 42,
+  "mc_dropout": {
+    "passes": 5,
+    "dropout_rate": 0.2,
+    "training_flag": true
+  },
+  "probability_tensor_shape": [
+    5,
+    200,
+    5
+  ],
+  "variation_diagnostic": {
+    "tolerance": 1e-07,
+    "sample_count": 200,
+    "varying_sample_count": 196,
+    "varying_sample_fraction": 0.98,
+    "top1_changed_sample_count": 2,
+    "top1_changed_sample_fraction": 0.01,
+    "max_probability_range": 0.8574674129486084,
+    "stochastic_variation_detected": true
+  },
+  "per_pass_validation_accuracy": [
+    0.985,
+    0.98,
+    0.985,
+    0.985,
+    0.98
+  ],
+  "entropy_computed": false,
+  "variance_uncertainty_computed": false,
+  "uncertainty_score_defined": false
+}
