@@ -4,7 +4,6 @@
 
 #include <cmath>
 #include <cstring>
-
 #include "gesture_model_data.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
 #include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
@@ -23,7 +22,6 @@ constexpr size_t TENSOR_ARENA_SIZE =
 alignas(16) uint8_t tensorArena[
     TENSOR_ARENA_SIZE
 ];
-
 const tflite::Model* model = nullptr;
 
 tflite::MicroInterpreter* interpreter =
@@ -57,6 +55,7 @@ bool initLocalModel() {
         return false;
     }
 
+
     static tflite::MicroMutableOpResolver<2>
         resolver;
 
@@ -77,6 +76,7 @@ bool initLocalModel() {
         return false;
     }
 
+
     static tflite::MicroInterpreter
         staticInterpreter(
             model,
@@ -94,6 +94,7 @@ bool initLocalModel() {
         return false;
     }
 
+
     inputTensor = interpreter->input(0);
     outputTensor = interpreter->output(0);
 
@@ -103,6 +104,7 @@ bool initLocalModel() {
     ) {
         return false;
     }
+
 
     if (
         inputTensor->type
@@ -117,6 +119,7 @@ bool initLocalModel() {
     ) {
         return false;
     }
+
 
     if (
         inputTensor->bytes
@@ -133,6 +136,7 @@ bool initLocalModel() {
     ) {
         return false;
     }
+
 
     initialized = true;
 
@@ -152,6 +156,7 @@ bool runLocalModel(
         return false;
     }
 
+
     for (
         size_t index = 0;
         index < MODEL_INPUT_FEATURES;
@@ -162,6 +167,7 @@ bool runLocalModel(
         }
     }
 
+
     std::memcpy(
         inputTensor->data.f,
         input,
@@ -169,12 +175,14 @@ bool runLocalModel(
             * sizeof(float)
     );
 
+
     if (
         interpreter->Invoke()
         != kTfLiteOk
     ) {
         return false;
     }
+
 
     for (
         size_t index = 0;
@@ -189,6 +197,7 @@ bool runLocalModel(
             return false;
         }
     }
+
 
     std::memcpy(
         output,
@@ -248,5 +257,23 @@ const char* localClassName(
 
     return names[classIndex];
 }
+
+
+size_t localModelTensorArenaCapacityBytes() {
+    return TENSOR_ARENA_SIZE;
+}
+
+
+size_t localModelTensorArenaUsedBytes() {
+    if (
+        !initialized
+        || interpreter == nullptr
+    ) {
+        return 0;
+    }
+
+    return interpreter->arena_used_bytes();
+}
+
 
 }  // namespace inference

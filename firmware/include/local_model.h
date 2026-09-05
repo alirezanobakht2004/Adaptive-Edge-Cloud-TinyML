@@ -23,4 +23,11 @@ const char* localClassName(
     size_t classIndex
 );
 
+// Diagnostic resource introspection.
+// The capacity is the configured static arena size.
+// The used value becomes valid after initLocalModel().
+size_t localModelTensorArenaCapacityBytes();
+
+size_t localModelTensorArenaUsedBytes();
+
 }  // namespace inference
