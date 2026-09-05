@@ -3,11 +3,14 @@
 #include <Arduino.h>
 #include <Wire.h>
 
+#include <climits>
+
 #include "version.h"
 #include "sensors/mpu6050.h"
 #include "feature_extractor.h"
 #include "input_preprocessor.h"
 #include "local_model.h"
+#include "window_buffer.h"
 
 
 namespace {
@@ -18,7 +21,6 @@ constexpr uint8_t SCL_PIN = 9;
 constexpr uint32_t I2C_FREQUENCY_HZ = 400000;
 
 constexpr uint32_t SAMPLE_RATE_HZ = 100;
-
 constexpr uint32_t SAMPLE_PERIOD_US =
     1000000UL / SAMPLE_RATE_HZ;
 
@@ -26,13 +28,18 @@ constexpr uint16_t GYRO_CALIBRATION_SAMPLES = 200;
 
 
 static_assert(
-    features::WINDOW_SAMPLES == 100,
-    "Live smoke test expects a 100-sample window."
+    sampling::WINDOW_SAMPLES == 100,
+    "Continuous runtime expects 100-sample windows."
 );
 
 static_assert(
-    features::SENSOR_CHANNELS == 6,
-    "Live smoke test expects six IMU channels."
+    sampling::STEP_SAMPLES == 50,
+    "Continuous runtime expects 50-sample steps."
+);
+
+static_assert(
+    sampling::SENSOR_CHANNELS == 6,
+    "Continuous runtime expects six IMU channels."
 );
 
 static_assert(
@@ -42,13 +49,26 @@ static_assert(
 );
 
 
-float liveWindow
-    [features::WINDOW_SAMPLES]
-    [features::SENSOR_CHANNELS];
+sampling::WindowBuffer runtimeBuffer;
 
-uint32_t sampleTimestampsUs[
-    features::WINDOW_SAMPLES
-];
+float inferenceWindow
+    [sampling::WINDOW_SAMPLES]
+    [sampling::SENSOR_CHANNELS];
+
+
+uint32_t nextSampleUs = 0;
+uint32_t previousSampleUs = 0;
+uint32_t previousWindowReadyUs = 0;
+
+uint32_t successfulSamples = 0;
+uint32_t readFailures = 0;
+uint32_t fullPeriodOverruns = 0;
+uint32_t windowCount = 0;
+
+uint64_t periodSumUs = 0;
+uint32_t periodCount = 0;
+uint32_t minPeriodUs = UINT32_MAX;
+uint32_t maxPeriodUs = 0;
 
 
 [[noreturn]]
@@ -64,89 +84,24 @@ void fatal(const char* message) {
 }
 
 
-void printFloatVector(
-    const char* name,
-    const float* values,
-    size_t count
+void resetPeriodStats() {
+    periodSumUs = 0;
+    periodCount = 0;
+    minPeriodUs = UINT32_MAX;
+    maxPeriodUs = 0;
+}
+
+
+void updatePeriodStats(
+    uint32_t sampleTimestampUs
 ) {
-    Serial.printf("%s = [", name);
-
-    for (size_t index = 0;
-         index < count;
-         ++index) {
-
-        if (index > 0) {
-            Serial.print(", ");
-        }
-
-        Serial.printf(
-            "%.6f",
-            values[index]
-        );
-    }
-
-    Serial.println("]");
-}
-
-
-bool captureSingleWindow() {
-    uint32_t nextSampleUs = micros();
-
-    for (
-        size_t index = 0;
-        index < features::WINDOW_SAMPLES;
-        ++index
-    ) {
-        while (
-            static_cast<int32_t>(
-                micros() - nextSampleUs
-            ) < 0
-        ) {
-            delayMicroseconds(100);
-        }
-
-        sampleTimestampsUs[index] =
-            micros();
-
-        nextSampleUs += SAMPLE_PERIOD_US;
-
-        ImuSample sample;
-
-        if (!mpu6050Read(sample)) {
-            Serial.printf(
-                "IMU_READ_FAILURE at sample=%u\n",
-                static_cast<unsigned>(index)
-            );
-
-            return false;
-        }
-
-        liveWindow[index][0] = sample.ax;
-        liveWindow[index][1] = sample.ay;
-        liveWindow[index][2] = sample.az;
-
-        liveWindow[index][3] = sample.gx;
-        liveWindow[index][4] = sample.gy;
-        liveWindow[index][5] = sample.gz;
-    }
-
-    return true;
-}
-
-
-void printSamplingSummary() {
-    uint32_t minPeriodUs = UINT32_MAX;
-    uint32_t maxPeriodUs = 0;
-    uint64_t periodSumUs = 0;
-
-    for (
-        size_t index = 1;
-        index < features::WINDOW_SAMPLES;
-        ++index
-    ) {
+    if (previousSampleUs != 0) {
         const uint32_t periodUs =
-            sampleTimestampsUs[index]
-            - sampleTimestampsUs[index - 1];
+            sampleTimestampUs
+            - previousSampleUs;
+
+        periodSumUs += periodUs;
+        ++periodCount;
 
         if (periodUs < minPeriodUs) {
             minPeriodUs = periodUs;
@@ -155,59 +110,26 @@ void printSamplingSummary() {
         if (periodUs > maxPeriodUs) {
             maxPeriodUs = periodUs;
         }
-
-        periodSumUs += periodUs;
     }
 
-    const float meanPeriodUs =
-        static_cast<float>(periodSumUs)
-        / static_cast<float>(
-            features::WINDOW_SAMPLES - 1
-        );
-
-    const uint32_t windowSpanUs =
-        sampleTimestampsUs[
-            features::WINDOW_SAMPLES - 1
-        ]
-        - sampleTimestampsUs[0];
-
-    Serial.println();
-    Serial.println("SAMPLING SUMMARY");
-    Serial.println("----------------");
-
-    Serial.printf(
-        "Samples:          %u\n",
-        static_cast<unsigned>(
-            features::WINDOW_SAMPLES
-        )
-    );
-
-    Serial.printf(
-        "Window span:      %.3f ms\n",
-        static_cast<float>(windowSpanUs)
-            / 1000.0f
-    );
-
-    Serial.printf(
-        "Mean period:      %.3f ms\n",
-        meanPeriodUs / 1000.0f
-    );
-
-    Serial.printf(
-        "Min period:       %.3f ms\n",
-        static_cast<float>(minPeriodUs)
-            / 1000.0f
-    );
-
-    Serial.printf(
-        "Max period:       %.3f ms\n",
-        static_cast<float>(maxPeriodUs)
-            / 1000.0f
-    );
+    previousSampleUs = sampleTimestampUs;
 }
 
 
-void runLiveInference() {
+void runWindowInference(
+    uint32_t windowReadyUs
+) {
+    if (
+        !runtimeBuffer.copyWindow(
+            inferenceWindow
+        )
+    ) {
+        fatal(
+            "window copy failed."
+        );
+    }
+
+
     float featureVector[
         features::FEATURE_COUNT
     ] = {};
@@ -221,14 +143,25 @@ void runLiveInference() {
     ] = {};
 
 
+    const uint32_t pipelineStartUs =
+        micros();
+
+    const uint32_t featureStartUs =
+        pipelineStartUs;
+
     if (
         !features::extractFeaturesV1(
-            liveWindow,
+            inferenceWindow,
             featureVector
         )
     ) {
-        fatal("features-v1 extraction failed.");
+        fatal(
+            "features-v1 extraction failed."
+        );
     }
+
+    const uint32_t featureEndUs =
+        micros();
 
 
     if (
@@ -237,8 +170,13 @@ void runLiveInference() {
             normalized
         )
     ) {
-        fatal("feature normalization failed.");
+        fatal(
+            "feature normalization failed."
+        );
     }
+
+    const uint32_t normalizeEndUs =
+        micros();
 
 
     if (
@@ -247,8 +185,13 @@ void runLiveInference() {
             probabilities
         )
     ) {
-        fatal("local Float32 inference failed.");
+        fatal(
+            "local Float32 inference failed."
+        );
     }
+
+    const uint32_t invokeEndUs =
+        micros();
 
 
     const int predictedClass =
@@ -263,51 +206,291 @@ void runLiveInference() {
                 inference::LOCAL_CLASS_COUNT
             )
     ) {
-        fatal("invalid predicted class.");
+        fatal(
+            "invalid predicted class."
+        );
     }
 
 
-    Serial.println();
-    Serial.println("LIVE LOCAL INFERENCE");
-    Serial.println("--------------------");
+    ++windowCount;
 
-    printFloatVector(
-        "features-v1",
-        featureVector,
-        features::FEATURE_COUNT
-    );
 
-    printFloatVector(
-        "normalized",
-        normalized,
-        inference::MODEL_INPUT_FEATURES
-    );
+    const uint32_t featureUs =
+        featureEndUs - featureStartUs;
 
-    printFloatVector(
-        "probabilities",
-        probabilities,
-        inference::LOCAL_CLASS_COUNT
-    );
+    const uint32_t normalizeUs =
+        normalizeEndUs - featureEndUs;
 
+    const uint32_t invokeUs =
+        invokeEndUs - normalizeEndUs;
+
+    const uint32_t pipelineUs =
+        invokeEndUs - pipelineStartUs;
+
+
+    float meanPeriodMs = 0.0f;
+    float minPeriodMs = 0.0f;
+    float maxPeriodMs = 0.0f;
+
+    if (periodCount > 0) {
+        meanPeriodMs =
+            static_cast<float>(
+                periodSumUs
+            )
+            / static_cast<float>(
+                periodCount
+            )
+            / 1000.0f;
+
+        minPeriodMs =
+            static_cast<float>(
+                minPeriodUs
+            )
+            / 1000.0f;
+
+        maxPeriodMs =
+            static_cast<float>(
+                maxPeriodUs
+            )
+            / 1000.0f;
+    }
+
+
+    float stepMs = 0.0f;
+
+    if (previousWindowReadyUs != 0) {
+        stepMs =
+            static_cast<float>(
+                windowReadyUs
+                - previousWindowReadyUs
+            )
+            / 1000.0f;
+    }
+
+    previousWindowReadyUs =
+        windowReadyUs;
+
+
+    // Keep runtime logging intentionally compact so Serial output
+    // is less likely to disturb 100 Hz acquisition.
     Serial.printf(
-        "Predicted class:  %d\n",
-        predictedClass
-    );
-
-    Serial.printf(
-        "Predicted gesture: %s\n",
+        "W=%lu S=%lu "
+        "gesture=%s class=%d conf=%.6f "
+        "step_ms=%.3f "
+        "period_ms(mean/min/max)=%.3f/%.3f/%.3f "
+        "pipe_us=%lu feat_us=%lu norm_us=%lu invoke_us=%lu "
+        "overruns=%lu read_fail=%lu\n",
+        static_cast<unsigned long>(
+            windowCount
+        ),
+        static_cast<unsigned long>(
+            successfulSamples
+        ),
         inference::localClassName(
             static_cast<size_t>(
                 predictedClass
             )
+        ),
+        predictedClass,
+        probabilities[predictedClass],
+        stepMs,
+        meanPeriodMs,
+        minPeriodMs,
+        maxPeriodMs,
+        static_cast<unsigned long>(
+            pipelineUs
+        ),
+        static_cast<unsigned long>(
+            featureUs
+        ),
+        static_cast<unsigned long>(
+            normalizeUs
+        ),
+        static_cast<unsigned long>(
+            invokeUs
+        ),
+        static_cast<unsigned long>(
+            fullPeriodOverruns
+        ),
+        static_cast<unsigned long>(
+            readFailures
         )
     );
 
+
+    resetPeriodStats();
+}
+
+
+bool sampleOnce() {
+    ImuSample sample;
+
+    if (!mpu6050Read(sample)) {
+        ++readFailures;
+        return false;
+    }
+
+
+    const float sampleVector[
+        sampling::SENSOR_CHANNELS
+    ] = {
+        sample.ax,
+        sample.ay,
+        sample.az,
+        sample.gx,
+        sample.gy,
+        sample.gz,
+    };
+
+
+    const uint32_t sampleTimestampUs =
+        micros();
+
+    updatePeriodStats(
+        sampleTimestampUs
+    );
+
+    ++successfulSamples;
+
+
+    const bool windowReady =
+        runtimeBuffer.pushSample(
+            sampleVector
+        );
+
+    if (windowReady) {
+        runWindowInference(
+            sampleTimestampUs
+        );
+    }
+
+    return true;
+}
+
+
+void initializeSensor() {
+    if (
+        !Wire.begin(
+            SDA_PIN,
+            SCL_PIN,
+            I2C_FREQUENCY_HZ
+        )
+    ) {
+        fatal(
+            "I2C initialization failed."
+        );
+    }
+
+
+    const uint8_t whoAmI =
+        mpu6050WhoAmI();
+
     Serial.printf(
-        "Confidence:       %.6f\n",
-        probabilities[predictedClass]
+        "WHO_AM_I: 0x%02X\n",
+        whoAmI
+    );
+
+    if (whoAmI == 0x68) {
+        Serial.println(
+            "Sensor identity: standard MPU6050"
+        );
+    } else if (whoAmI == 0x74) {
+        Serial.println(
+            "WARNING: non-standard WHO_AM_I=0x74; "
+            "register compatibility previously verified."
+        );
+    } else {
+        fatal(
+            "unsupported sensor identity."
+        );
+    }
+
+
+    if (!mpu6050Begin()) {
+        fatal(
+            "sensor configuration failed."
+        );
+    }
+
+
+    Serial.println(
+        "Sensor configuration OK."
+    );
+
+    Serial.println(
+        "I2C frequency: 400 kHz"
+    );
+
+    Serial.println(
+        "Sampling rate: 100 Hz"
+    );
+
+    Serial.println(
+        "Accelerometer range: +/-4 g"
+    );
+
+    Serial.println(
+        "Gyroscope range: +/-500 dps"
     );
 }
+
+
+void calibrateGyroscope() {
+    Serial.println();
+    Serial.println(
+        "Gyro calibration starting..."
+    );
+
+    Serial.println(
+        "KEEP THE DEVICE COMPLETELY STILL."
+    );
+
+
+    GyroBias bias;
+
+    if (
+        !mpu6050CalibrateGyro(
+            bias,
+            GYRO_CALIBRATION_SAMPLES
+        )
+    ) {
+        fatal(
+            "gyro calibration failed."
+        );
+    }
+
+
+    Serial.printf(
+        "Gyro bias: "
+        "gx=%.4f, gy=%.4f, gz=%.4f dps\n",
+        bias.x,
+        bias.y,
+        bias.z
+    );
+
+    Serial.println(
+        "Gyro calibration complete."
+    );
+}
+
+
+void initializeModel() {
+    Serial.println();
+    Serial.println(
+        "Initializing production Float32 model..."
+    );
+
+    if (!inference::initLocalModel()) {
+        fatal(
+            "production Float32 model initialization failed."
+        );
+    }
+
+    Serial.println(
+        "Production Float32 model ready."
+    );
+}
+
 
 }  // namespace
 
@@ -316,9 +499,10 @@ void setup() {
     Serial.begin(115200);
     delay(1500);
 
+
     Serial.println();
     Serial.println(
-        "=== Phase 4 / M5 — Live Local TinyML Smoke Test ==="
+        "=== Phase 4 / M5 — Continuous Local TinyML Runtime ==="
     );
 
     Serial.printf(
@@ -341,165 +525,100 @@ void setup() {
         ORIENTATION_VERSION
     );
 
-
-    if (
-        !Wire.begin(
-            SDA_PIN,
-            SCL_PIN,
-            I2C_FREQUENCY_HZ
-        )
-    ) {
-        fatal("I2C initialization failed.");
-    }
-
-
-    const uint8_t whoAmI =
-        mpu6050WhoAmI();
-
     Serial.printf(
-        "WHO_AM_I: 0x%02X\n",
-        whoAmI
-    );
-
-    if (whoAmI == 0x68) {
-        Serial.println(
-            "Sensor identity: standard MPU6050"
-        );
-    } else if (whoAmI == 0x74) {
-        Serial.println(
-            "WARNING: non-standard WHO_AM_I=0x74; "
-            "register compatibility previously verified."
-        );
-    } else {
-        fatal("unsupported sensor identity.");
-    }
-
-
-    if (!mpu6050Begin()) {
-        fatal("sensor configuration failed.");
-    }
-
-    Serial.println(
-        "Sensor configuration OK."
-    );
-
-    Serial.println(
-        "I2C frequency: 400 kHz"
-    );
-
-    Serial.println(
-        "Sampling rate: 100 Hz"
-    );
-
-    Serial.println(
-        "Accelerometer range: +/-4 g"
-    );
-
-    Serial.println(
-        "Gyroscope range: +/-500 dps"
-    );
-
-
-    Serial.println();
-    Serial.println(
-        "Gyro calibration starting..."
-    );
-
-    Serial.println(
-        "KEEP THE DEVICE COMPLETELY STILL."
-    );
-
-    GyroBias bias;
-
-    if (
-        !mpu6050CalibrateGyro(
-            bias,
-            GYRO_CALIBRATION_SAMPLES
+        "Runtime contract: %lu Hz, "
+        "%u-sample window, "
+        "%u-sample step, 50%% overlap\n",
+        static_cast<unsigned long>(
+            SAMPLE_RATE_HZ
+        ),
+        static_cast<unsigned>(
+            sampling::WINDOW_SAMPLES
+        ),
+        static_cast<unsigned>(
+            sampling::STEP_SAMPLES
         )
-    ) {
-        fatal("gyro calibration failed.");
-    }
-
-    Serial.printf(
-        "Gyro bias: "
-        "gx=%.4f, gy=%.4f, gz=%.4f dps\n",
-        bias.x,
-        bias.y,
-        bias.z
     );
 
-    Serial.println(
-        "Gyro calibration complete."
-    );
+
+    initializeSensor();
+    calibrateGyroscope();
+    initializeModel();
+
+
+    runtimeBuffer.reset();
+    resetPeriodStats();
+
+    successfulSamples = 0;
+    readFailures = 0;
+    fullPeriodOverruns = 0;
+    windowCount = 0;
+
+    previousSampleUs = 0;
+    previousWindowReadyUs = 0;
 
 
     Serial.println();
     Serial.println(
-        "Initializing production Float32 model..."
+        "Continuous runtime starting."
     );
-
-    if (!inference::initLocalModel()) {
-        fatal(
-            "production Float32 model initialization failed."
-        );
-    }
 
     Serial.println(
-        "Production Float32 model ready."
+        "First prediction after 100 successful samples;"
     );
 
+    Serial.println(
+        "then one prediction every 50 new successful samples."
+    );
+
+    Serial.println(
+        "For the first validation run, keep the device IDLE "
+        "for at least 10 prediction windows."
+    );
 
     Serial.println();
-    Serial.println(
-        "Single-window live capture will begin."
-    );
-
-    Serial.println(
-        "For the first smoke test, KEEP THE DEVICE IDLE."
-    );
-
-    Serial.println(
-        "Capture starts in 3 seconds..."
-    );
-
-    delay(1000);
-    Serial.println("3");
-
-    delay(1000);
-    Serial.println("2");
-
-    delay(1000);
-    Serial.println("1");
-
-    Serial.println();
-    Serial.println("CAPTURE START");
 
 
-    if (!captureSingleWindow()) {
-        fatal("live IMU window capture failed.");
-    }
-
-
-    Serial.println("CAPTURE END");
-
-    printSamplingSummary();
-
-    runLiveInference();
-
-
-    Serial.println();
-    Serial.println(
-        "LIVE END-TO-END SMOKE TEST COMPLETE."
-    );
-
-    Serial.println(
-        "Reset the board to run another capture."
-    );
+    nextSampleUs =
+        micros() + SAMPLE_PERIOD_US;
 }
 
 
 void loop() {
-    delay(1000);
+    const uint32_t nowUs =
+        micros();
+
+    if (
+        static_cast<int32_t>(
+            nowUs - nextSampleUs
+        ) < 0
+    ) {
+        delayMicroseconds(100);
+        return;
+    }
+
+
+    const uint32_t latenessUs =
+        nowUs - nextSampleUs;
+
+    if (
+        latenessUs
+        >= SAMPLE_PERIOD_US
+    ) {
+        ++fullPeriodOverruns;
+
+        // Do not burst-read stale "catch-up" samples.
+        // Re-anchor after a full-period miss.
+        nextSampleUs =
+            nowUs + SAMPLE_PERIOD_US;
+    } else {
+        // Preserve the 100 Hz schedule while runtime work fits
+        // inside the available 10 ms period.
+        nextSampleUs += SAMPLE_PERIOD_US;
+    }
+
+
+    sampleOnce();
 }
 
 #endif
