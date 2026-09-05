@@ -1,0 +1,21 @@
+{
+  "model_version": "gesture-model-v1.0.0",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "export_type": "float32-tflite",
+  "source_model_sha256": "2a103e4785b10d73932576e2240c06115f146e8740d5f875f5f63563efd40261",
+  "tflite_sha256": "98cd84af41980dcafb089d6cfd79b0d51c5591d6d0dde987c53184fe6c256d20",
+  "source_model_bytes": 103849,
+  "tflite_model_bytes": 25816,
+  "parity_split": "validation",
+  "parity_sample_count": 200,
+  "rtol": 1e-05,
+  "atol": 1e-05,
+  "max_abs_probability_difference": 2.384185791015625e-07,
+  "mean_abs_probability_difference": 3.1545683842892913e-09,
+  "class_matches": 200,
+  "class_match_rate": 1.0,
+  "numeric_parity_passed": true,
+  "class_parity_passed": true,
+  "parity_passed": true
+}
