@@ -5,11 +5,9 @@
 #include <cmath>
 #include <cstring>
 
-#include "deployment_preprocessing_params.h"
 #include "gesture_model_data.h"
-
-#include "tensorflow/lite/micro/all_ops_resolver.h"
 #include "tensorflow/lite/micro/micro_interpreter.h"
+#include "tensorflow/lite/micro/micro_mutable_op_resolver.h"
 #include "tensorflow/lite/schema/schema_generated.h"
 
 
@@ -17,8 +15,10 @@ namespace inference {
 
 namespace {
 
+// Known-good Float32 configuration from the runtime parity diagnostic.
+// This is not yet the measured minimum production arena size.
 constexpr size_t TENSOR_ARENA_SIZE =
-    32 * 1024;
+    64 * 1024;
 
 alignas(16) uint8_t tensorArena[
     TENSOR_ARENA_SIZE
@@ -33,17 +33,6 @@ TfLiteTensor* inputTensor = nullptr;
 TfLiteTensor* outputTensor = nullptr;
 
 bool initialized = false;
-
-
-bool closeEnough(
-    float first,
-    float second,
-    float tolerance = 1e-6f
-) {
-    return std::fabs(
-        first - second
-    ) <= tolerance;
-}
 
 }  // namespace
 
@@ -68,7 +57,25 @@ bool initLocalModel() {
         return false;
     }
 
-    static tflite::AllOpsResolver resolver;
+    static tflite::MicroMutableOpResolver<2>
+        resolver;
+
+    static bool resolverAttempted = false;
+    static bool resolverReady = false;
+
+    if (!resolverAttempted) {
+        resolverAttempted = true;
+
+        resolverReady =
+            resolver.AddFullyConnected()
+                == kTfLiteOk
+            && resolver.AddSoftmax()
+                == kTfLiteOk;
+    }
+
+    if (!resolverReady) {
+        return false;
+    }
 
     static tflite::MicroInterpreter
         staticInterpreter(
@@ -99,14 +106,14 @@ bool initLocalModel() {
 
     if (
         inputTensor->type
-        != kTfLiteInt8
+        != kTfLiteFloat32
     ) {
         return false;
     }
 
     if (
         outputTensor->type
-        != kTfLiteInt8
+        != kTfLiteFloat32
     ) {
         return false;
     }
@@ -114,6 +121,7 @@ bool initLocalModel() {
     if (
         inputTensor->bytes
         != MODEL_INPUT_FEATURES
+            * sizeof(float)
     ) {
         return false;
     }
@@ -121,42 +129,7 @@ bool initLocalModel() {
     if (
         outputTensor->bytes
         != LOCAL_CLASS_COUNT
-    ) {
-        return false;
-    }
-
-    if (
-        !closeEnough(
-            inputTensor->params.scale,
-            deployment_preprocessing::
-                INPUT_SCALE
-        )
-    ) {
-        return false;
-    }
-
-    if (
-        inputTensor->params.zero_point
-        != deployment_preprocessing::
-            INPUT_ZERO_POINT
-    ) {
-        return false;
-    }
-
-    if (
-        !closeEnough(
-            outputTensor->params.scale,
-            deployment_preprocessing::
-                OUTPUT_SCALE
-        )
-    ) {
-        return false;
-    }
-
-    if (
-        outputTensor->params.zero_point
-        != deployment_preprocessing::
-            OUTPUT_ZERO_POINT
+            * sizeof(float)
     ) {
         return false;
     }
@@ -168,8 +141,8 @@ bool initLocalModel() {
 
 
 bool runLocalModel(
-    const int8_t input[MODEL_INPUT_FEATURES],
-    int8_t output[LOCAL_CLASS_COUNT]
+    const float input[MODEL_INPUT_FEATURES],
+    float output[LOCAL_CLASS_COUNT]
 ) {
     if (
         !initialized
@@ -179,10 +152,21 @@ bool runLocalModel(
         return false;
     }
 
+    for (
+        size_t index = 0;
+        index < MODEL_INPUT_FEATURES;
+        ++index
+    ) {
+        if (!std::isfinite(input[index])) {
+            return false;
+        }
+    }
+
     std::memcpy(
-        inputTensor->data.int8,
+        inputTensor->data.f,
         input,
         MODEL_INPUT_FEATURES
+            * sizeof(float)
     );
 
     if (
@@ -192,10 +176,25 @@ bool runLocalModel(
         return false;
     }
 
+    for (
+        size_t index = 0;
+        index < LOCAL_CLASS_COUNT;
+        ++index
+    ) {
+        if (
+            !std::isfinite(
+                outputTensor->data.f[index]
+            )
+        ) {
+            return false;
+        }
+    }
+
     std::memcpy(
         output,
-        outputTensor->data.int8,
+        outputTensor->data.f,
         LOCAL_CLASS_COUNT
+            * sizeof(float)
     );
 
     return true;
@@ -203,7 +202,7 @@ bool runLocalModel(
 
 
 int localModelArgmax(
-    const int8_t output[LOCAL_CLASS_COUNT]
+    const float output[LOCAL_CLASS_COUNT]
 ) {
     if (output == nullptr) {
         return -1;
@@ -227,20 +226,6 @@ int localModelArgmax(
     return static_cast<int>(
         bestIndex
     );
-}
-
-
-float dequantizeLocalOutput(
-    int8_t value
-) {
-    return (
-        static_cast<float>(value)
-        - static_cast<float>(
-            deployment_preprocessing::
-                OUTPUT_ZERO_POINT
-        )
-    ) * deployment_preprocessing::
-        OUTPUT_SCALE;
 }
 
 

@@ -2,39 +2,42 @@
 #include <unity.h>
 
 #include <cmath>
-#include <cstdlib>
-#include <stdint.h>
+#include <cstring>
 
-#include "deployment_preprocessing_params.h"
+#include "gesture_model_data.h"
 #include "local_model.h"
 #include "local_inference_vectors.h"
 
 
 namespace {
 
-void testFullValidationLocalInferenceParity() {
+constexpr float OUTPUT_ABS_TOLERANCE =
+    1.0e-6f;
+
+
+void testProductionFloat32LocalInference() {
+    TEST_ASSERT_EQUAL_STRING(
+        local_inference_vectors::MODEL_SHA256,
+        gesture_model_data::MODEL_SHA256
+    );
+
+    TEST_ASSERT_EQUAL_UINT32(
+        local_inference_vectors::MODEL_LEN,
+        gesture_model_data::MODEL_LEN
+    );
+
     TEST_ASSERT_TRUE(
         inference::initLocalModel()
     );
 
     int invokeFailures = 0;
-
-    int desktopClassMatches = 0;
-    int desktopClassMismatches = 0;
-
+    int classMismatches = 0;
+    int numericViolations = 0;
     int esp32Correct = 0;
 
-    int globalMaxLsbDifference = 0;
-
-    float globalMaxProbabilityDifference =
-        0.0f;
-
-    uint64_t sumAbsoluteLsbDifference = 0;
-
-    size_t comparedOutputs = 0;
-
-    size_t globalMaxVectorIndex = 0;
-    size_t globalMaxOutputIndex = 0;
+    float maxAbsDifference = 0.0f;
+    size_t maxVectorIndex = 0;
+    size_t maxOutputIndex = 0;
 
     for (
         size_t vectorIndex = 0;
@@ -42,7 +45,7 @@ void testFullValidationLocalInferenceParity() {
             < local_inference_vectors::VECTOR_COUNT;
         ++vectorIndex
     ) {
-        int8_t actual[
+        float actual[
             inference::LOCAL_CLASS_COUNT
         ] = {};
 
@@ -55,6 +58,25 @@ void testFullValidationLocalInferenceParity() {
 
         if (!success) {
             ++invokeFailures;
+
+            Serial.printf(
+                "INVOKE_FAILURE "
+                "vector=%u "
+                "validation_index=%u "
+                "label=%s\n",
+                static_cast<unsigned>(
+                    vectorIndex
+                ),
+                static_cast<unsigned>(
+                    local_inference_vectors::
+                        VALIDATION_INDICES[
+                            vectorIndex
+                        ]
+                ),
+                local_inference_vectors::
+                    LABELS[vectorIndex]
+            );
+
             continue;
         }
 
@@ -75,20 +97,28 @@ void testFullValidationLocalInferenceParity() {
                     vectorIndex
                 ];
 
-        if (esp32Class == desktopClass) {
-            ++desktopClassMatches;
-        } else {
-            ++desktopClassMismatches;
+        if (
+            esp32Class
+            != desktopClass
+        ) {
+            ++classMismatches;
 
             Serial.printf(
                 "CLASS_MISMATCH "
                 "vector=%u "
+                "validation_index=%u "
                 "label=%s "
                 "desktop=%d "
                 "esp32=%d "
                 "true=%d\n",
                 static_cast<unsigned>(
                     vectorIndex
+                ),
+                static_cast<unsigned>(
+                    local_inference_vectors::
+                        VALIDATION_INDICES[
+                            vectorIndex
+                        ]
                 ),
                 local_inference_vectors::
                     LABELS[vectorIndex],
@@ -98,7 +128,10 @@ void testFullValidationLocalInferenceParity() {
             );
         }
 
-        if (esp32Class == trueClass) {
+        if (
+            esp32Class
+            == trueClass
+        ) {
             ++esp32Correct;
         }
 
@@ -108,187 +141,164 @@ void testFullValidationLocalInferenceParity() {
                 < inference::LOCAL_CLASS_COUNT;
             ++outputIndex
         ) {
-            const int expected =
-                static_cast<int>(
-                    local_inference_vectors::
-                        EXPECTED_OUTPUTS[
-                            vectorIndex
-                        ][outputIndex]
-                );
+            const float expected =
+                local_inference_vectors::
+                    EXPECTED_OUTPUTS[
+                        vectorIndex
+                    ][outputIndex];
 
-            const int actualValue =
-                static_cast<int>(
+            const float difference =
+                std::fabs(
                     actual[outputIndex]
-                );
-
-            const int difference =
-                std::abs(
-                    actualValue
                     - expected
                 );
 
-            sumAbsoluteLsbDifference +=
-                static_cast<uint64_t>(
-                    difference
-                );
-
-            ++comparedOutputs;
-
-            const float probabilityDifference =
-                static_cast<float>(
-                    difference
-                )
-                * deployment_preprocessing::
-                    OUTPUT_SCALE;
-
             if (
                 difference
-                > globalMaxLsbDifference
+                > maxAbsDifference
             ) {
-                globalMaxLsbDifference =
+                maxAbsDifference =
                     difference;
 
-                globalMaxVectorIndex =
+                maxVectorIndex =
                     vectorIndex;
 
-                globalMaxOutputIndex =
+                maxOutputIndex =
                     outputIndex;
             }
 
             if (
-                probabilityDifference
-                > globalMaxProbabilityDifference
+                difference
+                > OUTPUT_ABS_TOLERANCE
             ) {
-                globalMaxProbabilityDifference =
-                    probabilityDifference;
+                ++numericViolations;
+
+                Serial.printf(
+                    "NUMERIC_MISMATCH "
+                    "vector=%u "
+                    "output=%u "
+                    "expected=%.10f "
+                    "actual=%.10f "
+                    "diff=%.10f\n",
+                    static_cast<unsigned>(
+                        vectorIndex
+                    ),
+                    static_cast<unsigned>(
+                        outputIndex
+                    ),
+                    expected,
+                    actual[outputIndex],
+                    difference
+                );
             }
         }
     }
 
-    const float meanAbsoluteLsbDifference =
-        comparedOutputs > 0
-        ? static_cast<float>(
-            sumAbsoluteLsbDifference
-        )
-            / static_cast<float>(
-                comparedOutputs
-            )
-        : 0.0f;
-
-    const float meanAbsoluteProbabilityDifference =
-        meanAbsoluteLsbDifference
-        * deployment_preprocessing::
-            OUTPUT_SCALE;
-
-    const float esp32Accuracy =
-        static_cast<float>(
-            esp32Correct
-        )
-        / static_cast<float>(
-            local_inference_vectors::VECTOR_COUNT
-        );
-
     Serial.println();
     Serial.println(
-        "FULL VALIDATION LOCAL INFERENCE"
+        "PRODUCTION FLOAT32 LOCAL RUNNER"
     );
     Serial.println(
         "-------------------------------"
     );
 
     Serial.printf(
-        "Validation vectors:       %u\n",
+        "Model bytes:             %u\n",
         static_cast<unsigned>(
-            local_inference_vectors::VECTOR_COUNT
+            gesture_model_data::MODEL_LEN
         )
     );
 
     Serial.printf(
-        "Successful invokes:       %u/%u\n",
+        "Vectors:                 %u\n",
         static_cast<unsigned>(
-            local_inference_vectors::VECTOR_COUNT
+            local_inference_vectors::
+                VECTOR_COUNT
+        )
+    );
+
+    Serial.printf(
+        "Successful invokes:      %u/%u\n",
+        static_cast<unsigned>(
+            local_inference_vectors::
+                VECTOR_COUNT
             - invokeFailures
         ),
         static_cast<unsigned>(
-            local_inference_vectors::VECTOR_COUNT
+            local_inference_vectors::
+                VECTOR_COUNT
         )
     );
 
     Serial.printf(
-        "Desktop class matches:    %d/%u\n",
-        desktopClassMatches,
+        "Desktop class matches:   %u/%u\n",
         static_cast<unsigned>(
-            local_inference_vectors::VECTOR_COUNT
-        )
-    );
-
-    Serial.printf(
-        "Desktop class mismatches: %d\n",
-        desktopClassMismatches
-    );
-
-    Serial.printf(
-        "ESP32 correct:            %d/%u\n",
-        esp32Correct,
-        static_cast<unsigned>(
-            local_inference_vectors::VECTOR_COUNT
-        )
-    );
-
-    Serial.printf(
-        "ESP32 validation accuracy: %.6f\n",
-        esp32Accuracy
-    );
-
-    Serial.printf(
-        "Compared output values:   %u\n",
-        static_cast<unsigned>(
-            comparedOutputs
-        )
-    );
-
-    Serial.printf(
-        "Max INT8 LSB diff:        %d\n",
-        globalMaxLsbDifference
-    );
-
-    Serial.printf(
-        "Mean INT8 LSB diff:       %.6f\n",
-        meanAbsoluteLsbDifference
-    );
-
-    Serial.printf(
-        "Max probability diff:     %.8f\n",
-        globalMaxProbabilityDifference
-    );
-
-    Serial.printf(
-        "Mean probability diff:    %.8f\n",
-        meanAbsoluteProbabilityDifference
-    );
-
-    Serial.printf(
-        "Max diff location:        "
-        "vector_%u_output_%u\n",
-        static_cast<unsigned>(
-            globalMaxVectorIndex
+            local_inference_vectors::
+                VECTOR_COUNT
+            - classMismatches
         ),
         static_cast<unsigned>(
-            globalMaxOutputIndex
+            local_inference_vectors::
+                VECTOR_COUNT
         )
     );
 
-    // Deployment must invoke successfully for every
-    // validation vector.
+    Serial.printf(
+        "ESP32 correct:           %d/%u\n",
+        esp32Correct,
+        static_cast<unsigned>(
+            local_inference_vectors::
+                VECTOR_COUNT
+        )
+    );
+
+    Serial.printf(
+        "Numeric violations:      %d\n",
+        numericViolations
+    );
+
+    Serial.printf(
+        "Output abs tolerance:    %.10f\n",
+        OUTPUT_ABS_TOLERANCE
+    );
+
+    Serial.printf(
+        "Max output abs diff:     %.10f\n",
+        maxAbsDifference
+    );
+
+    Serial.printf(
+        "Max diff location:       "
+        "vector_%u_output_%u\n",
+        static_cast<unsigned>(
+            maxVectorIndex
+        ),
+        static_cast<unsigned>(
+            maxOutputIndex
+        )
+    );
+
     TEST_ASSERT_EQUAL_INT(
         0,
         invokeFailures
     );
 
-    // Functional parity is the hard gate here.
     TEST_ASSERT_EQUAL_INT(
         0,
-        desktopClassMismatches
+        classMismatches
+    );
+
+    TEST_ASSERT_EQUAL_INT(
+        0,
+        numericViolations
+    );
+
+    TEST_ASSERT_EQUAL_INT(
+        static_cast<int>(
+            local_inference_vectors::
+                VECTOR_COUNT
+        ),
+        esp32Correct
     );
 }
 
@@ -305,7 +315,7 @@ void setup() {
     UNITY_BEGIN();
 
     RUN_TEST(
-        testFullValidationLocalInferenceParity
+        testProductionFloat32LocalInference
     );
 
     UNITY_END();
