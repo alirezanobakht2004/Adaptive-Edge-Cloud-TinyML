@@ -1,0 +1,123 @@
+{
+  "model_version": "gesture-model-v1.1.0",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "evaluation_split": "validation",
+  "evaluation_session": "session_02",
+  "test_split_used": false,
+  "source_artifact": "mc_dropout_uncertainty_metrics.npz",
+  "source_artifact_sha256": "bf789c688eb33f650186793b82084bddd88e68eb5a3a70c1d4ab26f9f9631a58",
+  "source_distribution": "mean class probabilities from the already-frozen five-pass MC-Dropout validation artifact",
+  "mc_dropout": {
+    "passes": 5,
+    "dropout_rate": 0.2
+  },
+  "calibration_protocol": {
+    "purpose": "descriptive evaluation only",
+    "probability_transform_fitted": false,
+    "temperature_scaling_fitted": false,
+    "binning": "equal-width top-label confidence",
+    "bin_count": 10,
+    "ece_definition": "sum_b (n_b/N) * |accuracy_b - mean_confidence_b|",
+    "mce_definition": "maximum absolute reliability gap over non-empty bins",
+    "nll_log_base": "natural",
+    "brier_definition": "mean over samples of sum_c((p_c - y_c)^2)"
+  },
+  "metrics": {
+    "sample_count": 200,
+    "bin_count": 10,
+    "accuracy": 0.985,
+    "mean_confidence": 0.9869006773829461,
+    "signed_confidence_gap": 0.001900677382946081,
+    "absolute_confidence_gap": 0.001900677382946081,
+    "expected_calibration_error": 0.0071017965674400624,
+    "maximum_calibration_error": 0.2600559592247009,
+    "negative_log_likelihood": 0.0624341772042349,
+    "multiclass_brier_score": 0.028438254273448774,
+    "reliability_bins": [
+      {
+        "lower": 0.0,
+        "upper": 0.1,
+        "count": 0,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0,
+        "absolute_gap": 0.0
+      },
+      {
+        "lower": 0.1,
+        "upper": 0.2,
+        "count": 0,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0,
+        "absolute_gap": 0.0
+      },
+      {
+        "lower": 0.2,
+        "upper": 0.30000000000000004,
+        "count": 0,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0,
+        "absolute_gap": 0.0
+      },
+      {
+        "lower": 0.30000000000000004,
+        "upper": 0.4,
+        "count": 0,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0,
+        "absolute_gap": 0.0
+      },
+      {
+        "lower": 0.4,
+        "upper": 0.5,
+        "count": 0,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0,
+        "absolute_gap": 0.0
+      },
+      {
+        "lower": 0.5,
+        "upper": 0.6000000000000001,
+        "count": 0,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0,
+        "absolute_gap": 0.0
+      },
+      {
+        "lower": 0.6000000000000001,
+        "upper": 0.7000000000000001,
+        "count": 0,
+        "mean_confidence": 0.0,
+        "accuracy": 0.0,
+        "absolute_gap": 0.0
+      },
+      {
+        "lower": 0.7000000000000001,
+        "upper": 0.8,
+        "count": 2,
+        "mean_confidence": 0.7399440407752991,
+        "accuracy": 1.0,
+        "absolute_gap": 0.2600559592247009
+      },
+      {
+        "lower": 0.8,
+        "upper": 0.9,
+        "count": 5,
+        "mean_confidence": 0.8695968270301819,
+        "accuracy": 0.8,
+        "absolute_gap": 0.06959682703018188
+      },
+      {
+        "lower": 0.9,
+        "upper": 1.0,
+        "count": 193,
+        "mean_confidence": 0.9924987733672938,
+        "accuracy": 0.9896373056994818,
+        "absolute_gap": 0.0028614676678119233
+      }
+    ]
+  },
+  "threshold_selected": false,
+  "offload_policy_tuned": false,
+  "test_evaluation_performed": false
+}
