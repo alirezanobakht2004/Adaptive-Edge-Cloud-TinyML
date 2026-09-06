@@ -27,3 +27,6 @@ firmware/.pio/
 # Secrets
 .env
 .env.*
+
+# Local firmware credentials
+firmware/include/secrets.h
