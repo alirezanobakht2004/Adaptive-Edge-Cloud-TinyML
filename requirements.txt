@@ -5,3 +5,5 @@ pyserial>=3.5,<4
 matplotlib>=3.8,<4
 tensorflow>=2.20,<2.22
 paho-mqtt>=2,<3
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
