@@ -1,0 +1,56 @@
+{
+  "phase": 7,
+  "milestone": "M8",
+  "split": 1,
+  "source_model_version": "gesture-model-v1.1.0",
+  "source_model_sha256": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "test_split_used": false,
+  "validation_session": "session_02",
+  "validation_samples": 200,
+  "input_contract": "externally normalized features-v1 float32",
+  "input_shape": [
+    1,
+    10
+  ],
+  "output_layer": "block1",
+  "embedding_dim": 64,
+  "output_shape": [
+    1,
+    64
+  ],
+  "prefix_tflite": {
+    "filename": "gesture-model-v1.1.0-split1-prefix-float32-normalized-input.tflite",
+    "sha256": "4cd7f35f55e067dfa5c9c9bdf8be5d5488ee8f56270aea60cfe3345192fd75e2",
+    "bytes": 3996
+  },
+  "normalization_compatibility": {
+    "reference_model_version": "gesture-model-v1.0.0",
+    "max_abs_mean_diff": 0.0,
+    "max_abs_variance_diff": 0.0,
+    "tolerance": 1e-06,
+    "pass": true
+  },
+  "desktop_parity": {
+    "keras_external_vs_raw_max_abs_diff": 0.0,
+    "tflite_vs_raw_max_abs_diff": 4.76837158203125e-07,
+    "tolerance": 2e-05,
+    "pass": true
+  },
+  "parity_vectors": {
+    "filename": "split1_parity_vectors.npz",
+    "validation_indices": [
+      0,
+      120,
+      160,
+      40,
+      80
+    ],
+    "count": 5
+  },
+  "firmware_generated": false,
+  "esp32_parity_completed": false,
+  "server_tail_completed": false,
+  "end_to_end_completed": false
+}
