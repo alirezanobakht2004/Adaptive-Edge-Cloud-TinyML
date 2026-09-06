@@ -1,0 +1,78 @@
+{
+  "model_version": "gesture-cloud-tail-v1.0.0",
+  "model_purpose": "phase6-fixed-split3-cloud-tail",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "source_edge_model_version": "gesture-model-v1.1.0",
+  "source_edge_model_sha256": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c",
+  "source_layer": "block3",
+  "split_point": 3,
+  "embedding_dimension": 32,
+  "train_split": "session_01",
+  "validation_split": "session_02",
+  "test_split_used": false,
+  "class_to_id": {
+    "IDLE": 0,
+    "SWIPE_LEFT": 1,
+    "SWIPE_RIGHT": 2,
+    "ROTATE_CW": 3,
+    "SHAKE": 4
+  },
+  "seed": 42,
+  "training": {
+    "max_epochs": 200,
+    "epochs_ran": 37,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "early_stopping_patience": 20
+  },
+  "architecture": {
+    "block4_units": 64,
+    "block5_units": 32,
+    "cloud_head_units": 5
+  },
+  "validation_metrics": {
+    "accuracy": 0.985,
+    "macro_precision": 0.9852439024390243,
+    "macro_recall": 0.9850000000000001,
+    "macro_f1": 0.9850609470229724
+  },
+  "validation_confusion_matrix": [
+    [
+      40,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      39,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      39,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      39,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      40
+    ]
+  ],
+  "model_sha256": "9a834eecf909374488fe346c89b34310bd6c7fdb58570ed2ffb0c885535866d1"
+}
