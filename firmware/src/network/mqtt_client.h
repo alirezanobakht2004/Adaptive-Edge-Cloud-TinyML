@@ -9,9 +9,20 @@ constexpr uint16_t DEFAULT_MQTT_BUFFER_BYTES =
     1024;
 
 
+using MqttMessageHandler = void (*)(
+    const char* topic,
+    const uint8_t* payload,
+    unsigned int length
+);
+
+
 bool configureMqtt(
     const char* brokerHost,
     uint16_t brokerPort
+);
+
+bool setMqttMessageHandler(
+    MqttMessageHandler handler
 );
 
 bool connectMqtt(
@@ -19,6 +30,10 @@ bool connectMqtt(
 );
 
 bool isMqttConnected();
+
+bool subscribeMqtt(
+    const char* topic
+);
 
 bool publishMqtt(
     const char* topic,

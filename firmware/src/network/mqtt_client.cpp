@@ -13,6 +13,26 @@ PubSubClient client(transportClient);
 
 bool configured = false;
 
+network::MqttMessageHandler messageHandler =
+    nullptr;
+
+
+void dispatchMqttMessage(
+    char* topic,
+    uint8_t* payload,
+    unsigned int length
+) {
+    if (messageHandler == nullptr) {
+        return;
+    }
+
+    messageHandler(
+        topic,
+        payload,
+        length
+    );
+}
+
 }  // namespace
 
 
@@ -36,6 +56,10 @@ bool configureMqtt(
         brokerPort
     );
 
+    client.setCallback(
+        dispatchMqttMessage
+    );
+
     if (
         !client.setBufferSize(
             DEFAULT_MQTT_BUFFER_BYTES
@@ -47,6 +71,16 @@ bool configureMqtt(
 
     configured = true;
     return true;
+}
+
+
+bool setMqttMessageHandler(
+    MqttMessageHandler handler
+) {
+    messageHandler = handler;
+
+    return messageHandler
+        != nullptr;
 }
 
 
@@ -74,6 +108,23 @@ bool connectMqtt(
 
 bool isMqttConnected() {
     return client.connected();
+}
+
+
+bool subscribeMqtt(
+    const char* topic
+) {
+    if (
+        !client.connected()
+        || topic == nullptr
+        || topic[0] == '\0'
+    ) {
+        return false;
+    }
+
+    return client.subscribe(
+        topic
+    );
 }
 
 
