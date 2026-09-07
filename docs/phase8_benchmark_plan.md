@@ -1,5 +1,11 @@
 # Phase 8 — benchmark the action space
 
+> Historical proposal: the current implementation contract is documented in
+> `phase8_policy_dataset.md`. The fixed action mapping is 0 ALL_LOCAL,
+> 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD. The action-3 Split3 mapping and proposed
+> per-action row format below were planning notes and were never deployed as
+> policy_training_dataset_v1. They are retained as historical context only.
+
 Prepared 2026-09-08 after the Phase7 float32 split-path gate closed. This is a
 plan and future data contract, not an implemented collector, benchmark result,
 Meta Learner or Split Controller. See `phase7_m8_completion.md` for validation
