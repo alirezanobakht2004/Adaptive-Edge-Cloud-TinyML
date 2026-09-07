@@ -1,0 +1,887 @@
+.venv\Scripts\python.exe : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:2 char:133
++ ... ttempt.log; .venv\Scripts\python.exe -u -m tests.run_phase7_hardware  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+I0000 00:00:1788797021.447513   84900 port.cc:153] oneDNN custom operations are on. You may see slightly different
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1788797025.163350   84900 port.cc:153] oneDNN custom operations are on. You may see slightly different
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1788797026.969840   84900 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available
+CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with
+the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if
+CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+RUN: C:\Users\alire\.platformio\penv\Scripts\platformio.exe test -d firmware -e esp32-s3-n8r2 --upload-port COM10 --test-port COM10 -v
+Collected 25 tests (test_edge_uncertainty_parity, test_edge_uncertainty_stochastic, test_feature_parity, test_input_preprocessing, test_internal_tensor_diagnostic, test_local_inference, test_local_latency, test_local_memory, test_phase6_mqtt_client, test_phase6_mqtt_publish, test_phase6_mqtt_receive, test_phase6_network_reachability, test_phase6_server_e2e, test_phase6_server_timeout, test_phase6_wifi_manager, test_phase7_split1_e2e, test_phase7_split1_parity, test_phase7_split2_e2e, test_phase7_split2_parity, test_phase7_split3_e2e, test_phase7_split3_parity, test_tflm_fc1_diagnostic, test_tflm_float32_runtime, test_tflm_logits_diagnostic, test_window_buffer)
+
+Processing test_edge_uncertainty_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PHASE 5 / M6 \ufffd ESP32 FIXED-MASK PARITY
+=======================================
+Vectors:                    5
+Passes/vector:              5
+Prefix tensor arena:        1216 / 65536 bytes
+B3 max abs diff:            0
+Pass probability max diff:  1.1920929e-07
+Mean probability max diff:  2.23517418e-08
+Uncertainty max diff:       2.98023224e-08
+Mean variance max diff:     1.28056854e-09
+Max variance max diff:      1.62981451e-09
+Top-1 agreement:            5/5
+Acceptance tolerance B3:    1.0e-04
+Acceptance tolerance prob:  1.0e-04
+Acceptance tolerance unc:   1.0e-04
+
+ESP32_FIXED_MASK_PARITY_PASS
+test/test_edge_uncertainty_parity/test_main.cpp:465:testEsp32FixedMaskParity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+---- esp32-s3-n8r2:test_edge_uncertainty_parity [PASSED] Took 35.44 seconds ----
+
+Processing test_edge_uncertainty_stochastic in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+test/test_edge_uncertainty_stochastic/test_main.cpp:466:testDeterministicSeedIsReproducible:PASS
+
+PHASE 5 / M6 \ufffd ESP32 STOCHASTIC MASKING
+========================================
+Probe validation vector:      160
+Probe true class:             2
+Device-derived PRNG seed:     0xCD3BF3DA
+Logical inferences:           8
+Passes/inference:             5
+Total generated masks:        40
+Min unique masks/inference:   5
+Kept units min/max:           20 / 31 of 32
+Pass probability range min:   0.00901007652
+Pass probability range max:   0.321928322
+Uncertainty score min:        0.0390193835
+Uncertainty score max:        0.239167675
+Cross-inference variation:    YES
+Mask generator:               xorshift32
+Seed source:                  esp_random() state
+True-randomness claim:        NO
+Offload threshold/policy:     NONE
+
+ESP32_STOCHASTIC_MASKING_PASS
+test/test_edge_uncertainty_stochastic/test_main.cpp:470:testDeviceSeededRuntimeActuallyVaries:PASS
+
+-----------------------
+2 Tests 0 Failures 0 Ignored
+OK
+
+-- esp32-s3-n8r2:test_edge_uncertainty_stochastic [PASSED] Took 37.74 seconds --
+
+Processing test_feature_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+VECTOR 0: IDLE
+  f01 expected= 0.00192397 actual= 0.00192397 abs_diff=0.0000000002 tol=0.0001001924
+  f02 expected= 0.01070000 actual= 0.01070000 abs_diff=0.0000000000 tol=0.0001010700
+  f03 expected= 0.00041800 actual= 0.00041800 abs_diff=0.0000000010 tol=0.0001000418
+  f04 expected= 0.00225239 actual= 0.00225239 abs_diff=0.0000000000 tol=0.0001002252
+  f05 expected= 0.00355731 actual= 0.00355731 abs_diff=0.0000000030 tol=0.0001003557
+  f06 expected= 0.00355138 actual= 0.00355138 abs_diff=0.0000000037 tol=0.0001003551
+  f07 expected= 0.00313700 actual= 0.00313700 abs_diff=0.0000000000 tol=0.0001003137
+  f08 expected= 0.04658722 actual= 0.04658722 abs_diff=0.0000000000 tol=0.0001046587
+  f09 expected= 0.07529701 actual= 0.07529701 abs_diff=0.0000000000 tol=0.0001075297
+  f10 expected= 0.14513542 actual= 0.14513542 abs_diff=0.0000000000 tol=0.0001145135
+
+VECTOR 1: SWIPE_LEFT
+  f01 expected= 0.03492478 actual= 0.03492478 abs_diff=0.0000000037 tol=0.0001034925
+  f02 expected= 0.10630000 actual= 0.10630000 abs_diff=0.0000000000 tol=0.0001106300
+  f03 expected=-0.02341600 actual=-0.02341600 abs_diff=0.0000000000 tol=0.0001023416
+  f04 expected= 0.00759217 actual= 0.00759217 abs_diff=0.0000000005 tol=0.0001007592
+  f05 expected= 0.00956827 actual= 0.00956828 abs_diff=0.0000000056 tol=0.0001009568
+  f06 expected= 0.00963024 actual= 0.00963024 abs_diff=0.0000000019 tol=0.0001009630
+  f07 expected= 2.23160005 actual= 2.23160028 abs_diff=0.0000002384 tol=0.0003231600
+  f08 expected= 1.79874289 actual= 1.79874289 abs_diff=0.0000000000 tol=0.0002798743
+  f09 expected= 2.93895316 actual= 2.93895340 abs_diff=0.0000002384 tol=0.0003938953
+  f10 expected= 5.70878553 actual= 5.70878553 abs_diff=0.0000000000 tol=0.0006708785
+
+VECTOR 2: SWIPE_RIGHT
+  f01 expected= 0.03458249 actual= 0.03458249 abs_diff=0.0000000000 tol=0.0001034582
+  f02 expected= 0.09680000 actual= 0.09680000 abs_diff=0.0000000000 tol=0.0001096800
+  f03 expected= 0.03045600 actual= 0.03045600 abs_diff=0.0000000037 tol=0.0001030456
+  f04 expected= 0.00705228 actual= 0.00705228 abs_diff=0.0000000000 tol=0.0001007052
+  f05 expected= 0.00729999 actual= 0.00729999 abs_diff=0.0000000047 tol=0.0001007300
+  f06 expected= 0.00732301 actual= 0.00732302 abs_diff=0.0000000144 tol=0.0001007323
+  f07 expected=-0.04778300 actual=-0.04778298 abs_diff=0.0000000149 tol=0.0001047783
+  f08 expected= 1.34946704 actual= 1.34946704 abs_diff=0.0000000000 tol=0.0002349467
+  f09 expected= 1.44664013 actual= 1.44664013 abs_diff=0.0000000000 tol=0.0002446640
+  f10 expected= 3.11638856 actual= 3.11638832 abs_diff=0.0000002384 tol=0.0004116388
+
+VECTOR 3: ROTATE_CW
+  f01 expected= 0.02567277 actual= 0.02567277 abs_diff=0.0000000019 tol=0.0001025673
+  f02 expected= 0.14850000 actual= 0.14850000 abs_diff=0.0000000000 tol=0.0001148500
+  f03 expected= 0.02270600 actual= 0.02270600 abs_diff=0.0000000000 tol=0.0001022706
+  f04 expected= 0.01587428 actual= 0.01587428 abs_diff=0.0000000000 tol=0.0001015874
+  f05 expected= 0.00649938 actual= 0.00649939 abs_diff=0.0000000088 tol=0.0001006499
+  f06 expected= 0.00733159 actual= 0.00733160 abs_diff=0.0000000098 tol=0.0001007332
+  f07 expected=-13.10473442 actual=-13.10473442 abs_diff=0.0000000000 tol=0.0014104734
+  f08 expected= 26.25010300 actual= 26.25010109 abs_diff=0.0000019073 tol=0.0027250103
+  f09 expected= 29.46242332 actual= 29.46242332 abs_diff=0.0000000000 tol=0.0030462423
+  f10 expected= 48.95369720 actual= 48.95369720 abs_diff=0.0000000000 tol=0.0049953698
+
+VECTOR 4: SHAKE
+  f01 expected= 0.14536990 actual= 0.14536990 abs_diff=0.0000000000 tol=0.0001145370
+  f02 expected= 0.31209999 actual= 0.31209999 abs_diff=0.0000000000 tol=0.0001312100
+  f03 expected= 0.07469400 actual= 0.07469401 abs_diff=0.0000000075 tol=0.0001074694
+  f04 expected= 0.02706837 actual= 0.02706837 abs_diff=0.0000000019 tol=0.0001027068
+  f05 expected= 0.01790515 actual= 0.01790515 abs_diff=0.0000000000 tol=0.0001017905
+  f06 expected= 0.02105592 actual= 0.02105593 abs_diff=0.0000000093 tol=0.0001021056
+  f07 expected= 1.12892997 actual= 1.12892985 abs_diff=0.0000001192 tol=0.0002128930
+  f08 expected= 5.51104736 actual= 5.51104832 abs_diff=0.0000009537 tol=0.0006511047
+  f09 expected= 5.99030495 actual= 5.99030399 abs_diff=0.0000009537 tol=0.0006990305
+  f10 expected= 13.30427551 actual= 13.30427551 abs_diff=0.0000000000 tol=0.0014304275
+
+FEATURE_PARITY_MAX_ABS_DIFF=0.0000019073
+test/test_feature_parity/test_main.cpp:117:testFeatureParity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+-------- esp32-s3-n8r2:test_feature_parity [PASSED] Took 35.94 seconds --------
+
+Processing test_input_preprocessing in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+VECTOR 0: IDLE
+  f01 norm_expected=-0.76424152 norm_actual=-0.76424152 q_expected=-27 q_actual=-27
+  f02 norm_expected=-0.82367480 norm_actual=-0.82367480 q_expected=-28 q_actual=-28
+  f03 norm_expected=-0.21351269 norm_actual=-0.21351269 q_expected=-16 q_actual=-16
+  f04 norm_expected=-0.76570183 norm_actual=-0.76570183 q_expected=-27 q_actual=-27
+  f05 norm_expected=-0.71010941 norm_actual=-0.71010941 q_expected=-26 q_actual=-26
+  f06 norm_expected=-0.62350637 norm_actual=-0.62350637 q_expected=-24 q_actual=-24
+  f07 norm_expected= 0.44748917 norm_actual= 0.44748917 q_expected=-3 q_actual=-3
+  f08 norm_expected=-0.63988125 norm_actual=-0.63988125 q_expected=-25 q_actual=-25
+  f09 norm_expected=-0.69847351 norm_actual=-0.69847351 q_expected=-26 q_actual=-26
+  f10 norm_expected=-0.80814201 norm_actual=-0.80814201 q_expected=-28 q_actual=-28
+
+VECTOR 1: SWIPE_LEFT
+  f01 norm_expected=-0.36976910 norm_actual=-0.36976910 q_expected=-19 q_actual=-19
+  f02 norm_expected=-0.46274135 norm_actual=-0.46274135 q_expected=-21 q_actual=-21
+  f03 norm_expected=-0.88560450 norm_actual=-0.88560450 q_expected=-30 q_actual=-30
+  f04 norm_expected=-0.55025041 norm_actual=-0.55025041 q_expected=-23 q_actual=-23
+  f05 norm_expected=-0.35118413 norm_actual=-0.35118413 q_expected=-19 q_actual=-19
+  f06 norm_expected=-0.36239463 norm_actual=-0.36239463 q_expected=-19 q_actual=-19
+  f07 norm_expected= 0.63804567 norm_actual= 0.63804567 q_expected=1 q_actual=1
+  f08 norm_expected=-0.48032424 norm_actual=-0.48032424 q_expected=-22 q_actual=-22
+  f09 norm_expected=-0.51099938 norm_actual=-0.51099938 q_expected=-22 q_actual=-22
+  f10 norm_expected=-0.60367036 norm_actual=-0.60367036 q_expected=-24 q_actual=-24
+
+VECTOR 2: SWIPE_RIGHT
+  f01 norm_expected=-0.37386060 norm_actual=-0.37386060 q_expected=-19 q_actual=-19
+  f02 norm_expected=-0.49860817 norm_actual=-0.49860817 q_expected=-22 q_actual=-22
+  f03 norm_expected= 0.63352489 norm_actual= 0.63352489 q_expected=1 q_actual=1
+  f04 norm_expected=-0.57203424 norm_actual=-0.57203424 q_expected=-23 q_actual=-23
+  f05 norm_expected=-0.48662731 norm_actual=-0.48662731 q_expected=-22 q_actual=-22
+  f06 norm_expected=-0.46149987 norm_actual=-0.46149987 q_expected=-21 q_actual=-21
+  f07 norm_expected= 0.44313499 norm_actual= 0.44313499 q_expected=-3 q_actual=-3
+  f08 norm_expected=-0.52123672 norm_actual=-0.52123672 q_expected=-22 q_actual=-22
+  f09 norm_expected=-0.60869622 norm_actual=-0.60869622 q_expected=-24 q_actual=-24
+  f10 norm_expected=-0.69894445 norm_actual=-0.69894445 q_expected=-26 q_actual=-26
+
+VECTOR 3: ROTATE_CW
+  f01 norm_expected=-0.48036221 norm_actual=-0.48036221 q_expected=-22 q_actual=-22
+  f02 norm_expected=-0.30341715 norm_actual=-0.30341715 q_expected=-18 q_actual=-18
+  f03 norm_expected= 0.41498369 norm_actual= 0.41498369 q_expected=-4 q_actual=-4
+  f04 norm_expected=-0.21608098 norm_actual=-0.21608098 q_expected=-16 q_actual=-16
+  f05 norm_expected=-0.53443295 norm_actual=-0.53443295 q_expected=-23 q_actual=-23
+  f06 norm_expected=-0.46113122 norm_actual=-0.46113122 q_expected=-21 q_actual=-21
+  f07 norm_expected=-0.67336845 norm_actual=-0.67336845 q_expected=-25 q_actual=-25
+  f08 norm_expected= 1.74629641 norm_actual= 1.74629641 q_expected=23 q_actual=23
+  f09 norm_expected= 1.22540522 norm_actual= 1.22540522 q_expected=12 q_actual=12
+  f10 norm_expected= 0.98563856 norm_actual= 0.98563856 q_expected=8 q_actual=8
+
+VECTOR 4: SHAKE
+  f01 norm_expected= 0.95042759 norm_actual= 0.95042759 q_expected=7 q_actual=7
+  f02 norm_expected= 0.31424728 norm_actual= 0.31424728 q_expected=-6 q_actual=-6
+  f03 norm_expected= 1.88098645 norm_actual= 1.88098645 q_expected=26 q_actual=26
+  f04 norm_expected= 0.23558256 norm_actual= 0.23558256 q_expected=-7 q_actual=-7
+  f05 norm_expected= 0.14662530 norm_actual= 0.14662530 q_expected=-9 q_actual=-9
+  f06 norm_expected= 0.12838471 norm_actual= 0.12838471 q_expected=-9 q_actual=-9
+  f07 norm_expected= 0.54375601 norm_actual= 0.54375601 q_expected=-1 q_actual=-1
+  f08 norm_expected=-0.14226967 norm_actual=-0.14226967 q_expected=-15 q_actual=-15
+  f09 norm_expected=-0.31123739 norm_actual=-0.31123739 q_expected=-18 q_actual=-18
+  f10 norm_expected=-0.32452583 norm_actual=-0.32452583 q_expected=-18 q_actual=-18
+
+PREPROCESSING_MAX_NORMALIZED_ABS_DIFF=0.0000000000
+test/test_input_preprocessing/test_main.cpp:141:testInputPreprocessingParity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------ esp32-s3-n8r2:test_input_preprocessing [PASSED] Took 34.54 seconds ------
+
+Processing test_internal_tensor_diagnostic in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+test/test_internal_tensor_diagnostic/test_main.cpp: In function 'void {anonymous}::testInternalTensorDiagnostic()':
+test/test_internal_tensor_diagnostic/test_main.cpp:140:9: error: no matching function for call to 'tflite::MicroInterpreter::MicroInterpreter(const tflite::Model*&, tflite::AllOpsResolver&, uint8_t [65536], const size_t&, std::nullptr_t, std::nullptr_t, bool)'
+         );
+         ^
+In file included from test/test_internal_tensor_diagnostic/test_main.cpp:14:
+.pio/libdeps/esp32-s3-n8r2/Chirale_TensorFLowLite/src/tensorflow/lite/micro/micro_interpreter.h:60:3: note: candidate: 'tflite::MicroInterpreter::MicroInterpreter(const tflite::Model*, const tflite::MicroOpResolver&, tflite::MicroAllocator*, tflite::MicroResourceVariables*, tflite::MicroProfilerInterface*)'
+   MicroInterpreter(const Model* model, const MicroOpResolver& op_resolver,
+   ^~~~~~~~~~~~~~~~
+.pio/libdeps/esp32-s3-n8r2/Chirale_TensorFLowLite/src/tensorflow/lite/micro/micro_interpreter.h:60:3: note:   candidate expects 5 arguments, 7 provided
+.pio/libdeps/esp32-s3-n8r2/Chirale_TensorFLowLite/src/tensorflow/lite/micro/micro_interpreter.h:50:3: note: candidate: 'tflite::MicroInterpreter::MicroInterpreter(const tflite::Model*, const tflite::MicroOpResolver&, uint8_t*, size_t, tflite::MicroResourceVariables*, tflite::MicroProfilerInterface*)'
+   MicroInterpreter(const Model* model, const MicroOpResolver& op_resolver,
+   ^~~~~~~~~~~~~~~~
+.pio/libdeps/esp32-s3-n8r2/Chirale_TensorFLowLite/src/tensorflow/lite/micro/micro_interpreter.h:50:3: note:   candidate expects 6 arguments, 7 provided
+.pio/libdeps/esp32-s3-n8r2/Chirale_TensorFLowLite/src/tensorflow/lite/micro/micro_interpreter.h:40:7: note: candidate: 'constexpr tflite::MicroInterpreter::MicroInterpreter(const tflite::MicroInterpreter&)'
+ class MicroInterpreter {
+       ^~~~~~~~~~~~~~~~
+.pio/libdeps/esp32-s3-n8r2/Chirale_TensorFLowLite/src/tensorflow/lite/micro/micro_interpreter.h:40:7: note:   candidate expects 1 argument, 7 provided
+In file included from .pio/libdeps/esp32-s3-n8r2/Unity/src/unity.h:22,
+                 from test/test_internal_tensor_diagnostic/test_main.cpp:2:
+test/test_internal_tensor_diagnostic/test_main.cpp:143:21: error: 'class tflite::MicroInterpreter' has no member named 'preserve_all_tensors'
+         interpreter.preserve_all_tensors()
+                     ^~~~~~~~~~~~~~~~~~~~
+.pio/libdeps/esp32-s3-n8r2/Unity/src/unity_internals.h:891:107: note: in definition of macro 'UNITY_TEST_ASSERT'
+ #define UNITY_TEST_ASSERT(condition, line, message)                                              do { if (condition) { /* nothing*/ } else { UNITY_TEST_FAIL((line), (message)); } } while (0)
+                                                                                                           ^~~~~~~~~
+test/test_internal_tensor_diagnostic/test_main.cpp:142:5: note: in expansion of macro 'TEST_ASSERT_TRUE'
+     TEST_ASSERT_TRUE(
+     ^~~~~~~~~~~~~~~~
+test/test_internal_tensor_diagnostic/test_main.cpp:232:29: error: 'class tflite::MicroInterpreter' has no member named 'GetTensor'; did you mean 'input_tensor'?
+                 interpreter.GetTensor(
+                             ^~~~~~~~~
+                             input_tensor
+*** [.pio\build\esp32-s3-n8r2\test\test_internal_tensor_diagnostic\test_main.cpp.o] Error 1
+Uploading stage has failed, see errors above. Use `pio test -vvv` option to enable verbose output.
+-- esp32-s3-n8r2:test_internal_tensor_diagnostic [ERRORED] Took 28.16 seconds --
+
+Processing test_local_inference in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PRODUCTION FLOAT32 LOCAL RUNNER
+-------------------------------
+Model bytes:             25344
+Vectors:                 5
+Successful invokes:      5/5
+Desktop class matches:   5/5
+ESP32 correct:           5/5
+Numeric violations:      0
+Output abs tolerance:    0.0000010000
+Max output abs diff:     0.0000001192
+Max diff location:       vector_4_output_4
+test/test_local_inference/test_main.cpp:319:testProductionFloat32LocalInference:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+-------- esp32-s3-n8r2:test_local_inference [PASSED] Took 49.37 seconds --------
+
+Processing test_local_latency in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+FORMAL LOCAL LATENCY BENCHMARK
+==============================
+Vectors:              5 validation windows
+Warmup iterations:    50
+Measured iterations:  1000
+Serial logging inside measured loop: NO
+Sensor acquisition included: NO
+WindowBuffer copy included: NO
+Pipeline = features + normalization + Float32 TFLM + argmax
+First/cold invoke:     1696 us
+
+Feature extraction min=275 us mean=313.77 us median=315.00 us p95=358 us max=360 us
+Normalization      min=5 us mean=5.88 us median=6.00 us p95=7 us max=14 us
+TFLM invoke        min=321 us mean=407.59 us median=333.00 us p95=683 us max=686 us
+Compute pipeline   min=611 us mean=728.32 us median=661.00 us p95=1042 us max=1050 us
+Checksum:              985.679260
+LATENCY_BENCHMARK_COMPLETE
+test/test_local_latency/test_main.cpp:547:testFormalLocalLatencyBenchmark:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+--------- esp32-s3-n8r2:test_local_latency [PASSED] Took 40.82 seconds ---------
+
+Processing test_local_memory in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+FORMAL LOCAL MEMORY BENCHMARK
+=============================
+Model blob:                  25344 bytes
+Tensor arena capacity:       65536 bytes
+Tensor arena used:           1504 bytes
+Tensor arena headroom:       64032 bytes
+Tensor arena utilization:    2.29 %
+
+WindowBuffer object:         2416 bytes
+Chronological window copy:   2400 bytes
+Feature vector:              40 bytes
+Normalized model input:      40 bytes
+Probability output:          20 bytes
+
+BEFORE MODEL INIT
+  heap_size:       327972 bytes
+  free_heap:       302564 bytes
+  min_free_heap:   297416 bytes
+  max_alloc_heap:  262132 bytes
+  psram_size:      2095087 bytes
+  free_psram:      2094843 bytes
+  max_alloc_psram: 2064372 bytes
+AFTER MODEL INIT
+  heap_size:       327940 bytes
+  free_heap:       302364 bytes
+  min_free_heap:   297216 bytes
+  max_alloc_heap:  262132 bytes
+  psram_size:      2095087 bytes
+  free_psram:      2094843 bytes
+  max_alloc_psram: 2064372 bytes
+AFTER 1000 INVOKES
+  heap_size:       327940 bytes
+  free_heap:       302364 bytes
+  min_free_heap:   297216 bytes
+  max_alloc_heap:  262132 bytes
+  psram_size:      2095087 bytes
+  free_psram:      2094843 bytes
+  max_alloc_psram: 2064372 bytes
+
+Heap delta during init:      200 bytes
+Heap delta after invokes:    0 bytes
+PSRAM delta during init:     0 bytes
+PSRAM delta after invokes:   0 bytes
+
+NOTE: the production Tensor Arena is a static buffer,
+so its 64 KiB capacity is reflected in static RAM/build
+footprint rather than in the runtime heap delta above.
+MEMORY_BENCHMARK_COMPLETE
+test/test_local_memory/test_main.cpp:481:testFormalLocalMemoryBenchmark:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+--------- esp32-s3-n8r2:test_local_memory [PASSED] Took 42.17 seconds ---------
+
+Processing test_phase6_mqtt_client in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PHASE6_MQTT_CLIENT_START
+WIFI_MANAGER_CONNECT=PASS
+MQTT_CONFIGURE=PASS
+MQTT_CLIENT_CONNECT=PASS state=0
+MQTT_CLIENT_PUBLISH=PASS
+PHASE6_MQTT_CLIENT_PASS
+test/test_phase6_mqtt_client/test_main.cpp:130:testProductionMqttClient:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------ esp32-s3-n8r2:test_phase6_mqtt_client [PASSED] Took 47.21 seconds ------
+
+Processing test_phase6_mqtt_publish in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PHASE6_MQTT_PUBLISH_START
+WIFI_CONNECT=PASS
+WIFI_IP=192.168.137.22
+WIFI_RSSI_DBM=-19
+MQTT_CONNECT=PASS state=0
+MQTT_PUBLISH=PASS
+PHASE6_MQTT_PUBLISH_PASS
+test/test_phase6_mqtt_publish/test_main.cpp:151:testMqttConnectAndPublish:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------ esp32-s3-n8r2:test_phase6_mqtt_publish [PASSED] Took 41.79 seconds ------
+
+Processing test_phase6_mqtt_receive in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PHASE6_MQTT_RECEIVE_START
+MQTT_SUBSCRIBE=PASS
+MQTT_RECEIVE=PASS
+MQTT_RECEIVED_TOPIC=gesture/esp32-01/inference/response
+MQTT_RECEIVED_PAYLOAD={"transport_test":"phase6_mqtt_receive_pass"}
+PHASE6_MQTT_RECEIVE_PASS
+test/test_phase6_mqtt_receive/test_main.cpp:212:testProductionMqttReceive:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------ esp32-s3-n8r2:test_phase6_mqtt_receive [PASSED] Took 54.96 seconds ------
+
+Processing test_phase6_network_reachability in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+5enabled
+
+PHASE6_NETWORK_REACHABILITY_START
+WIFI_STATUS=3
+WIFI_IP=192.168.137.22
+WIFI_RSSI_DBM=-20
+BROKER_TCP_CONNECT=PASS
+PHASE6_NETWORK_REACHABILITY_PASS
+test/test_phase6_network_reachability/test_main.cpp:96:testWifiAndBrokerTcpReachability:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+-- esp32-s3-n8r2:test_phase6_network_reachability [PASSED] Took 40.50 seconds --
+
+Processing test_phase6_server_e2e in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PHASE6_SERVER_E2E_START
+E2E_SUBSCRIBE=PASS
+E2E_REQUEST_PUBLISH=PASS
+MQTT_INFERENCE_OK request_id=m7-esp32-e2e-001 device_id=esp32-01 split=3 class=SWIPE_RIGHT confidence=0.220028 server_ms=718.573600 response_topic=gesture/esp32-01/inference/response
+E2E_RESPONSE_RECEIVE=PASS
+E2E_RESPONSE_TOPIC=gesture/esp32-01/inference/response
+E2E_RESPONSE_PAYLOAD={"request_id":"m7-esp32-e2e-001","split":3,"predicted_class":"SWIPE_RIGHT","confidence":0.22002758085727692,"server_latency_ms":718.5736,"model_version":"gesture-cloud-tail-v1.0.0"}
+PHASE6_SERVER_E2E_PASS
+test/test_phase6_server_e2e/test_main.cpp:290:testEsp32ServerEndToEnd:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------- esp32-s3-n8r2:test_phase6_server_e2e [PASSED] Took 42.34 seconds -------
+
+Processing test_phase6_server_timeout in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PHASE6_SERVER_TIMEOUT_START
+TIMEOUT_REQUEST_PUBLISH=PASS
+HARNESS: server-unavailable fixture for timeout test
+SERVER_RESPONSE_RECEIVED=NO
+SERVER_TIMEOUT_DETECTED=PASS
+TIMEOUT_ELAPSED_MS=2001
+PHASE6_SERVER_TIMEOUT_PASS
+test/test_phase6_server_timeout/test_main.cpp:246:testServerResponseTimeout:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+----- esp32-s3-n8r2:test_phase6_server_timeout [PASSED] Took 47.89 seconds -----
+
+Processing test_phase6_wifi_manager in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+PHASE6_WIFI_MANAGER_START
+WIFI_MANAGER_CONNECT=PASS
+WIFI_MANAGER_RSSI_DBM=-19
+PHASE6_WIFI_MANAGER_PASS
+test/test_phase6_wifi_manager/test_main.cpp:63:testProductionWifiManager:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------ esp32-s3-n8r2:test_phase6_wifi_manager [PASSED] Took 47.58 seconds ------
+
+Processing test_phase7_split1_e2e in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+MQTT_INFERENCE_OK request_id=split1-e2e-0 device_id=esp32-split1-test split=1 class=IDLE confidence=0.999637 server_ms=40.585200 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=0 RESPONSE={"request_id":"split1-e2e-0","split":1,"predicted_class":"IDLE","confidence":0.9996368885040283,"server_latency_ms":40.5852,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-1 device_id=esp32-split1-test split=1 class=SWIPE_LEFT confidence=0.999905 server_ms=10.285800 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=1 RESPONSE={"request_id":"split1-e2e-1","split":1,"predicted_class":"SWIPE_LEFT","confidence":0.9999047517776489,"server_latency_ms":10.2858,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-2 device_id=esp32-split1-test split=1 class=SWIPE_RIGHT confidence=0.988655 server_ms=6.450600 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=2 RESPONSE={"request_id":"split1-e2e-2","split":1,"predicted_class":"SWIPE_RIGHT","confidence":0.9886553287506104,"server_latency_ms":6.4506,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-3 device_id=esp32-split1-test split=1 class=ROTATE_CW confidence=1.000000 server_ms=7.048400 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=3 RESPONSE={"request_id":"split1-e2e-3","split":1,"predicted_class":"ROTATE_CW","confidence":1.0,"server_latency_ms":7.0484,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-4 device_id=esp32-split1-test split=1 class=SHAKE confidence=1.000000 server_ms=7.724600 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=4 RESPONSE={"request_id":"split1-e2e-4","split":1,"predicted_class":"SHAKE","confidence":0.9999995231628418,"server_latency_ms":7.7246,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+PHASE7_SPLIT1_E2E_PASS
+test/test_phase7_split1_e2e/test_main.cpp:92:testSplit1EndToEnd:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------- esp32-s3-n8r2:test_phase7_split1_e2e [PASSED] Took 52.12 seconds -------
+
+Processing test_phase7_split1_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+SPLIT1_VECTOR_COUNT=5
+SPLIT1_MAX_ABS_DIFF=0.000000000
+PHASE7_SPLIT1_PARITY_PASS
+test/test_phase7_split1_parity/test_main.cpp:214:testSplit1Parity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+----- esp32-s3-n8r2:test_phase7_split1_parity [PASSED] Took 36.75 seconds -----
+
+Processing test_phase7_split2_e2e in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+[   410][I][esp32-hal-psram.c:96] psramInit(): PSRAM enabled
+MQTT_INFERENCE_OK request_id=split2-e2e-0 device_id=esp32-split2-test split=2 class=IDLE confidence=0.999188 server_ms=41.284300 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=0 RESPONSE={"request_id":"split2-e2e-0","split":2,"predicted_class":"IDLE","confidence":0.9991884827613831,"server_latency_ms":41.2843,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-1 device_id=esp32-split2-test split=2 class=SWIPE_LEFT confidence=0.999717 server_ms=14.440700 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=1 RESPONSE={"request_id":"split2-e2e-1","split":2,"predicted_class":"SWIPE_LEFT","confidence":0.9997170567512512,"server_latency_ms":14.4407,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-2 device_id=esp32-split2-test split=2 class=SWIPE_RIGHT confidence=0.973221 server_ms=16.217300 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=2 RESPONSE={"request_id":"split2-e2e-2","split":2,"predicted_class":"SWIPE_RIGHT","confidence":0.9732206463813782,"server_latency_ms":16.2173,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-3 device_id=esp32-split2-test split=2 class=ROTATE_CW confidence=0.999999 server_ms=15.866500 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=3 RESPONSE={"request_id":"split2-e2e-3","split":2,"predicted_class":"ROTATE_CW","confidence":0.9999990463256836,"server_latency_ms":15.8665,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-4 device_id=esp32-split2-test split=2 class=SHAKE confidence=0.999991 server_ms=7.512000 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=4 RESPONSE={"request_id":"split2-e2e-4","split":2,"predicted_class":"SHAKE","confidence":0.9999911785125732,"server_latency_ms":7.512,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+PHASE7_SPLIT2_E2E_PASS
+test/test_phase7_split2_e2e/test_main.cpp:92:testSplit2EndToEnd:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------- esp32-s3-n8r2:test_phase7_split2_e2e [PASSED] Took 52.69 seconds -------
+
+Processing test_phase7_split2_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+SPLIT2_VECTOR_COUNT=5
+SPLIT2_MAX_ABS_DIFF=0.000000000
+PHASE7_SPLIT2_PARITY_PASS
+test/test_phase7_split2_parity/test_main.cpp:214:testSplit2Parity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+----- esp32-s3-n8r2:test_phase7_split2_parity [PASSED] Took 34.54 seconds -----
+
+Processing test_phase7_split3_e2e in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+MQTT_INFERENCE_OK request_id=split3-e2e-0 device_id=esp32-split3-test split=3 class=IDLE confidence=0.997433 server_ms=16.656400 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=0 RESPONSE={"request_id":"split3-e2e-0","split":3,"predicted_class":"IDLE","confidence":0.9974330067634583,"server_latency_ms":16.6564,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-1 device_id=esp32-split3-test split=3 class=SWIPE_LEFT confidence=0.999468 server_ms=7.245700 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=1 RESPONSE={"request_id":"split3-e2e-1","split":3,"predicted_class":"SWIPE_LEFT","confidence":0.9994677901268005,"server_latency_ms":7.2457,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-2 device_id=esp32-split3-test split=3 class=SWIPE_RIGHT confidence=0.958919 server_ms=11.425800 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=2 RESPONSE={"request_id":"split3-e2e-2","split":3,"predicted_class":"SWIPE_RIGHT","confidence":0.9589192271232605,"server_latency_ms":11.4258,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-3 device_id=esp32-split3-test split=3 class=ROTATE_CW confidence=0.999988 server_ms=8.462600 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=3 RESPONSE={"request_id":"split3-e2e-3","split":3,"predicted_class":"ROTATE_CW","confidence":0.9999876022338867,"server_latency_ms":8.4626,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-4 device_id=esp32-split3-test split=3 class=SHAKE confidence=0.999939 server_ms=11.234700 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=4 RESPONSE={"request_id":"split3-e2e-4","split":3,"predicted_class":"SHAKE","confidence":0.9999387264251709,"server_latency_ms":11.2347,"model_version":"gesture-cloud-tail-v1.0.0"}
+PHASE7_SPLIT3_E2E_PASS
+test/test_phase7_split3_e2e/test_main.cpp:87:testSplit3EndToEnd:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------- esp32-s3-n8r2:test_phase7_split3_e2e [PASSED] Took 55.91 seconds -------
+
+Processing test_phase7_split3_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+SPLIT3_VECTOR_COUNT=5
+SPLIT3_MAX_ABS_DIFF=0.000000000
+PHASE7_SPLIT3_PARITY_PASS
+test/test_phase7_split3_parity/test_main.cpp:29:testSplit3Parity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+----- esp32-s3-n8r2:test_phase7_split3_parity [PASSED] Took 37.80 seconds -----
+
+Processing test_tflm_fc1_diagnostic in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+VECTOR 82
+FC1 mismatches: 31/64
+FC1 max LSB diff: 9
+FC1 mean LSB diff: 1.734375
+FC1 max diff index: 1
+Desktop FC1: [-124, -99, -128, -113, -128, -116, -102, -97, -115, -128, -128, -109, ...]
+ESP32 FC1:   [-124, -90, -128, -116, -128, -109, -104, -98, -114, -127, -128, -105, ...]
+FC1_EXACT_VECTOR_82=false
+
+VECTOR 119
+FC1 mismatches: 26/64
+FC1 max LSB diff: 33
+FC1 mean LSB diff: 3.531250
+FC1 max diff index: 5
+Desktop FC1: [-110, -63, -128, -79, -128, -71, -58, -37, -112, -128, -88, -128, ...]
+ESP32 FC1:   [-110, -43, -128, -88, -128, -38, -63, -40, -112, -128, -88, -128, ...]
+FC1_EXACT_VECTOR_119=false
+
+TFLM FC1 DIAGNOSTIC COMPLETE
+Invoke failures: 0
+test/test_tflm_fc1_diagnostic/test_main.cpp:372:testTflmFc1Diagnostic:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+------ esp32-s3-n8r2:test_tflm_fc1_diagnostic [PASSED] Took 43.68 seconds ------
+
+Processing test_tflm_float32_runtime in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+
+FLOAT32 TFLM RUNTIME SUMMARY
+----------------------------
+Model bytes:               25344
+Validation vectors:        200
+Successful invokes:        200/200
+Desktop class matches:     200/200
+Desktop class mismatches:  0
+ESP32 correct:             197/200
+ESP32 validation accuracy: 0.985000
+Compared outputs:          1000
+Max output abs diff:       0.0000002682
+Mean output abs diff:      0.0000000069
+Max diff location:         vector_82_output_1
+test/test_tflm_float32_runtime/test_main.cpp:413:testFloat32RuntimeParity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+----- esp32-s3-n8r2:test_tflm_float32_runtime [PASSED] Took 48.40 seconds -----
+
+Processing test_tflm_logits_diagnostic in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+CLASS_MISMATCH vector=82 desktop=4 esp32=1 true=4
+  desktop_logits=[-53, -1, -21, -46, 1]
+  esp32_logits=[-56, -3, -23, -46, -5]
+
+VECTOR 82
+  desktop_logits=[-53, -1, -21, -46, 1]
+  esp32_logits=[-56, -3, -23, -46, -5]
+  desktop_class=4 esp32_class=1 true=4
+
+VECTOR 119
+  desktop_logits=[-76, -10, 15, -50, 33]
+  esp32_logits=[-78, -11, 10, -51, 16]
+  desktop_class=4 esp32_class=4 true=4
+
+TFLM LOGITS DIAGNOSTIC SUMMARY
+------------------------------
+Diagnostic model bytes:    12688
+Validation vectors:        200
+Successful invokes:        200/200
+Desktop class matches:     199/200
+Desktop class mismatches:  1
+ESP32 correct:             196/200
+ESP32 validation accuracy: 0.980000
+Compared logits:           1000
+Max INT8 logits LSB diff:  18
+Mean INT8 logits LSB diff: 2.369000
+Max dequantized logit diff: 3.59696341
+Mean dequantized logit diff: 0.47340035
+Max diff location:         vector_72_output_4
+test/test_tflm_logits_diagnostic/test_main.cpp:599:testTflmLogitsDiagnostic:FAIL: Expected 0 Was 1
+
+-----------------------
+1 Tests 1 Failures 0 Ignored
+FAIL
+
+---- esp32-s3-n8r2:test_tflm_logits_diagnostic [FAILED] Took 46.02 seconds ----
+
+Processing test_window_buffer in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+test/test_window_buffer/test_main.cpp:341:testContractConstants:PASS
+test/test_window_buffer/test_main.cpp:345:testFirstWindowAppearsAtSample100:PASS
+test/test_window_buffer/test_main.cpp:349:testNextWindowAppearsAfter50NewSamples:PASS
+test/test_window_buffer/test_main.cpp:353:testRingWrapPreservesChronologicalOrder:PASS
+test/test_window_buffer/test_main.cpp:357:testResetRestoresEmptyState:PASS
+
+-----------------------
+5 Tests 0 Failures 0 Ignored
+OK
+
+--------- esp32-s3-n8r2:test_window_buffer [PASSED] Took 32.34 seconds ---------
+
+=================================== SUMMARY ===================================
+Environment    Test                              Status    Duration
+-------------  --------------------------------  --------  ------------
+esp32-s3-n8r2  test_edge_uncertainty_parity      PASSED    00:00:35.437
+esp32-s3-n8r2  test_edge_uncertainty_stochastic  PASSED    00:00:37.742
+esp32-s3-n8r2  test_feature_parity               PASSED    00:00:35.941
+esp32-s3-n8r2  test_input_preprocessing          PASSED    00:00:34.540
+esp32-s3-n8r2  test_internal_tensor_diagnostic   ERRORED   00:00:28.160
+esp32-s3-n8r2  test_local_inference              PASSED    00:00:49.370
+esp32-s3-n8r2  test_local_latency                PASSED    00:00:40.823
+esp32-s3-n8r2  test_local_memory                 PASSED    00:00:42.174
+esp32-s3-n8r2  test_phase6_mqtt_client           PASSED    00:00:47.211
+esp32-s3-n8r2  test_phase6_mqtt_publish          PASSED    00:00:41.787
+esp32-s3-n8r2  test_phase6_mqtt_receive          PASSED    00:00:54.963
+esp32-s3-n8r2  test_phase6_network_reachability  PASSED    00:00:40.498
+esp32-s3-n8r2  test_phase6_server_e2e            PASSED    00:00:42.337
+esp32-s3-n8r2  test_phase6_server_timeout        PASSED    00:00:47.892
+esp32-s3-n8r2  test_phase6_wifi_manager          PASSED    00:00:47.582
+esp32-s3-n8r2  test_phase7_split1_e2e            PASSED    00:00:52.119
+esp32-s3-n8r2  test_phase7_split1_parity         PASSED    00:00:36.754
+esp32-s3-n8r2  test_phase7_split2_e2e            PASSED    00:00:52.694
+esp32-s3-n8r2  test_phase7_split2_parity         PASSED    00:00:34.542
+esp32-s3-n8r2  test_phase7_split3_e2e            PASSED    00:00:55.912
+esp32-s3-n8r2  test_phase7_split3_parity         PASSED    00:00:37.801
+esp32-s3-n8r2  test_tflm_fc1_diagnostic          PASSED    00:00:43.676
+esp32-s3-n8r2  test_tflm_float32_runtime         PASSED    00:00:48.396
+esp32-s3-n8r2  test_tflm_logits_diagnostic       FAILED    00:00:46.016
+esp32-s3-n8r2  test_window_buffer                PASSED    00:00:32.339
+
+__________________ esp32-s3-n8r2:test_tflm_logits_diagnostic __________________
+test/test_tflm_logits_diagnostic/test_main.cpp:599:testTflmLogitsDiagnostic:FAIL: Expected 0 Was 1
+
+============ 30 test cases: 1 failed, 28 succeeded in 00:17:46.705 ============

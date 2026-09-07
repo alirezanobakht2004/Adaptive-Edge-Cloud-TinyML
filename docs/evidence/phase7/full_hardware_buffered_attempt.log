@@ -1,0 +1,32 @@
+.venv\Scripts\python.exe : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:2 char:1
++ .venv\Scripts\python.exe -u -m tests.run_phase7_hardware --port COM10 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+I0000 00:00:1788796731.940649    8316 port.cc:153] oneDNN custom operations are on. You may see slightly different
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1788796735.967794    8316 port.cc:153] oneDNN custom operations are on. You may see slightly different
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1788796738.750024    8316 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available
+CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with
+the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if
+CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+RUN: C:\Users\alire\.platformio\penv\Scripts\platformio.exe test -d firmware -e esp32-s3-n8r2 --upload-port COM10 --test-port COM10 -v
+Collected 25 tests (test_edge_uncertainty_parity, test_edge_uncertainty_stochastic, test_feature_parity, test_input_preprocessing, test_internal_tensor_diagnostic, test_local_inference, test_local_latency, test_local_memory, test_phase6_mqtt_client, test_phase6_mqtt_publish, test_phase6_mqtt_receive, test_phase6_network_reachability, test_phase6_server_e2e, test_phase6_server_timeout, test_phase6_wifi_manager, test_phase7_split1_e2e, test_phase7_split1_parity, test_phase7_split2_e2e, test_phase7_split2_parity, test_phase7_split3_e2e, test_phase7_split3_parity, test_tflm_fc1_diagnostic, test_tflm_float32_runtime, test_tflm_logits_diagnostic, test_window_buffer)
+
+Processing test_edge_uncertainty_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+

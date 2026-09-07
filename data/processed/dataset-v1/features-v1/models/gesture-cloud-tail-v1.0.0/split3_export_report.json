@@ -1,0 +1,19 @@
+{
+  "split_id": 3,
+  "input_embedding_dim": 32,
+  "output_classes": 5,
+  "source_model_version": "gesture-model-v1.1.0",
+  "model_version": "gesture-cloud-tail-v1.0.0",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "test_split_used": false,
+  "model_sha256": "9a834eecf909374488fe346c89b34310bd6c7fdb58570ed2ffb0c885535866d1",
+  "tflite_sha256": "dad0f6904f1b794a7967f63a48a9c0da9ff9a85354862a72196605c305ef6602",
+  "tflite_bytes": 19876,
+  "prefix_sha256": "7ddc83cc428fcac48b7fc4fd6799e22bbff522682f0e00f1bfcb18ef3f49d7cf",
+  "prefix_bytes": 23868,
+  "parity_vector_count": 5,
+  "parity_tolerance": 1e-05,
+  "prefix_max_abs_diff": 7.152557373046875e-07,
+  "keras_tflite_max_abs_diff": 3.725290298461914e-09
+}
