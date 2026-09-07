@@ -1,4 +1,4 @@
-"""Validated server-side inference for Split1 and the existing Split3 path."""
+"""Validated server-side inference for all three fixed split paths."""
 
 from __future__ import annotations
 
@@ -333,22 +333,40 @@ class Split1CloudInference(Split3CloudInference):
         from ml.training.train_cloud_tail import SOURCE_MODEL_SHA256
         super()._validate_metadata(metadata)
         expected = {
-            "split_id": 1, "input_embedding_dim": 64, "output_classes": 5,
+            "split_id": cls.expected_split,
+            "input_embedding_dim": cls.expected_dimension, "output_classes": 5,
             "dataset_version": "dataset-v1", "feature_version": "features-v1",
             "class_to_id": CLASS_TO_ID, "source_edge_model_sha256": SOURCE_MODEL_SHA256,
         }
         for key, value in expected.items():
             if metadata.get(key) != value:
-                raise RuntimeError(f"Invalid Split1 metadata: {key}")
+                raise RuntimeError(f"Invalid Split{cls.expected_split} metadata: {key}")
+
+
+class Split2CloudInference(Split1CloudInference):
+    """48-D continuation with the same strict provenance checks as Split1."""
+
+    expected_version = "gesture-cloud-tail-split2-v1.0.0"
+    expected_purpose = "phase7-split2-cloud-tail"
+    expected_split = 2
+    expected_dimension = 48
+
+    def __init__(self, model_path: Path | None = None, metadata_path: Path | None = None) -> None:
+        from ml.models.cloud_tail_split2 import MODEL_PATH, MODEL_DIR, validate_cloud_tail_split2
+        Split3CloudInference.__init__(
+            self, MODEL_PATH if model_path is None else model_path,
+            MODEL_DIR / "metadata.json" if metadata_path is None else metadata_path,
+        )
+        validate_cloud_tail_split2(self._model)
 
 
 class SplitCloudInference:
     """Explicit fixed-split routing; no adaptive policy."""
 
     def __init__(self) -> None:
-        self.runtimes = {1: Split1CloudInference(), 3: Split3CloudInference()}
+        self.runtimes = {1: Split1CloudInference(), 2: Split2CloudInference(), 3: Split3CloudInference()}
 
     def infer(self, embedding: Sequence[float], split: int = 3) -> InferenceResult:
         if isinstance(split, bool) or not isinstance(split, int) or split not in self.runtimes:
-            raise ValueError("Supported splits are 1 and 3")
+            raise ValueError("Supported splits are 1, 2 and 3")
         return self.runtimes[split].infer(embedding)

@@ -1,4 +1,4 @@
-"""MQTT inference service for fixed Split1 and Split3 requests."""
+"""MQTT inference service for fixed Split1, Split2 and Split3 requests."""
 
 from __future__ import annotations
 

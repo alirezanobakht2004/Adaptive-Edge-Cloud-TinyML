@@ -84,7 +84,7 @@ def test_reject_invalid_split1_payload(embedding):
         parse_inference_request(json.dumps(request(embedding)).encode())
 
 
-@pytest.mark.parametrize("split", [2, 0, True, "1"])
+@pytest.mark.parametrize("split", [4, 0, True, "1"])
 def test_reject_unsupported_routing(runtime, split):
     with pytest.raises(ValueError):
         runtime.infer([0.0] * 64, split=split)

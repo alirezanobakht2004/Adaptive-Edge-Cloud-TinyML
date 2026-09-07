@@ -61,10 +61,10 @@ def test_fixed_split3_request_contract() -> None:
 def test_request_rejects_unsupported_split() -> None:
     with pytest.raises(
         ValueError,
-        match="Split 1 and Split 3 only",
+        match="Split 1, Split 2 and Split 3 only",
     ):
         parse_inference_request(
-            encode_request(split=2)
+            encode_request(split=4)
         )
 
 
