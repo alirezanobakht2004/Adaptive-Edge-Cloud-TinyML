@@ -128,8 +128,11 @@ def validate_record(record: dict) -> None:
             if value is not None:
                 _timestamp(value, key)
         else:
-            _number(value, key, integer=key.endswith("bytes"))
+            maximum = 1 if key in ("local_confidence", "local_margin") else math.log(5) + 1e-9 if key == "local_entropy" else None
+            _number(value, key, maximum, integer=key.endswith("bytes"))
     reward = record["reward"]
+    if not isinstance(reward["energy_proxy_version"], str) or not reward["energy_proxy_version"].strip():
+        raise ValueError("energy_proxy_version must be nonempty")
     if reward["energy_kind"] not in ("estimated", "simulated"):
         raise ValueError("Energy must be estimated or simulated; measured energy is unsupported")
     for key in ("latency_component", "communication_cost_component", "energy_component"):
@@ -152,11 +155,19 @@ def validate_record(record: dict) -> None:
     _number(outcome["confidence"], "outcome confidence", 1)
     if outcome["status"] == "success" and (outcome["predicted_class"] is None or outcome["confidence"] is None):
         raise ValueError("Successful outcome requires a classification")
+    if outcome["error"] is not None and not isinstance(outcome["error"], str):
+        raise ValueError("outcome error must be text or null")
     if meta["record_kind"] == "observation" and meta["measurement_scope"] == "unmeasured":
         raise ValueError("Observation needs a measurement scope")
     for key in ("artifact_hashes", "clock_domains"):
         if not isinstance(record["provenance"][key], dict):
             raise ValueError(f"provenance.{key} must be an object")
+    for key in ("state_source", "notes"):
+        if not isinstance(record["provenance"][key], str):
+            raise ValueError(f"provenance.{key} must be text")
+    for value in record["provenance"]["artifact_hashes"].values():
+        if not isinstance(value, str) or len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
+            raise ValueError("Artifact hashes must be lowercase SHA-256 hex")
 
 
 def schema_description() -> dict:

@@ -1,0 +1,14 @@
+{
+  "dataset_version": "policy_training_dataset_v1",
+  "actions": {
+    "0": "ALL_LOCAL",
+    "1": "SPLIT1",
+    "2": "SPLIT2",
+    "3": "ALL_CLOUD"
+  },
+  "feature_version": "features-v1",
+  "source_dataset_version": "dataset-v1",
+  "model_version": "gesture-model-v1.1.0",
+  "energy": "estimated/simulated only",
+  "writer_mode": "single writer; reject duplicate run/sample IDs"
+}

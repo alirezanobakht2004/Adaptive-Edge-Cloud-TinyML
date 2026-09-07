@@ -1,0 +1,99 @@
+{
+  "version": "policy_training_dataset_v1",
+  "actions": {
+    "0": "ALL_LOCAL",
+    "1": "SPLIT1",
+    "2": "SPLIT2",
+    "3": "ALL_CLOUD"
+  },
+  "required_structure": {
+    "metadata": {
+      "dataset_version": "policy_training_dataset_v1",
+      "sample_id": "example-000001",
+      "timestamp": "2026-09-08T00:00:00+00:00",
+      "device_id": "example-device",
+      "model_version": "gesture-model-v1.1.0",
+      "feature_version": "features-v1",
+      "source_dataset_version": "dataset-v1",
+      "record_kind": "example",
+      "measurement_scope": "unmeasured",
+      "run_id": "example-run",
+      "session_id": "example-session"
+    },
+    "state": {
+      "uncertainty": {
+        "confidence": null,
+        "entropy": null,
+        "margin": null
+      },
+      "device": {
+        "free_heap": null,
+        "tensor_arena_usage": null,
+        "cpu_frequency": null,
+        "inference_latency_estimate": null
+      },
+      "network": {
+        "mqtt_rtt_ms": null,
+        "packet_size_estimate": null,
+        "connection_state": "unknown",
+        "estimated_bandwidth": null
+      },
+      "application": {
+        "predicted_class": null,
+        "window_id": "example-window"
+      }
+    },
+    "action": 0,
+    "reward": {
+      "latency_component": null,
+      "communication_cost_component": null,
+      "energy_component": null,
+      "energy_kind": "estimated",
+      "energy_proxy_version": "unconfigured",
+      "final_reward": null,
+      "calculation": "placeholder-unconfigured"
+    },
+    "measurements": {
+      "preprocessing_latency_ms": null,
+      "local_inference_latency_ms": null,
+      "prefix_latency_ms": null,
+      "mqtt_send_timestamp": null,
+      "server_response_timestamp": null,
+      "round_trip_latency_ms": null,
+      "embedding_size_bytes": null,
+      "request_bytes": null,
+      "response_bytes": null,
+      "cloud_inference_latency_ms": null,
+      "request_receive_time": null,
+      "response_publish_time": null,
+      "total_latency_ms": null,
+      "local_confidence": null,
+      "local_entropy": null,
+      "local_margin": null
+    },
+    "outcome": {
+      "status": "not_executed",
+      "predicted_class": null,
+      "confidence": null,
+      "true_class": null,
+      "error": null
+    },
+    "provenance": {
+      "state_source": "unavailable",
+      "artifact_hashes": {},
+      "clock_domains": {},
+      "notes": "Example only; no measured data."
+    }
+  },
+  "null_semantics": "Unknown or unmeasured; never silently replaced by zero",
+  "units": {
+    "entropy": "nats",
+    "cpu_frequency": "MHz",
+    "estimated_bandwidth": "bytes/second",
+    "free_heap": "bytes",
+    "tensor_arena_usage": "bytes",
+    "energy_component": "proxy score"
+  },
+  "validator": "tools.policy_dataset.schema.validate_record",
+  "warning": "Action 3 is ALL_CLOUD, not MQTT split=3. Energy is estimated/simulated only."
+}
