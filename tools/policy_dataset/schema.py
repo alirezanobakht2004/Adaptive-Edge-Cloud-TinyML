@@ -24,6 +24,7 @@ METRIC_NAMES = (
     "mqtt_send_timestamp", "server_response_timestamp", "round_trip_latency_ms",
     "embedding_size_bytes", "request_bytes", "response_bytes", "cloud_inference_latency_ms",
     "request_receive_time", "response_publish_time", "total_latency_ms",
+    "local_confidence", "local_entropy", "local_margin",
 )
 TEMPLATE = {
     "metadata": {
