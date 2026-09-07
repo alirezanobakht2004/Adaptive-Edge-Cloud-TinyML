@@ -33,3 +33,14 @@ def test_split2_export_provenance():
     assert report["frozen_prefix_verified"] is True
     assert report["model_sha256"] == sha256_file(MODEL_PATH)
     assert report["tflite_sha256"] == sha256_file(MODEL_DIR / f"{CLOUD_TAIL_VERSION}.tflite")
+
+
+def test_split2_prefix_continues_to_cloud():
+    from ml.export.split_validation import SPLITS, SOURCE_VERSION
+    path = SPLITS / f"{SOURCE_VERSION}-split2-prefix-float32-normalized-input.tflite"
+    model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+    with np.load(MODEL_DIR / "split2_cloud_parity_vectors.npz") as vectors:
+        embeddings = run_float32(path, vectors["normalized_inputs"], 10, 48)
+        np.testing.assert_allclose(embeddings, vectors["embeddings"], atol=1e-5, rtol=0)
+        result = model(embeddings, training=False).numpy()
+        np.testing.assert_allclose(result, vectors["expected_probabilities"], atol=1e-5, rtol=0)

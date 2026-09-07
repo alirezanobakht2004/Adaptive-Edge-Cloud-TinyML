@@ -1,0 +1,24 @@
+{
+  "phase": 7,
+  "milestone": "M8",
+  "split_id": 2,
+  "source_model_version": "gesture-model-v1.1.0",
+  "source_model_sha256": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "input_shape": [
+    1,
+    10
+  ],
+  "output_shape": [
+    1,
+    48
+  ],
+  "prefix_tflite": "gesture-model-v1.1.0-split2-prefix-float32-normalized-input.tflite",
+  "prefix_sha256": "5634a188717f9b8778964971d85ebf919e5aa3ec4b08756c0b8c84294c99c025",
+  "prefix_bytes": 16984,
+  "parity_count": 5,
+  "tolerance": 1e-05,
+  "test_split_used": false,
+  "max_abs_diff": 4.76837158203125e-07
+}
