@@ -1,4 +1,4 @@
-﻿"""Phase 6 / M7 server-side inference for the fixed Split-3 path."""
+"""Validated server-side inference for Split1 and the existing Split3 path."""
 
 from __future__ import annotations
 
@@ -12,6 +12,12 @@ from typing import Sequence
 import numpy as np
 import tensorflow as tf
 
+from ml.models.cloud_tail_split1 import (
+    CLOUD_TAIL_VERSION as SPLIT1_TAIL_VERSION,
+    MODEL_DIR as SPLIT1_MODEL_DIR,
+    MODEL_PATH as SPLIT1_MODEL_PATH,
+    validate_cloud_tail_split1,
+)
 from ml.models.cloud_model import (
     CLASS_COUNT,
     CLOUD_TAIL_VERSION,
@@ -45,6 +51,7 @@ class InferenceResult:
     confidence: float
     server_latency_ms: float
     model_version: str
+    split: int = 3
 
 
 def sha256_file(path: Path) -> str:
@@ -62,6 +69,11 @@ def sha256_file(path: Path) -> str:
 
 class Split3CloudInference:
     """Validated runtime for the fixed 32-D Split-3 cloud tail."""
+
+    expected_version = CLOUD_TAIL_VERSION
+    expected_purpose = EXPECTED_MODEL_PURPOSE
+    expected_split = EXPECTED_SPLIT_POINT
+    expected_dimension = INPUT_EMBEDDING_DIM
 
     def __init__(
         self,
@@ -130,7 +142,7 @@ class Split3CloudInference:
 
         if self._model.input_shape != (
             None,
-            INPUT_EMBEDDING_DIM,
+            self.expected_dimension,
         ):
             raise RuntimeError(
                 "Unexpected cloud-tail input shape: "
@@ -146,9 +158,9 @@ class Split3CloudInference:
                 f"{self._model.output_shape}"
             )
 
-    @staticmethod
+    @classmethod
     def _validate_metadata(
-        metadata: dict[str, object],
+        cls, metadata: dict[str, object],
     ) -> None:
         required_fields = (
             "model_version",
@@ -168,13 +180,13 @@ class Split3CloudInference:
                     f"Cloud-tail metadata missing field: {field}"
                 )
 
-        if metadata["model_version"] != CLOUD_TAIL_VERSION:
+        if metadata["model_version"] != cls.expected_version:
             raise RuntimeError(
                 "Unexpected cloud-tail model version: "
                 f"{metadata['model_version']}"
             )
 
-        if metadata["model_purpose"] != EXPECTED_MODEL_PURPOSE:
+        if metadata["model_purpose"] != cls.expected_purpose:
             raise RuntimeError(
                 "Unexpected cloud-tail model purpose: "
                 f"{metadata['model_purpose']}"
@@ -189,14 +201,14 @@ class Split3CloudInference:
                 f"{metadata['source_edge_model_version']}"
             )
 
-        if metadata["split_point"] != EXPECTED_SPLIT_POINT:
+        if metadata["split_point"] != cls.expected_split:
             raise RuntimeError(
-                "Phase-6 runtime supports fixed Split 3 only."
+                f"Runtime requires split={cls.expected_split}."
             )
 
         if (
             metadata["embedding_dimension"]
-            != INPUT_EMBEDDING_DIM
+            != cls.expected_dimension
         ):
             raise RuntimeError(
                 "Unexpected embedding dimension: "
@@ -217,7 +229,7 @@ class Split3CloudInference:
         self,
         embedding: Sequence[float],
     ) -> InferenceResult:
-        """Run one fixed Split-3 server-tail inference."""
+        """Run one inference using this runtime's validated split contract."""
 
         try:
             vector = np.asarray(
@@ -229,10 +241,10 @@ class Split3CloudInference:
                 "embedding must contain numeric values"
             ) from exc
 
-        if vector.shape != (INPUT_EMBEDDING_DIM,):
+        if vector.shape != (self.embedding_dimension,):
             raise ValueError(
                 "embedding must contain exactly "
-                f"{INPUT_EMBEDDING_DIM} values; "
+                f"{self.embedding_dimension} values; "
                 f"got shape {vector.shape}"
             )
 
@@ -295,4 +307,48 @@ class Split3CloudInference:
             confidence=confidence,
             server_latency_ms=server_latency_ms,
             model_version=self.model_version,
+            split=self.split_point,
         )
+
+
+class Split1CloudInference(Split3CloudInference):
+    """64-D Split1 tail with separate version and artifact validation."""
+
+    expected_version = SPLIT1_TAIL_VERSION
+
+    expected_purpose = "phase7-split1-cloud-tail"
+    expected_split = 1
+    expected_dimension = 64
+
+    def __init__(self, model_path: Path | None = None, metadata_path: Path | None = None) -> None:
+        super().__init__(
+            SPLIT1_MODEL_PATH if model_path is None else model_path,
+            SPLIT1_MODEL_DIR / "metadata.json" if metadata_path is None else metadata_path,
+        )
+        validate_cloud_tail_split1(self._model)
+
+    @classmethod
+    def _validate_metadata(cls, metadata: dict[str, object]) -> None:
+        from ml.dataset.loader import CLASS_TO_ID
+        from ml.training.train_cloud_tail import SOURCE_MODEL_SHA256
+        super()._validate_metadata(metadata)
+        expected = {
+            "split_id": 1, "input_embedding_dim": 64, "output_classes": 5,
+            "dataset_version": "dataset-v1", "feature_version": "features-v1",
+            "class_to_id": CLASS_TO_ID, "source_edge_model_sha256": SOURCE_MODEL_SHA256,
+        }
+        for key, value in expected.items():
+            if metadata.get(key) != value:
+                raise RuntimeError(f"Invalid Split1 metadata: {key}")
+
+
+class SplitCloudInference:
+    """Explicit fixed-split routing; no adaptive policy."""
+
+    def __init__(self) -> None:
+        self.runtimes = {1: Split1CloudInference(), 3: Split3CloudInference()}
+
+    def infer(self, embedding: Sequence[float], split: int = 3) -> InferenceResult:
+        if isinstance(split, bool) or not isinstance(split, int) or split not in self.runtimes:
+            raise ValueError("Supported splits are 1 and 3")
+        return self.runtimes[split].infer(embedding)

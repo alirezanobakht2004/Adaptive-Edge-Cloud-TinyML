@@ -1,4 +1,4 @@
-﻿"""JSON request validation for Phase 6 / M7 MQTT inference."""
+"""JSON request validation for Split1 and Split3 MQTT inference."""
 
 from __future__ import annotations
 
@@ -12,13 +12,10 @@ from ml.models.cloud_model import (
 )
 
 
-EXPECTED_SPLIT_POINT = 3
-
-
 def parse_inference_request(
     payload: bytes,
 ) -> dict[str, Any]:
-    """Parse and validate the fixed Split-3 MQTT inference request."""
+    """Parse and validate the Split1 or Split3 MQTT inference request."""
 
     try:
         text = payload.decode("utf-8")
@@ -91,9 +88,9 @@ def parse_inference_request(
             "split must be an integer"
         )
 
-    if split != EXPECTED_SPLIT_POINT:
+    if split not in (1, 3):
         raise ValueError(
-            "Phase-6 M7 server supports fixed Split 3 only"
+            "Server supports Split 1 and Split 3 only"
         )
 
     model_version = data["model_version"]
@@ -117,10 +114,12 @@ def parse_inference_request(
             "embedding must be a JSON array"
         )
 
-    if len(embedding) != INPUT_EMBEDDING_DIM:
+    embedding_dimension = 64 if split == 1 else INPUT_EMBEDDING_DIM
+
+    if len(embedding) != embedding_dimension:
         raise ValueError(
             "embedding must contain exactly "
-            f"{INPUT_EMBEDDING_DIM} values"
+            f"{embedding_dimension} values"
         )
 
     normalized_embedding: list[float] = []

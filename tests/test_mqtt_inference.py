@@ -58,10 +58,10 @@ def test_fixed_split3_request_contract() -> None:
     )
 
 
-def test_request_rejects_non_split3() -> None:
+def test_request_rejects_unsupported_split() -> None:
     with pytest.raises(
         ValueError,
-        match="fixed Split 3 only",
+        match="Split 1 and Split 3 only",
     ):
         parse_inference_request(
             encode_request(split=2)
@@ -131,6 +131,7 @@ def test_build_inference_response() -> None:
     )
 
     assert response == {
+        "split": 3,
         "request_id": "m7-test-001",
         "predicted_class": "IDLE",
         "confidence": 0.875,

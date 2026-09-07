@@ -1,4 +1,4 @@
-﻿"""MQTT fixed Split-3 inference service for Phase 6 / M7."""
+"""MQTT inference service for fixed Split1 and Split3 requests."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from typing import Any
 
 import paho.mqtt.client as mqtt
 
-from .inference import Split3CloudInference
+from .inference import Split3CloudInference, SplitCloudInference
 from .schemas import parse_inference_request
 
 
@@ -23,7 +23,7 @@ REQUEST_TOPIC = "gesture/+/inference/request"
 class ServerState:
     """Long-lived state shared by MQTT callbacks."""
 
-    runtime: Split3CloudInference
+    runtime: Split3CloudInference | SplitCloudInference
 
 
 def device_id_from_topic(topic: str) -> str:
@@ -49,14 +49,20 @@ def response_topic(device_id: str) -> str:
 
 def build_inference_response(
     request: dict[str, Any],
-    runtime: Split3CloudInference,
+    runtime: Split3CloudInference | SplitCloudInference,
 ) -> dict[str, Any]:
-    """Run the fixed Split-3 cloud tail and build response JSON."""
+    """Run the requested cloud tail and build response JSON."""
 
-    result = runtime.infer(request["embedding"])
+    if isinstance(runtime, SplitCloudInference):
+        result = runtime.infer(request["embedding"], split=request["split"])
+    else:
+        if request["split"] != getattr(runtime, "split_point", 3):
+            raise ValueError("Request split does not match runtime")
+        result = runtime.infer(request["embedding"])
 
     return {
         "request_id": request["request_id"],
+        "split": request["split"],
         "predicted_class": result.predicted_class,
         "confidence": result.confidence,
         "server_latency_ms": result.server_latency_ms,
@@ -183,7 +189,7 @@ def on_message(
 
 
 def main() -> None:
-    runtime = Split3CloudInference()
+    runtime = SplitCloudInference()
 
     state = ServerState(
         runtime=runtime,
@@ -206,13 +212,10 @@ def main() -> None:
         f"broker={BROKER_HOST}:{BROKER_PORT}"
     )
 
-    print(
-        "CLOUD_TAIL_READY "
-        f"model={runtime.model_version} "
-        f"split={runtime.split_point} "
-        f"embedding_dim={runtime.embedding_dimension} "
-        f"sha256={runtime.model_sha256}"
-    )
+    for tail in runtime.runtimes.values():
+        print(f"CLOUD_TAIL_READY model={tail.model_version} "
+              f"split={tail.split_point} embedding_dim={tail.embedding_dimension} "
+              f"sha256={tail.model_sha256}")
 
     client.connect(
         BROKER_HOST,
