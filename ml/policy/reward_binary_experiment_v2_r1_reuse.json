@@ -1,0 +1,42 @@
+{
+  "version": "binary-reward-experiment-v2-r1-reuse",
+  "actions": {
+    "0": "LOCAL",
+    "1": "CLOUD"
+  },
+  "parent_version": "binary-reward-experiment-v1",
+  "parent_configuration_sha256": "fac59cd60d8e5c3dc2c0a1d80855871699fbf90014e41cff7d8b57a7cc40c8b7",
+  "weights": {
+    "accuracy": 1.0,
+    "latency": 0.1,
+    "communication": 0.1,
+    "energy_proxy": 0.1
+  },
+  "scales": {
+    "latency_ms": 100,
+    "communication_bytes": 1024,
+    "energy_proxy": 1
+  },
+  "tie_tolerance": 1e-06,
+  "calibration": "provisional inherited M30 weights; no tuning",
+  "cost_convention": "incremental-post-decision-v1",
+  "shared_costs_excluded": [
+    "features preprocessing",
+    "local prediction and five MC passes",
+    "policy state acquisition and probe",
+    "policy inference and common logging"
+  ],
+  "local": {
+    "second_inference_count": 0,
+    "latency_ms": 0,
+    "communication_bytes": 0,
+    "energy_proxy": 0,
+    "provenance": "accounting zero for returning an already available result; not a measured zero-duration operation"
+  },
+  "cloud": {
+    "latency_source": "M30 action_us / 1000 includes serialization, MQTT roundtrip and result handling; simulated alternatives explicitly tagged",
+    "energy_proxy_method": "incremental endpoint-payload proxy: request-plus-response application bytes / 1024; serialization CPU, radio waiting and cloud compute energy are not measured and excluded",
+    "energy_kind": "estimated_or_simulated_proxy_only"
+  },
+  "energy_proxy_version": "r1-incremental-payload-proxy-v1"
+}
