@@ -151,6 +151,8 @@ void setUp() {}
 void tearDown() {}
 void setup() {
     Serial.begin(115200); delay(2000); UNITY_BEGIN(); RUN_TEST(testCampaignPrefixParity); UNITY_END();
+    // PlatformIO Unity calls Serial.end(); the interactive campaign needs it again.
+    Serial.begin(115200);
     network::connectWifi(); network::configureMqtt("192.168.137.1", 1883); network::setMqttMessageHandler(callback);
     network::connectMqtt("esp32-policy-campaign"); network::subscribeMqtt(responseTopic);
     Serial.setTimeout(1000); Serial.println("POLICY_CAMPAIGN_READY");

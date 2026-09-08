@@ -88,6 +88,7 @@ def trace_to_record(trace, *, run_id, device_id, timestamp, session_id, true_cla
 def parse_trace(line):
     if not line.startswith("POLICY_TRACE "):
         raise ValueError("Not a device trace line")
-    trace = json.loads(line[len("POLICY_TRACE "):])
+    from .serializer import _object, _constant
+    trace = json.loads(line[len("POLICY_TRACE "):], object_pairs_hook=_object, parse_constant=_constant)
     validate_trace(trace)
     return trace
