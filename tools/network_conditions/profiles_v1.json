@@ -1,0 +1,54 @@
+{
+  "baseline": {
+    "version": "network-profile-v1",
+    "type": "controlled_network",
+    "profile": "baseline",
+    "simulated": true,
+    "application": "offline-cost-overlay",
+    "injected_parameters": {
+      "edge_compute_multiplier": 1,
+      "network_residual_multiplier": 1,
+      "cloud_compute_multiplier": 1,
+      "added_rtt_ms": 0
+    }
+  },
+  "high_latency": {
+    "version": "network-profile-v1",
+    "type": "controlled_network",
+    "profile": "high_latency",
+    "simulated": true,
+    "application": "offline-cost-overlay",
+    "injected_parameters": {
+      "edge_compute_multiplier": 1,
+      "network_residual_multiplier": 1,
+      "cloud_compute_multiplier": 1,
+      "added_rtt_ms": 150
+    }
+  },
+  "edge_loaded": {
+    "version": "network-profile-v1",
+    "type": "controlled_network",
+    "profile": "edge_loaded",
+    "simulated": true,
+    "application": "offline-cost-overlay",
+    "injected_parameters": {
+      "edge_compute_multiplier": 20,
+      "network_residual_multiplier": 1,
+      "cloud_compute_multiplier": 1,
+      "added_rtt_ms": 0
+    }
+  },
+  "cloud_favorable": {
+    "version": "network-profile-v1",
+    "type": "controlled_network",
+    "profile": "cloud_favorable",
+    "simulated": true,
+    "application": "offline-cost-overlay",
+    "injected_parameters": {
+      "edge_compute_multiplier": 8,
+      "network_residual_multiplier": 0.25,
+      "cloud_compute_multiplier": 0.5,
+      "added_rtt_ms": 0
+    }
+  }
+}
