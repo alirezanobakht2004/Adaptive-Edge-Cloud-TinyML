@@ -1,0 +1,80 @@
+{
+  "source_dataset_name": "6-Axis Motion Gesture Dataset: Hand Waves & Flicks",
+  "source_filename": "gesture_dataset.csv",
+  "source_sha256": "839fbe1de07f180f0434288f73fe0ef42b5e5a3a23dd6548efd54bdab2bd575b",
+  "source_url": "https://www.kaggle.com/datasets/dilharajayawardhane/6-axis-motion-gesture-dataset-hand-waves-and-flicks",
+  "original_labels": [
+    "flick_down",
+    "flick_up",
+    "idle",
+    "wave_left",
+    "wave_right"
+  ],
+  "conversion_version": "external-recordings-v1",
+  "timestamp": "2026-09-08T04:14:58.966027+00:00",
+  "recording_count": 1100,
+  "row_count": 55000,
+  "recording_identity": [
+    "label",
+    "sample_id"
+  ],
+  "sensor_columns": [
+    "ax",
+    "ay",
+    "az",
+    "gx",
+    "gy",
+    "gz"
+  ],
+  "axis_mapping": {
+    "ax": "ax",
+    "ay": "ay",
+    "az": "az",
+    "gx": "gx",
+    "gy": "gy",
+    "gz": "gz"
+  },
+  "axis_orientation": "unknown",
+  "axis_mapping_assumptions": "Preserve named sensor axes and signs; no rotation or mounting correction.",
+  "units": {
+    "acceleration": "g",
+    "gyroscope": "degrees/s"
+  },
+  "source_context": {
+    "source_dataset_name": "6-Axis Motion Gesture Dataset: Hand Waves & Flicks",
+    "author": "Dilhara Jayawardhane",
+    "source_url": "https://www.kaggle.com/datasets/dilharajayawardhane/6-axis-motion-gesture-dataset-hand-waves-and-flicks",
+    "source_sha256": "839fbe1de07f180f0434288f73fe0ef42b5e5a3a23dd6548efd54bdab2bd575b",
+    "reviewed_date": "2026-09-08",
+    "associated_repository": "https://github.com/Dilharajay/gesture-cmd",
+    "associated_revision": "0f1e63bad76366c7d415e1e42649841b72635dbc",
+    "firmware_reference": "https://github.com/Dilharajay/gesture-cmd/blob/0f1e63bad76366c7d415e1e42649841b72635dbc/firmware/src/data_collection.cpp",
+    "logger_reference": "https://github.com/Dilharajay/gesture-cmd/blob/0f1e63bad76366c7d415e1e42649841b72635dbc/server/src/training/gesture_logger.py",
+    "readme_reference": "https://github.com/Dilharajay/gesture-cmd/blob/0f1e63bad76366c7d415e1e42649841b72635dbc/README.md",
+    "units": {
+      "acceleration": "g",
+      "gyroscope": "degrees/s"
+    },
+    "units_evidence": "Associated acquisition code divides acceleration by 16384 LSB/g and gyro by 131 LSB/(degree/s). Exact capture firmware revision is not recorded in the CSV.",
+    "sampling_evidence": "Associated acquisition code specifies 50 Hz and 50 samples; corroborated by all within-recording CSV intervals.",
+    "axis_orientation": "unknown",
+    "axis_evidence": "Associated code preserves sensor register axes; mounting relative to dataset-v1's gesture frame is undocumented.",
+    "idle_evidence": "Associated README describes idle as resting hand positions; supports only the broad idle/non-motion label correspondence.",
+    "provenance_limitations": [
+      "Kaggle describes ESP32 while the current linked implementation describes ESP8266; exact capture revision is unknown.",
+      "The CSV has 300 distinct sample_id values reused across labels, not 300 independently identifiable participant sessions.",
+      "Participant identities, session boundaries, sensor mounting and calibration are absent.",
+      "Kaggle page exposes both CC BY 4.0 and CC BY-NC-SA 4.0 text; resolve applicable dataset version terms before redistribution or future reuse."
+    ]
+  },
+  "sampling_hz_observed": 50.0,
+  "samples_per_recording": {
+    "50": 1100
+  },
+  "resampling": "none",
+  "unit_conversion": "none",
+  "dtype": "float64 sensor values; int64 timestamps/offsets",
+  "array_layout": "Recording i uses sensor_values[offsets[i]:offsets[i+1]] and matching timestamps; original label/id arrays align.",
+  "archive_sha256": "c5559f05eac1a2bde9a55d8be4be52e8f196a87a6cdf7f4b4440502564f4c209",
+  "production_dataset_compatible": false
+}
