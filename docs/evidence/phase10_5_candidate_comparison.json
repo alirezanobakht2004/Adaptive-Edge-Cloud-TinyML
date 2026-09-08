@@ -1,0 +1,301 @@
+{
+  "artifacts": [
+    {
+      "bytes": 106324,
+      "dense_layers": [
+        {
+          "dense_macs": 640,
+          "input_dim": 10,
+          "name": "block1",
+          "output_dim": 64
+        },
+        {
+          "dense_macs": 3072,
+          "input_dim": 64,
+          "name": "block2",
+          "output_dim": 48
+        },
+        {
+          "dense_macs": 1536,
+          "input_dim": 48,
+          "name": "block3",
+          "output_dim": 32
+        },
+        {
+          "dense_macs": 160,
+          "input_dim": 32,
+          "name": "edge_head",
+          "output_dim": 5
+        }
+      ],
+      "path": "data/processed/dataset-v1/features-v1/models/gesture-model-v1.1.0/gesture-model-v1.1.0.keras",
+      "sha256": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c"
+    },
+    {
+      "bytes": 86361,
+      "dense_layers": [
+        {
+          "dense_macs": 3072,
+          "input_dim": 64,
+          "name": "split1_block2",
+          "output_dim": 48
+        },
+        {
+          "dense_macs": 1536,
+          "input_dim": 48,
+          "name": "split1_block3",
+          "output_dim": 32
+        },
+        {
+          "dense_macs": 160,
+          "input_dim": 32,
+          "name": "split1_cloud_head",
+          "output_dim": 5
+        }
+      ],
+      "path": "data/processed/dataset-v1/features-v1/models/gesture-cloud-tail-split1-v1.0.0/gesture-cloud-tail-split1-v1.0.0.keras",
+      "sha256": "ce144c368964f74da96da6ca77c00d35e2de0577f605ac54d458475454191b9c"
+    },
+    {
+      "bytes": 104356,
+      "dense_layers": [
+        {
+          "dense_macs": 1536,
+          "input_dim": 48,
+          "name": "split2_block3",
+          "output_dim": 32
+        },
+        {
+          "dense_macs": 2048,
+          "input_dim": 32,
+          "name": "split2_block4",
+          "output_dim": 64
+        },
+        {
+          "dense_macs": 2048,
+          "input_dim": 64,
+          "name": "split2_block5",
+          "output_dim": 32
+        },
+        {
+          "dense_macs": 160,
+          "input_dim": 32,
+          "name": "split2_cloud_head",
+          "output_dim": 5
+        }
+      ],
+      "path": "data/processed/dataset-v1/features-v1/models/gesture-cloud-tail-split2-v1.0.0/gesture-cloud-tail-split2-v1.0.0.keras",
+      "sha256": "533c57db42219b68d807756ae140ed505fb25e1b0a5e45ca4eeb500b5031468c"
+    },
+    {
+      "bytes": 80683,
+      "dense_layers": [
+        {
+          "dense_macs": 2048,
+          "input_dim": 32,
+          "name": "block4",
+          "output_dim": 64
+        },
+        {
+          "dense_macs": 2048,
+          "input_dim": 64,
+          "name": "block5",
+          "output_dim": 32
+        },
+        {
+          "dense_macs": 160,
+          "input_dim": 32,
+          "name": "cloud_head",
+          "output_dim": 5
+        }
+      ],
+      "path": "data/processed/dataset-v1/features-v1/models/gesture-cloud-tail-v1.0.0/gesture-cloud-tail-v1.0.0.keras",
+      "sha256": "9a834eecf909374488fe346c89b34310bd6c7fdb58570ed2ffb0c885535866d1"
+    }
+  ],
+  "candidates": [
+    {
+      "actual_candidate_reward": null,
+      "candidate_measured_accuracy": null,
+      "candidate_measured_latency_ms": null,
+      "conditional_payload_reward_delta_vs_split1": 0.059832763671875025,
+      "conditional_reward_at_unchanged_split1_accuracy_latency_compute": 0.8474501809895834,
+      "conditional_reward_gap_to_cloud": 0.021130037109375,
+      "conditional_reward_gap_to_local": 0.10238117317708328,
+      "embedding_dim": 16,
+      "estimated_direct_communication_penalty": 0.04487508138020833,
+      "estimated_json_request_response_bytes": 459.52083333333326,
+      "float32_embedding_bytes": 64,
+      "placement": {
+        "additional_dense_macs": 2048,
+        "cloud": "hypothetical decoder(16->64), existing Split1 tail",
+        "cloud_dense_macs": 5792,
+        "edge": "B1(10->64), hypothetical linear encoder(64->16)",
+        "edge_dense_macs": 1664,
+        "kind": "hypothetical_B1_encoder_decoder",
+        "quality": "unknown; no rank reduction can be assumed lossless; no encoder/decoder built",
+        "requires_new_parameters": true
+      },
+      "raw_bytes_ratio_to_cloud_features": 1.6
+    },
+    {
+      "actual_candidate_reward": null,
+      "candidate_measured_accuracy": null,
+      "candidate_measured_latency_ms": null,
+      "conditional_payload_reward_delta_vs_split1": 0.049860636393229185,
+      "conditional_reward_at_unchanged_split1_accuracy_latency_compute": 0.8374780537109374,
+      "conditional_reward_gap_to_cloud": 0.031102164388020936,
+      "conditional_reward_gap_to_local": 0.11235330045572922,
+      "embedding_dim": 24,
+      "estimated_direct_communication_penalty": 0.04986114501953125,
+      "estimated_json_request_response_bytes": 510.57812499999994,
+      "float32_embedding_bytes": 96,
+      "placement": {
+        "additional_dense_macs": 3072,
+        "cloud": "hypothetical decoder(24->64), existing Split1 tail",
+        "cloud_dense_macs": 6304,
+        "edge": "B1(10->64), hypothetical linear encoder(64->24)",
+        "edge_dense_macs": 2176,
+        "kind": "hypothetical_B1_encoder_decoder",
+        "quality": "unknown; no rank reduction can be assumed lossless; no encoder/decoder built",
+        "requires_new_parameters": true
+      },
+      "raw_bytes_ratio_to_cloud_features": 2.4
+    },
+    {
+      "actual_candidate_reward": null,
+      "candidate_measured_accuracy": null,
+      "candidate_measured_latency_ms": null,
+      "conditional_payload_reward_delta_vs_split1": 0.03988850911458335,
+      "conditional_reward_at_unchanged_split1_accuracy_latency_compute": 0.8275059264322916,
+      "conditional_reward_gap_to_cloud": 0.04107429166666676,
+      "conditional_reward_gap_to_local": 0.12232542773437505,
+      "embedding_dim": 32,
+      "estimated_direct_communication_penalty": 0.05484720865885417,
+      "estimated_json_request_response_bytes": 561.6354166666666,
+      "float32_embedding_bytes": 128,
+      "placement": {
+        "additional_dense_macs": 0,
+        "cloud": "existing Split3 tail",
+        "cloud_dense_macs": 4256,
+        "edge": "B1 through B3",
+        "edge_dense_macs": 5248,
+        "kind": "existing_B3_boundary",
+        "quality": "existing artifacts; no new candidate benchmark or accuracy measurement",
+        "requires_new_parameters": false
+      },
+      "raw_bytes_ratio_to_cloud_features": 3.2
+    },
+    {
+      "actual_candidate_reward": null,
+      "candidate_measured_accuracy": null,
+      "candidate_measured_latency_ms": null,
+      "conditional_payload_reward_delta_vs_split1": 0.019944254557291676,
+      "conditional_reward_at_unchanged_split1_accuracy_latency_compute": 0.8075616718749999,
+      "conditional_reward_gap_to_cloud": 0.061018546223958414,
+      "conditional_reward_gap_to_local": 0.1422696822916667,
+      "embedding_dim": 48,
+      "estimated_direct_communication_penalty": 0.0648193359375,
+      "estimated_json_request_response_bytes": 663.75,
+      "float32_embedding_bytes": 192,
+      "placement": {
+        "additional_dense_macs": 0,
+        "cloud": "existing Split2 tail",
+        "cloud_dense_macs": 5792,
+        "edge": "B1 through B2",
+        "edge_dense_macs": 3712,
+        "kind": "existing_B2_control",
+        "quality": "existing artifacts; no new candidate benchmark or accuracy measurement",
+        "requires_new_parameters": false
+      },
+      "raw_bytes_ratio_to_cloud_features": 4.8
+    }
+  ],
+  "current_measured_baselines": {
+    "0": {
+      "mean_communication_bytes": 0,
+      "mean_latency_ms": 16.0634375,
+      "mean_reward": 0.9498313541666666
+    },
+    "1": {
+      "mean_communication_bytes": 765.8645833333334,
+      "mean_latency_ms": 36.32007291666667,
+      "mean_reward": 0.7876174173177083
+    },
+    "2": {
+      "mean_communication_bytes": 663.75,
+      "mean_latency_ms": 38.64152083333333,
+      "mean_reward": 0.7976032447916667
+    },
+    "3": {
+      "mean_communication_bytes": 391.96875,
+      "mean_latency_ms": 38.745052083333334,
+      "mean_reward": 0.8685802180989584
+    }
+  },
+  "full_cloud_dense_macs": 9504,
+  "limitations": [
+    "Dense MAC counts omit biases, activations, normalization, uncertainty passes, allocations and transport",
+    "MACs are not latency or energy measurements; no MAC-to-ms conversion performed",
+    "JSON sizes are extrapolated from two existing means; no candidate tensors were invented",
+    "Payload-only reward overlay uses Split1 costs for all dimensions to isolate bytes, not candidate placement costs",
+    "16/24 require separately trained or otherwise justified new bottleneck parameters; no truncation or losslessness claim",
+    "32/48 artifact availability does not supply matched candidate measurements or alter policy action mapping"
+  ],
+  "measured_source_sha256": "19a5f2ff65733f096e4533144ca94ada37ed1429b4ec512f81759d3290dee7bb",
+  "new_artifacts_created": false,
+  "payload_estimator": {
+    "assumptions": "source value formatting/sparsity and metadata overhead extrapolate; response differences absorbed",
+    "bytes_per_dimension": 6.382161458333336,
+    "intercept_bytes": 357.4062499999999,
+    "kind": "two-point descriptive fit, not measured candidate JSON size"
+  },
+  "prefixes": [
+    {
+      "bytes": 3996,
+      "embedding_dim": 64,
+      "sha256": "4cd7f35f55e067dfa5c9c9bdf8be5d5488ee8f56270aea60cfe3345192fd75e2",
+      "split": 1
+    },
+    {
+      "bytes": 16984,
+      "embedding_dim": 48,
+      "sha256": "5634a188717f9b8778964971d85ebf919e5aa3ec4b08756c0b8c84294c99c025",
+      "split": 2
+    },
+    {
+      "bytes": 23868,
+      "embedding_dim": 32,
+      "sha256": "7ddc83cc428fcac48b7fc4fd6799e22bbff522682f0e00f1bfcb18ef3f49d7cf",
+      "split": 3
+    }
+  ],
+  "reward_configuration": {
+    "actions": {
+      "0": "ALL_LOCAL",
+      "1": "SPLIT1",
+      "2": "SPLIT2",
+      "3": "ALL_CLOUD"
+    },
+    "dataset_version": "policy_training_dataset_v1",
+    "energy_kind": "estimated",
+    "energy_method": "Dimensionless estimated proxy: (preprocessing_ms + state_inference_ms + selected_edge_compute_ms) / 10 + selected_payload_bytes / 1024; excludes radio waiting, cloud energy and probe traffic; not joules or battery measurement",
+    "energy_proxy_version": "m30-compute-payload-proxy-v1",
+    "scales": {
+      "communication_bytes": 1024,
+      "energy_proxy": 1,
+      "latency_ms": 100
+    },
+    "tie_tolerance": 1e-06,
+    "version": "reward-calibration-v1",
+    "weights": {
+      "accuracy": 1.0,
+      "communication": 0.1,
+      "energy_proxy": 0.1,
+      "latency": 0.1
+    }
+  },
+  "source_windows": 24,
+  "training_allowed": false,
+  "version": "split-architecture-study-v1"
+}
