@@ -1,0 +1,3 @@
+# Keep the supplied raw CSV and reproducible numerical derivatives local.
+/gesture_dataset.csv
+/converted/*.npz

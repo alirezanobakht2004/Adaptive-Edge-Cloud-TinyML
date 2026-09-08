@@ -1,0 +1,126 @@
+{
+  "source_name": "6-Axis Motion Gesture Dataset: Hand Waves & Flicks",
+  "source_filename": "gesture_dataset.csv",
+  "source_sha256": "839fbe1de07f180f0434288f73fe0ef42b5e5a3a23dd6548efd54bdab2bd575b",
+  "source_url": "https://www.kaggle.com/datasets/dilharajayawardhane/6-axis-motion-gesture-dataset-hand-waves-and-flicks",
+  "source_documentation_available": true,
+  "columns": [
+    "label",
+    "sample_id",
+    "timestamp_ms",
+    "ax",
+    "ay",
+    "az",
+    "gx",
+    "gy",
+    "gz"
+  ],
+  "row_count": 55000,
+  "sensor_fields": [
+    "ax",
+    "ay",
+    "az",
+    "gx",
+    "gy",
+    "gz"
+  ],
+  "missing_columns": [],
+  "missing_values": {
+    "label": 0,
+    "sample_id": 0,
+    "timestamp_ms": 0,
+    "ax": 0,
+    "ay": 0,
+    "az": 0,
+    "gx": 0,
+    "gy": 0,
+    "gz": 0
+  },
+  "invalid_numeric_values": {
+    "timestamp_ms": 0,
+    "ax": 0,
+    "ay": 0,
+    "az": 0,
+    "gx": 0,
+    "gy": 0,
+    "gz": 0
+  },
+  "timestamp_available": true,
+  "duplicate_rows": 0,
+  "units": {
+    "acceleration": "g",
+    "gyroscope": "degrees/s"
+  },
+  "axis_orientation": "unknown",
+  "units_evidence": "Associated acquisition code divides acceleration by 16384 LSB/g and gyro by 131 LSB/(degree/s). Exact capture firmware revision is not recorded in the CSV.",
+  "source_context": {
+    "source_dataset_name": "6-Axis Motion Gesture Dataset: Hand Waves & Flicks",
+    "author": "Dilhara Jayawardhane",
+    "source_url": "https://www.kaggle.com/datasets/dilharajayawardhane/6-axis-motion-gesture-dataset-hand-waves-and-flicks",
+    "source_sha256": "839fbe1de07f180f0434288f73fe0ef42b5e5a3a23dd6548efd54bdab2bd575b",
+    "reviewed_date": "2026-09-08",
+    "associated_repository": "https://github.com/Dilharajay/gesture-cmd",
+    "associated_revision": "0f1e63bad76366c7d415e1e42649841b72635dbc",
+    "firmware_reference": "https://github.com/Dilharajay/gesture-cmd/blob/0f1e63bad76366c7d415e1e42649841b72635dbc/firmware/src/data_collection.cpp",
+    "logger_reference": "https://github.com/Dilharajay/gesture-cmd/blob/0f1e63bad76366c7d415e1e42649841b72635dbc/server/src/training/gesture_logger.py",
+    "readme_reference": "https://github.com/Dilharajay/gesture-cmd/blob/0f1e63bad76366c7d415e1e42649841b72635dbc/README.md",
+    "units": {
+      "acceleration": "g",
+      "gyroscope": "degrees/s"
+    },
+    "units_evidence": "Associated acquisition code divides acceleration by 16384 LSB/g and gyro by 131 LSB/(degree/s). Exact capture firmware revision is not recorded in the CSV.",
+    "sampling_evidence": "Associated acquisition code specifies 50 Hz and 50 samples; corroborated by all within-recording CSV intervals.",
+    "axis_orientation": "unknown",
+    "axis_evidence": "Associated code preserves sensor register axes; mounting relative to dataset-v1's gesture frame is undocumented.",
+    "idle_evidence": "Associated README describes idle as resting hand positions; supports only the broad idle/non-motion label correspondence.",
+    "provenance_limitations": [
+      "Kaggle describes ESP32 while the current linked implementation describes ESP8266; exact capture revision is unknown.",
+      "The CSV has 300 distinct sample_id values reused across labels, not 300 independently identifiable participant sessions.",
+      "Participant identities, session boundaries, sensor mounting and calibration are absent.",
+      "Kaggle page exposes both CC BY 4.0 and CC BY-NC-SA 4.0 text; resolve applicable dataset version terms before redistribution or future reuse."
+    ]
+  },
+  "recording_count": 1100,
+  "recording_identity": [
+    "label",
+    "sample_id"
+  ],
+  "sample_ids_reused_across_labels": 200,
+  "classes": [
+    "flick_down",
+    "flick_up",
+    "idle",
+    "wave_left",
+    "wave_right"
+  ],
+  "class_distribution_rows": {
+    "wave_right": 10000,
+    "wave_left": 10000,
+    "flick_up": 10000,
+    "flick_down": 10000,
+    "idle": 15000
+  },
+  "class_distribution_recordings": {
+    "wave_right": 200,
+    "wave_left": 200,
+    "flick_up": 200,
+    "flick_down": 200,
+    "idle": 300
+  },
+  "samples_per_recording": {
+    "50": 1100
+  },
+  "within_recording_timestamp_delta_ms": {
+    "20": 53900
+  },
+  "nonpositive_timestamp_deltas": 0,
+  "inferred_sampling_hz": 50.0,
+  "duplicate_sensor_recordings": 0,
+  "compatibility_notes": [
+    "Rows are time samples; recordings are (label, sample_id) groups in source order.",
+    "timestamp_ms supplies relative timing, not verified UTC timestamps.",
+    "features-v1 requires 100 samples, 100 Hz, acceleration in g and gyro in degrees/s.",
+    "Units, orientation, participant/session provenance and gesture definitions are undocumented in this CSV.",
+    "Label names do not authorize wave/flick mappings to production gestures."
+  ]
+}
