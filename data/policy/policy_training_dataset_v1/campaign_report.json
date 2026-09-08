@@ -1,0 +1,62 @@
+{
+  "dataset_version": "policy_training_dataset_v1",
+  "valid": true,
+  "inputs": [
+    {
+      "path": "data/policy/policy_training_dataset_v1/campaigns/local_run01/policy_training_dataset_v1.jsonl",
+      "sha256_lf_utf8": "f6f81db5cd0510045bb5a55e4333336c44e890a2fb5d62b9805c3a65cb7f3856"
+    },
+    {
+      "path": "data/policy/policy_training_dataset_v1/campaigns/split1/policy_training_dataset_v1.jsonl",
+      "sha256_lf_utf8": "e2f4b59cab1d1f85b35ee3631918085fa57e4e3868e31b23e4d5056d2a430475"
+    },
+    {
+      "path": "data/policy/policy_training_dataset_v1/campaigns/split2/policy_training_dataset_v1.jsonl",
+      "sha256_lf_utf8": "b25285fcd21e344c825d0bb299ae2f2d9ea076642dccef2aee6ba6c82f41d728"
+    },
+    {
+      "path": "data/policy/policy_training_dataset_v1/campaigns/cloud/policy_training_dataset_v1.jsonl",
+      "sha256_lf_utf8": "83b5eedcb175aa01ccd453d561fcb9548c61102b5c633b5a1a45b34480022539"
+    }
+  ],
+  "valid_observations": 100,
+  "duplicate_samples": 0,
+  "errors": [],
+  "actions": {
+    "ALL_LOCAL": 25,
+    "SPLIT1": 25,
+    "SPLIT2": 25,
+    "ALL_CLOUD": 25
+  },
+  "scopes": {
+    "device": 100
+  },
+  "outcomes": {
+    "success": 100
+  },
+  "labeled_observations": 100,
+  "missing_measurements": {
+    "cloud_inference_latency_ms": 25,
+    "embedding_size_bytes": 0,
+    "local_confidence": 100,
+    "local_entropy": 100,
+    "local_inference_latency_ms": 75,
+    "local_margin": 100,
+    "mqtt_send_timestamp": 100,
+    "prefix_latency_ms": 0,
+    "preprocessing_latency_ms": 0,
+    "request_bytes": 0,
+    "request_receive_time": 25,
+    "response_bytes": 0,
+    "response_publish_time": 25,
+    "round_trip_latency_ms": 25,
+    "server_response_timestamp": 100,
+    "total_latency_ms": 0
+  },
+  "energy": "estimated/simulated only; null means unconfigured",
+  "training_ready": false,
+  "limitations": [
+    "Schema validity does not establish policy-training readiness.",
+    "Repeated windows in different runs are allowed; split future training by session/window."
+  ]
+}

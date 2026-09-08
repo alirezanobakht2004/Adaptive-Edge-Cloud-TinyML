@@ -48,3 +48,36 @@ def validate_dataset(directory):
             raise ValueError("Examples cannot enter observations.jsonl")
     return {"observations": len(records), "examples": 1,
             "training_ready": False, "reason": "Collection validation is not policy-training qualification"}
+
+
+def validate_campaign(directory):
+    """Cross-check run configuration, raw device traces and their v1 projection."""
+    from .device_trace import validate_trace
+    directory = Path(directory)
+    configuration = json.loads((directory / "configuration.json").read_text(encoding="utf-8"))
+    for key, expected in (("dataset_version", VERSION), ("source_dataset_version", "dataset-v1"),
+                          ("feature_version", "features-v1"), ("model_version", "gesture-model-v1.1.0")):
+        if configuration.get(key) != expected:
+            raise ValueError(f"Campaign version mismatch: {key}")
+    modes = {"local": 0, "split1": 1, "split2": 2, "cloud": 3}
+    if configuration.get("mode") not in modes or configuration.get("action") != modes[configuration["mode"]]:
+        raise ValueError("Campaign mode/action mismatch")
+    records = read_records(directory / f"{VERSION}.jsonl")
+    traces = [json.loads(line) for line in (directory / "raw_traces.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    if len(records) != len(traces) or len(records) != configuration["samples_collected"]:
+        raise ValueError("Campaign record/trace count mismatch")
+    if configuration["status"] == "complete" and len(records) != configuration["samples_requested"]:
+        raise ValueError("Incomplete campaign marked complete")
+    for index, (record, trace) in enumerate(zip(records, traces)):
+        validate_trace(trace)
+        if (record["metadata"]["run_id"] != configuration["run_id"]
+                or record["metadata"]["session_id"] != configuration["input_session"]
+                or trace["window_id"] != configuration["window_indices"][index]
+                or record["state"]["application"]["window_id"] != str(trace["window_id"])
+                or record["action"] != configuration["action"] or trace["action"] != record["action"]
+                or record["outcome"]["predicted_class"] != trace["prediction"]
+                or record["outcome"]["status"] != trace["status"]
+                or record["measurements"]["total_latency_ms"] != trace["total_us"] / 1000
+                or record["provenance"]["artifact_hashes"] != configuration["artifact_hashes"]):
+            raise ValueError(f"Campaign trace/projection mismatch at sample {index}")
+    return {"status": configuration["status"], "observations": len(records)}

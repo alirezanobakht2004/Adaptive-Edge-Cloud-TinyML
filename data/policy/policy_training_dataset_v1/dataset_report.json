@@ -1,0 +1,50 @@
+{
+  "dataset_version": "policy_training_dataset_v1",
+  "valid": true,
+  "inputs": [
+    {
+      "path": "data/policy/policy_training_dataset_v1/policy_training_dataset_v1.jsonl",
+      "sha256_lf_utf8": "fd5c9557de9d903bfd7f53979bcd1a3a2c41aebb204c4b77ea46679978f9b897"
+    }
+  ],
+  "valid_observations": 100,
+  "duplicate_samples": 0,
+  "errors": [],
+  "actions": {
+    "ALL_LOCAL": 25,
+    "SPLIT1": 25,
+    "SPLIT2": 25,
+    "ALL_CLOUD": 25
+  },
+  "scopes": {
+    "device": 100
+  },
+  "outcomes": {
+    "success": 100
+  },
+  "labeled_observations": 100,
+  "missing_measurements": {
+    "cloud_inference_latency_ms": 25,
+    "embedding_size_bytes": 0,
+    "local_confidence": 100,
+    "local_entropy": 100,
+    "local_inference_latency_ms": 75,
+    "local_margin": 100,
+    "mqtt_send_timestamp": 100,
+    "prefix_latency_ms": 0,
+    "preprocessing_latency_ms": 0,
+    "request_bytes": 0,
+    "request_receive_time": 25,
+    "response_bytes": 0,
+    "response_publish_time": 25,
+    "round_trip_latency_ms": 25,
+    "server_response_timestamp": 100,
+    "total_latency_ms": 0
+  },
+  "energy": "estimated/simulated only; null means unconfigured",
+  "training_ready": false,
+  "limitations": [
+    "Schema validity does not establish policy-training readiness.",
+    "Repeated windows in different runs are allowed; split future training by session/window."
+  ]
+}
