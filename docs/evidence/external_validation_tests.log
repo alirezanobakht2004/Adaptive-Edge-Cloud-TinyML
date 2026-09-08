@@ -1,0 +1,17 @@
+........................................................................ [ 40%]
+........................................................................ [ 80%]
+...................................                                      [100%]
+============================== warnings summary ===============================
+tests/test_split1_cloud_tail.py::test_frozen_prefix_to_cloud_tail_parity
+tests/test_split2_cloud_tail.py::test_split2_model_contract_and_parity
+tests/test_split2_cloud_tail.py::test_split2_prefix_continues_to_cloud
+tests/test_split3_cloud_tail.py::test_existing_split3_artifacts_and_prefix_tail_parity
+  C:\Users\alire\OneDrive\Desktop\Final Project\Project Source\Adaptive-Edge-Cloud-TinyML\.venv\Lib\site-packages\tensorflow\lite\python\interpreter.py:457: UserWarning:     Warning: tf.lite.Interpreter is deprecated and is scheduled for deletion in
+      TF 2.20. Please use the LiteRT interpreter from the ai_edge_litert package.
+      See the [migration guide](https://ai.google.dev/edge/litert/migration)
+      for details.
+
+    warnings.warn(_INTERPRETER_DELETION_WARNING)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+179 passed, 4 warnings in 10.85s
