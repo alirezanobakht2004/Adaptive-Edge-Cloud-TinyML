@@ -1,0 +1,66 @@
+{
+  "version": "policy-config-v1",
+  "status": "formulation-only",
+  "dataset_version": "policy_training_dataset_v1",
+  "feature_version": "features-v1",
+  "model_version": "gesture-model-v1.1.0",
+  "actions": {"0": "ALL_LOCAL", "1": "SPLIT1", "2": "SPLIT2", "3": "ALL_CLOUD"},
+  "state_feature_names": [
+    "state.uncertainty.confidence", "state.uncertainty.entropy", "state.uncertainty.margin",
+    "state.device.free_heap", "state.device.tensor_arena_usage", "state.device.cpu_frequency",
+    "state.device.inference_latency_estimate", "state.network.mqtt_rtt_ms",
+    "state.network.connection_state", "state.application.predicted_class"
+  ],
+  "categorical_features": {
+    "state.network.connection_state": ["connected", "disconnected", "unknown"],
+    "state.application.predicted_class": [0, 1, 2, 3, 4]
+  },
+  "feature_units": {
+    "state.uncertainty.confidence": "probability",
+    "state.uncertainty.entropy": "nats",
+    "state.uncertainty.margin": "probability difference",
+    "state.device.free_heap": "bytes",
+    "state.device.tensor_arena_usage": "bytes; B3 used arena only",
+    "state.device.cpu_frequency": "MHz",
+    "state.device.inference_latency_estimate": "ms; measured pre-decision B3/MC pass",
+    "state.network.mqtt_rtt_ms": "ms; pre-decision application probe",
+    "state.network.connection_state": "categorical",
+    "state.application.predicted_class": "pre-decision class ID"
+  },
+  "encoding_specification": {
+    "numeric": "train-partition-only standardization; parameters not fitted",
+    "categorical": "one-hot in the declared category order; class IDs are not ordinal",
+    "encoded_dimension": 16,
+    "missing_required_feature": "reject offline training row; do not impute from outcome",
+    "constant_features": "retain schema slots; assess only on training partition before choosing a versioned transform",
+    "fitted_parameters": null
+  },
+  "deferred_features": {
+    "state.network.packet_size_estimate": "Currently null; actual post-action payload bytes must not fill this field",
+    "state.network.estimated_bandwidth": "Currently null; units and estimator must be specified before use",
+    "raw_trace.rssi_dbm": "Sidecar only; requires a versioned correlated projection",
+    "raw_trace.psram_free": "Sidecar only; requires a versioned correlated projection",
+    "energy_budget": "No measured battery state; any future budget is estimated/simulated"
+  },
+  "excluded_inputs": ["action", "outcome", "measurements", "reward", "metadata", "state.application.window_id"],
+  "reward": {
+    "version": "policy-reward-proposal-v1",
+    "formula": "w_accuracy * correct_success - w_latency * latency_ms/L_ref - w_communication * payload_bytes/B_ref - w_energy_proxy * estimated_energy_proxy/E_ref",
+    "weights": {"accuracy": null, "latency": null, "communication": null, "energy_proxy": null},
+    "scales": {"latency_ms": null, "communication_bytes": null, "estimated_energy_proxy": null},
+    "energy_kind": "estimated_or_simulated_only",
+    "energy_proxy_version": "unconfigured",
+    "missing_component": "reward unavailable; no implicit zero or fabricated estimate",
+    "storage": "Future derived versioned target artifact; never overwrite v1 placeholder reward.final_reward"
+  },
+  "supervision": {
+    "logged_action_meaning": "executed fixed baseline action, not optimal action",
+    "future_target": "argmax expected configured reward among feasible actions under matched pre-decision conditions",
+    "counterfactuals": "Not inferred from different states or absent observations",
+    "ties": "Record ties/uncertainty; do not invent a unique winner",
+    "split_group": ["metadata.session_id", "state.application.window_id"],
+    "preferred_holdout": "Independent acquisition sessions/participants; group all action repeats of a window",
+    "split_seed": null
+  },
+  "training_enabled": false
+}

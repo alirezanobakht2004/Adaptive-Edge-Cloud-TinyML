@@ -1,0 +1,1105 @@
+{
+  "sample_count": 100,
+  "action_distribution": {
+    "ALL_LOCAL": 25,
+    "SPLIT1": 25,
+    "SPLIT2": 25,
+    "ALL_CLOUD": 25
+  },
+  "state_statistics": {
+    "state.application.predicted_class": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 5,
+      "constant_when_present": false,
+      "categories": {
+        "0": 20,
+        "1": 20,
+        "2": 20,
+        "3": 20,
+        "4": 20
+      }
+    },
+    "state.application.window_id": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 25,
+      "constant_when_present": false,
+      "categories": {
+        "0": 4,
+        "120": 4,
+        "160": 4,
+        "40": 4,
+        "80": 4,
+        "1": 4,
+        "121": 4,
+        "161": 4,
+        "41": 4,
+        "81": 4,
+        "2": 4,
+        "122": 4,
+        "162": 4,
+        "42": 4,
+        "82": 4,
+        "3": 4,
+        "123": 4,
+        "163": 4,
+        "43": 4,
+        "83": 4,
+        "4": 4,
+        "124": 4,
+        "164": 4,
+        "44": 4,
+        "84": 4
+      }
+    },
+    "state.device.cpu_frequency": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 1,
+      "constant_when_present": true,
+      "min": 240,
+      "max": 240,
+      "mean": 240,
+      "median": 240.0,
+      "std_population": 0.0
+    },
+    "state.device.free_heap": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 12,
+      "constant_when_present": false,
+      "min": 164368,
+      "max": 165344,
+      "mean": 164709.04,
+      "median": 164592.0,
+      "std_population": 222.36735012137012
+    },
+    "state.device.inference_latency_estimate": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 76,
+      "constant_when_present": false,
+      "min": 0.943,
+      "max": 2.285,
+      "mean": 1.33408,
+      "median": 1.213,
+      "std_population": 0.4449264136910732
+    },
+    "state.device.tensor_arena_usage": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 1,
+      "constant_when_present": true,
+      "min": 1216,
+      "max": 1216,
+      "mean": 1216,
+      "median": 1216.0,
+      "std_population": 0.0
+    },
+    "state.network.connection_state": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 1,
+      "constant_when_present": true,
+      "categories": {
+        "connected": 100
+      }
+    },
+    "state.network.estimated_bandwidth": {
+      "count": 100,
+      "present": 0,
+      "missing": 100,
+      "unique": 0,
+      "constant_when_present": false,
+      "categories": {}
+    },
+    "state.network.mqtt_rtt_ms": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 97,
+      "constant_when_present": false,
+      "min": 9.305,
+      "max": 21.696,
+      "mean": 12.34024,
+      "median": 11.5415,
+      "std_population": 2.5186872815814194
+    },
+    "state.network.packet_size_estimate": {
+      "count": 100,
+      "present": 0,
+      "missing": 100,
+      "unique": 0,
+      "constant_when_present": false,
+      "categories": {}
+    },
+    "state.uncertainty.confidence": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 25,
+      "constant_when_present": false,
+      "min": 0.766576886,
+      "max": 0.999999046,
+      "mean": 0.98150727752,
+      "median": 0.997237802,
+      "std_population": 0.05089743089942696
+    },
+    "state.uncertainty.entropy": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 25,
+      "constant_when_present": false,
+      "min": 1.45865888e-05,
+      "max": 0.667137444,
+      "mean": 0.06782485888812,
+      "median": 0.0202281456,
+      "std_population": 0.14780790345802164
+    },
+    "state.uncertainty.margin": {
+      "count": 100,
+      "present": 100,
+      "missing": 0,
+      "unique": 25,
+      "constant_when_present": false,
+      "min": 0.576300383,
+      "max": 0.999998152,
+      "mean": 0.9658492446,
+      "median": 0.994847119,
+      "std_population": 0.09393902339794272
+    }
+  },
+  "state_statistics_by_action": {
+    "ALL_LOCAL": {
+      "state.application.predicted_class": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 5,
+        "constant_when_present": false,
+        "categories": {
+          "0": 5,
+          "1": 5,
+          "2": 5,
+          "3": 5,
+          "4": 5
+        }
+      },
+      "state.application.window_id": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "categories": {
+          "0": 1,
+          "120": 1,
+          "160": 1,
+          "40": 1,
+          "80": 1,
+          "1": 1,
+          "121": 1,
+          "161": 1,
+          "41": 1,
+          "81": 1,
+          "2": 1,
+          "122": 1,
+          "162": 1,
+          "42": 1,
+          "82": 1,
+          "3": 1,
+          "123": 1,
+          "163": 1,
+          "43": 1,
+          "83": 1,
+          "4": 1,
+          "124": 1,
+          "164": 1,
+          "44": 1,
+          "84": 1
+        }
+      },
+      "state.device.cpu_frequency": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 240,
+        "max": 240,
+        "mean": 240,
+        "median": 240,
+        "std_population": 0.0
+      },
+      "state.device.free_heap": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 6,
+        "constant_when_present": false,
+        "min": 164856,
+        "max": 165344,
+        "mean": 165077.12,
+        "median": 165080,
+        "std_population": 70.72217191235009
+      },
+      "state.device.inference_latency_estimate": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 16,
+        "constant_when_present": false,
+        "min": 0.943,
+        "max": 2.285,
+        "mean": 1.01188,
+        "median": 0.957,
+        "std_population": 0.26026237837997257
+      },
+      "state.device.tensor_arena_usage": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 1216,
+        "max": 1216,
+        "mean": 1216,
+        "median": 1216,
+        "std_population": 0.0
+      },
+      "state.network.connection_state": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "categories": {
+          "connected": 25
+        }
+      },
+      "state.network.estimated_bandwidth": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.network.mqtt_rtt_ms": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 9.802,
+        "max": 18.782,
+        "mean": 12.94928,
+        "median": 12.753,
+        "std_population": 2.364999019365547
+      },
+      "state.network.packet_size_estimate": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.uncertainty.confidence": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.766576886,
+        "max": 0.999999046,
+        "mean": 0.98150727752,
+        "median": 0.997237802,
+        "std_population": 0.05089743089942696
+      },
+      "state.uncertainty.entropy": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 1.45865888e-05,
+        "max": 0.667137444,
+        "mean": 0.06782485888812,
+        "median": 0.0202281456,
+        "std_population": 0.14780790345802164
+      },
+      "state.uncertainty.margin": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.576300383,
+        "max": 0.999998152,
+        "mean": 0.9658492446,
+        "median": 0.994847119,
+        "std_population": 0.09393902339794272
+      }
+    },
+    "SPLIT1": {
+      "state.application.predicted_class": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 5,
+        "constant_when_present": false,
+        "categories": {
+          "0": 5,
+          "1": 5,
+          "2": 5,
+          "3": 5,
+          "4": 5
+        }
+      },
+      "state.application.window_id": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "categories": {
+          "0": 1,
+          "120": 1,
+          "160": 1,
+          "40": 1,
+          "80": 1,
+          "1": 1,
+          "121": 1,
+          "161": 1,
+          "41": 1,
+          "81": 1,
+          "2": 1,
+          "122": 1,
+          "162": 1,
+          "42": 1,
+          "82": 1,
+          "3": 1,
+          "123": 1,
+          "163": 1,
+          "43": 1,
+          "83": 1,
+          "4": 1,
+          "124": 1,
+          "164": 1,
+          "44": 1,
+          "84": 1
+        }
+      },
+      "state.device.cpu_frequency": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 240,
+        "max": 240,
+        "mean": 240,
+        "median": 240,
+        "std_population": 0.0
+      },
+      "state.device.free_heap": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 5,
+        "constant_when_present": false,
+        "min": 164560,
+        "max": 165080,
+        "mean": 164606.4,
+        "median": 164592,
+        "std_population": 97.69176014383198
+      },
+      "state.device.inference_latency_estimate": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 22,
+        "constant_when_present": false,
+        "min": 0.994,
+        "max": 1.349,
+        "mean": 1.2263600000000001,
+        "median": 1.227,
+        "std_population": 0.056219484166968293
+      },
+      "state.device.tensor_arena_usage": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 1216,
+        "max": 1216,
+        "mean": 1216,
+        "median": 1216,
+        "std_population": 0.0
+      },
+      "state.network.connection_state": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "categories": {
+          "connected": 25
+        }
+      },
+      "state.network.estimated_bandwidth": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.network.mqtt_rtt_ms": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 24,
+        "constant_when_present": false,
+        "min": 10.352,
+        "max": 16.487,
+        "mean": 12.00648,
+        "median": 11.537,
+        "std_population": 1.6002325111058078
+      },
+      "state.network.packet_size_estimate": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.uncertainty.confidence": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.766576886,
+        "max": 0.999999046,
+        "mean": 0.98150727752,
+        "median": 0.997237802,
+        "std_population": 0.05089743089942696
+      },
+      "state.uncertainty.entropy": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 1.45865888e-05,
+        "max": 0.667137444,
+        "mean": 0.06782485888812,
+        "median": 0.0202281456,
+        "std_population": 0.14780790345802164
+      },
+      "state.uncertainty.margin": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.576300383,
+        "max": 0.999998152,
+        "mean": 0.9658492446,
+        "median": 0.994847119,
+        "std_population": 0.09393902339794272
+      }
+    },
+    "SPLIT2": {
+      "state.application.predicted_class": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 5,
+        "constant_when_present": false,
+        "categories": {
+          "0": 5,
+          "1": 5,
+          "2": 5,
+          "3": 5,
+          "4": 5
+        }
+      },
+      "state.application.window_id": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "categories": {
+          "0": 1,
+          "120": 1,
+          "160": 1,
+          "40": 1,
+          "80": 1,
+          "1": 1,
+          "121": 1,
+          "161": 1,
+          "41": 1,
+          "81": 1,
+          "2": 1,
+          "122": 1,
+          "162": 1,
+          "42": 1,
+          "82": 1,
+          "3": 1,
+          "123": 1,
+          "163": 1,
+          "43": 1,
+          "83": 1,
+          "4": 1,
+          "124": 1,
+          "164": 1,
+          "44": 1,
+          "84": 1
+        }
+      },
+      "state.device.cpu_frequency": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 240,
+        "max": 240,
+        "mean": 240,
+        "median": 240,
+        "std_population": 0.0
+      },
+      "state.device.free_heap": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 4,
+        "constant_when_present": false,
+        "min": 164560,
+        "max": 164608,
+        "mean": 164580.48,
+        "median": 164576,
+        "std_population": 10.632478544535136
+      },
+      "state.device.inference_latency_estimate": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 19,
+        "constant_when_present": false,
+        "min": 1.226,
+        "max": 2.191,
+        "mean": 2.01876,
+        "median": 2.033,
+        "std_population": 0.16698461725560232
+      },
+      "state.device.tensor_arena_usage": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 1216,
+        "max": 1216,
+        "mean": 1216,
+        "median": 1216,
+        "std_population": 0.0
+      },
+      "state.network.connection_state": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "categories": {
+          "connected": 25
+        }
+      },
+      "state.network.estimated_bandwidth": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.network.mqtt_rtt_ms": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 9.305,
+        "max": 20.351,
+        "mean": 12.39696,
+        "median": 11.409,
+        "std_population": 2.8313415404009454
+      },
+      "state.network.packet_size_estimate": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.uncertainty.confidence": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.766576886,
+        "max": 0.999999046,
+        "mean": 0.98150727752,
+        "median": 0.997237802,
+        "std_population": 0.05089743089942696
+      },
+      "state.uncertainty.entropy": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 1.45865888e-05,
+        "max": 0.667137444,
+        "mean": 0.06782485888812,
+        "median": 0.0202281456,
+        "std_population": 0.14780790345802164
+      },
+      "state.uncertainty.margin": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.576300383,
+        "max": 0.999998152,
+        "mean": 0.9658492446,
+        "median": 0.994847119,
+        "std_population": 0.09393902339794272
+      }
+    },
+    "ALL_CLOUD": {
+      "state.application.predicted_class": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 5,
+        "constant_when_present": false,
+        "categories": {
+          "0": 5,
+          "1": 5,
+          "2": 5,
+          "3": 5,
+          "4": 5
+        }
+      },
+      "state.application.window_id": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "categories": {
+          "0": 1,
+          "120": 1,
+          "160": 1,
+          "40": 1,
+          "80": 1,
+          "1": 1,
+          "121": 1,
+          "161": 1,
+          "41": 1,
+          "81": 1,
+          "2": 1,
+          "122": 1,
+          "162": 1,
+          "42": 1,
+          "82": 1,
+          "3": 1,
+          "123": 1,
+          "163": 1,
+          "43": 1,
+          "83": 1,
+          "4": 1,
+          "124": 1,
+          "164": 1,
+          "44": 1,
+          "84": 1
+        }
+      },
+      "state.device.cpu_frequency": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 240,
+        "max": 240,
+        "mean": 240,
+        "median": 240,
+        "std_population": 0.0
+      },
+      "state.device.free_heap": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 5,
+        "constant_when_present": false,
+        "min": 164368,
+        "max": 164608,
+        "mean": 164572.16,
+        "median": 164576,
+        "std_population": 42.99923720253651
+      },
+      "state.device.inference_latency_estimate": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 20,
+        "constant_when_present": false,
+        "min": 1.011,
+        "max": 2.056,
+        "mean": 1.07932,
+        "median": 1.024,
+        "std_population": 0.2096455523019747
+      },
+      "state.device.tensor_arena_usage": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "min": 1216,
+        "max": 1216,
+        "mean": 1216,
+        "median": 1216,
+        "std_population": 0.0
+      },
+      "state.network.connection_state": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 1,
+        "constant_when_present": true,
+        "categories": {
+          "connected": 25
+        }
+      },
+      "state.network.estimated_bandwidth": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.network.mqtt_rtt_ms": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 9.699,
+        "max": 21.696,
+        "mean": 12.00824,
+        "median": 10.743,
+        "std_population": 2.934095516918289
+      },
+      "state.network.packet_size_estimate": {
+        "count": 25,
+        "present": 0,
+        "missing": 25,
+        "unique": 0,
+        "constant_when_present": false,
+        "categories": {}
+      },
+      "state.uncertainty.confidence": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.766576886,
+        "max": 0.999999046,
+        "mean": 0.98150727752,
+        "median": 0.997237802,
+        "std_population": 0.05089743089942696
+      },
+      "state.uncertainty.entropy": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 1.45865888e-05,
+        "max": 0.667137444,
+        "mean": 0.06782485888812,
+        "median": 0.0202281456,
+        "std_population": 0.14780790345802164
+      },
+      "state.uncertainty.margin": {
+        "count": 25,
+        "present": 25,
+        "missing": 0,
+        "unique": 25,
+        "constant_when_present": false,
+        "min": 0.576300383,
+        "max": 0.999998152,
+        "mean": 0.9658492446,
+        "median": 0.994847119,
+        "std_population": 0.09393902339794272
+      }
+    }
+  },
+  "uncertainty_distribution": {
+    "confidence": {
+      "edges": [
+        0,
+        0.5,
+        0.8,
+        0.9,
+        0.95,
+        1
+      ],
+      "counts": [
+        0,
+        4,
+        4,
+        0,
+        92
+      ],
+      "missing": 0,
+      "outside": 0,
+      "interpretation": "Descriptive bins only; not policy thresholds. Final bin includes upper endpoint."
+    },
+    "entropy": {
+      "edges": [
+        0,
+        0.05,
+        0.1,
+        0.2,
+        0.5,
+        1.6094379124341003
+      ],
+      "counts": [
+        76,
+        16,
+        0,
+        4,
+        4
+      ],
+      "missing": 0,
+      "outside": 0,
+      "interpretation": "Descriptive bins only; not policy thresholds. Final bin includes upper endpoint."
+    },
+    "margin": {
+      "edges": [
+        0,
+        0.2,
+        0.5,
+        0.8,
+        0.95,
+        1
+      ],
+      "counts": [
+        0,
+        0,
+        8,
+        0,
+        92
+      ],
+      "missing": 0,
+      "outside": 0,
+      "interpretation": "Descriptive bins only; not policy thresholds. Final bin includes upper endpoint."
+    }
+  },
+  "missing_values": {
+    "action": 0,
+    "measurements.cloud_inference_latency_ms": 25,
+    "measurements.embedding_size_bytes": 0,
+    "measurements.local_confidence": 100,
+    "measurements.local_entropy": 100,
+    "measurements.local_inference_latency_ms": 75,
+    "measurements.local_margin": 100,
+    "measurements.mqtt_send_timestamp": 100,
+    "measurements.prefix_latency_ms": 0,
+    "measurements.preprocessing_latency_ms": 0,
+    "measurements.request_bytes": 0,
+    "measurements.request_receive_time": 25,
+    "measurements.response_bytes": 0,
+    "measurements.response_publish_time": 25,
+    "measurements.round_trip_latency_ms": 25,
+    "measurements.server_response_timestamp": 100,
+    "measurements.total_latency_ms": 0,
+    "metadata.dataset_version": 0,
+    "metadata.device_id": 0,
+    "metadata.feature_version": 0,
+    "metadata.measurement_scope": 0,
+    "metadata.model_version": 0,
+    "metadata.record_kind": 0,
+    "metadata.run_id": 0,
+    "metadata.sample_id": 0,
+    "metadata.session_id": 0,
+    "metadata.source_dataset_version": 0,
+    "metadata.timestamp": 0,
+    "outcome.confidence": 0,
+    "outcome.error": 100,
+    "outcome.predicted_class": 0,
+    "outcome.status": 0,
+    "outcome.true_class": 0,
+    "reward.calculation": 0,
+    "reward.communication_cost_component": 100,
+    "reward.energy_component": 100,
+    "reward.energy_kind": 0,
+    "reward.energy_proxy_version": 0,
+    "reward.final_reward": 100,
+    "reward.latency_component": 100,
+    "state.application.predicted_class": 0,
+    "state.application.window_id": 0,
+    "state.device.cpu_frequency": 0,
+    "state.device.free_heap": 0,
+    "state.device.inference_latency_estimate": 0,
+    "state.device.tensor_arena_usage": 0,
+    "state.network.connection_state": 0,
+    "state.network.estimated_bandwidth": 100,
+    "state.network.mqtt_rtt_ms": 0,
+    "state.network.packet_size_estimate": 100,
+    "state.uncertainty.confidence": 0,
+    "state.uncertainty.entropy": 0,
+    "state.uncertainty.margin": 0
+  },
+  "selected_feature_availability": {
+    "state.uncertainty.confidence": 100,
+    "state.uncertainty.entropy": 100,
+    "state.uncertainty.margin": 100,
+    "state.device.free_heap": 100,
+    "state.device.tensor_arena_usage": 100,
+    "state.device.cpu_frequency": 100,
+    "state.device.inference_latency_estimate": 100,
+    "state.network.mqtt_rtt_ms": 100,
+    "state.network.connection_state": 100,
+    "state.application.predicted_class": 100
+  },
+  "complete_selected_state_rows": 100,
+  "coverage": {
+    "independent_source_sessions": [
+      "session_02"
+    ],
+    "unique_source_windows": 25,
+    "devices": [
+      "esp32-s3-n8r2"
+    ],
+    "measurement_scopes": {
+      "device": 100
+    },
+    "runs": 4,
+    "actions_per_run": {
+      "c16576fdeb73483894d0099e833d4f78": [
+        0
+      ],
+      "a9763d1890b4457cadb053022b675be8": [
+        1
+      ],
+      "a7cdc822ab0d451d8e8609768f7adb83": [
+        2
+      ],
+      "3f99d16e0b24400da8a7d70ce76d0b83": [
+        3
+      ]
+    },
+    "runs_with_multiple_actions": 0,
+    "source_windows_with_all_four_actions": 25,
+    "windows_with_identical_uncertainty_across_repeats": 25,
+    "unique_selected_states": 100,
+    "exact_selected_states_with_all_four_actions": 0,
+    "label_distribution": {
+      "0": 20,
+      "1": 20,
+      "2": 20,
+      "3": 20,
+      "4": 20
+    },
+    "outcomes": {
+      "success": 100
+    },
+    "correct_labeled_outcomes": 100,
+    "network_connections": {
+      "connected": 100
+    },
+    "constant_selected_features": [
+      "state.device.tensor_arena_usage",
+      "state.device.cpu_frequency",
+      "state.network.connection_state"
+    ],
+    "reward_values_present": 0,
+    "energy_proxy_values_present": 0
+  },
+  "training_ready": false,
+  "training_enabled": false,
+  "readiness_gates": {
+    "selected_state_complete": true,
+    "all_actions_observed": true,
+    "independent_train_validation_test_sessions_possible": false,
+    "reward_configuration_frozen": false,
+    "matched_condition_cost_labels_qualified": false,
+    "coverage_protocol_approved": false,
+    "training_authorized_in_m25": false
+  },
+  "limitations": [
+    "Action balance is not state-conditioned action overlap. Executed action is not an optimal supervision label.",
+    "Repeats of a source window must stay together in any future partition; no row-random train/test split.",
+    "This analysis does not infer counterfactual rewards or causal action effects.",
+    "v1 reward is a negative-cost placeholder and cannot store the proposed accuracy-inclusive reward unchanged.",
+    "Energy, reward parameters, coverage criteria and target-label construction remain unconfigured."
+  ],
+  "dataset_version": "policy_training_dataset_v1",
+  "config_version": "policy-config-v1",
+  "dataset_sha256_lf_utf8": "fd5c9557de9d903bfd7f53979bcd1a3a2c41aebb204c4b77ea46679978f9b897",
+  "config_sha256_lf_utf8": "13068a94761ded91913d0a0d2a763aed385b08dc330dca840f7874e7505d2048",
+  "input_policy": "Canonical observations only; snapshots and per-run copies are not additional samples. External Kaggle data excluded.",
+  "campaign_validation": [
+    {
+      "path": "cloud",
+      "status": "complete",
+      "observations": 25
+    },
+    {
+      "path": "local",
+      "status": "failed",
+      "observations": 0,
+      "note": "No observation file; startup failure retained"
+    },
+    {
+      "path": "local_run01",
+      "status": "complete",
+      "observations": 25
+    },
+    {
+      "path": "split1",
+      "status": "complete",
+      "observations": 25
+    },
+    {
+      "path": "split2",
+      "status": "complete",
+      "observations": 25
+    }
+  ]
+}
