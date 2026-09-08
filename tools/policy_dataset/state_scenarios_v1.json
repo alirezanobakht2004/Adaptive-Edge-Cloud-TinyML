@@ -1,0 +1,87 @@
+{
+  "A_normal_poor_network": {
+    "version": "adaptive-state-scenario-v1",
+    "name": "A_normal_poor_network",
+    "simulated": true,
+    "local_compute_pressure": 0,
+    "inference_queue_pressure": 0,
+    "local_inference_available": true,
+    "cloud_availability": true,
+    "transport_available": true,
+    "queue_reference_ms": 40,
+    "quality_rtt_reference_ms": 50,
+    "network_profile": {
+      "version": "network-profile-v1",
+      "type": "controlled_network",
+      "profile": "high_latency",
+      "simulated": true,
+      "application": "offline-cost-overlay",
+      "injected_parameters": {
+        "edge_compute_multiplier": 1,
+        "network_residual_multiplier": 1,
+        "cloud_compute_multiplier": 1,
+        "added_rtt_ms": 150
+      }
+    },
+    "expected_actions_hypothesis": [
+      0
+    ]
+  },
+  "B_pressure_good_network": {
+    "version": "adaptive-state-scenario-v1",
+    "name": "B_pressure_good_network",
+    "simulated": true,
+    "local_compute_pressure": 0.95,
+    "inference_queue_pressure": 0.75,
+    "local_inference_available": true,
+    "cloud_availability": true,
+    "transport_available": true,
+    "queue_reference_ms": 40,
+    "quality_rtt_reference_ms": 50,
+    "network_profile": {
+      "version": "network-profile-v1",
+      "type": "controlled_network",
+      "profile": "edge_loaded",
+      "simulated": true,
+      "application": "offline-cost-overlay",
+      "injected_parameters": {
+        "edge_compute_multiplier": 20,
+        "network_residual_multiplier": 0.25,
+        "cloud_compute_multiplier": 1,
+        "added_rtt_ms": 0
+      }
+    },
+    "expected_actions_hypothesis": [
+      1,
+      2
+    ]
+  },
+  "C_inference_unavailable": {
+    "version": "adaptive-state-scenario-v1",
+    "name": "C_inference_unavailable",
+    "simulated": true,
+    "local_compute_pressure": 1,
+    "inference_queue_pressure": 1,
+    "local_inference_available": false,
+    "cloud_availability": true,
+    "transport_available": true,
+    "queue_reference_ms": 40,
+    "quality_rtt_reference_ms": 50,
+    "network_profile": {
+      "version": "network-profile-v1",
+      "type": "controlled_network",
+      "profile": "baseline",
+      "simulated": true,
+      "application": "offline-cost-overlay",
+      "injected_parameters": {
+        "edge_compute_multiplier": 1,
+        "network_residual_multiplier": 0.25,
+        "cloud_compute_multiplier": 1,
+        "added_rtt_ms": 0
+      }
+    },
+    "expected_actions_hypothesis": [
+      3
+    ]
+  }
+}

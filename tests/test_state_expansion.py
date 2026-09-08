@@ -1,0 +1,82 @@
+from copy import deepcopy
+
+import pytest
+
+from tests.test_matched_campaign import fixture
+from tools.policy_dataset.matched_dataset import build_sample
+from tools.policy_dataset.state_expansion import (
+    SCENARIOS, coverage_report, expand_sample, load_scenario, validate_scenario, validate_v3,
+)
+
+
+def source_fixture():
+    entries, condition = fixture()
+    return build_sample(entries, condition, "synthetic")
+
+
+def test_deterministic_state_schema_and_source_preservation():
+    source = source_fixture()
+    before = deepcopy(source)
+    for name in SCENARIOS:
+        scenario = load_scenario(name)
+        sample = expand_sample(source, scenario)
+        validate_v3(sample, source, scenario)
+        assert sample["measurement_provenance"]["simulated"] is True
+        assert [a["action"] for a in sample["action_outcomes"]] == [0, 1, 2, 3]
+        assert sample["reward_configuration"]["weights"] == source["condition"]["reward"]["weights"]
+    assert source == before
+
+
+def test_unavailable_device_is_inference_service_not_transport():
+    source = source_fixture()
+    scenario = load_scenario(SCENARIOS[2])
+    sample = expand_sample(source, scenario)
+    assert sample["optimal_action"] == 3
+    assert sample["state"]["uncertainty"]["confidence"] is None
+    assert sample["state"]["device"]["inference_latency_estimate"] is None
+    for action in sample["action_outcomes"][:3]:
+        assert action["status"] == "infeasible"
+        assert action["measurements"] is action["outcomes"] is action["mean_reward"] is None
+    scenario["transport_available"] = False
+    sample = expand_sample(source, scenario)
+    assert sample["optimal_action"] is None
+    assert sample["label_status"] == "no_feasible_action"
+    assert sample["state"]["network"]["network_quality_score"] == 0
+
+
+def test_hypothesis_does_not_select_an_action():
+    source = source_fixture()
+    scenario = load_scenario(SCENARIOS[0])
+    first = expand_sample(source, scenario)
+    scenario["expected_actions_hypothesis"] = [1, 2]
+    second = expand_sample(source, scenario)
+    assert first["optimal_actions"] == second["optimal_actions"]
+    assert first["action_outcomes"] == second["action_outcomes"]
+
+
+def test_cloud_unavailability_excludes_all_remote_actions():
+    scenario = load_scenario(SCENARIOS[0])
+    scenario["cloud_availability"] = False
+    sample = expand_sample(source_fixture(), scenario)
+    assert sample["optimal_action"] == 0
+    assert all(not a["feasible"] for a in sample["action_outcomes"][1:])
+
+
+@pytest.mark.parametrize("field,value", [("simulated", False), ("local_compute_pressure", 2),
+    ("inference_queue_pressure", float("nan")), ("cloud_availability", 1)])
+def test_invalid_scenario_rejected(field, value):
+    scenario = load_scenario(SCENARIOS[0])
+    scenario[field] = value
+    with pytest.raises(ValueError): validate_scenario(scenario)
+
+
+def test_tampering_rejected_and_coverage_does_not_count_infeasible_splits():
+    source = source_fixture()
+    scenario = load_scenario(SCENARIOS[2])
+    sample = expand_sample(source, scenario)
+    report = coverage_report([sample])
+    assert report["split_coverage"]["1"]["feasible_states"] == 0
+    assert report["split_coverage"]["1"]["non_dominated_states"] == 0
+    assert not report["minimum_gate_passed"]
+    sample["action_outcomes"][0]["mean_reward"] = 1
+    with pytest.raises(ValueError): validate_v3(sample, source, scenario)
