@@ -1,0 +1,32 @@
+{
+  "action_coverage": {
+    "0": 96,
+    "1": 96,
+    "2": 96,
+    "3": 96
+  },
+  "ambiguous_labels": 0,
+  "dataset_version": "policy_training_dataset_v2",
+  "diversity_gate": {
+    "all_four_optimal_labels_present": false,
+    "calibration_qualified": false,
+    "independent_measured_conditions": false,
+    "passed": false
+  },
+  "label_distribution": {
+    "0": 24,
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "profiles": [
+    "baseline"
+  ],
+  "real_new_measurements": 0,
+  "samples": 24,
+  "schema_extension": "controlled-network-replay-v1",
+  "simulated": true,
+  "training_allowed": false,
+  "unique_source_samples": 24,
+  "valid": true
+}

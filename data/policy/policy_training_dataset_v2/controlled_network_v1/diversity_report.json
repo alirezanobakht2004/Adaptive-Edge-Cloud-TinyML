@@ -1,0 +1,160 @@
+{
+  "action_coverage": {
+    "0": 384,
+    "1": 384,
+    "2": 384,
+    "3": 384
+  },
+  "ambiguous_labels": 0,
+  "by_profile": {
+    "baseline": {
+      "action_coverage": {
+        "0": 96,
+        "1": 96,
+        "2": 96,
+        "3": 96
+      },
+      "ambiguous_labels": 0,
+      "dataset_version": "policy_training_dataset_v2",
+      "diversity_gate": {
+        "all_four_optimal_labels_present": false,
+        "calibration_qualified": false,
+        "independent_measured_conditions": false,
+        "passed": false
+      },
+      "label_distribution": {
+        "0": 24,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "profiles": [
+        "baseline"
+      ],
+      "real_new_measurements": 0,
+      "samples": 24,
+      "schema_extension": "controlled-network-replay-v1",
+      "simulated": true,
+      "training_allowed": false,
+      "unique_source_samples": 24
+    },
+    "cloud_favorable": {
+      "action_coverage": {
+        "0": 96,
+        "1": 96,
+        "2": 96,
+        "3": 96
+      },
+      "ambiguous_labels": 0,
+      "dataset_version": "policy_training_dataset_v2",
+      "diversity_gate": {
+        "all_four_optimal_labels_present": false,
+        "calibration_qualified": false,
+        "independent_measured_conditions": false,
+        "passed": false
+      },
+      "label_distribution": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 24
+      },
+      "profiles": [
+        "cloud_favorable"
+      ],
+      "real_new_measurements": 0,
+      "samples": 24,
+      "schema_extension": "controlled-network-replay-v1",
+      "simulated": true,
+      "training_allowed": false,
+      "unique_source_samples": 24
+    },
+    "edge_loaded": {
+      "action_coverage": {
+        "0": 96,
+        "1": 96,
+        "2": 96,
+        "3": 96
+      },
+      "ambiguous_labels": 0,
+      "dataset_version": "policy_training_dataset_v2",
+      "diversity_gate": {
+        "all_four_optimal_labels_present": false,
+        "calibration_qualified": false,
+        "independent_measured_conditions": false,
+        "passed": false
+      },
+      "label_distribution": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 24
+      },
+      "profiles": [
+        "edge_loaded"
+      ],
+      "real_new_measurements": 0,
+      "samples": 24,
+      "schema_extension": "controlled-network-replay-v1",
+      "simulated": true,
+      "training_allowed": false,
+      "unique_source_samples": 24
+    },
+    "high_latency": {
+      "action_coverage": {
+        "0": 96,
+        "1": 96,
+        "2": 96,
+        "3": 96
+      },
+      "ambiguous_labels": 0,
+      "dataset_version": "policy_training_dataset_v2",
+      "diversity_gate": {
+        "all_four_optimal_labels_present": false,
+        "calibration_qualified": false,
+        "independent_measured_conditions": false,
+        "passed": false
+      },
+      "label_distribution": {
+        "0": 24,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "profiles": [
+        "high_latency"
+      ],
+      "real_new_measurements": 0,
+      "samples": 24,
+      "schema_extension": "controlled-network-replay-v1",
+      "simulated": true,
+      "training_allowed": false,
+      "unique_source_samples": 24
+    }
+  },
+  "dataset_version": "policy_training_dataset_v2",
+  "diversity_gate": {
+    "all_four_optimal_labels_present": false,
+    "calibration_qualified": false,
+    "independent_measured_conditions": false,
+    "passed": false
+  },
+  "label_distribution": {
+    "0": 48,
+    "1": 0,
+    "2": 0,
+    "3": 48
+  },
+  "profiles": [
+    "baseline",
+    "cloud_favorable",
+    "edge_loaded",
+    "high_latency"
+  ],
+  "real_new_measurements": 0,
+  "samples": 96,
+  "schema_extension": "controlled-network-replay-v1",
+  "simulated": true,
+  "training_allowed": false,
+  "unique_source_samples": 24
+}

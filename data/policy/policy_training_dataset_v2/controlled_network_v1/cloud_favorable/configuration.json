@@ -1,0 +1,54 @@
+{
+  "dataset_version": "policy_training_dataset_v2",
+  "git_commit": "e2cfae2ebf23e84777d2d990bc90610d8b6b2c20",
+  "implementation_sha256": {
+    "profiles.py": "c815c3c75d9040108ee43a48f252ee47612295edcc4de5bdaf4322e0f1913869",
+    "run_controlled_campaign.py": "c2fc6c7ca65eb4a52304d449ca70df984796126375cea28fef3081321515d074"
+  },
+  "network_condition": {
+    "application": "offline-cost-overlay",
+    "injected_parameters": {
+      "added_rtt_ms": 0,
+      "cloud_compute_multiplier": 0.5,
+      "edge_compute_multiplier": 8,
+      "network_residual_multiplier": 0.25
+    },
+    "profile": "cloud_favorable",
+    "simulated": true,
+    "type": "controlled_network",
+    "version": "network-profile-v1"
+  },
+  "samples_requested": 24,
+  "simulated": true,
+  "source_dataset_sha256": "19a5f2ff65733f096e4533144ca94ada37ed1429b4ec512f81759d3290dee7bb",
+  "source_directory": "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02",
+  "source_sample_ids": [
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/0",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/120",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/160",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/40",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/80",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/1",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/121",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/161",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/41",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/81",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/2",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/122",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/162",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/42",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/82",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/3",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/123",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/163",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/43",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/83",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/4",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/164",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/44",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/84"
+  ],
+  "timestamp": "2026-09-08T14:17:32.465307+00:00",
+  "training_enabled": false,
+  "version": "controlled-network-replay-v1"
+}
