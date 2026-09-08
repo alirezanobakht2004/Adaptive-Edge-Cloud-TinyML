@@ -11,7 +11,7 @@ If you don't see any output for the first 10 secs, please reset board (press res
 test/test_phase10_matched_campaign/test_main.cpp:175:testCampaignPrefixParity:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+1 Tests 0 Failures 0 Ignored
 OK
 
 --- esp32-s3-n8r2:test_phase10_matched_campaign [PASSED] Took 53.16 seconds ---

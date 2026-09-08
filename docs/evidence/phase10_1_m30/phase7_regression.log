@@ -4,19 +4,19 @@ At line:2 char:77
 +                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
- 
-I0000 00:00:1788860049.068284   42084 port.cc:153] oneDNN custom operations are on. You may see slightly different 
-numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+
+I0000 00:00:1788860049.068284   42084 port.cc:153] oneDNN custom operations are on. You may see slightly different
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the
 environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1788860054.880663   42084 port.cc:153] oneDNN custom operations are on. You may see slightly different 
-numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+I0000 00:00:1788860054.880663   42084 port.cc:153] oneDNN custom operations are on. You may see slightly different
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the
 environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-I0000 00:00:1788860056.820753   42084 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available 
+I0000 00:00:1788860056.820753   42084 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available
 CPU instructions in performance-critical operations.
-To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with 
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with
 the appropriate compiler flags.
-WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if 
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if
 CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
 RUN: C:\Users\alire\.platformio\penv\Scripts\platformio.exe test -d firmware -e esp32-s3-n8r2 --upload-port COM10 --test-port COM10 -v -f test_phase7_*
 Collected 27 tests (test_edge_uncertainty_parity, test_edge_uncertainty_stochastic, test_feature_parity, test_input_preprocessing, test_internal_tensor_diagnostic, test_local_inference, test_local_latency, test_local_memory, test_phase10_matched_campaign, test_phase6_mqtt_client, test_phase6_mqtt_publish, test_phase6_mqtt_receive, test_phase6_network_reachability, test_phase6_server_e2e, test_phase6_server_timeout, test_phase6_wifi_manager, test_phase7_split1_e2e, test_phase7_split1_parity, test_phase7_split2_e2e, test_phase7_split2_parity, test_phase7_split3_e2e, test_phase7_split3_parity, test_phase9_campaign, test_tflm_fc1_diagnostic, test_tflm_float32_runtime, test_tflm_logits_diagnostic, test_window_buffer)
@@ -43,7 +43,7 @@ PHASE7_SPLIT1_E2E_PASS
 test/test_phase7_split1_e2e/test_main.cpp:92:testSplit1EndToEnd:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+1 Tests 0 Failures 0 Ignored
 OK
 
 ------- esp32-s3-n8r2:test_phase7_split1_e2e [PASSED] Took 62.32 seconds -------
@@ -62,7 +62,7 @@ PHASE7_SPLIT1_PARITY_PASS
 test/test_phase7_split1_parity/test_main.cpp:214:testSplit1Parity:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+1 Tests 0 Failures 0 Ignored
 OK
 
 ----- esp32-s3-n8r2:test_phase7_split1_parity [PASSED] Took 35.95 seconds -----
@@ -89,7 +89,7 @@ PHASE7_SPLIT2_E2E_PASS
 test/test_phase7_split2_e2e/test_main.cpp:92:testSplit2EndToEnd:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+1 Tests 0 Failures 0 Ignored
 OK
 
 ------- esp32-s3-n8r2:test_phase7_split2_e2e [PASSED] Took 45.93 seconds -------
@@ -108,7 +108,7 @@ PHASE7_SPLIT2_PARITY_PASS
 test/test_phase7_split2_parity/test_main.cpp:214:testSplit2Parity:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+1 Tests 0 Failures 0 Ignored
 OK
 
 ----- esp32-s3-n8r2:test_phase7_split2_parity [PASSED] Took 36.54 seconds -----
@@ -135,7 +135,7 @@ PHASE7_SPLIT3_E2E_PASS
 test/test_phase7_split3_e2e/test_main.cpp:87:testSplit3EndToEnd:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+1 Tests 0 Failures 0 Ignored
 OK
 
 ------- esp32-s3-n8r2:test_phase7_split3_e2e [PASSED] Took 44.22 seconds -------
@@ -154,7 +154,7 @@ PHASE7_SPLIT3_PARITY_PASS
 test/test_phase7_split3_parity/test_main.cpp:29:testSplit3Parity:PASS
 
 -----------------------
-1 Tests 0 Failures 0 Ignored 
+1 Tests 0 Failures 0 Ignored
 OK
 
 ----- esp32-s3-n8r2:test_phase7_split3_parity [PASSED] Took 35.06 seconds -----
