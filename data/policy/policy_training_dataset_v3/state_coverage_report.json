@@ -1,0 +1,507 @@
+{
+  "action_coverage": {
+    "0": {
+      "feasible_records": 48,
+      "infeasible_records": 24,
+      "outcome_records": 72
+    },
+    "1": {
+      "feasible_records": 48,
+      "infeasible_records": 24,
+      "outcome_records": 72
+    },
+    "2": {
+      "feasible_records": 48,
+      "infeasible_records": 24,
+      "outcome_records": 72
+    },
+    "3": {
+      "feasible_records": 72,
+      "infeasible_records": 0,
+      "outcome_records": 72
+    }
+  },
+  "dataset_version": "policy_training_dataset_v3",
+  "independent_source_windows": 24,
+  "label_distribution": {
+    "0": 24,
+    "1": 0,
+    "2": 0,
+    "3": 48
+  },
+  "limitations": [
+    "Simulated conditions with uncalibrated pressure/queue response",
+    "Only one source session/device",
+    "No fresh uncertainty when inference service unavailable",
+    "Independent physical diversity and reward calibration remain unqualified"
+  ],
+  "minimum_gate_passed": false,
+  "minimum_readiness_criteria": {
+    "each_split_has_non_dominated_feasible_state": false,
+    "more_than_one_action_label": true,
+    "state_coverage_report_exists": true
+  },
+  "new_hardware_measurements": 0,
+  "samples": 72,
+  "scenarios": {
+    "A_normal_poor_network": {
+      "hypothesis_matches": 24,
+      "label_distribution": {
+        "0": 24,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "samples": 24
+    },
+    "B_pressure_good_network": {
+      "hypothesis_matches": 0,
+      "label_distribution": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 24
+      },
+      "samples": 24
+    },
+    "C_inference_unavailable": {
+      "hypothesis_matches": 24,
+      "label_distribution": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 24
+      },
+      "samples": 24
+    }
+  },
+  "simulated": true,
+  "split_coverage": {
+    "1": {
+      "feasible_states": 48,
+      "non_dominated_states": 0,
+      "optimal_labels": 0
+    },
+    "2": {
+      "feasible_states": 48,
+      "non_dominated_states": 0,
+      "optimal_labels": 0
+    }
+  },
+  "state_statistics": {
+    "state.application.predicted_class": {
+      "missing": 24,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured",
+        "unavailable_or_unmeasured"
+      ],
+      "value_counts": {
+        "0": 10,
+        "1": 8,
+        "2": 10,
+        "3": 10,
+        "4": 10
+      }
+    },
+    "state.application.window_id": {
+      "missing": 0,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured"
+      ],
+      "value_counts": {
+        "0": 3,
+        "1": 3,
+        "120": 3,
+        "121": 3,
+        "122": 3,
+        "123": 3,
+        "160": 3,
+        "161": 3,
+        "162": 3,
+        "163": 3,
+        "164": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3,
+        "40": 3,
+        "41": 3,
+        "42": 3,
+        "43": 3,
+        "44": 3,
+        "80": 3,
+        "81": 3,
+        "82": 3,
+        "83": 3,
+        "84": 3
+      }
+    },
+    "state.device.cpu_frequency": {
+      "missing": 0,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured"
+      ],
+      "value_counts": {
+        "240": 72
+      }
+    },
+    "state.device.free_heap": {
+      "missing": 0,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured"
+      ],
+      "value_counts": {
+        "164576": 12,
+        "164592": 57,
+        "164608": 3
+      }
+    },
+    "state.device.inference_latency_estimate": {
+      "missing": 24,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured",
+        "simulated_or_derived",
+        "unavailable_or_unmeasured"
+      ],
+      "value_counts": {
+        "0.907": 1,
+        "0.908": 2,
+        "0.912": 1,
+        "0.914": 1,
+        "0.935": 1,
+        "1.144": 2,
+        "1.15": 1,
+        "1.151": 1,
+        "1.2": 1,
+        "1.203": 1,
+        "2.127": 1,
+        "2.128": 1,
+        "2.136": 1,
+        "2.137": 1,
+        "2.138": 1,
+        "2.142": 1,
+        "2.144": 2,
+        "2.145": 1,
+        "2.148": 1,
+        "2.155": 1,
+        "2.167": 1,
+        "48.14": 1,
+        "48.16": 2,
+        "48.24": 1,
+        "48.28": 1,
+        "48.7": 1,
+        "52.879999999999995": 2,
+        "53.0": 1,
+        "53.019999999999996": 1,
+        "54.0": 1,
+        "54.06": 1,
+        "72.53999999999999": 1,
+        "72.56": 1,
+        "72.72": 1,
+        "72.74000000000001": 1,
+        "72.75999999999999": 1,
+        "72.84": 1,
+        "72.88": 2,
+        "72.9": 1,
+        "72.96000000000001": 1,
+        "73.1": 1,
+        "73.34": 1
+      }
+    },
+    "state.device.inference_queue_pressure": {
+      "missing": 0,
+      "provenance_kinds": [
+        "simulated_or_derived"
+      ],
+      "value_counts": {
+        "0": 24,
+        "0.75": 24,
+        "1": 24
+      }
+    },
+    "state.device.local_compute_pressure": {
+      "missing": 0,
+      "provenance_kinds": [
+        "simulated_or_derived"
+      ],
+      "value_counts": {
+        "0": 24,
+        "0.95": 24,
+        "1": 24
+      }
+    },
+    "state.device.local_inference_available": {
+      "missing": 0,
+      "provenance_kinds": [
+        "simulated_or_derived"
+      ],
+      "value_counts": {
+        "False": 24,
+        "True": 48
+      }
+    },
+    "state.device.tensor_arena_usage": {
+      "missing": 0,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured"
+      ],
+      "value_counts": {
+        "1216": 72
+      }
+    },
+    "state.network.cloud_availability": {
+      "missing": 0,
+      "provenance_kinds": [
+        "simulated_or_derived"
+      ],
+      "value_counts": {
+        "True": 72
+      }
+    },
+    "state.network.connection_state": {
+      "missing": 0,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured"
+      ],
+      "value_counts": {
+        "connected": 72
+      }
+    },
+    "state.network.estimated_bandwidth": {
+      "missing": 72,
+      "provenance_kinds": [
+        "unavailable_or_unmeasured"
+      ],
+      "value_counts": {}
+    },
+    "state.network.mqtt_rtt_ms": {
+      "missing": 0,
+      "provenance_kinds": [
+        "simulated_or_derived"
+      ],
+      "value_counts": {
+        "159.313": 1,
+        "159.514": 1,
+        "159.727": 1,
+        "160.352": 1,
+        "160.368": 1,
+        "160.402": 1,
+        "160.495": 1,
+        "160.503": 1,
+        "160.504": 1,
+        "160.518": 1,
+        "160.607": 1,
+        "160.708": 1,
+        "160.787": 1,
+        "160.81": 1,
+        "160.816": 1,
+        "161.458": 1,
+        "161.551": 1,
+        "161.575": 1,
+        "162.369": 1,
+        "162.562": 1,
+        "163.525": 1,
+        "164.435": 1,
+        "173.461": 1,
+        "174.423": 1,
+        "2.32825": 2,
+        "2.3785": 2,
+        "2.43175": 2,
+        "2.588": 2,
+        "2.592": 2,
+        "2.6005": 2,
+        "2.62375": 2,
+        "2.62575": 2,
+        "2.626": 2,
+        "2.6295": 2,
+        "2.65175": 2,
+        "2.677": 2,
+        "2.69675": 2,
+        "2.7025": 2,
+        "2.704": 2,
+        "2.8645": 2,
+        "2.88775": 2,
+        "2.89375": 2,
+        "3.09225": 2,
+        "3.1405": 2,
+        "3.38125": 2,
+        "3.60875": 2,
+        "5.86525": 2,
+        "6.10575": 2
+      }
+    },
+    "state.network.network_quality_score": {
+      "missing": 0,
+      "provenance_kinds": [
+        "simulated_or_derived"
+      ],
+      "value_counts": {
+        "0.22279356393952493": 1,
+        "0.22375269062610478": 1,
+        "0.2331708909459743": 1,
+        "0.23416461772626154": 1,
+        "0.23522548715198388": 1,
+        "0.235439259025564": 1,
+        "0.23632281696797827": 1,
+        "0.23634962727663783": 1,
+        "0.2364535747051424": 1,
+        "0.237173649058895": 1,
+        "0.2371803994117926": 1,
+        "0.23720627932462626": 1,
+        "0.23729521423011943": 1,
+        "0.2374090129957694": 1,
+        "0.23750938162057403": 1,
+        "0.2375251776688329": 1,
+        "0.23752630603839373": 1,
+        "0.2375353333808404": 1,
+        "0.2376403266128649": 1,
+        "0.23767873440827506": 1,
+        "0.23769681296113182": 1,
+        "0.23840516480949045": 1,
+        "0.23864753668012642": 1,
+        "0.23887670617687387": 1,
+        "0.8911742557580997": 2,
+        "0.8950107625044191": 2,
+        "0.9326835637838972": 2,
+        "0.9366584709050462": 2,
+        "0.9409019486079355": 2,
+        "0.941757036102256": 2,
+        "0.9452912678719131": 2,
+        "0.9453985091065511": 2,
+        "0.9458142988205696": 2,
+        "0.94869459623558": 2,
+        "0.9487215976471705": 2,
+        "0.948825117298505": 2,
+        "0.9491808569204777": 2,
+        "0.9496360519830775": 2,
+        "0.9500375264822961": 2,
+        "0.9501007106753316": 2,
+        "0.9501052241535749": 2,
+        "0.9501413335233616": 2,
+        "0.9505613064514596": 2,
+        "0.9507149376331": 2,
+        "0.9507872518445273": 2,
+        "0.9536206592379618": 2,
+        "0.9545901467205057": 2,
+        "0.9555068247074955": 2
+      }
+    },
+    "state.network.packet_size_estimate": {
+      "missing": 72,
+      "provenance_kinds": [
+        "unavailable_or_unmeasured"
+      ],
+      "value_counts": {}
+    },
+    "state.network.transport_available": {
+      "missing": 0,
+      "provenance_kinds": [
+        "simulated_or_derived"
+      ],
+      "value_counts": {
+        "True": 72
+      }
+    },
+    "state.uncertainty.confidence": {
+      "missing": 24,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured",
+        "unavailable_or_unmeasured"
+      ],
+      "value_counts": {
+        "0.766576886": 2,
+        "0.866411865": 2,
+        "0.981906354": 2,
+        "0.983469903": 2,
+        "0.990289867": 2,
+        "0.993962586": 2,
+        "0.994554102": 2,
+        "0.994851947": 2,
+        "0.994925499": 2,
+        "0.995459378": 2,
+        "0.995477796": 2,
+        "0.997237802": 2,
+        "0.997683227": 2,
+        "0.998277009": 2,
+        "0.99880898": 2,
+        "0.999054909": 2,
+        "0.999688685": 2,
+        "0.999696374": 2,
+        "0.999872744": 2,
+        "0.99993825": 2,
+        "0.999952435": 2,
+        "0.999993205": 2,
+        "0.999998033": 2,
+        "0.999999046": 2
+      }
+    },
+    "state.uncertainty.entropy": {
+      "missing": 24,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured",
+        "unavailable_or_unmeasured"
+      ],
+      "value_counts": {
+        "0.000555400737": 2,
+        "0.000661274593": 2,
+        "0.00131216401": 2,
+        "0.00283236289": 2,
+        "0.00311158481": 2,
+        "0.00813789014": 2,
+        "0.0104045756": 2,
+        "0.0143040279": 2,
+        "0.0184906386": 2,
+        "0.0202281456": 2,
+        "0.0309476666": 2,
+        "0.0327707082": 2,
+        "0.0330334641": 2,
+        "0.0330465063": 2,
+        "0.0353259109": 2,
+        "0.0411764421": 2,
+        "0.0613440871": 2,
+        "0.0920574069": 2,
+        "0.0952507332": 2,
+        "0.426668137": 2,
+        "0.667137444": 2,
+        "1.45865888e-05": 2,
+        "2.86089271e-05": 2,
+        "9.18640071e-05": 2
+      }
+    },
+    "state.uncertainty.margin": {
+      "missing": 24,
+      "provenance_kinds": [
+        "carried_from_measured_source_not_remeasured",
+        "unavailable_or_unmeasured"
+      ],
+      "value_counts": {
+        "0.576300383": 2,
+        "0.741242945": 2,
+        "0.964063108": 2,
+        "0.970172048": 2,
+        "0.984075963": 2,
+        "0.989326835": 2,
+        "0.989465892": 2,
+        "0.989860415": 2,
+        "0.990083456": 2,
+        "0.991577446": 2,
+        "0.99267596": 2,
+        "0.994847119": 2,
+        "0.996485293": 2,
+        "0.997220933": 2,
+        "0.998042703": 2,
+        "0.998301029": 2,
+        "0.99940753": 2,
+        "0.999493182": 2,
+        "0.999757469": 2,
+        "0.999876678": 2,
+        "0.999920905": 2,
+        "0.999988854": 2,
+        "0.999996305": 2,
+        "0.999998152": 2
+      }
+    }
+  },
+  "training_allowed": false,
+  "unlabeled": 0,
+  "valid": true
+}

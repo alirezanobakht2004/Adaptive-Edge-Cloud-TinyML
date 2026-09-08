@@ -80,3 +80,42 @@ def test_tampering_rejected_and_coverage_does_not_count_infeasible_splits():
     assert not report["minimum_gate_passed"]
     sample["action_outcomes"][0]["mean_reward"] = 1
     with pytest.raises(ValueError): validate_v3(sample, source, scenario)
+
+
+def test_queue_is_charged_equally_to_every_local_inference_action():
+    source = source_fixture()
+    scenario = load_scenario(SCENARIOS[1])
+    queued = expand_sample(source, scenario)
+    wait = scenario["inference_queue_pressure"] * scenario["queue_reference_ms"]
+    scenario["inference_queue_pressure"] = 0
+    unqueued = expand_sample(source, scenario)
+    for action in range(4):
+        a = queued["action_outcomes"][action]["measurements"][0]
+        b = unqueued["action_outcomes"][action]["measurements"][0]
+        assert a["latency_ms"] - b["latency_ms"] == pytest.approx(wait if action < 3 else 0)
+        assert a["energy"]["value"] == b["energy"]["value"]
+
+
+def test_cloud_only_omits_unavailable_state_compute_cost():
+    from tools.policy_dataset.run_controlled_campaign import simulate_sample
+    source = source_fixture()
+    scenario = load_scenario(SCENARIOS[2])
+    baseline = simulate_sample(source, scenario["network_profile"])
+    sample = expand_sample(source, scenario)
+    state_ms = source["source_entries"][0]["trace"]["state_us"] / 1000
+    actual = sample["action_outcomes"][3]["measurements"][0]
+    original = baseline["candidate_actions"][3]["measurements"][0]
+    assert actual["latency_ms"] == pytest.approx(original["latency_ms"] - state_ms)
+    assert actual["energy"]["value"] == pytest.approx(original["energy"]["value"] - state_ms / 10)
+
+
+def test_persisted_v3_campaign_reconstructs_with_coverage():
+    import json
+    from pathlib import Path
+    from tools.policy_dataset.run_state_expansion_campaign import validate_output
+    root = Path("data/policy/policy_training_dataset_v3")
+    report = validate_output(root)
+    assert report == json.loads((root / "state_coverage_report.json").read_text())
+    assert report["samples"] == 72
+    assert report["state_statistics"]["state.uncertainty.confidence"]["missing"] == 24
+    assert not report["training_allowed"]

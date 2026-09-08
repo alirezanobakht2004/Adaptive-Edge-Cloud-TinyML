@@ -1,0 +1,40 @@
+{
+  "all_actions": {
+    "0": "ALL_LOCAL",
+    "1": "SPLIT1",
+    "2": "SPLIT2",
+    "3": "ALL_CLOUD"
+  },
+  "availability_fields": [
+    "state.device.local_inference_available",
+    "state.network.transport_available"
+  ],
+  "dataset_version": "policy_training_dataset_v3",
+  "infeasible_action": "Explicit reason; outcomes, measurements, reward and components null; excluded from argmax",
+  "missing_state": "Null means unavailable/unmeasured, not zero; C has no fresh uncertainty",
+  "new_state_fields": {
+    "state.device.inference_queue_pressure": "float [0,1], simulated; queued wait=pressure*queue_reference_ms",
+    "state.device.local_compute_pressure": "float [0,1], simulated; available compute multiplier=1/(1-pressure)",
+    "state.network.cloud_availability": "boolean, simulated cloud service availability",
+    "state.network.network_quality_score": "float [0,1], derived from simulated RTT and configured reference"
+  },
+  "required_record_fields": [
+    "dataset_version",
+    "sample_id",
+    "source_sample_id",
+    "source_sha256",
+    "metadata",
+    "scenario",
+    "state",
+    "action_outcomes",
+    "reward_configuration",
+    "optimal_action",
+    "optimal_actions",
+    "label_status",
+    "measurement_provenance",
+    "training_enabled"
+  ],
+  "state_provenance": "One provenance entry per state leaf; no new measured values",
+  "training_enabled": false,
+  "validator": "tools.policy_dataset.run_state_expansion_campaign.validate_output"
+}

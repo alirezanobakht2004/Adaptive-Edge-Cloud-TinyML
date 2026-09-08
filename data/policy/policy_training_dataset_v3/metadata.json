@@ -1,0 +1,129 @@
+{
+  "dataset_version": "policy_training_dataset_v3",
+  "git_commit": "962342455b9417366f53ab4533b6464e228b42b8",
+  "implementation_hashes": {
+    "run_state_expansion_campaign.py": "2cadf8e66991a274dd2fbf120c823c82c73b20317f4491c821310f29bdf88c22",
+    "state_expansion.py": "5105ebf5f03d55be0a0447ab302546b90599b4cc7acf14613f9d1acdb2f7ac3f"
+  },
+  "independent_source_windows": 24,
+  "sample_count": 72,
+  "scenarios": {
+    "A_normal_poor_network": {
+      "cloud_availability": true,
+      "expected_actions_hypothesis": [
+        0
+      ],
+      "inference_queue_pressure": 0,
+      "local_compute_pressure": 0,
+      "local_inference_available": true,
+      "name": "A_normal_poor_network",
+      "network_profile": {
+        "application": "offline-cost-overlay",
+        "injected_parameters": {
+          "added_rtt_ms": 150,
+          "cloud_compute_multiplier": 1,
+          "edge_compute_multiplier": 1,
+          "network_residual_multiplier": 1
+        },
+        "profile": "high_latency",
+        "simulated": true,
+        "type": "controlled_network",
+        "version": "network-profile-v1"
+      },
+      "quality_rtt_reference_ms": 50,
+      "queue_reference_ms": 40,
+      "simulated": true,
+      "transport_available": true,
+      "version": "adaptive-state-scenario-v1"
+    },
+    "B_pressure_good_network": {
+      "cloud_availability": true,
+      "expected_actions_hypothesis": [
+        1,
+        2
+      ],
+      "inference_queue_pressure": 0.75,
+      "local_compute_pressure": 0.95,
+      "local_inference_available": true,
+      "name": "B_pressure_good_network",
+      "network_profile": {
+        "application": "offline-cost-overlay",
+        "injected_parameters": {
+          "added_rtt_ms": 0,
+          "cloud_compute_multiplier": 1,
+          "edge_compute_multiplier": 20,
+          "network_residual_multiplier": 0.25
+        },
+        "profile": "edge_loaded",
+        "simulated": true,
+        "type": "controlled_network",
+        "version": "network-profile-v1"
+      },
+      "quality_rtt_reference_ms": 50,
+      "queue_reference_ms": 40,
+      "simulated": true,
+      "transport_available": true,
+      "version": "adaptive-state-scenario-v1"
+    },
+    "C_inference_unavailable": {
+      "cloud_availability": true,
+      "expected_actions_hypothesis": [
+        3
+      ],
+      "inference_queue_pressure": 1,
+      "local_compute_pressure": 1,
+      "local_inference_available": false,
+      "name": "C_inference_unavailable",
+      "network_profile": {
+        "application": "offline-cost-overlay",
+        "injected_parameters": {
+          "added_rtt_ms": 0,
+          "cloud_compute_multiplier": 1,
+          "edge_compute_multiplier": 1,
+          "network_residual_multiplier": 0.25
+        },
+        "profile": "baseline",
+        "simulated": true,
+        "type": "controlled_network",
+        "version": "network-profile-v1"
+      },
+      "quality_rtt_reference_ms": 50,
+      "queue_reference_ms": 40,
+      "simulated": true,
+      "transport_available": true,
+      "version": "adaptive-state-scenario-v1"
+    }
+  },
+  "selected_source_ids": [
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/0",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/120",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/160",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/40",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/80",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/1",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/121",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/161",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/41",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/81",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/2",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/122",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/162",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/42",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/82",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/3",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/123",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/163",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/43",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/83",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/4",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/164",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/44",
+    "48d1e9e3cb0747fd9e571ba760f19910/session_02/84"
+  ],
+  "simulated": true,
+  "source_directory": "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02",
+  "source_schema_version": "policy_training_dataset_v2",
+  "source_sha256": "19a5f2ff65733f096e4533144ca94ada37ed1429b4ec512f81759d3290dee7bb",
+  "timestamp": "2026-09-08T14:41:43.410226+00:00",
+  "training_enabled": false
+}
