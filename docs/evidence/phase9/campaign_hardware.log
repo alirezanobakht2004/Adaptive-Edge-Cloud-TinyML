@@ -1,0 +1,47 @@
+Collected 26 tests (test_edge_uncertainty_parity, test_edge_uncertainty_stochastic, test_feature_parity, test_input_preprocessing, test_internal_tensor_diagnostic, test_local_inference, test_local_latency, test_local_memory, test_phase6_mqtt_client, test_phase6_mqtt_publish, test_phase6_mqtt_receive, test_phase6_network_reachability, test_phase6_server_e2e, test_phase6_server_timeout, test_phase6_wifi_manager, test_phase7_split1_e2e, test_phase7_split1_parity, test_phase7_split2_e2e, test_phase7_split2_parity, test_phase7_split3_e2e, test_phase7_split3_parity, test_phase9_campaign, test_tflm_fc1_diagnostic, test_tflm_float32_runtime, test_tflm_logits_diagnostic, test_window_buffer)
+
+Processing test_phase9_campaign in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+test/test_phase9_campaign/test_main.cpp:153:testCampaignPrefixParity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+
+-------- esp32-s3-n8r2:test_phase9_campaign [PASSED] Took 75.62 seconds --------
+
+=================================== SUMMARY ===================================
+Environment    Test                              Status    Duration
+-------------  --------------------------------  --------  ------------
+esp32-s3-n8r2  test_edge_uncertainty_parity      SKIPPED
+esp32-s3-n8r2  test_edge_uncertainty_stochastic  SKIPPED
+esp32-s3-n8r2  test_feature_parity               SKIPPED
+esp32-s3-n8r2  test_input_preprocessing          SKIPPED
+esp32-s3-n8r2  test_internal_tensor_diagnostic   SKIPPED
+esp32-s3-n8r2  test_local_inference              SKIPPED
+esp32-s3-n8r2  test_local_latency                SKIPPED
+esp32-s3-n8r2  test_local_memory                 SKIPPED
+esp32-s3-n8r2  test_phase6_mqtt_client           SKIPPED
+esp32-s3-n8r2  test_phase6_mqtt_publish          SKIPPED
+esp32-s3-n8r2  test_phase6_mqtt_receive          SKIPPED
+esp32-s3-n8r2  test_phase6_network_reachability  SKIPPED
+esp32-s3-n8r2  test_phase6_server_e2e            SKIPPED
+esp32-s3-n8r2  test_phase6_server_timeout        SKIPPED
+esp32-s3-n8r2  test_phase6_wifi_manager          SKIPPED
+esp32-s3-n8r2  test_phase7_split1_e2e            SKIPPED
+esp32-s3-n8r2  test_phase7_split1_parity         SKIPPED
+esp32-s3-n8r2  test_phase7_split2_e2e            SKIPPED
+esp32-s3-n8r2  test_phase7_split2_parity         SKIPPED
+esp32-s3-n8r2  test_phase7_split3_e2e            SKIPPED
+esp32-s3-n8r2  test_phase7_split3_parity         SKIPPED
+esp32-s3-n8r2  test_phase9_campaign              PASSED    00:01:15.620
+esp32-s3-n8r2  test_tflm_fc1_diagnostic          SKIPPED
+esp32-s3-n8r2  test_tflm_float32_runtime         SKIPPED
+esp32-s3-n8r2  test_tflm_logits_diagnostic       SKIPPED
+esp32-s3-n8r2  test_window_buffer                SKIPPED
+================== 1 test cases: 1 succeeded in 00:01:15.620 ==================
