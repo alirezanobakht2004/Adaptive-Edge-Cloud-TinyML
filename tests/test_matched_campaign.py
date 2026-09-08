@@ -81,6 +81,9 @@ def test_reject_tampered_derived_labels_and_reward():
     sample = build_sample(entries, condition, "synthetic")
     sample["candidate_actions"][0]["measurements"][0]["reward"] += .01
     with pytest.raises(ValueError): validate_sample(sample)
+    sample = build_sample(entries, condition, "synthetic")
+    sample["label"]["optimal_action"] = False
+    with pytest.raises(ValueError): validate_sample(sample)
     condition["reward"]["energy_method"] = "unspecified method"
     with pytest.raises(ValueError): validate_condition(condition)
 
@@ -133,3 +136,16 @@ def test_campaign_checks_raw_server_and_source_labels(tmp_path, monkeypatch):
     events[0]["response"]["model_version"] = "wrong"
     jsonl("server_events.jsonl", events)
     with pytest.raises(ValueError, match="Server/device"): validate_campaign(tmp_path)
+
+
+def test_committed_v2_pilot_evidence_and_canonical_snapshot():
+    from tools.policy_dataset.validate_matched_dataset import validate_campaign
+    root = Path("data/policy/policy_training_dataset_v2")
+    metadata = json.loads((root / "metadata.json").read_text())
+    campaign = root / metadata["canonical_campaign"]
+    assert (root / "policy_training_dataset_v2.jsonl").read_bytes() == (campaign / "policy_training_dataset_v2.jsonl").read_bytes()
+    report = validate_campaign(campaign)
+    assert report == json.loads((root / "dataset_report.json").read_text())
+    assert report["matched_samples"] == metadata["sample_count"]
+    assert report["candidate_executions"] == metadata["candidate_execution_count"]
+    assert report["training_allowed"] is False

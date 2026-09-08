@@ -177,7 +177,7 @@ def build_sample(entries, condition, sample_id):
 
 def validate_sample(sample):
     expected = build_sample(sample["source_entries"], sample["condition"], sample["sample_id"])
-    if sample != expected:
+    if digest(sample) != digest(expected):
         raise ValueError("Dataset v2 schema/derived values differ from reproducible measurements")
 
 

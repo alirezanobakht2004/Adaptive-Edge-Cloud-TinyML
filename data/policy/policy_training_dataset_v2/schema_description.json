@@ -1,0 +1,36 @@
+{
+  "candidate_actions": "Exactly actions 0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD; per-action repeated correctness, predictions, latency_ms, payload bytes, estimated energy, normalized components, M29 reward and means.",
+  "dataset_version": "policy_training_dataset_v2",
+  "format": "jsonl",
+  "label": {
+    "method": "argmax-mean-observed-M29-reward",
+    "optimal_action": "integer 0..3, or null for tied mean rewards",
+    "optimal_actions": "all actions within configured tolerance of maximum mean reward",
+    "repeat_optimal_actions": "argmax sets per repeat for stability inspection"
+  },
+  "metadata": "Original v1 source metadata, intentionally preserves embedded source dataset_version; top-level dataset_version identifies v2.",
+  "repeats": "4, 8, 12 or 16; all four action positions equally represented",
+  "required_top_level_fields": [
+    "candidate_actions",
+    "condition",
+    "dataset_version",
+    "label",
+    "maximum_observed_drift",
+    "metadata",
+    "repeats",
+    "sample_id",
+    "source_entries",
+    "source_sha256",
+    "state",
+    "training_enabled"
+  ],
+  "source_entries": "Raw physical trace, live guard and v1 record for each execution. v1 reward placeholders remain unchanged.",
+  "state": "Complete frozen v1 state: uncertainty, device, network, application. Required M25 fields non-null. Deferred v1 fields retain null.",
+  "training_enabled": false,
+  "units": {
+    "communication": "selected request+response payload bytes",
+    "energy": "dimensionless estimated compute/payload proxy, never measured joules",
+    "latency": "ms"
+  },
+  "validation": "Rebuild all derived fields with M29; reject schema/type changes, missing metrics, state changes, duplicate executions, guard drift and wrong source/server evidence."
+}

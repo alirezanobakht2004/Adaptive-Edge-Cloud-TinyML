@@ -1,0 +1,120 @@
+{
+  "artifact_hashes": {
+    "cloud_tail": "9a834eecf909374488fe346c89b34310bd6c7fdb58570ed2ffb0c885535866d1",
+    "source_model": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c",
+    "split1_tail": "ce144c368964f74da96da6ca77c00d35e2de0577f605ac54d458475454191b9c",
+    "split2_tail": "533c57db42219b68d807756ae140ed505fb25e1b0a5e45ca4eeb500b5031468c"
+  },
+  "broker_host": "127.0.0.1",
+  "broker_port": 1883,
+  "condition": {
+    "description": "Exploratory connected ESP32/hotspot/LAN condition; provisional reward weights, not final policy calibration. One physical snapshot with bounded drift, not simultaneous identical physics.",
+    "energy_proxy": {
+      "compute_reference_ms": 10,
+      "payload_reference_bytes": 1024
+    },
+    "limits": {
+      "heap_drift_bytes": 4096,
+      "maximum_rtt_ms": 50,
+      "maximum_snapshot_age_ms": 10000,
+      "psram_drift_bytes": 4096,
+      "rssi_drift_db": 8,
+      "rtt_drift_ms": 20
+    },
+    "name": "connected-lab-pilot-v1",
+    "reward": {
+      "actions": {
+        "0": "ALL_LOCAL",
+        "1": "SPLIT1",
+        "2": "SPLIT2",
+        "3": "ALL_CLOUD"
+      },
+      "dataset_version": "policy_training_dataset_v1",
+      "energy_kind": "estimated",
+      "energy_method": "Dimensionless estimated proxy: (preprocessing_ms + state_inference_ms + selected_edge_compute_ms) / 10 + selected_payload_bytes / 1024; excludes radio waiting, cloud energy and probe traffic; not joules or battery measurement",
+      "energy_proxy_version": "m30-compute-payload-proxy-v1",
+      "scales": {
+        "communication_bytes": 1024,
+        "energy_proxy": 1,
+        "latency_ms": 100
+      },
+      "tie_tolerance": 1e-06,
+      "version": "reward-calibration-v1",
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.1,
+        "energy_proxy": 0.1,
+        "latency": 0.1
+      }
+    },
+    "version": "matched-condition-v1"
+  },
+  "dataset_version": "policy_training_dataset_v2",
+  "dependencies": {
+    "numpy": "2.5.2",
+    "paho-mqtt": "2.1.0",
+    "pyserial": "3.5",
+    "tensorflow": "2.21.0"
+  },
+  "feature_matrix_sha256": "f09797062f2227a82bcfcc6e7c6234170c98e1910b38d9227f50a37c43570f18",
+  "finished_at": "2026-09-08T09:41:14.363328+00:00",
+  "git_commit": "2b8addaeab06acfb5cbcde6f7b086a847d463908",
+  "git_dirty": true,
+  "labels_sha256": "bd1eeee122b41bdc9a6fc1dad0b4ff8d1d3e295219dc78bc0d75f6bfc9d618f0",
+  "local_firmware_binary_sha256": "339b5a1e1e55bfff0615c0ca0af8a6d204826c87df56037b56e564caded89986",
+  "matched_samples": 25,
+  "model_versions": {
+    "0": "gesture-model-v1.1.0/local-stochastic-head",
+    "1": "gesture-cloud-tail-split1-v1.0.0",
+    "2": "gesture-cloud-tail-split2-v1.0.0",
+    "3": "gesture-full-cloud-v1.0.0"
+  },
+  "port": "COM10",
+  "qualification": "diagnostic_only: host pytest overlapped measurement; excluded from canonical v2 pilot",
+  "rejected_windows": [],
+  "repeats": 4,
+  "run_id": "c208e2606785446c87b58cf50bfdf59b",
+  "samples_requested": 25,
+  "server_errors": [],
+  "source_hashes": {
+    "C:\\Users\\alire\\OneDrive\\Desktop\\Final Project\\Project Source\\Adaptive-Edge-Cloud-TinyML\\tools\\policy_dataset\\campaign_server.py": "56677d604421c3f0e8b45aee5061e5b8e2dc777a27268db4096db78e2af71e60",
+    "C:\\Users\\alire\\OneDrive\\Desktop\\Final Project\\Project Source\\Adaptive-Edge-Cloud-TinyML\\tools\\policy_dataset\\device_trace.py": "6d62dff5f0b3ffd9e6f102c710826de639678b02229bc3a06b62d2f7e7661f8c",
+    "C:\\Users\\alire\\OneDrive\\Desktop\\Final Project\\Project Source\\Adaptive-Edge-Cloud-TinyML\\tools\\policy_dataset\\matched_dataset.py": "8f37fd5be675fad5446399f1d8e25da62511fc374f1086b41affae85216af155",
+    "C:\\Users\\alire\\OneDrive\\Desktop\\Final Project\\Project Source\\Adaptive-Edge-Cloud-TinyML\\tools\\policy_dataset\\reward_engine\\engine.py": "0804027be17b7ef52df3864d8aa26950ad296d658d84a23318b6b9f8e81b5aab",
+    "C:\\Users\\alire\\OneDrive\\Desktop\\Final Project\\Project Source\\Adaptive-Edge-Cloud-TinyML\\tools\\policy_dataset\\run_matched_campaign.py": "2436edb1f0e9e1843e7789549f0b4c317bb1ab7fa82c8007bb2692bfd2520592",
+    "firmware\\test\\test_phase10_matched_campaign\\test_main.cpp": "74837d0023d0c995f47e16284bb4dc7530ed316d3c94a747d87a69d9c78fc608"
+  },
+  "source_session": "session_02",
+  "state_protocol": "One physical snapshot per window; four cyclic orders; live drift guards",
+  "status": "complete",
+  "timestamp": "2026-09-08T09:40:29.073852+00:00",
+  "training_enabled": false,
+  "version": "matched-campaign-v1",
+  "window_indices": [
+    0,
+    120,
+    160,
+    40,
+    80,
+    1,
+    121,
+    161,
+    41,
+    81,
+    2,
+    122,
+    162,
+    42,
+    82,
+    3,
+    123,
+    163,
+    43,
+    83,
+    4,
+    124,
+    164,
+    44,
+    84
+  ]
+}

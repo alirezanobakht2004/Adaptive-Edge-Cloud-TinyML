@@ -1,0 +1,73 @@
+{
+  "actions": {
+    "0": "ALL_LOCAL",
+    "1": "SPLIT1",
+    "2": "SPLIT2",
+    "3": "ALL_CLOUD"
+  },
+  "candidate_execution_count": 384,
+  "canonical_campaign": "campaigns/connected_lab_run02",
+  "condition": {
+    "description": "Exploratory connected ESP32/hotspot/LAN condition; provisional reward weights, not final policy calibration. One physical snapshot with bounded drift, not simultaneous identical physics.",
+    "energy_proxy": {
+      "compute_reference_ms": 10,
+      "payload_reference_bytes": 1024
+    },
+    "limits": {
+      "heap_drift_bytes": 4096,
+      "maximum_rtt_ms": 50,
+      "maximum_snapshot_age_ms": 10000,
+      "psram_drift_bytes": 4096,
+      "rssi_drift_db": 8,
+      "rtt_drift_ms": 20
+    },
+    "name": "connected-lab-pilot-v1",
+    "reward": {
+      "actions": {
+        "0": "ALL_LOCAL",
+        "1": "SPLIT1",
+        "2": "SPLIT2",
+        "3": "ALL_CLOUD"
+      },
+      "dataset_version": "policy_training_dataset_v1",
+      "energy_kind": "estimated",
+      "energy_method": "Dimensionless estimated proxy: (preprocessing_ms + state_inference_ms + selected_edge_compute_ms) / 10 + selected_payload_bytes / 1024; excludes radio waiting, cloud energy and probe traffic; not joules or battery measurement",
+      "energy_proxy_version": "m30-compute-payload-proxy-v1",
+      "scales": {
+        "communication_bytes": 1024,
+        "energy_proxy": 1,
+        "latency_ms": 100
+      },
+      "tie_tolerance": 1e-06,
+      "version": "reward-calibration-v1",
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.1,
+        "energy_proxy": 0.1,
+        "latency": 0.1
+      }
+    },
+    "version": "matched-condition-v1"
+  },
+  "condition_sha256": "7d1eb629f1f9f43561fbcebdfbbfb9b54ce3ecff5b6e2687efa42780cfbdbb95",
+  "dataset_version": "policy_training_dataset_v2",
+  "excluded_campaigns": {
+    "campaigns/connected_lab_run01": "Diagnostic hardware/collector run overlapped host pytest; not included in canonical dataset"
+  },
+  "feature_version": "features-v1",
+  "model_version": "gesture-model-v1.1.0",
+  "qualification": "Real configuration-dependent pilot labels only; independent sessions, network/resource variation and nonlocal optimal labels still missing",
+  "sample_count": 24,
+  "schema": "schema_description.json",
+  "source_class_distribution": {
+    "0": 5,
+    "1": 4,
+    "2": 5,
+    "3": 5,
+    "4": 5
+  },
+  "source_dataset_version": "dataset-v1",
+  "state_source": "One physical snapshot per source window, reused across counterbalanced sequential actions with live drift guards",
+  "training_allowed": false,
+  "validator": "tools.policy_dataset.validate_matched_dataset"
+}

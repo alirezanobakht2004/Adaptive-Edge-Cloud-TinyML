@@ -1,0 +1,28 @@
+{
+  "action_coverage": {
+    "0": 100,
+    "1": 100,
+    "2": 100,
+    "3": 100
+  },
+  "ambiguous_labels": 0,
+  "candidate_executions": 400,
+  "dataset_version": "policy_training_dataset_v2",
+  "energy_kind": "estimated",
+  "limitations": [
+    "One controlled sequential snapshot, not simultaneous physical executions",
+    "Condition-dependent pilot labels; independent sessions and broader conditions still required",
+    "Energy proxy is dimensionless and unvalidated against battery measurements"
+  ],
+  "matched_samples": 25,
+  "optimal_action_distribution": {
+    "0": 25,
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "rejected_windows": [],
+  "training_allowed": false,
+  "unique_source_windows": 25,
+  "valid": true
+}

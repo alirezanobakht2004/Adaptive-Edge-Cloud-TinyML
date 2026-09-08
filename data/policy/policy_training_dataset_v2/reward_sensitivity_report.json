@@ -1,0 +1,85 @@
+{
+  "dataset_version": "policy_training_dataset_v2",
+  "description": "Offline reweighting of actual candidate measurements; no new inference runs or weight fitting. Baseline calibration and canonical labels unchanged.",
+  "source_sha256": "19a5f2ff65733f096e4533144ca94ada37ed1429b4ec512f81759d3290dee7bb",
+  "training_allowed": false,
+  "variants": {
+    "accuracy_only_tie_diagnostic": {
+      "optimal_action_distribution": {
+        "None": 24
+      },
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.0,
+        "energy_proxy": 0.0,
+        "latency": 0.0
+      }
+    },
+    "communication_times_0.5": {
+      "optimal_action_distribution": {
+        "0": 24
+      },
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.05,
+        "energy_proxy": 0.1,
+        "latency": 0.1
+      }
+    },
+    "communication_times_2": {
+      "optimal_action_distribution": {
+        "0": 24
+      },
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.2,
+        "energy_proxy": 0.1,
+        "latency": 0.1
+      }
+    },
+    "energy_proxy_times_0.5": {
+      "optimal_action_distribution": {
+        "0": 24
+      },
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.1,
+        "energy_proxy": 0.05,
+        "latency": 0.1
+      }
+    },
+    "energy_proxy_times_2": {
+      "optimal_action_distribution": {
+        "0": 24
+      },
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.1,
+        "energy_proxy": 0.2,
+        "latency": 0.1
+      }
+    },
+    "latency_times_0.5": {
+      "optimal_action_distribution": {
+        "0": 24
+      },
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.1,
+        "energy_proxy": 0.1,
+        "latency": 0.05
+      }
+    },
+    "latency_times_2": {
+      "optimal_action_distribution": {
+        "0": 24
+      },
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.1,
+        "energy_proxy": 0.1,
+        "latency": 0.2
+      }
+    }
+  }
+}

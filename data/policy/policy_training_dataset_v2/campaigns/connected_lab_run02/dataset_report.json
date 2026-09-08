@@ -1,0 +1,117 @@
+{
+  "action_coverage": {
+    "0": 96,
+    "1": 96,
+    "2": 96,
+    "3": 96
+  },
+  "action_metrics": {
+    "0": {
+      "accuracy": 1,
+      "mean_communication_bytes": 0,
+      "mean_estimated_energy_proxy": 0.34105208333333337,
+      "mean_latency_ms": 16.0634375,
+      "mean_reward": 0.9498313541666666
+    },
+    "1": {
+      "accuracy": 1,
+      "mean_communication_bytes": 765.8645833333334,
+      "mean_estimated_energy_proxy": 1.0127104654947916,
+      "mean_latency_ms": 36.32007291666667,
+      "mean_reward": 0.7876174173177083
+    },
+    "2": {
+      "accuracy": 1,
+      "mean_communication_bytes": 663.75,
+      "mean_estimated_energy_proxy": 0.989358984375,
+      "mean_latency_ms": 38.64152083333333,
+      "mean_reward": 0.7976032447916667
+    },
+    "3": {
+      "accuracy": 1,
+      "mean_communication_bytes": 391.96875,
+      "mean_estimated_energy_proxy": 0.5439653157552083,
+      "mean_latency_ms": 38.745052083333334,
+      "mean_reward": 0.8685802180989584
+    }
+  },
+  "ambiguous_labels": 0,
+  "campaign_run_id": "48d1e9e3cb0747fd9e571ba760f19910",
+  "candidate_executions": 384,
+  "condition": {
+    "description": "Exploratory connected ESP32/hotspot/LAN condition; provisional reward weights, not final policy calibration. One physical snapshot with bounded drift, not simultaneous identical physics.",
+    "energy_proxy": {
+      "compute_reference_ms": 10,
+      "payload_reference_bytes": 1024
+    },
+    "limits": {
+      "heap_drift_bytes": 4096,
+      "maximum_rtt_ms": 50,
+      "maximum_snapshot_age_ms": 10000,
+      "psram_drift_bytes": 4096,
+      "rssi_drift_db": 8,
+      "rtt_drift_ms": 20
+    },
+    "name": "connected-lab-pilot-v1",
+    "reward": {
+      "actions": {
+        "0": "ALL_LOCAL",
+        "1": "SPLIT1",
+        "2": "SPLIT2",
+        "3": "ALL_CLOUD"
+      },
+      "dataset_version": "policy_training_dataset_v1",
+      "energy_kind": "estimated",
+      "energy_method": "Dimensionless estimated proxy: (preprocessing_ms + state_inference_ms + selected_edge_compute_ms) / 10 + selected_payload_bytes / 1024; excludes radio waiting, cloud energy and probe traffic; not joules or battery measurement",
+      "energy_proxy_version": "m30-compute-payload-proxy-v1",
+      "scales": {
+        "communication_bytes": 1024,
+        "energy_proxy": 1,
+        "latency_ms": 100
+      },
+      "tie_tolerance": 1e-06,
+      "version": "reward-calibration-v1",
+      "weights": {
+        "accuracy": 1.0,
+        "communication": 0.1,
+        "energy_proxy": 0.1,
+        "latency": 0.1
+      }
+    },
+    "version": "matched-condition-v1"
+  },
+  "dataset_sha256": "19a5f2ff65733f096e4533144ca94ada37ed1429b4ec512f81759d3290dee7bb",
+  "dataset_version": "policy_training_dataset_v2",
+  "energy_kind": "estimated",
+  "limitations": [
+    "One controlled sequential snapshot, not simultaneous physical executions",
+    "Condition-dependent pilot labels; independent sessions and broader conditions still required",
+    "Energy proxy is dimensionless and unvalidated against battery measurements"
+  ],
+  "matched_samples": 24,
+  "maximum_observed_drift": {
+    "heap_drift_bytes": 420,
+    "maximum_rtt_ms": 27.653,
+    "maximum_snapshot_age_ms": 1615.192,
+    "psram_drift_bytes": 0,
+    "rssi_drift_db": 3,
+    "rtt_drift_ms": 17.251
+  },
+  "optimal_action_distribution": {
+    "0": 24,
+    "1": 0,
+    "2": 0,
+    "3": 0
+  },
+  "rejected_windows": [
+    {
+      "reason": "Condition violated: rtt_drift_ms=20.258 > 20",
+      "window_id": 124
+    }
+  ],
+  "repeat_label_agreement_samples": 24,
+  "source_and_server_evidence_validated": true,
+  "training_allowed": false,
+  "unique_source_windows": 24,
+  "valid": true
+}
