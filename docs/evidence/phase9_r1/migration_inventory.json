@@ -1,0 +1,4658 @@
+{
+  "baseline_commit": "4548d5601709fecb2b4584ad99fbb6d8f969e7b5",
+  "baseline_tests": {
+    "passed": 255,
+    "failed": 0,
+    "warnings": 4,
+    "seconds": 61.67
+  },
+  "canonical_external_before_sha256": "947a8fc53728c5392a97afae95be149034d7346d07e88fd4d978813b42755a80",
+  "canonical_after_sha256": "31f60c66a802d8b9587f90c745411d4107e0c91b9030f57dba9810f15ad46b5c",
+  "reference_findings": [
+    {
+      "path": "README.md",
+      "line": 17,
+      "classification": "A",
+      "text": "Split1/2/3 artifacts and regression suites remain fixed experimental baselines."
+    },
+    {
+      "path": "README.md",
+      "line": 19,
+      "classification": "A",
+      "text": "a learned binary policy is not yet integrated. Historical four-action datasets"
+    },
+    {
+      "path": "config/experiment.yaml",
+      "line": 13,
+      "classification": "A",
+      "text": "- all_local"
+    },
+    {
+      "path": "config/experiment.yaml",
+      "line": 14,
+      "classification": "A",
+      "text": "- all_cloud"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 19,
+      "classification": "A",
+      "text": "- `ALL_CLOUD` sends the 10-feature vector, while the validated split embeddings are 64, 48, and 32 float32 values."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 35,
+      "classification": "A",
+      "text": "For the undergraduate MVP, **adaptive split-point selection and the Split Controller are retired from the production decision path**. No further split-architecture optimization is required unless new measured evidence justifies reopening it."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 80,
+      "classification": "A",
+      "text": "Split inference was implemented and validated as an experimental branch of the project. However, measured and controlled action-space studies showed that the current 64/48/32-dimensional split embeddings are not competitive with directly offloading the 10-feature vector. Therefore adaptive split-poi"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 591,
+      "classification": "A",
+      "text": "Dense(48)"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 641,
+      "classification": "A",
+      "text": "ALL_CLOUD input: 10 values"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 659,
+      "classification": "A",
+      "text": "- No Split Controller is deployed in the production decision path."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 673,
+      "classification": "A",
+      "text": "Split prefixes remain isolated fixed-split experimental baselines. The Split Controller is retired from production."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 809,
+      "classification": "A",
+      "text": "Dense(4)"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 818,
+      "classification": "A",
+      "text": "## 15. Split Controller \u2014 Retired from Production MVP"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 834,
+      "classification": "A",
+      "text": "- Do not train or deploy a Split Controller for the current MVP."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 870,
+      "classification": "A",
+      "text": "The historical four-action datasets (`LOCAL`, `Split1`, `Split2`, `ALL_CLOUD`) remain valid research evidence but must not be silently relabeled as binary training data. If reused, conversion/provenance must be explicit and versioned."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 1437,
+      "classification": "A",
+      "text": "The production system does not require a learned Split Controller."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 1616,
+      "classification": "A",
+      "text": "\u2502   \u2502   \u2514\u2500\u2500 train_split_controller.py  # retired historical placeholder; not production"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 1653,
+      "classification": "A",
+      "text": "\u2502       \u2502   \u2514\u2500\u2500 split_controller.cpp  # retired historical placeholder; not production"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 1687,
+      "classification": "A",
+      "text": "\u2502   \u251c\u2500\u2500 all_local/"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 1688,
+      "classification": "A",
+      "text": "\u2502   \u251c\u2500\u2500 all_cloud/"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 1799,
+      "classification": "A",
+      "text": "split-policy-v1.0.0 (historical naming only; no production Split Controller)"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 1973,
+      "classification": "A",
+      "text": "No learned Split Controller is required for the current MVP."
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 2247,
+      "classification": "A",
+      "text": "LOCAL / Split1 / Split2 / Split3 (or LOCAL + learned split selection)"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 2327,
+      "classification": "A",
+      "text": "Split Controller:"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 2331,
+      "classification": "A",
+      "text": "Split1 = 64-D"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 2332,
+      "classification": "A",
+      "text": "Split2 = 48-D"
+    },
+    {
+      "path": "docs/PROJECT_ARCHITECTURE.md",
+      "line": 2333,
+      "classification": "A",
+      "text": "Split3 = 32-D"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 40,
+      "classification": "C",
+      "text": "\"name\": \"split1_block2\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 46,
+      "classification": "C",
+      "text": "\"name\": \"split1_block3\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 52,
+      "classification": "C",
+      "text": "\"name\": \"split1_cloud_head\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 56,
+      "classification": "C",
+      "text": "\"path\": \"data/processed/dataset-v1/features-v1/models/gesture-cloud-tail-split1-v1.0.0/gesture-cloud-tail-split1-v1.0.0.keras\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 65,
+      "classification": "C",
+      "text": "\"name\": \"split2_block3\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 71,
+      "classification": "C",
+      "text": "\"name\": \"split2_block4\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 77,
+      "classification": "C",
+      "text": "\"name\": \"split2_block5\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 83,
+      "classification": "C",
+      "text": "\"name\": \"split2_cloud_head\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 87,
+      "classification": "C",
+      "text": "\"path\": \"data/processed/dataset-v1/features-v1/models/gesture-cloud-tail-split2-v1.0.0/gesture-cloud-tail-split2-v1.0.0.keras\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 121,
+      "classification": "C",
+      "text": "\"conditional_payload_reward_delta_vs_split1\": 0.059832763671875025,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 122,
+      "classification": "C",
+      "text": "\"conditional_reward_at_unchanged_split1_accuracy_latency_compute\": 0.8474501809895834,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 131,
+      "classification": "C",
+      "text": "\"cloud\": \"hypothetical decoder(16->64), existing Split1 tail\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 145,
+      "classification": "C",
+      "text": "\"conditional_payload_reward_delta_vs_split1\": 0.049860636393229185,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 146,
+      "classification": "C",
+      "text": "\"conditional_reward_at_unchanged_split1_accuracy_latency_compute\": 0.8374780537109374,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 155,
+      "classification": "C",
+      "text": "\"cloud\": \"hypothetical decoder(24->64), existing Split1 tail\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 169,
+      "classification": "C",
+      "text": "\"conditional_payload_reward_delta_vs_split1\": 0.03988850911458335,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 170,
+      "classification": "C",
+      "text": "\"conditional_reward_at_unchanged_split1_accuracy_latency_compute\": 0.8275059264322916,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 179,
+      "classification": "C",
+      "text": "\"cloud\": \"existing Split3 tail\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 193,
+      "classification": "C",
+      "text": "\"conditional_payload_reward_delta_vs_split1\": 0.019944254557291676,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 194,
+      "classification": "C",
+      "text": "\"conditional_reward_at_unchanged_split1_accuracy_latency_compute\": 0.8075616718749999,"
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 203,
+      "classification": "C",
+      "text": "\"cloud\": \"existing Split2 tail\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 241,
+      "classification": "C",
+      "text": "\"Payload-only reward overlay uses Split1 costs for all dimensions to isolate bytes, not candidate placement costs\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 275,
+      "classification": "C",
+      "text": "\"0\": \"ALL_LOCAL\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 276,
+      "classification": "C",
+      "text": "\"1\": \"SPLIT1\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 277,
+      "classification": "C",
+      "text": "\"2\": \"SPLIT2\","
+    },
+    {
+      "path": "docs/evidence/phase10_5_candidate_comparison.json",
+      "line": 278,
+      "classification": "C",
+      "text": "\"3\": \"ALL_CLOUD\""
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 4,
+      "classification": "C",
+      "text": "\"ALL_LOCAL\": 25,"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 5,
+      "classification": "C",
+      "text": "\"SPLIT1\": 25,"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 6,
+      "classification": "C",
+      "text": "\"SPLIT2\": 25,"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 7,
+      "classification": "C",
+      "text": "\"ALL_CLOUD\": 25"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 182,
+      "classification": "C",
+      "text": "\"ALL_LOCAL\": {"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 354,
+      "classification": "C",
+      "text": "\"SPLIT1\": {"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 526,
+      "classification": "C",
+      "text": "\"SPLIT2\": {"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 698,
+      "classification": "C",
+      "text": "\"ALL_CLOUD\": {"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 1028,
+      "classification": "C",
+      "text": "\"source_windows_with_all_four_actions\": 25,"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 1031,
+      "classification": "C",
+      "text": "\"exact_selected_states_with_all_four_actions\": 0,"
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 1095,
+      "classification": "C",
+      "text": "\"path\": \"split1\","
+    },
+    {
+      "path": "docs/evidence/phase10_policy_dataset_analysis.json",
+      "line": 1100,
+      "classification": "C",
+      "text": "\"path\": \"split2\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 27,
+      "classification": "C",
+      "text": "\"request_id\": \"split1-e2e-0\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 32,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split1-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 36,
+      "classification": "C",
+      "text": "\"request_id\": \"split1-e2e-1\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 41,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split1-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 45,
+      "classification": "C",
+      "text": "\"request_id\": \"split1-e2e-2\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 50,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split1-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 54,
+      "classification": "C",
+      "text": "\"request_id\": \"split1-e2e-3\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 59,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split1-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 63,
+      "classification": "C",
+      "text": "\"request_id\": \"split1-e2e-4\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 68,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split1-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 78,
+      "classification": "C",
+      "text": "\"request_id\": \"split2-e2e-0\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 83,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 87,
+      "classification": "C",
+      "text": "\"request_id\": \"split2-e2e-1\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 92,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 96,
+      "classification": "C",
+      "text": "\"request_id\": \"split2-e2e-2\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 101,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 105,
+      "classification": "C",
+      "text": "\"request_id\": \"split2-e2e-3\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 110,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 114,
+      "classification": "C",
+      "text": "\"request_id\": \"split2-e2e-4\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 119,
+      "classification": "C",
+      "text": "\"model_version\": \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 129,
+      "classification": "C",
+      "text": "\"request_id\": \"split3-e2e-0\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 138,
+      "classification": "C",
+      "text": "\"request_id\": \"split3-e2e-1\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 147,
+      "classification": "C",
+      "text": "\"request_id\": \"split3-e2e-2\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 156,
+      "classification": "C",
+      "text": "\"request_id\": \"split3-e2e-3\","
+    },
+    {
+      "path": "docs/evidence/phase7/phase7_validation_summary.json",
+      "line": 165,
+      "classification": "C",
+      "text": "\"request_id\": \"split3-e2e-4\","
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/README.md",
+      "line": 5,
+      "classification": "C",
+      "text": "Actions: 0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD. Action 3 is NOT MQTT split=3."
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/metadata.json",
+      "line": 4,
+      "classification": "C",
+      "text": "\"0\": \"ALL_LOCAL\","
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/metadata.json",
+      "line": 5,
+      "classification": "C",
+      "text": "\"1\": \"SPLIT1\","
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/metadata.json",
+      "line": 6,
+      "classification": "C",
+      "text": "\"2\": \"SPLIT2\","
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/metadata.json",
+      "line": 7,
+      "classification": "C",
+      "text": "\"3\": \"ALL_CLOUD\""
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/schema.json",
+      "line": 4,
+      "classification": "C",
+      "text": "\"0\": \"ALL_LOCAL\","
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/schema.json",
+      "line": 5,
+      "classification": "C",
+      "text": "\"1\": \"SPLIT1\","
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/schema.json",
+      "line": 6,
+      "classification": "C",
+      "text": "\"2\": \"SPLIT2\","
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/schema.json",
+      "line": 7,
+      "classification": "C",
+      "text": "\"3\": \"ALL_CLOUD\""
+    },
+    {
+      "path": "docs/evidence/phase8/host_smoke/schema.json",
+      "line": 98,
+      "classification": "C",
+      "text": "\"warning\": \"Action 3 is ALL_CLOUD, not MQTT split=3. Energy is estimated/simulated only.\""
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/README.md",
+      "line": 5,
+      "classification": "C",
+      "text": "Actions: 0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD. Action 3 is NOT MQTT split=3."
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/metadata.json",
+      "line": 4,
+      "classification": "C",
+      "text": "\"0\": \"ALL_LOCAL\","
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/metadata.json",
+      "line": 5,
+      "classification": "C",
+      "text": "\"1\": \"SPLIT1\","
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/metadata.json",
+      "line": 6,
+      "classification": "C",
+      "text": "\"2\": \"SPLIT2\","
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/metadata.json",
+      "line": 7,
+      "classification": "C",
+      "text": "\"3\": \"ALL_CLOUD\""
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/schema.json",
+      "line": 4,
+      "classification": "C",
+      "text": "\"0\": \"ALL_LOCAL\","
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/schema.json",
+      "line": 5,
+      "classification": "C",
+      "text": "\"1\": \"SPLIT1\","
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/schema.json",
+      "line": 6,
+      "classification": "C",
+      "text": "\"2\": \"SPLIT2\","
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/schema.json",
+      "line": 7,
+      "classification": "C",
+      "text": "\"3\": \"ALL_CLOUD\""
+    },
+    {
+      "path": "docs/evidence/phase8/mqtt_smoke/schema.json",
+      "line": 98,
+      "classification": "C",
+      "text": "\"warning\": \"Action 3 is ALL_CLOUD, not MQTT split=3. Energy is estimated/simulated only.\""
+    },
+    {
+      "path": "docs/experiments.md",
+      "line": 14,
+      "classification": "C",
+      "text": "experiments/all_local/20260915_baseline-v1/"
+    },
+    {
+      "path": "docs/experiments.md",
+      "line": 15,
+      "classification": "C",
+      "text": "experiments/fixed_split/20260918_split2-v1/"
+    },
+    {
+      "path": "docs/mqtt_protocol.md",
+      "line": 7,
+      "classification": "A",
+      "text": "is `server/app/cloud_full.py`; it does not alias CLOUD to Split3."
+    },
+    {
+      "path": "docs/mqtt_protocol.md",
+      "line": 15,
+      "classification": "A",
+      "text": "benchmark. Its four-action numbering is historical and must not be reinterpreted"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 15,
+      "classification": "C",
+      "text": "| 0 ALL_LOCAL | ESP32 B3 prefix and existing stochastic local head |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 16,
+      "classification": "C",
+      "text": "| 1 SPLIT1 | ESP32 64-dimensional prefix, MQTT, Split1 cloud tail |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 17,
+      "classification": "C",
+      "text": "| 2 SPLIT2 | ESP32 48-dimensional prefix, MQTT, Split2 cloud tail |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 18,
+      "classification": "C",
+      "text": "| 3 ALL_CLOUD | ESP32 sends 10 normalized features; server executes full cloud network |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 20,
+      "classification": "C",
+      "text": "ALL_CLOUD is not Split3. Local and cloud heads retain their existing distinct"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 43,
+      "classification": "C",
+      "text": "5. Execute four repeats, rotating the four-action order. Every action appears"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 97,
+      "classification": "C",
+      "text": "Selected edge compute is the local action duration for ALL_LOCAL, prefix"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 98,
+      "classification": "C",
+      "text": "duration for SPLIT1/2, and zero for full-cloud model compute on the edge."
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 111,
+      "classification": "C",
+      "text": "excluding probe traffic and MQTT/TCP/Wi-Fi headers. ALL_LOCAL has zero selected"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 126,
+      "classification": "C",
+      "text": "four action summaries, repeated candidate measurements, source records,"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 137,
+      "classification": "C",
+      "text": "The final campaign requested 25 windows with four repeats of all four actions"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 147,
+      "classification": "C",
+      "text": "| ALL_LOCAL | 96 / 96 | 16.0634 ms | 0 | 0.3411 |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 148,
+      "classification": "C",
+      "text": "| SPLIT1 | 96 / 96 | 36.3201 ms | 765.8646 | 1.0127 |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 149,
+      "classification": "C",
+      "text": "| SPLIT2 | 96 / 96 | 38.6415 ms | 663.7500 | 0.9894 |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 150,
+      "classification": "C",
+      "text": "| ALL_CLOUD | 96 / 96 | 38.7451 ms | 391.9688 | 0.5440 |"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 154,
+      "classification": "C",
+      "text": "The labels are **24 ALL_LOCAL, zero SPLIT1/SPLIT2/ALL_CLOUD**, with agreement"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 157,
+      "classification": "C",
+      "text": "makes all four actions tie for all 24 samples. No weights were fitted to create"
+    },
+    {
+      "path": "docs/phase10_1_m30_matched_campaign.md",
+      "line": 199,
+      "classification": "C",
+      "text": "- All **six Phase7 hardware suites passed**, covering Split1/2/3 parity and"
+    },
+    {
+      "path": "docs/phase10_1_reward_calibration.md",
+      "line": 10,
+      "classification": "C",
+      "text": "The action mapping remains 0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD."
+    },
+    {
+      "path": "docs/phase10_1_reward_calibration.md",
+      "line": 14,
+      "classification": "C",
+      "text": "using the explicit current four-action contract and the M25 state specification."
+    },
+    {
+      "path": "docs/phase10_1_reward_calibration.md",
+      "line": 30,
+      "classification": "C",
+      "text": "cannot inspect a callback to prove that ALL_CLOUD ran the full cloud graph."
+    },
+    {
+      "path": "docs/phase10_2_network_diversity.md",
+      "line": 5,
+      "classification": "C",
+      "text": "all four actions evaluated for every state. **Zero new hardware measurements"
+    },
+    {
+      "path": "docs/phase10_2_network_diversity.md",
+      "line": 11,
+      "classification": "C",
+      "text": "mapping are preserved: 0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD. Action 3"
+    },
+    {
+      "path": "docs/phase10_2_network_diversity.md",
+      "line": 12,
+      "classification": "C",
+      "text": "retains the source M30 full-cloud execution, not Split3. No firmware, production"
+    },
+    {
+      "path": "docs/phase10_2_network_diversity.md",
+      "line": 54,
+      "classification": "C",
+      "text": "C = cloud inference time         # zero for ALL_LOCAL"
+    },
+    {
+      "path": "docs/phase10_2_network_diversity.md",
+      "line": 55,
+      "classification": "C",
+      "text": "N = selected time - E - C         # remote residual; zero for ALL_LOCAL"
+    },
+    {
+      "path": "docs/phase10_2_network_diversity.md",
+      "line": 131,
+      "classification": "C",
+      "text": "| Profile | Scenario records | ALL_LOCAL labels | SPLIT1 labels | SPLIT2 labels | ALL_CLOUD labels |"
+    },
+    {
+      "path": "docs/phase10_2_network_diversity.md",
+      "line": 140,
+      "classification": "C",
+      "text": "repeats), covering all four actions. Across profiles this is 1,536 candidate"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 3,
+      "classification": "C",
+      "text": "**Split1 and Split2 currently lose because another action dominates their"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 28,
+      "classification": "C",
+      "text": "from four-action comparisons. There are **24 independent source windows**, not"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 75,
+      "classification": "C",
+      "text": "| ALL_LOCAL | 1.000000 | 0.016063 | 0.000000 | 0.034105 | 0.949831 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 76,
+      "classification": "C",
+      "text": "| SPLIT1 | 1.000000 | 0.036320 | 0.074791 | 0.101271 | 0.787617 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 77,
+      "classification": "C",
+      "text": "| SPLIT2 | 1.000000 | 0.038642 | 0.064819 | 0.098936 | 0.797603 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 78,
+      "classification": "C",
+      "text": "| ALL_CLOUD | 1.000000 | 0.038745 | 0.038278 | 0.054397 | 0.868580 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 95,
+      "classification": "C",
+      "text": "edge slowdown favors ALL_CLOUD, whose selected model compute is zero on the edge."
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 103,
+      "classification": "C",
+      "text": "| ALL_LOCAL | None | 0 | 0 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 104,
+      "classification": "C",
+      "text": "| SPLIT1 | 64-value embedding | 256 | 765.8646 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 105,
+      "classification": "C",
+      "text": "| SPLIT2 | 48-value embedding | 192 | 663.7500 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 106,
+      "classification": "C",
+      "text": "| ALL_CLOUD | 10 normalized features | 40 | 391.9688 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 108,
+      "classification": "C",
+      "text": "ALL_CLOUD sends extracted features, not a raw IMU window. The split boundary"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 109,
+      "classification": "C",
+      "text": "expands that feature representation. Split1 and Split2 therefore have about"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 110,
+      "classification": "C",
+      "text": "1.95 and 1.69 times the selected payload of ALL_CLOUD in this JSON protocol."
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 131,
+      "classification": "C",
+      "text": "| ALL_LOCAL | 14.2648 | 1.7987 | 0 | 0 | 16.0634 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 132,
+      "classification": "C",
+      "text": "| SPLIT1 | 14.2648 | 1.0361 | 5.6491 | 15.3701 | 36.3201 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 133,
+      "classification": "C",
+      "text": "| SPLIT2 | 14.2648 | 1.7998 | 7.1437 | 15.4333 | 38.6415 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 134,
+      "classification": "C",
+      "text": "| ALL_CLOUD | 14.2648 | 0 | 10.5634 | 13.9169 | 38.7451 |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 141,
+      "classification": "C",
+      "text": "Split1 reduces mean server compute relative to ALL_CLOUD, but incurs edge-prefix"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 142,
+      "classification": "C",
+      "text": "compute and higher residual overhead. Its total advantage over ALL_CLOUD is"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 143,
+      "classification": "C",
+      "text": "only **2.4250 ms**. Split2's total advantage is only **0.1035 ms**. Both are"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 144,
+      "classification": "C",
+      "text": "substantially slower than ALL_LOCAL. These are small-sample means, not claims"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 152,
+      "classification": "C",
+      "text": "Holding all other mean costs fixed, the current reward requires Split1 and"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 153,
+      "classification": "C",
+      "text": "Split2 to be respectively **83.388 ms** and **71.081 ms** faster than ALL_CLOUD"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 157,
+      "classification": "C",
+      "text": "| Target | Total latency needed to tie ALL_LOCAL | Total latency needed to tie ALL_CLOUD |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 159,
+      "classification": "C",
+      "text": "| SPLIT1 | -125.894 ms | -44.643 ms |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 160,
+      "classification": "C",
+      "text": "| SPLIT2 | -113.587 ms | -32.335 ms |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 169,
+      "classification": "C",
+      "text": "| Cohort | Mean reward LOCAL | SPLIT1 | SPLIT2 | CLOUD | Dominator present for both splits in every state |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 171,
+      "classification": "C",
+      "text": "| Real M30 | 0.949831 | 0.787617 | 0.797603 | 0.868580 | ALL_LOCAL |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 172,
+      "classification": "C",
+      "text": "| Simulated baseline | 0.949831 | 0.787617 | 0.797603 | 0.868580 | ALL_LOCAL |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 173,
+      "classification": "C",
+      "text": "| Simulated high_latency | 0.799831 | 0.487617 | 0.497603 | 0.568580 | ALL_LOCAL |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 174,
+      "classification": "C",
+      "text": "| Simulated edge_loaded | 0.237032 | 0.234194 | 0.084567 | 0.531707 | ALL_CLOUD |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 175,
+      "classification": "C",
+      "text": "| Simulated cloud_favorable | 0.696711 | 0.607566 | 0.559542 | 0.769678 | ALL_CLOUD |"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 217,
+      "classification": "C",
+      "text": "at 100%, Split1 would need other conditions where local correctness is lower"
+    },
+    {
+      "path": "docs/phase10_3_split_sensitivity.md",
+      "line": 219,
+      "classification": "C",
+      "text": "more than **8.10 points**, to overcome each corresponding cost gap. Split2's"
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 6,
+      "classification": "C",
+      "text": "Labels are 24 ALL_LOCAL and 48 ALL_CLOUD. Neither split becomes optimal, and"
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 17,
+      "classification": "C",
+      "text": "The action mapping remains 0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD."
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 18,
+      "classification": "C",
+      "text": "ALL_CLOUD continues to mean full-cloud execution from 10 normalized features,"
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 19,
+      "classification": "C",
+      "text": "not Split3. Gesture models, prefix models, tails, production inference,"
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 46,
+      "classification": "C",
+      "text": "inference service: ALL_LOCAL, SPLIT1 and SPLIT2. ALL_CLOUD bypasses this assumed"
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 98,
+      "classification": "C",
+      "text": "All four action outcomes are present in every row. Infeasible actions contain"
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 120,
+      "classification": "C",
+      "text": "- Four action outcomes, feasibility/reasons, repeated results, normalized and"
+    },
+    {
+      "path": "docs/phase10_4_state_expansion.md",
+      "line": 138,
+      "classification": "C",
+      "text": "| Scenario | Records | LOCAL | SPLIT1 | SPLIT2 | CLOUD | Hypothesis result |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 23,
+      "classification": "C",
+      "text": "IMU stream or large image tensor. ALL_CLOUD transmits those 10 features. Split1"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 24,
+      "classification": "C",
+      "text": "and Split2 expand them to 64 and 48 values; thus they do not currently save"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 41,
+      "classification": "C",
+      "text": "| Split1 cloud tail | 64 -> 48 -> 32 -> 5 |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 42,
+      "classification": "C",
+      "text": "| Split2 cloud tail | 48 -> 32 -> 64 -> 32 -> 5 |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 43,
+      "classification": "C",
+      "text": "| Split3 cloud tail | 32 -> 64 -> 32 -> 5 |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 44,
+      "classification": "C",
+      "text": "| Full-cloud composition | Source B1/B2/B3 followed by Split3 tail |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 47,
+      "classification": "C",
+      "text": "The Split1 tail is a shorter continuation than the B1\u2013B5 full-cloud graph."
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 51,
+      "classification": "C",
+      "text": "The 48-dimensional boundary is existing B2/Split2. The 32-dimensional boundary"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 52,
+      "classification": "C",
+      "text": "is existing B3/Split3. Neither requires inventing a new width. There is no saved"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 53,
+      "classification": "C",
+      "text": "16- or 24-dimensional boundary. Policy action 3 remains **ALL_CLOUD**; inspecting"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 54,
+      "classification": "C",
+      "text": "the neural Split3 boundary does not rename or replace that policy action."
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 60,
+      "classification": "C",
+      "text": "existing Split1 tail. This defines a concrete compute estimate without pretending"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 68,
+      "classification": "C",
+      "text": "| 16 | B1 + 64->16 encoder; cloud 16->64 decoder + Split1 tail | 1,664 | 5,792 | 7,456 | Yes |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 69,
+      "classification": "C",
+      "text": "| 24 | B1 + 64->24 encoder; cloud 24->64 decoder + Split1 tail | 2,176 | 6,304 | 8,480 | Yes |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 70,
+      "classification": "C",
+      "text": "| 32 | Existing B1\u2013B3 / Split3 tail | 5,248 | 4,256 | 9,504 | No |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 71,
+      "classification": "C",
+      "text": "| 48 | Existing B1\u2013B2 / Split2 tail; control | 3,712 | 5,792 | 9,504 | No |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 74,
+      "classification": "C",
+      "text": "require 640, 3,072 and 1,536 MACs. Current Split1 uses 640 edge MACs and 4,768"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 90,
+      "classification": "C",
+      "text": "| Width | Raw tensor bytes | Raw bytes / ALL_CLOUD's 40-byte feature tensor | Estimated JSON request + response bytes |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 97,
+      "classification": "C",
+      "text": "Reference: current Split1 is 256 raw tensor bytes and 765.865 measured mean"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 98,
+      "classification": "C",
+      "text": "selected JSON bytes; current Split2 is 192 and 663.750. ALL_CLOUD is 40 and"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 116,
+      "classification": "C",
+      "text": "bytes, even though they are smaller than current Split1. With equal precision"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 134,
+      "classification": "C",
+      "text": "Split1 accuracy, latency and accounted edge compute fixed for every row. It"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 138,
+      "classification": "C",
+      "text": "| Width | Estimated direct payload penalty | Payload-only reward gain vs Split1 | Conditional reward |"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 145,
+      "classification": "C",
+      "text": "Current measured mean rewards are LOCAL 0.949831, Split1 0.787617, Split2"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 148,
+      "classification": "C",
+      "text": "For 48 dimensions, the conditional reward differs from actual Split2 because"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 149,
+      "classification": "C",
+      "text": "the overlay deliberately retains Split1 compute/latency; do not confuse them."
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 164,
+      "classification": "C",
+      "text": "local inference. Keep policy action mapping explicit; do not alias ALL_CLOUD"
+    },
+    {
+      "path": "docs/phase10_5_split_revision_study.md",
+      "line": 165,
+      "classification": "C",
+      "text": "to the neural Split3 route. No such campaign or firmware deployment ran here."
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 19,
+      "classification": "C",
+      "text": "older benchmark enumeration: **action 3 is ALL_CLOUD, never Split3**. Split3's"
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 20,
+      "classification": "C",
+      "text": "validated inference path remains unchanged and outside this four-action space."
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 107,
+      "classification": "C",
+      "text": "| 0 | ALL_LOCAL | Complete local edge inference |"
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 108,
+      "classification": "C",
+      "text": "| 1 | SPLIT1 | 64-D prefix embedding plus Split1 tail |"
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 109,
+      "classification": "C",
+      "text": "| 2 | SPLIT2 | 48-D prefix embedding plus Split2 tail |"
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 110,
+      "classification": "C",
+      "text": "| 3 | ALL_CLOUD | Ten normalized features; all neural blocks execute on server |"
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 181,
+      "classification": "C",
+      "text": "| Action distribution | 25 each for ALL_LOCAL, SPLIT1, SPLIT2, ALL_CLOUD |"
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 182,
+      "classification": "C",
+      "text": "| Unique source windows | 25; all four actions executed for every window |"
+    },
+    {
+      "path": "docs/phase10_policy_formulation.md",
+      "line": 187,
+      "classification": "C",
+      "text": "| Full selected state vectors | 100 distinct; none observed under all four actions |"
+    },
+    {
+      "path": "docs/phase6_server_m7_closure.md",
+      "line": 502,
+      "classification": "C",
+      "text": "8fb0d23 feat: train fixed split3 cloud tail"
+    },
+    {
+      "path": "docs/phase6_server_m7_closure.md",
+      "line": 503,
+      "classification": "C",
+      "text": "6116c14 feat: add fixed split3 server inference runtime"
+    },
+    {
+      "path": "docs/phase6_server_m7_closure.md",
+      "line": 504,
+      "classification": "C",
+      "text": "2abcddc feat: connect mqtt to split3 cloud inference"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 22,
+      "classification": "C",
+      "text": "The shorter Split1 tail was explicitly requested and completed in the prior"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 23,
+      "classification": "C",
+      "text": "milestone. It is preserved here. Split2 and Split3 follow the canonical deeper"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 40,
+      "classification": "C",
+      "text": "| Split1 prefix, unchanged | `gesture-model-v1.1.0/tflite/splits/gesture-model-v1.1.0-split1-prefix-float32-normalized-input.tflite` | 3,996 |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 41,
+      "classification": "C",
+      "text": "| Split2 prefix, new | `gesture-model-v1.1.0/tflite/splits/gesture-model-v1.1.0-split2-prefix-float32-normalized-input.tflite` | 16,984 |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 42,
+      "classification": "C",
+      "text": "| Split3 prefix, reused | `gesture-model-v1.1.0/tflite/gesture-model-v1.1.0-prefix-b3-float32-normalized-input.tflite` | 23,868 |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 43,
+      "classification": "C",
+      "text": "| Split1 cloud, unchanged | `gesture-cloud-tail-split1-v1.0.0/gesture-cloud-tail-split1-v1.0.0.tflite` | 21,972 |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 44,
+      "classification": "C",
+      "text": "| Split2 cloud, new | `gesture-cloud-tail-split2-v1.0.0/gesture-cloud-tail-split2-v1.0.0.tflite` | 26,820 |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 45,
+      "classification": "C",
+      "text": "| Split3 cloud, newly exported from unchanged Keras | `gesture-cloud-tail-v1.0.0/gesture-cloud-tail-v1.0.0.tflite` | 19,876 |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 47,
+      "classification": "C",
+      "text": "Split2's model directory also contains its Keras model, `metadata.json`,"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 48,
+      "classification": "C",
+      "text": "`training_history.json`, `split2_export_report.json`, and"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 49,
+      "classification": "C",
+      "text": "`split2_cloud_parity_vectors.npz`. Its prefix directory contains"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 50,
+      "classification": "C",
+      "text": "`split2_export_report.json` and `split2_parity_vectors.npz`. Split3's existing"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 51,
+      "classification": "C",
+      "text": "model directory gains only its TFLite export, `split3_export_report.json`, and"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 52,
+      "classification": "C",
+      "text": "`split3_cloud_parity_vectors.npz`; its Keras model and original metadata are unchanged."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 54,
+      "classification": "C",
+      "text": "Split2 training freezes the source prefix, extracts B2 embeddings from the"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 56,
+      "classification": "C",
+      "text": "copies source B3 and existing Split3 cloud weights as initialization, then trains"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 63,
+      "classification": "C",
+      "text": "- `ml/models/cloud_tail_split2.py`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 64,
+      "classification": "C",
+      "text": "- `ml/training/train_cloud_tail_split2.py`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 65,
+      "classification": "C",
+      "text": "- `ml/export/export_split2_cloud_tail.py`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 66,
+      "classification": "C",
+      "text": "- `ml/export/generate_split2_firmware.py`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 68,
+      "classification": "C",
+      "text": "- `ml/export/validate_split3.py`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 70,
+      "classification": "C",
+      "text": "- `tests/test_split2_cloud_tail.py`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 71,
+      "classification": "C",
+      "text": "- `tests/test_split3_cloud_tail.py`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 75,
+      "classification": "C",
+      "text": "Firmware additions are `split2_model_data.h/.cpp`, generated expectation/vector"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 76,
+      "classification": "C",
+      "text": "headers, and isolated `test_phase7_split2_parity`, `test_phase7_split2_e2e`,"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 77,
+      "classification": "C",
+      "text": "`test_phase7_split3_parity`, and `test_phase7_split3_e2e` suites. Split3 tests use"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 92,
+      "classification": "C",
+      "text": "| Check | Split1 | Split2 | Split3 |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 100,
+      "classification": "C",
+      "text": "- Isolated Split2 ESP32 prefix test: **passed**, five vectors,"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 101,
+      "classification": "C",
+      "text": "`SPLIT2_MAX_ABS_DIFF=0.000000000`."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 104,
+      "classification": "C",
+      "text": "- All six Phase7 suites passed: Split1/2/3 parity and Split1/2/3 MQTT E2E."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 110,
+      "classification": "C",
+      "text": "| `test_phase7_split1_parity` | PASS, 5 vectors |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 111,
+      "classification": "C",
+      "text": "| `test_phase7_split1_e2e` | PASS, 5 round trips |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 112,
+      "classification": "C",
+      "text": "| `test_phase7_split2_parity` | PASS, 5 vectors |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 113,
+      "classification": "C",
+      "text": "| `test_phase7_split2_e2e` | PASS, 5 round trips |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 114,
+      "classification": "C",
+      "text": "| `test_phase7_split3_parity` | PASS, 5 vectors |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 115,
+      "classification": "C",
+      "text": "| `test_phase7_split3_e2e` | PASS, 5 round trips |"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 151,
+      "classification": "C",
+      "text": ".venv\\Scripts\\python.exe -m ml.training.train_cloud_tail_split2"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 152,
+      "classification": "C",
+      "text": ".venv\\Scripts\\python.exe -m ml.export.export_split2_cloud_tail"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 153,
+      "classification": "C",
+      "text": ".venv\\Scripts\\python.exe -m ml.export.generate_split2_firmware"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 154,
+      "classification": "C",
+      "text": ".venv\\Scripts\\python.exe -m ml.export.validate_split3"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 188,
+      "classification": "C",
+      "text": "- [x] Split1 retained and revalidated on ESP32 and MQTT."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 189,
+      "classification": "C",
+      "text": "- [x] Split2 Keras, float32 tail, prefix, reports and parity artifacts saved."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 190,
+      "classification": "C",
+      "text": "- [x] Split2 prefix and five-sample hardware MQTT round trip passed."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 191,
+      "classification": "C",
+      "text": "- [x] Existing Split3 Keras and B3 runtime retained; float32/parity evidence added."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 192,
+      "classification": "C",
+      "text": "- [x] Split3 prefix and five-sample hardware MQTT round trip passed."
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 202,
+      "classification": "C",
+      "text": "The previously completed, uncommitted Split1 work was recorded separately as"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 205,
+      "classification": "C",
+      "text": "1. `81c04f8` ? `feat(split2): add split2 cloud tail training and export`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 206,
+      "classification": "C",
+      "text": "2. `f02cadf` ? `feat(split2): add esp32 prefix and parity validation`"
+    },
+    {
+      "path": "docs/phase7_m8_completion.md",
+      "line": 208,
+      "classification": "C",
+      "text": "4. `1680a8e` ? `test(phase7): validate split2 and split3 e2e`"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 1,
+      "classification": "C",
+      "text": "# Phase 7 / M8: Split1 completion"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 3,
+      "classification": "C",
+      "text": "Validated on 2026-09-07. The Split1 milestone is complete for the fixed-vector"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 10,
+      "classification": "C",
+      "text": "request specifies a separate, shorter Split1 tail; this implementation follows"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 15,
+      "classification": "C",
+      "text": "ESP32 | Split1 embedding: float32[64] | server"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 16,
+      "classification": "C",
+      "text": "B2 Dense(48, ReLU) \u2192 B3 Dense(32, ReLU)"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 20,
+      "classification": "C",
+      "text": "Model name: `gesture_cloud_tail_split1`."
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 21,
+      "classification": "C",
+      "text": "Version: `gesture-cloud-tail-split1-v1.0.0`."
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 26,
+      "classification": "C",
+      "text": "Split3 tail. These tails have different architectures and independently trained"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 31,
+      "classification": "C",
+      "text": "No Meta Learner, Split Controller, OTA, continual learning, or dashboard work."
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 37,
+      "classification": "C",
+      "text": "- `ml/models/cloud_tail_split1.py`: named model, metadata contract, shape validation."
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 38,
+      "classification": "C",
+      "text": "- `ml/training/train_cloud_tail_split1.py`: source hash verification, frozen B1"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 40,
+      "classification": "C",
+      "text": "- `ml/export/export_split1_cloud_tail.py`: float32 export, parity validation,"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 42,
+      "classification": "C",
+      "text": "- `tests/test_split1_cloud_tail.py`: deterministic inference, real prefix/tail"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 44,
+      "classification": "C",
+      "text": "- `firmware/test/test_phase7_split1_e2e/test_main.cpp`: isolated hardware test"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 46,
+      "classification": "C",
+      "text": "- `firmware/test/test_phase7_split1_e2e/cloud_expectations.h`: generated class and"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 48,
+      "classification": "C",
+      "text": "- `docs/phase7_split1_completion.md`: this record."
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 52,
+      "classification": "C",
+      "text": "- `server/app/inference.py`: validated Split1 runtime and fixed split routing,"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 53,
+      "classification": "C",
+      "text": "sharing the existing inference implementation with Split3."
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 59,
+      "classification": "C",
+      "text": "`data/processed/dataset-v1/features-v1/models/gesture-cloud-tail-split1-v1.0.0/`:"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 61,
+      "classification": "C",
+      "text": "- `gesture-cloud-tail-split1-v1.0.0.keras`"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 62,
+      "classification": "C",
+      "text": "- `gesture-cloud-tail-split1-v1.0.0.tflite` (21,972 bytes)"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 65,
+      "classification": "C",
+      "text": "- `split1_export_report.json`"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 66,
+      "classification": "C",
+      "text": "- `split1_cloud_parity_vectors.npz`"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 82,
+      "classification": "C",
+      "text": "\"request_id\": \"split1-e2e-0\","
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 83,
+      "classification": "C",
+      "text": "\"device_id\": \"esp32-split1-test\","
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 121,
+      "classification": "C",
+      "text": "- Server observed `split1-e2e-0` through `split1-e2e-4`, respectively returning"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 127,
+      "classification": "C",
+      "text": "test/test_phase7_split1_e2e/test_main.cpp:92: testSplit1EndToEnd [PASSED]"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 128,
+      "classification": "C",
+      "text": "esp32-s3-n8r2:test_phase7_split1_e2e [PASSED]"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 143,
+      "classification": "C",
+      "text": ".venv\\Scripts\\python.exe -m ml.training.train_cloud_tail_split1"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 144,
+      "classification": "C",
+      "text": ".venv\\Scripts\\python.exe -m ml.export.export_split1_cloud_tail"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 145,
+      "classification": "C",
+      "text": ".venv\\Scripts\\python.exe -m py_compile ml/models/cloud_tail_split1.py ml/training/train_cloud_tail_split1.py ml/export/export_split1_cloud_tail.py server/app/inference.py server/app/mqtt.py server/app/schemas.py tests/test_split1_cloud_tail.py tests/test_mqtt_inference.py"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 149,
+      "classification": "C",
+      "text": "& 'C:\\Users\\alire\\.platformio\\penv\\Scripts\\platformio.exe' test -d firmware -e esp32-s3-n8r2 -f test_phase7_split1_e2e --upload-port COM10 --test-port COM10"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 161,
+      "classification": "C",
+      "text": "- [x] Split1 cloud tail model exists."
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 177,
+      "classification": "C",
+      "text": "Split2 still needs its 48-value prefix/tail artifacts, parity tests, server route,"
+    },
+    {
+      "path": "docs/phase7_split1_completion.md",
+      "line": 178,
+      "classification": "C",
+      "text": "and hardware round trip. Split3's existing 32-value cloud tail and Python route"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 4,
+      "classification": "C",
+      "text": "> `phase8_policy_dataset.md`. The fixed action mapping is 0 ALL_LOCAL,"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 5,
+      "classification": "C",
+      "text": "> 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD. The action-3 Split3 mapping and proposed"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 11,
+      "classification": "C",
+      "text": "Meta Learner or Split Controller. See `phase7_m8_completion.md` for validation"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 23,
+      "classification": "C",
+      "text": "| 1 | Split1 | ESP32 B1, then `gesture-cloud-tail-split1-v1.0.0` | 64 float32 values |"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 24,
+      "classification": "C",
+      "text": "| 2 | Split2 | ESP32 B1+B2, then `gesture-cloud-tail-split2-v1.0.0` | 48 float32 values |"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 25,
+      "classification": "C",
+      "text": "| 3 | Split3 | Existing ESP32 B1+B2+B3, then `gesture-cloud-tail-v1.0.0` | 32 float32 values |"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 28,
+      "classification": "C",
+      "text": "versions and normalization hash in a run manifest. Split1's shorter tail and"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 41,
+      "classification": "C",
+      "text": "and an input hash. Replay that same input for all four actions."
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 59,
+      "classification": "C",
+      "text": "future policies on TEST. Keep all four actions and repeated measurements from"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 100,
+      "classification": "C",
+      "text": "Split1, that earlier computation is not free. Record decision/preparation cost"
+    },
+    {
+      "path": "docs/phase8_benchmark_plan.md",
+      "line": 205,
+      "classification": "C",
+      "text": "Meta Learner and Split Controller training remain a later phase. OTA, continual"
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 9,
+      "classification": "C",
+      "text": "observations. A complete device-state campaign and real ALL_CLOUD executor are"
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 19,
+      "classification": "C",
+      "text": "| M12 baselines | ALL_LOCAL, ALL_CLOUD, FIXED_SPLIT1, FIXED_SPLIT2, RULE_BASED_ADAPTIVE; explicit executor boundary and coverage-aware summaries |"
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 22,
+      "classification": "C",
+      "text": "The action mapping is **0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD**."
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 24,
+      "classification": "C",
+      "text": "as policy ALL_CLOUD. ALL_CLOUD has a strategy interface but no implicit transport"
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 57,
+      "classification": "C",
+      "text": "deprecation warnings. Existing Split1/2/3 Python regression tests passed."
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 62,
+      "classification": "C",
+      "text": "timeout preservation, valid responses and the ALL_CLOUD/Split3 distinction."
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 67,
+      "classification": "C",
+      "text": "- Real host/broker/cloud smoke: **10 observations**, five each for Split1/2."
+    },
+    {
+      "path": "docs/phase8_completion.md",
+      "line": 106,
+      "classification": "C",
+      "text": "Before future training: supply a genuine ALL_CLOUD executor, finish device-state"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 24,
+      "classification": "C",
+      "text": "| 0 | ALL_LOCAL | Classification remains local |"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 25,
+      "classification": "C",
+      "text": "| 1 | SPLIT1 | B1 embedding offloaded through the validated Split1 path |"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 26,
+      "classification": "C",
+      "text": "| 2 | SPLIT2 | B1+B2 embedding offloaded through the validated Split2 path |"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 27,
+      "classification": "C",
+      "text": "| 3 | ALL_CLOUD | Entire model computation performed in the cloud; requires an explicit future executor |"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 31,
+      "classification": "C",
+      "text": "Split3 runtime/protocol remains unchanged. Its results cannot be imported as"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 32,
+      "classification": "C",
+      "text": "ALL_CLOUD observations. No ALL_CLOUD wire protocol or executor is invented here;"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 78,
+      "classification": "C",
+      "text": "- `PolicySample.prefix`: measure Split1/2 prefix calls and embedding sizes."
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 134,
+      "classification": "C",
+      "text": "ALL_LOCAL, ALL_CLOUD, FIXED_SPLIT1 and FIXED_SPLIT2 strategies, and"
+    },
+    {
+      "path": "docs/phase8_policy_dataset.md",
+      "line": 143,
+      "classification": "C",
+      "text": "samples use Split1 on a fast link or Split2 on a slower acceptable link. It is"
+    },
+    {
+      "path": "docs/phase9_completion.md",
+      "line": 10,
+      "classification": "C",
+      "text": "| M15 | Executed local, Split1, Split2 and genuine ten-feature ALL_CLOUD paths |"
+    },
+    {
+      "path": "docs/phase9_completion.md",
+      "line": 13,
+      "classification": "C",
+      "text": "| M18 | Measured four-action summary; rule-based baseline explicitly missing, energy null |"
+    },
+    {
+      "path": "docs/phase9_completion.md",
+      "line": 63,
+      "classification": "C",
+      "text": "python -m tools.policy_dataset.run_campaign --samples 25 --mode split1 --output data/policy/policy_training_dataset_v1/campaigns/split1"
+    },
+    {
+      "path": "docs/phase9_completion.md",
+      "line": 64,
+      "classification": "C",
+      "text": "python -m tools.policy_dataset.run_campaign --samples 25 --mode split2 --output data/policy/policy_training_dataset_v1/campaigns/split2"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 12,
+      "classification": "C",
+      "text": "| 0 ALL_LOCAL | Existing B3 prefix and five-pass stochastic edge head | None for the selected action |"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 13,
+      "classification": "C",
+      "text": "| 1 SPLIT1 | Existing float32 10 -> 64 prefix | Existing Split1 tail: 64 -> 48 -> 32 -> 5 |"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 14,
+      "classification": "C",
+      "text": "| 2 SPLIT2 | Existing float32 10 -> 48 prefix | Existing Split2 tail: 48 -> 32 -> 64 -> 32 -> 5 |"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 15,
+      "classification": "C",
+      "text": "| 3 ALL_CLOUD | Normalize ten features, send all ten | Frozen B1/B2/B3 followed by B4/B5/cloud head: 10 -> 64 -> 48 -> 32 -> 64 -> 32 -> 5 |"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 17,
+      "classification": "C",
+      "text": "ALL_CLOUD is `gesture-full-cloud-v1.0.0`, composed in memory from hash-checked"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 20,
+      "classification": "C",
+      "text": "weights does not make this an alias for a Split3 request. Production"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 27,
+      "classification": "C",
+      "text": "uncertainty implementation. Split1/2 use their existing model assets and a shared"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 33,
+      "classification": "C",
+      "text": "The local selected action runs B3/MC again with the same seed. ALL_CLOUD still"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 50,
+      "classification": "C",
+      "text": "Probe traffic is retained separately, including for ALL_LOCAL. MQTT headers,"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 75,
+      "classification": "C",
+      "text": "python -m tools.policy_dataset.run_campaign --samples 25 --mode split1 --output <new-split1-directory>"
+    },
+    {
+      "path": "docs/phase9_dataset_collection.md",
+      "line": 76,
+      "classification": "C",
+      "text": "python -m tools.policy_dataset.run_campaign --samples 25 --mode split2 --output <new-split2-directory>"
+    },
+    {
+      "path": "firmware/include/split1_model_data.h",
+      "line": 5,
+      "classification": "B",
+      "text": "namespace split1_model_data {"
+    },
+    {
+      "path": "firmware/include/split1_model_data.h",
+      "line": 17,
+      "classification": "B",
+      "text": "}  // namespace split1_model_data"
+    },
+    {
+      "path": "firmware/include/split2_model_data.h",
+      "line": 3,
+      "classification": "B",
+      "text": "namespace split2_model_data {"
+    },
+    {
+      "path": "firmware/src/inference/split1_model_data.cpp",
+      "line": 1,
+      "classification": "B",
+      "text": "#include \"split1_model_data.h\""
+    },
+    {
+      "path": "firmware/src/inference/split1_model_data.cpp",
+      "line": 3,
+      "classification": "B",
+      "text": "namespace split1_model_data {"
+    },
+    {
+      "path": "firmware/src/inference/split1_model_data.cpp",
+      "line": 354,
+      "classification": "B",
+      "text": "}  // namespace split1_model_data"
+    },
+    {
+      "path": "firmware/src/inference/split2_model_data.cpp",
+      "line": 1,
+      "classification": "B",
+      "text": "#include \"split2_model_data.h\""
+    },
+    {
+      "path": "firmware/src/inference/split2_model_data.cpp",
+      "line": 2,
+      "classification": "B",
+      "text": "namespace split2_model_data {"
+    },
+    {
+      "path": "firmware/src/inference/split2_model_data.cpp",
+      "line": 1424,
+      "classification": "B",
+      "text": "static_assert(MODEL_LEN == EXPECTED_MODEL_LEN, \"Split2 byte count mismatch\");"
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 11,
+      "classification": "B",
+      "text": "#include \"split1_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 12,
+      "classification": "B",
+      "text": "#include \"split2_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 18,
+      "classification": "B",
+      "text": "#include \"../test_phase7_split1_parity/split1_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 19,
+      "classification": "B",
+      "text": "#include \"../test_phase7_split2_parity/split2_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 42,
+      "classification": "B",
+      "text": "const auto* model = tflite::GetModel(split == 1 ? split1_model_data::MODEL : split2_model_data::MODEL);"
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 60,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE(prefix(split, split1_parity_vectors::NORMALIZED_INPUTS[0], actual));"
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 62,
+      "classification": "B",
+      "text": "const float expected = split == 1 ? split1_parity_vectors::EXPECTED_OUTPUTS[0][i] : split2_parity_vectors::EXPECTED_OUTPUTS[0][i];"
+    },
+    {
+      "path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "line": 151,
+      "classification": "B",
+      "text": "const char* version = action == 1 ? \"gesture-cloud-tail-split1-v1.0.0\" : action == 2 ? \"gesture-cloud-tail-split2-v1.0.0\" : \"gesture-full-cloud-v1.0.0\";"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/cloud_expectations.h",
+      "line": 1,
+      "classification": "B",
+      "text": "// Generated by ml.export.export_split1_cloud_tail; Keras SHA-256:"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 1,
+      "classification": "B",
+      "text": "// Isolated Split1 integration test; production inference is unchanged."
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 10,
+      "classification": "B",
+      "text": "#include \"split1_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 11,
+      "classification": "B",
+      "text": "#include \"../test_phase7_split1_parity/split1_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 18,
+      "classification": "B",
+      "text": "constexpr const char* requestTopic = \"gesture/esp32-split1-test/inference/request\";"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 19,
+      "classification": "B",
+      "text": "constexpr const char* responseTopic = \"gesture/esp32-split1-test/inference/response\";"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 31,
+      "classification": "B",
+      "text": "void testSplit1EndToEnd() {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 35,
+      "classification": "B",
+      "text": "tflite::GetModel(split1_model_data::MODEL), resolver, arena, sizeof(arena));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 40,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE(network::connectMqtt(\"esp32-split1-e2e\"));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 43,
+      "classification": "B",
+      "text": "for (size_t v = 0; v < split1_parity_vectors::VECTOR_COUNT; ++v) {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 44,
+      "classification": "B",
+      "text": "memcpy(interpreter.input(0)->data.f, split1_parity_vectors::NORMALIZED_INPUTS[v],"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 47,
+      "classification": "B",
+      "text": "String payload = \"{\\\"request_id\\\":\\\"split1-e2e-\" + String(v) +"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 48,
+      "classification": "B",
+      "text": "\"\\\",\\\"device_id\\\":\\\"esp32-split1-test\\\",\\\"timestamp_ms\\\":\" + String(millis()) +"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 53,
+      "classification": "B",
+      "text": "TEST_ASSERT_FLOAT_WITHIN(2e-5f, split1_parity_vectors::EXPECTED_OUTPUTS[v][i], value);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 62,
+      "classification": "B",
+      "text": "snprintf(expectedRequest, sizeof(expectedRequest), \"\\\"request_id\\\":\\\"split1-e2e-%u\\\"\", unsigned(v));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 70,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE_MESSAGE(received, \"Split1 server response timeout\");"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 72,
+      "classification": "B",
+      "text": "TEST_ASSERT_NOT_NULL(strstr(response, \"\\\"model_version\\\":\\\"gesture-cloud-tail-split1-v1.0.0\\\"\"));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 79,
+      "classification": "B",
+      "text": "Serial.printf(\"SPLIT1_E2E_VECTOR=%u RESPONSE=%s\\n\", unsigned(v), response);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 82,
+      "classification": "B",
+      "text": "Serial.println(\"PHASE7_SPLIT1_E2E_PASS\");"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_e2e/test_main.cpp",
+      "line": 92,
+      "classification": "B",
+      "text": "RUN_TEST(testSplit1EndToEnd);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/split1_parity_vectors.h",
+      "line": 6,
+      "classification": "B",
+      "text": "namespace split1_parity_vectors {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/split1_parity_vectors.h",
+      "line": 38,
+      "classification": "B",
+      "text": "}  // namespace split1_parity_vectors"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 14,
+      "classification": "B",
+      "text": "#include \"split1_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 15,
+      "classification": "B",
+      "text": "#include \"split1_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 28,
+      "classification": "B",
+      "text": "void testSplit1Parity() {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 32,
+      "classification": "B",
+      "text": "split1_model_data::MODEL"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 91,
+      "classification": "B",
+      "text": "split1_model_data::INPUT_FEATURES"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 98,
+      "classification": "B",
+      "text": "split1_model_data::OUTPUT_UNITS"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 110,
+      "classification": "B",
+      "text": "split1_parity_vectors::VECTOR_COUNT;"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 116,
+      "classification": "B",
+      "text": "split1_parity_vectors::NORMALIZED_INPUTS["
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 119,
+      "classification": "B",
+      "text": "split1_parity_vectors::INPUT_FEATURES"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 133,
+      "classification": "B",
+      "text": "split1_parity_vectors::OUTPUT_UNITS;"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 141,
+      "classification": "B",
+      "text": "split1_parity_vectors::EXPECTED_OUTPUTS["
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 166,
+      "classification": "B",
+      "text": "\"Split1 output mismatch\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 173,
+      "classification": "B",
+      "text": "\"SPLIT1_VECTOR_COUNT=%u\\n\","
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 175,
+      "classification": "B",
+      "text": "split1_parity_vectors::VECTOR_COUNT"
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 181,
+      "classification": "B",
+      "text": "\"SPLIT1_MAX_ABS_DIFF=%.9f\\n\","
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 187,
+      "classification": "B",
+      "text": "\"PHASE7_SPLIT1_PARITY_PASS\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split1_parity/test_main.cpp",
+      "line": 213,
+      "classification": "B",
+      "text": "testSplit1Parity"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 1,
+      "classification": "B",
+      "text": "// Isolated Split2 integration test; production inference is unchanged."
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 10,
+      "classification": "B",
+      "text": "#include \"split2_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 11,
+      "classification": "B",
+      "text": "#include \"../test_phase7_split2_parity/split2_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 18,
+      "classification": "B",
+      "text": "constexpr const char* requestTopic = \"gesture/esp32-split2-test/inference/request\";"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 19,
+      "classification": "B",
+      "text": "constexpr const char* responseTopic = \"gesture/esp32-split2-test/inference/response\";"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 31,
+      "classification": "B",
+      "text": "void testSplit2EndToEnd() {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 35,
+      "classification": "B",
+      "text": "tflite::GetModel(split2_model_data::MODEL), resolver, arena, sizeof(arena));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 40,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE(network::connectMqtt(\"esp32-split2-e2e\"));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 43,
+      "classification": "B",
+      "text": "for (size_t v = 0; v < split2_parity_vectors::VECTOR_COUNT; ++v) {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 44,
+      "classification": "B",
+      "text": "memcpy(interpreter.input(0)->data.f, split2_parity_vectors::NORMALIZED_INPUTS[v],"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 47,
+      "classification": "B",
+      "text": "String payload = \"{\\\"request_id\\\":\\\"split2-e2e-\" + String(v) +"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 48,
+      "classification": "B",
+      "text": "\"\\\",\\\"device_id\\\":\\\"esp32-split2-test\\\",\\\"timestamp_ms\\\":\" + String(millis()) +"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 53,
+      "classification": "B",
+      "text": "TEST_ASSERT_FLOAT_WITHIN(1e-5f, split2_parity_vectors::EXPECTED_OUTPUTS[v][i], value);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 62,
+      "classification": "B",
+      "text": "snprintf(expectedRequest, sizeof(expectedRequest), \"\\\"request_id\\\":\\\"split2-e2e-%u\\\"\", unsigned(v));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 70,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE_MESSAGE(received, \"Split2 server response timeout\");"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 72,
+      "classification": "B",
+      "text": "TEST_ASSERT_NOT_NULL(strstr(response, \"\\\"model_version\\\":\\\"gesture-cloud-tail-split2-v1.0.0\\\"\"));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 79,
+      "classification": "B",
+      "text": "Serial.printf(\"SPLIT2_E2E_VECTOR=%u RESPONSE=%s\\n\", unsigned(v), response);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 82,
+      "classification": "B",
+      "text": "Serial.println(\"PHASE7_SPLIT2_E2E_PASS\");"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_e2e/test_main.cpp",
+      "line": 92,
+      "classification": "B",
+      "text": "RUN_TEST(testSplit2EndToEnd);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/split2_parity_vectors.h",
+      "line": 3,
+      "classification": "B",
+      "text": "namespace split2_parity_vectors {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 14,
+      "classification": "B",
+      "text": "#include \"split2_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 15,
+      "classification": "B",
+      "text": "#include \"split2_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 28,
+      "classification": "B",
+      "text": "void testSplit2Parity() {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 32,
+      "classification": "B",
+      "text": "split2_model_data::MODEL"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 91,
+      "classification": "B",
+      "text": "split2_model_data::INPUT_FEATURES"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 98,
+      "classification": "B",
+      "text": "split2_model_data::OUTPUT_UNITS"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 110,
+      "classification": "B",
+      "text": "split2_parity_vectors::VECTOR_COUNT;"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 116,
+      "classification": "B",
+      "text": "split2_parity_vectors::NORMALIZED_INPUTS["
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 119,
+      "classification": "B",
+      "text": "split2_parity_vectors::INPUT_FEATURES"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 133,
+      "classification": "B",
+      "text": "split2_parity_vectors::OUTPUT_UNITS;"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 141,
+      "classification": "B",
+      "text": "split2_parity_vectors::EXPECTED_OUTPUTS["
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 166,
+      "classification": "B",
+      "text": "\"Split2 output mismatch\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 173,
+      "classification": "B",
+      "text": "\"SPLIT2_VECTOR_COUNT=%u\\n\","
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 175,
+      "classification": "B",
+      "text": "split2_parity_vectors::VECTOR_COUNT"
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 181,
+      "classification": "B",
+      "text": "\"SPLIT2_MAX_ABS_DIFF=%.9f\\n\","
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 187,
+      "classification": "B",
+      "text": "\"PHASE7_SPLIT2_PARITY_PASS\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split2_parity/test_main.cpp",
+      "line": 213,
+      "classification": "B",
+      "text": "testSplit2Parity"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 1,
+      "classification": "B",
+      "text": "// Isolated Split3 integration test; production inference is unchanged."
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 11,
+      "classification": "B",
+      "text": "#include \"../test_phase7_split3_parity/split3_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 18,
+      "classification": "B",
+      "text": "constexpr const char* requestTopic = \"gesture/esp32-split3-test/inference/request\";"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 19,
+      "classification": "B",
+      "text": "constexpr const char* responseTopic = \"gesture/esp32-split3-test/inference/response\";"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 31,
+      "classification": "B",
+      "text": "void testSplit3EndToEnd() {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 36,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE(network::connectMqtt(\"esp32-split3-e2e\"));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 39,
+      "classification": "B",
+      "text": "for (size_t v = 0; v < split3_parity_vectors::VECTOR_COUNT; ++v) {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 41,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE(inference::runPrefixB3(split3_parity_vectors::NORMALIZED_INPUTS[v], embedding));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 42,
+      "classification": "B",
+      "text": "String payload = \"{\\\"request_id\\\":\\\"split3-e2e-\" + String(v) +"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 43,
+      "classification": "B",
+      "text": "\"\\\",\\\"device_id\\\":\\\"esp32-split3-test\\\",\\\"timestamp_ms\\\":\" + String(millis()) +"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 48,
+      "classification": "B",
+      "text": "TEST_ASSERT_FLOAT_WITHIN(1e-5f, split3_parity_vectors::EXPECTED_OUTPUTS[v][i], value);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 57,
+      "classification": "B",
+      "text": "snprintf(expectedRequest, sizeof(expectedRequest), \"\\\"request_id\\\":\\\"split3-e2e-%u\\\"\", unsigned(v));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 65,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE_MESSAGE(received, \"Split3 server response timeout\");"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 74,
+      "classification": "B",
+      "text": "Serial.printf(\"SPLIT3_E2E_VECTOR=%u RESPONSE=%s\\n\", unsigned(v), response);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 77,
+      "classification": "B",
+      "text": "Serial.println(\"PHASE7_SPLIT3_E2E_PASS\");"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_e2e/test_main.cpp",
+      "line": 87,
+      "classification": "B",
+      "text": "RUN_TEST(testSplit3EndToEnd);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/split3_parity_vectors.h",
+      "line": 3,
+      "classification": "B",
+      "text": "namespace split3_parity_vectors {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 5,
+      "classification": "B",
+      "text": "#include \"split3_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 7,
+      "classification": "B",
+      "text": "void testSplit3Parity() {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 10,
+      "classification": "B",
+      "text": "for (size_t v = 0; v < split3_parity_vectors::VECTOR_COUNT; ++v) {"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 12,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE(inference::runPrefixB3(split3_parity_vectors::NORMALIZED_INPUTS[v], embedding));"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 15,
+      "classification": "B",
+      "text": "const float diff = std::fabs(embedding[i] - split3_parity_vectors::EXPECTED_OUTPUTS[v][i]);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 17,
+      "classification": "B",
+      "text": "TEST_ASSERT_FLOAT_WITHIN(1e-5f, split3_parity_vectors::EXPECTED_OUTPUTS[v][i], embedding[i]);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 20,
+      "classification": "B",
+      "text": "Serial.printf(\"SPLIT3_VECTOR_COUNT=5\\nSPLIT3_MAX_ABS_DIFF=%.9f\\n\", maximum);"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 21,
+      "classification": "B",
+      "text": "Serial.println(\"PHASE7_SPLIT3_PARITY_PASS\");"
+    },
+    {
+      "path": "firmware/test/test_phase7_split3_parity/test_main.cpp",
+      "line": 29,
+      "classification": "B",
+      "text": "RUN_TEST(testSplit3Parity);"
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 10,
+      "classification": "B",
+      "text": "#include \"split1_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 11,
+      "classification": "B",
+      "text": "#include \"split2_model_data.h\""
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 17,
+      "classification": "B",
+      "text": "#include \"../test_phase7_split1_parity/split1_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 18,
+      "classification": "B",
+      "text": "#include \"../test_phase7_split2_parity/split2_parity_vectors.h\""
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 41,
+      "classification": "B",
+      "text": "const auto* model = tflite::GetModel(split == 1 ? split1_model_data::MODEL : split2_model_data::MODEL);"
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 59,
+      "classification": "B",
+      "text": "TEST_ASSERT_TRUE(prefix(split, split1_parity_vectors::NORMALIZED_INPUTS[0], actual));"
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 61,
+      "classification": "B",
+      "text": "const float expected = split == 1 ? split1_parity_vectors::EXPECTED_OUTPUTS[0][i] : split2_parity_vectors::EXPECTED_OUTPUTS[0][i];"
+    },
+    {
+      "path": "firmware/test/test_phase9_campaign/test_main.cpp",
+      "line": 134,
+      "classification": "B",
+      "text": "const char* version = action == 1 ? \"gesture-cloud-tail-split1-v1.0.0\" : action == 2 ? \"gesture-cloud-tail-split2-v1.0.0\" : \"gesture-full-cloud-v1.0.0\";"
+    },
+    {
+      "path": "ml/export/export_split1.py",
+      "line": 59,
+      "classification": "B",
+      "text": "f\"{SOURCE_MODEL_VERSION}-split1-prefix-\""
+    },
+    {
+      "path": "ml/export/export_split1.py",
+      "line": 63,
+      "classification": "B",
+      "text": "REPORT_FILENAME = \"split1_export_report.json\""
+    },
+    {
+      "path": "ml/export/export_split1.py",
+      "line": 64,
+      "classification": "B",
+      "text": "PARITY_VECTORS_FILENAME = \"split1_parity_vectors.npz\""
+    },
+    {
+      "path": "ml/export/export_split1.py",
+      "line": 359,
+      "classification": "B",
+      "text": "name=\"split1_raw_reference\","
+    },
+    {
+      "path": "ml/export/export_split1.py",
+      "line": 432,
+      "classification": "B",
+      "text": "expected_split1=raw_reference["
+    },
+    {
+      "path": "ml/export/export_split1.py",
+      "line": 435,
+      "classification": "B",
+      "text": "tflite_split1=tflite_output["
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Export float32 Split1 tail and validate against frozen prefix parity vectors.\"\"\""
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 8,
+      "classification": "B",
+      "text": "from ml.models.cloud_tail_split1 import ("
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 10,
+      "classification": "B",
+      "text": "validate_cloud_tail_split1,"
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 21,
+      "classification": "B",
+      "text": "path = (MODEL_DIR.parents[5] / \"firmware/test/test_phase7_split1_e2e\""
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 25,
+      "classification": "B",
+      "text": "\"// Generated by ml.export.export_split1_cloud_tail; Keras SHA-256:\\n\""
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 40,
+      "classification": "B",
+      "text": "raise ValueError(\"Split1 tail TFLite shape/dtype mismatch\")"
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 51,
+      "classification": "B",
+      "text": "parity_path = MODEL_DIR / \"split1_cloud_parity_vectors.npz\""
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 53,
+      "classification": "B",
+      "text": "raise RuntimeError(\"Refusing to overwrite Split1 export evidence\")"
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 55,
+      "classification": "B",
+      "text": "validate_cloud_tail_split1(model)"
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 56,
+      "classification": "B",
+      "text": "report_path = MODEL_DIR / \"split1_export_report.json\""
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 59,
+      "classification": "B",
+      "text": "raise RuntimeError(\"Split1 Keras hash mismatch\")"
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 64,
+      "classification": "B",
+      "text": "/ \"split1_parity_vectors.npz\")"
+    },
+    {
+      "path": "ml/export/export_split1_cloud_tail.py",
+      "line": 66,
+      "classification": "B",
+      "text": "embeddings = vectors[\"tflite_split1\"].copy()"
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Export Split2 cloud continuation and five float32 parity vectors.\"\"\""
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 8,
+      "classification": "B",
+      "text": "from ml.models.cloud_tail_split2 import ("
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 9,
+      "classification": "B",
+      "text": "MODEL_DIR, MODEL_PATH, CLOUD_TAIL_VERSION, validate_cloud_tail_split2,"
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 18,
+      "classification": "B",
+      "text": "parity_path = MODEL_DIR / \"split2_cloud_parity_vectors.npz\""
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 20,
+      "classification": "B",
+      "text": "raise RuntimeError(\"Refusing to overwrite Split2 export evidence\")"
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 21,
+      "classification": "B",
+      "text": "report_path = MODEL_DIR / \"split2_export_report.json\""
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 24,
+      "classification": "B",
+      "text": "raise RuntimeError(\"Split2 Keras hash mismatch\")"
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 26,
+      "classification": "B",
+      "text": "validate_cloud_tail_split2(model)"
+    },
+    {
+      "path": "ml/export/export_split2_cloud_tail.py",
+      "line": 29,
+      "classification": "B",
+      "text": "with np.load(SPLITS / \"split1_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "ml/export/generate_phase7_e2e.py",
+      "line": 1,
+      "classification": "D",
+      "text": "\"\"\"Generate fixed cloud-response expectations and Split3 vectors for hardware tests.\"\"\""
+    },
+    {
+      "path": "ml/export/generate_phase7_e2e.py",
+      "line": 8,
+      "classification": "D",
+      "text": "from ml.export.generate_split1_firmware import matrix_to_cpp, write_new_file"
+    },
+    {
+      "path": "ml/export/generate_phase7_e2e.py",
+      "line": 18,
+      "classification": "D",
+      "text": "version = \"gesture-cloud-tail-v1.0.0\" if split == 3 else \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "ml/export/generate_phase7_e2e.py",
+      "line": 32,
+      "classification": "D",
+      "text": "write_new_file(ROOT / \"firmware/test/test_phase7_split3_parity/split3_parity_vectors.h\", f'''#pragma once"
+    },
+    {
+      "path": "ml/export/generate_phase7_e2e.py",
+      "line": 34,
+      "classification": "D",
+      "text": "namespace split3_parity_vectors {{"
+    },
+    {
+      "path": "ml/export/generate_phase7_e2e.py",
+      "line": 40,
+      "classification": "D",
+      "text": "{matrix_to_cpp(vectors['expected_split3'])}"
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 21,
+      "classification": "B",
+      "text": "REPORT_PATH = MODEL_ROOT / \"split1_export_report.json\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 24,
+      "classification": "B",
+      "text": "\"gesture-model-v1.1.0-split1-prefix-\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 28,
+      "classification": "B",
+      "text": "PARITY_PATH = MODEL_ROOT / \"split1_parity_vectors.npz\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 31,
+      "classification": "B",
+      "text": "\"firmware/include/split1_model_data.h\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 35,
+      "classification": "B",
+      "text": "\"firmware/src/inference/split1_model_data.cpp\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 39,
+      "classification": "B",
+      "text": "\"firmware/test/test_phase7_split1_parity/\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 40,
+      "classification": "B",
+      "text": "\"split1_parity_vectors.h\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 177,
+      "classification": "B",
+      "text": "\"expected_split1\","
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 204,
+      "classification": "B",
+      "text": "payload[\"expected_split1\"],"
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 234,
+      "classification": "B",
+      "text": "f\"Unexpected expected_split1 shape: \""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 245,
+      "classification": "B",
+      "text": "\"expected_split1 contains non-finite values.\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 282,
+      "classification": "B",
+      "text": "namespace split1_model_data {{"
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 294,
+      "classification": "B",
+      "text": "}}  // namespace split1_model_data"
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 304,
+      "classification": "B",
+      "text": "return f'''#include \"split1_model_data.h\""
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 306,
+      "classification": "B",
+      "text": "namespace split1_model_data {{"
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 325,
+      "classification": "B",
+      "text": "}}  // namespace split1_model_data"
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 356,
+      "classification": "B",
+      "text": "namespace split1_parity_vectors {{"
+    },
+    {
+      "path": "ml/export/generate_split1_firmware.py",
+      "line": 380,
+      "classification": "B",
+      "text": "}}  // namespace split1_parity_vectors"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 8,
+      "classification": "B",
+      "text": "from ml.export.generate_split1_firmware import bytes_to_cpp, matrix_to_cpp, write_new_file"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 15,
+      "classification": "B",
+      "text": "output = SPLITS / f\"{SOURCE_VERSION}-split2-prefix-float32-normalized-input.tflite\""
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 16,
+      "classification": "B",
+      "text": "parity_path = SPLITS / \"split2_parity_vectors.npz\""
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 17,
+      "classification": "B",
+      "text": "report_path = SPLITS / \"split2_export_report.json\""
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 18,
+      "classification": "B",
+      "text": "header = ROOT / \"firmware/include/split2_model_data.h\""
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 19,
+      "classification": "B",
+      "text": "source_path = ROOT / \"firmware/src/inference/split2_model_data.cpp\""
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 20,
+      "classification": "B",
+      "text": "vectors_path = ROOT / \"firmware/test/test_phase7_split2_parity/split2_parity_vectors.h\""
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 22,
+      "classification": "B",
+      "text": "raise RuntimeError(\"Refusing to overwrite Split2 prefix evidence\")"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 26,
+      "classification": "B",
+      "text": "with np.load(SPLITS / \"split1_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 39,
+      "classification": "B",
+      "text": "expected_split2=expected, tflite_split2=actual)"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 43,
+      "classification": "B",
+      "text": "namespace split2_model_data {{"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 54,
+      "classification": "B",
+      "text": "write_new_file(source_path, f'''#include \"split2_model_data.h\""
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 55,
+      "classification": "B",
+      "text": "namespace split2_model_data {{"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 62,
+      "classification": "B",
+      "text": "static_assert(MODEL_LEN == EXPECTED_MODEL_LEN, \"Split2 byte count mismatch\");"
+    },
+    {
+      "path": "ml/export/generate_split2_firmware.py",
+      "line": 67,
+      "classification": "B",
+      "text": "namespace split2_parity_vectors {{"
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Add float32 and fixed-vector evidence for the existing, unchanged Split3 models.\"\"\""
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 18,
+      "classification": "B",
+      "text": "parity_path = directory / \"split3_cloud_parity_vectors.npz\""
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 19,
+      "classification": "B",
+      "text": "report_path = directory / \"split3_export_report.json\""
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 21,
+      "classification": "B",
+      "text": "raise RuntimeError(\"Refusing to overwrite Split3 validation evidence\")"
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 24,
+      "classification": "B",
+      "text": "raise RuntimeError(\"Frozen Split3 Keras hash mismatch\")"
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 27,
+      "classification": "B",
+      "text": "raise ValueError(\"Split3 must be (None, 32) -> (None, 5)\")"
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 34,
+      "classification": "B",
+      "text": "with np.load(SPLITS / \"split1_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "ml/export/validate_split3.py",
+      "line": 47,
+      "classification": "B",
+      "text": "expected_split3=expected_prefix, true_classes=labels, validation_indices=indices,"
+    },
+    {
+      "path": "ml/models/base_model.py",
+      "line": 25,
+      "classification": "D",
+      "text": "-> Dense(48) + ReLU"
+    },
+    {
+      "path": "ml/models/cloud_model.py",
+      "line": 24,
+      "classification": "D",
+      "text": "name=\"split3_embedding\","
+    },
+    {
+      "path": "ml/models/cloud_model.py",
+      "line": 48,
+      "classification": "D",
+      "text": "name=\"gesture_cloud_tail_split3\","
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Phase 7 Split1 continuation; independent of the frozen Split3 tail.\"\"\""
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 10,
+      "classification": "B",
+      "text": "CLOUD_TAIL_VERSION = \"gesture-cloud-tail-split1-v1.0.0\""
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 22,
+      "classification": "B",
+      "text": "def build_cloud_tail_split1() -> tf.keras.Model:"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 23,
+      "classification": "B",
+      "text": "inputs = tf.keras.Input(shape=(64,), dtype=tf.float32, name=\"split1_embedding\")"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 24,
+      "classification": "B",
+      "text": "x = tf.keras.layers.Dense(48, activation=\"relu\", name=\"split1_block2\")(inputs)"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 25,
+      "classification": "B",
+      "text": "x = tf.keras.layers.Dense(32, activation=\"relu\", name=\"split1_block3\")(x)"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 26,
+      "classification": "B",
+      "text": "outputs = tf.keras.layers.Dense(5, activation=\"softmax\", name=\"split1_cloud_head\")(x)"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 27,
+      "classification": "B",
+      "text": "return tf.keras.Model(inputs, outputs, name=\"gesture_cloud_tail_split1\")"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 30,
+      "classification": "B",
+      "text": "def validate_cloud_tail_split1(model: tf.keras.Model) -> None:"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 32,
+      "classification": "B",
+      "text": "raise ValueError(\"Split1 requires (None, 64) -> (None, 5)\")"
+    },
+    {
+      "path": "ml/models/cloud_tail_split1.py",
+      "line": 37,
+      "classification": "B",
+      "text": "raise ValueError(\"Unexpected Split1 continuation architecture\")"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Phase 7 Split2 continuation; independent of the frozen Split3 tail.\"\"\""
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 10,
+      "classification": "B",
+      "text": "CLOUD_TAIL_VERSION = \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 22,
+      "classification": "B",
+      "text": "def build_cloud_tail_split2() -> tf.keras.Model:"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 23,
+      "classification": "B",
+      "text": "inputs = tf.keras.Input(shape=(48,), dtype=tf.float32, name=\"split2_embedding\")"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 24,
+      "classification": "B",
+      "text": "x = tf.keras.layers.Dense(32, activation=\"relu\", name=\"split2_block3\")(inputs)"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 25,
+      "classification": "B",
+      "text": "x = tf.keras.layers.Dense(64, activation=\"relu\", name=\"split2_block4\")(x)"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 26,
+      "classification": "B",
+      "text": "x = tf.keras.layers.Dense(32, activation=\"relu\", name=\"split2_block5\")(x)"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 27,
+      "classification": "B",
+      "text": "outputs = tf.keras.layers.Dense(5, activation=\"softmax\", name=\"split2_cloud_head\")(x)"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 28,
+      "classification": "B",
+      "text": "return tf.keras.Model(inputs, outputs, name=\"gesture_cloud_tail_split2\")"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 31,
+      "classification": "B",
+      "text": "def validate_cloud_tail_split2(model: tf.keras.Model) -> None:"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 33,
+      "classification": "B",
+      "text": "raise ValueError(\"Split2 requires (None, 48) -> (None, 5)\")"
+    },
+    {
+      "path": "ml/models/cloud_tail_split2.py",
+      "line": 38,
+      "classification": "B",
+      "text": "raise ValueError(\"Unexpected Split2 continuation architecture\")"
+    },
+    {
+      "path": "ml/policy/benchmark.py",
+      "line": 52,
+      "classification": "B",
+      "text": "return Selection(int(Action.ALL_LOCAL))"
+    },
+    {
+      "path": "ml/policy/benchmark.py",
+      "line": 53,
+      "classification": "B",
+      "text": "return Selection(int(Action.SPLIT1 if rtt <= self.fast_rtt_ms else Action.SPLIT2))"
+    },
+    {
+      "path": "ml/policy/benchmark.py",
+      "line": 57,
+      "classification": "B",
+      "text": "return [FixedStrategy(\"ALL_LOCAL\", Action.ALL_LOCAL),"
+    },
+    {
+      "path": "ml/policy/benchmark.py",
+      "line": 58,
+      "classification": "B",
+      "text": "FixedStrategy(\"ALL_CLOUD\", Action.ALL_CLOUD),"
+    },
+    {
+      "path": "ml/policy/benchmark.py",
+      "line": 59,
+      "classification": "B",
+      "text": "FixedStrategy(\"FIXED_SPLIT1\", Action.SPLIT1),"
+    },
+    {
+      "path": "ml/policy/benchmark.py",
+      "line": 60,
+      "classification": "B",
+      "text": "FixedStrategy(\"FIXED_SPLIT2\", Action.SPLIT2), RuleBasedAdaptive()]"
+    },
+    {
+      "path": "ml/policy/benchmark.py",
+      "line": 64,
+      "classification": "B",
+      "text": "\"\"\"Executors are explicit adapters; missing ALL_CLOUD support fails rather than using Split3.\"\"\""
+    },
+    {
+      "path": "ml/policy/formulation.py",
+      "line": 25,
+      "classification": "B",
+      "text": "raise ValueError(\"Action mapping must preserve ALL_CLOUD as action 3\")"
+    },
+    {
+      "path": "ml/policy/policy_config_v1.json",
+      "line": 7,
+      "classification": "B",
+      "text": "\"actions\": {\"0\": \"ALL_LOCAL\", \"1\": \"SPLIT1\", \"2\": \"SPLIT2\", \"3\": \"ALL_CLOUD\"},"
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 16,
+      "classification": "B",
+      "text": "VERSIONS = (\"gesture-model-v1.1.0\", \"gesture-cloud-tail-split1-v1.0.0\","
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 17,
+      "classification": "B",
+      "text": "\"gesture-cloud-tail-split2-v1.0.0\", \"gesture-cloud-tail-v1.0.0\")"
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 48,
+      "classification": "B",
+      "text": "\"cloud\": f\"hypothetical decoder({dimension}->64), existing Split1 tail\","
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 57,
+      "classification": "B",
+      "text": "\"cloud\": \"existing Split3 tail\" if dimension == 32 else \"existing Split2 tail\","
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 106,
+      "classification": "B",
+      "text": "split3 = json.loads((model_root / VERSIONS[3] / \"split3_export_report.json\").read_text())"
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 109,
+      "classification": "B",
+      "text": "if split3[\"prefix_sha256\"] != b3_sha or split3[\"model_sha256\"] != artifacts[3][\"sha256\"]:"
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 110,
+      "classification": "B",
+      "text": "raise ValueError(\"Split3 artifact/report mismatch\")"
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 129,
+      "classification": "B",
+      "text": "\"conditional_payload_reward_delta_vs_split1\": delta,"
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 130,
+      "classification": "B",
+      "text": "\"conditional_reward_at_unchanged_split1_accuracy_latency_compute\": conditional_reward,"
+    },
+    {
+      "path": "ml/policy/split_architecture_analysis.py",
+      "line": 144,
+      "classification": "B",
+      "text": "\"Payload-only reward overlay uses Split1 costs for all dimensions to isolate bytes, not candidate placement costs\","
+    },
+    {
+      "path": "ml/policy/train_split_controller.py",
+      "line": 1,
+      "classification": "A",
+      "text": "\"\"\"Retired R1 historical placeholder. No production Split Controller is trained.\"\"\""
+    },
+    {
+      "path": "ml/training/train_cloud_tail.py",
+      "line": 399,
+      "classification": "D",
+      "text": "\"phase6-fixed-split3-cloud-tail\","
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Train only Split1 B2/B3/head on frozen B1 embeddings, without TEST data.\"\"\""
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 10,
+      "classification": "B",
+      "text": "from ml.models.cloud_tail_split1 import ("
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 12,
+      "classification": "B",
+      "text": "build_cloud_tail_split1, validate_cloud_tail_split1,"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 23,
+      "classification": "B",
+      "text": "raise RuntimeError(f\"Refusing to overwrite Split1 artifacts: {MODEL_DIR}\")"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 37,
+      "classification": "B",
+      "text": "raise ValueError(\"Invalid Split1 embeddings\")"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 38,
+      "classification": "B",
+      "text": "model = build_cloud_tail_split1()"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 39,
+      "classification": "B",
+      "text": "for target, original in ((\"split1_block2\", \"block2\"), (\"split1_block3\", \"block3\"),"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 40,
+      "classification": "B",
+      "text": "(\"split1_cloud_head\", \"edge_head\")):"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 55,
+      "classification": "B",
+      "text": "validate_cloud_tail_split1(model)"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 61,
+      "classification": "B",
+      "text": "\"model_purpose\": \"phase7-split1-cloud-tail\","
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 78,
+      "classification": "B",
+      "text": "for filename in (\"metadata.json\", \"split1_export_report.json\"):"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split1.py",
+      "line": 80,
+      "classification": "B",
+      "text": "print(f\"SPLIT1_TRAINING_PASS: {MODEL_PATH}\")"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Train only Split2 B3/B4/B5/head on frozen B1/B2 embeddings, without TEST data.\"\"\""
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 10,
+      "classification": "B",
+      "text": "from ml.models.cloud_tail_split2 import ("
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 12,
+      "classification": "B",
+      "text": "build_cloud_tail_split2, validate_cloud_tail_split2,"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 23,
+      "classification": "B",
+      "text": "raise RuntimeError(f\"Refusing to overwrite Split2 artifacts: {MODEL_DIR}\")"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 37,
+      "classification": "B",
+      "text": "raise ValueError(\"Invalid Split2 embeddings\")"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 38,
+      "classification": "B",
+      "text": "model = build_cloud_tail_split2()"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 39,
+      "classification": "B",
+      "text": "model.get_layer(\"split2_block3\").set_weights(source.get_layer(\"block3\").get_weights())"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 41,
+      "classification": "B",
+      "text": "from ml.models.cloud_model import CLOUD_TAIL_VERSION as SPLIT3_VERSION"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 42,
+      "classification": "B",
+      "text": "split3_path = MODEL_DIR.parent / SPLIT3_VERSION / f\"{SPLIT3_VERSION}.keras\""
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 43,
+      "classification": "B",
+      "text": "split3 = tf.keras.models.load_model(split3_path, compile=False)"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 44,
+      "classification": "B",
+      "text": "for target, original in ((\"split2_block4\", \"block4\"), (\"split2_block5\", \"block5\"),"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 45,
+      "classification": "B",
+      "text": "(\"split2_cloud_head\", \"cloud_head\")):"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 46,
+      "classification": "B",
+      "text": "model.get_layer(target).set_weights(split3.get_layer(original).get_weights())"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 60,
+      "classification": "B",
+      "text": "validate_cloud_tail_split2(model)"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 67,
+      "classification": "B",
+      "text": "\"model_purpose\": \"phase7-split2-cloud-tail\","
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 81,
+      "classification": "B",
+      "text": "\"initial_split3_sha256\": sha256_file(split3_path),"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 82,
+      "classification": "B",
+      "text": "\"initial_weights\": \"source block3 and frozen Split3 cloud layers; copied, then trained\","
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 85,
+      "classification": "B",
+      "text": "for filename in (\"metadata.json\", \"split2_export_report.json\"):"
+    },
+    {
+      "path": "ml/training/train_cloud_tail_split2.py",
+      "line": 87,
+      "classification": "B",
+      "text": "print(f\"SPLIT2_TRAINING_PASS: {MODEL_PATH}\")"
+    },
+    {
+      "path": "ml/uncertainty/mc_dropout.py",
+      "line": 42,
+      "classification": "D",
+      "text": "-> Dense(48) + ReLU"
+    },
+    {
+      "path": "server/app/cloud_full.py",
+      "line": 3,
+      "classification": "B",
+      "text": "Uses frozen existing weights. This is not a Split3 request or production route."
+    },
+    {
+      "path": "server/app/cloud_full.py",
+      "line": 11,
+      "classification": "B",
+      "text": "from .inference import Split3CloudInference"
+    },
+    {
+      "path": "server/app/cloud_full.py",
+      "line": 19,
+      "classification": "B",
+      "text": "self.tail = Split3CloudInference()"
+    },
+    {
+      "path": "server/app/cloud_full.py",
+      "line": 30,
+      "classification": "B",
+      "text": "raise ValueError(\"ALL_CLOUD requires exactly 10 finite normalized features\")"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 15,
+      "classification": "D",
+      "text": "from ml.models.cloud_tail_split1 import ("
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 16,
+      "classification": "D",
+      "text": "CLOUD_TAIL_VERSION as SPLIT1_TAIL_VERSION,"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 17,
+      "classification": "D",
+      "text": "MODEL_DIR as SPLIT1_MODEL_DIR,"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 18,
+      "classification": "D",
+      "text": "MODEL_PATH as SPLIT1_MODEL_PATH,"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 19,
+      "classification": "D",
+      "text": "validate_cloud_tail_split1,"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 30,
+      "classification": "D",
+      "text": "EXPECTED_MODEL_PURPOSE = \"phase6-fixed-split3-cloud-tail\""
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 70,
+      "classification": "D",
+      "text": "class Split3CloudInference:"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 314,
+      "classification": "D",
+      "text": "class Split1CloudInference(Split3CloudInference):"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 315,
+      "classification": "D",
+      "text": "\"\"\"64-D Split1 tail with separate version and artifact validation.\"\"\""
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 317,
+      "classification": "D",
+      "text": "expected_version = SPLIT1_TAIL_VERSION"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 319,
+      "classification": "D",
+      "text": "expected_purpose = \"phase7-split1-cloud-tail\""
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 325,
+      "classification": "D",
+      "text": "SPLIT1_MODEL_PATH if model_path is None else model_path,"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 326,
+      "classification": "D",
+      "text": "SPLIT1_MODEL_DIR / \"metadata.json\" if metadata_path is None else metadata_path,"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 328,
+      "classification": "D",
+      "text": "validate_cloud_tail_split1(self._model)"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 346,
+      "classification": "D",
+      "text": "class Split2CloudInference(Split1CloudInference):"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 347,
+      "classification": "D",
+      "text": "\"\"\"48-D continuation with the same strict provenance checks as Split1.\"\"\""
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 349,
+      "classification": "D",
+      "text": "expected_version = \"gesture-cloud-tail-split2-v1.0.0\""
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 350,
+      "classification": "D",
+      "text": "expected_purpose = \"phase7-split2-cloud-tail\""
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 355,
+      "classification": "D",
+      "text": "from ml.models.cloud_tail_split2 import MODEL_PATH, MODEL_DIR, validate_cloud_tail_split2"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 356,
+      "classification": "D",
+      "text": "Split3CloudInference.__init__("
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 360,
+      "classification": "D",
+      "text": "validate_cloud_tail_split2(self._model)"
+    },
+    {
+      "path": "server/app/inference.py",
+      "line": 367,
+      "classification": "D",
+      "text": "self.runtimes = {1: Split1CloudInference(), 2: Split2CloudInference(), 3: Split3CloudInference()}"
+    },
+    {
+      "path": "server/app/mqtt.py",
+      "line": 1,
+      "classification": "D",
+      "text": "\"\"\"MQTT inference service for fixed Split1, Split2 and Split3 requests.\"\"\""
+    },
+    {
+      "path": "server/app/mqtt.py",
+      "line": 12,
+      "classification": "D",
+      "text": "from .inference import Split3CloudInference, SplitCloudInference"
+    },
+    {
+      "path": "server/app/mqtt.py",
+      "line": 26,
+      "classification": "D",
+      "text": "runtime: Split3CloudInference | SplitCloudInference"
+    },
+    {
+      "path": "server/app/mqtt.py",
+      "line": 52,
+      "classification": "D",
+      "text": "runtime: Split3CloudInference | SplitCloudInference,"
+    },
+    {
+      "path": "server/app/schemas.py",
+      "line": 1,
+      "classification": "D",
+      "text": "\"\"\"JSON request validation for Split1, Split2 and Split3 MQTT inference.\"\"\""
+    },
+    {
+      "path": "server/app/schemas.py",
+      "line": 18,
+      "classification": "D",
+      "text": "\"\"\"Parse and validate the Split1, Split2 or Split3 MQTT inference request.\"\"\""
+    },
+    {
+      "path": "tests/test_matched_campaign.py",
+      "line": 72,
+      "classification": "D",
+      "text": "if problem == \"mapping\": condition[\"reward\"][\"actions\"][\"3\"] = \"SPLIT3\""
+    },
+    {
+      "path": "tests/test_matched_campaign.py",
+      "line": 110,
+      "classification": "D",
+      "text": "versions = {\"1\": \"gesture-cloud-tail-split1-v1.0.0\", \"2\": \"gesture-cloud-tail-split2-v1.0.0\","
+    },
+    {
+      "path": "tests/test_mqtt_inference.py",
+      "line": 42,
+      "classification": "D",
+      "text": "def test_fixed_split3_request_contract() -> None:"
+    },
+    {
+      "path": "tests/test_network_conditions.py",
+      "line": 32,
+      "classification": "B",
+      "text": "@pytest.mark.parametrize(\"field,value\", [(\"simulated\", False), (\"profile\", \"SPLIT3\"), (\"version\", \"unknown\")])"
+    },
+    {
+      "path": "tests/test_policy_benchmark.py",
+      "line": 8,
+      "classification": "D",
+      "text": "def test_baselines_and_missing_all_cloud_executor():"
+    },
+    {
+      "path": "tests/test_policy_benchmark.py",
+      "line": 11,
+      "classification": "D",
+      "text": "with pytest.raises(NotImplementedError, match=\"ALL_CLOUD\"):"
+    },
+    {
+      "path": "tests/test_policy_benchmark_report.py",
+      "line": 13,
+      "classification": "D",
+      "text": "assert report[\"baselines\"][\"ALL_LOCAL\"][\"accuracy\"] == 1"
+    },
+    {
+      "path": "tests/test_policy_benchmark_report.py",
+      "line": 14,
+      "classification": "D",
+      "text": "assert report[\"baselines\"][\"ALL_LOCAL\"][\"mean_latency_ms\"] == 2"
+    },
+    {
+      "path": "tests/test_policy_benchmark_report.py",
+      "line": 15,
+      "classification": "D",
+      "text": "assert report[\"baselines\"][\"ALL_CLOUD\"][\"accuracy\"] is None"
+    },
+    {
+      "path": "tests/test_policy_benchmark_report.py",
+      "line": 17,
+      "classification": "D",
+      "text": "assert report[\"baselines\"][\"ALL_LOCAL\"][\"mean_estimated_energy_proxy\"] is None"
+    },
+    {
+      "path": "tests/test_policy_collector.py",
+      "line": 51,
+      "classification": "D",
+      "text": "meta[\"actions\"][\"3\"] = \"SPLIT3\""
+    },
+    {
+      "path": "tests/test_policy_formulation.py",
+      "line": 20,
+      "classification": "D",
+      "text": "@pytest.mark.parametrize(\"change\", [\"split3_alias\", \"post_action_leakage\", \"wrong_version\", \"reward_weight\", \"training\", \"encoding\"])"
+    },
+    {
+      "path": "tests/test_policy_formulation.py",
+      "line": 23,
+      "classification": "D",
+      "text": "if change == \"split3_alias\":"
+    },
+    {
+      "path": "tests/test_policy_formulation.py",
+      "line": 24,
+      "classification": "D",
+      "text": "config[\"actions\"][\"3\"] = \"SPLIT3\""
+    },
+    {
+      "path": "tests/test_policy_formulation.py",
+      "line": 45,
+      "classification": "D",
+      "text": "assert report[\"coverage\"][\"source_windows_with_all_four_actions\"] == 25"
+    },
+    {
+      "path": "tests/test_policy_instrumentation.py",
+      "line": 36,
+      "classification": "D",
+      "text": "def test_split3_is_not_all_cloud():"
+    },
+    {
+      "path": "tests/test_policy_instrumentation.py",
+      "line": 39,
+      "classification": "D",
+      "text": "with pytest.raises(ValueError, match=\"ALL_CLOUD\"):"
+    },
+    {
+      "path": "tests/test_policy_instrumentation.py",
+      "line": 56,
+      "classification": "D",
+      "text": "\"server_latency_ms\": 2., \"model_version\": \"gesture-cloud-tail-split2-v1.0.0\"}"
+    },
+    {
+      "path": "tests/test_policy_schema.py",
+      "line": 7,
+      "classification": "D",
+      "text": "assert ACTION_NAMES == {0: \"ALL_LOCAL\", 1: \"SPLIT1\", 2: \"SPLIT2\", 3: \"ALL_CLOUD\"}"
+    },
+    {
+      "path": "tests/test_reward_engine.py",
+      "line": 16,
+      "classification": "D",
+      "text": "\"actions\": {\"0\": \"ALL_LOCAL\", \"1\": \"SPLIT1\", \"2\": \"SPLIT2\", \"3\": \"ALL_CLOUD\"},"
+    },
+    {
+      "path": "tests/test_reward_engine.py",
+      "line": 61,
+      "classification": "D",
+      "text": "if problem == \"mapping\": config[\"actions\"][\"3\"] = \"SPLIT3\""
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 11,
+      "classification": "D",
+      "text": "from server.app.inference import Split3CloudInference"
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 15,
+      "classification": "D",
+      "text": "def runtime() -> Split3CloudInference:"
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 16,
+      "classification": "D",
+      "text": "return Split3CloudInference()"
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 19,
+      "classification": "D",
+      "text": "def test_split3_cloud_runtime_contract("
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 20,
+      "classification": "D",
+      "text": "runtime: Split3CloudInference,"
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 33,
+      "classification": "D",
+      "text": "def test_split3_cloud_runtime_inference("
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 34,
+      "classification": "D",
+      "text": "runtime: Split3CloudInference,"
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 60,
+      "classification": "D",
+      "text": "def test_split3_cloud_runtime_rejects_wrong_embedding_size("
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 61,
+      "classification": "D",
+      "text": "runtime: Split3CloudInference,"
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 70,
+      "classification": "D",
+      "text": "def test_split3_cloud_runtime_rejects_nonfinite_embedding("
+    },
+    {
+      "path": "tests/test_server_inference.py",
+      "line": 71,
+      "classification": "D",
+      "text": "runtime: Split3CloudInference,"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 10,
+      "classification": "B",
+      "text": "from ml.export.export_split1 import run_tflite as run_prefix"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 11,
+      "classification": "B",
+      "text": "from ml.export.export_split1_cloud_tail import run_tail_tflite"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 12,
+      "classification": "B",
+      "text": "from ml.models.cloud_tail_split1 import ("
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 15,
+      "classification": "B",
+      "text": "from server.app.inference import Split1CloudInference, SplitCloudInference"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 26,
+      "classification": "B",
+      "text": "return dict(request_id=\"split1-test-001\", device_id=\"esp32-01\", timestamp_ms=123,"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 32,
+      "classification": "B",
+      "text": "assert model.name == \"gesture_cloud_tail_split1\""
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 35,
+      "classification": "B",
+      "text": "with np.load(MODEL_DIR / \"split1_cloud_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 45,
+      "classification": "B",
+      "text": "/ f\"{SOURCE_MODEL_VERSION}-split1-prefix-float32-normalized-input.tflite\")"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 46,
+      "classification": "B",
+      "text": "with np.load(MODEL_DIR / \"split1_cloud_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 74,
+      "classification": "B",
+      "text": "assert response[\"request_id\"] == \"split1-test-001\""
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 82,
+      "classification": "B",
+      "text": "def test_reject_invalid_split1_payload(embedding):"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 99,
+      "classification": "B",
+      "text": "Split1CloudInference(metadata_path=path)"
+    },
+    {
+      "path": "tests/test_split1_cloud_tail.py",
+      "line": 106,
+      "classification": "B",
+      "text": "Split1CloudInference(model_path=path)"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 6,
+      "classification": "B",
+      "text": "from ml.models.cloud_tail_split2 import MODEL_DIR, MODEL_PATH, CLOUD_TAIL_VERSION, validate_cloud_tail_split2"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 11,
+      "classification": "B",
+      "text": "def test_split2_model_contract_and_parity():"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 13,
+      "classification": "B",
+      "text": "validate_cloud_tail_split2(model)"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 14,
+      "classification": "B",
+      "text": "assert model.name == \"gesture_cloud_tail_split2\""
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 17,
+      "classification": "B",
+      "text": "with np.load(MODEL_DIR / \"split2_cloud_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 28,
+      "classification": "B",
+      "text": "def test_split2_export_provenance():"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 29,
+      "classification": "B",
+      "text": "report = json.loads((MODEL_DIR / \"split2_export_report.json\").read_text())"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 38,
+      "classification": "B",
+      "text": "def test_split2_prefix_continues_to_cloud():"
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 40,
+      "classification": "B",
+      "text": "path = SPLITS / f\"{SOURCE_VERSION}-split2-prefix-float32-normalized-input.tflite\""
+    },
+    {
+      "path": "tests/test_split2_cloud_tail.py",
+      "line": 42,
+      "classification": "B",
+      "text": "with np.load(MODEL_DIR / \"split2_cloud_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "tests/test_split3_cloud_tail.py",
+      "line": 8,
+      "classification": "B",
+      "text": "from server.app.inference import Split3CloudInference"
+    },
+    {
+      "path": "tests/test_split3_cloud_tail.py",
+      "line": 13,
+      "classification": "B",
+      "text": "def test_existing_split3_artifacts_and_prefix_tail_parity():"
+    },
+    {
+      "path": "tests/test_split3_cloud_tail.py",
+      "line": 19,
+      "classification": "B",
+      "text": "runtime = Split3CloudInference()"
+    },
+    {
+      "path": "tests/test_split3_cloud_tail.py",
+      "line": 20,
+      "classification": "B",
+      "text": "with np.load(directory / \"split3_cloud_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "tests/test_split3_cloud_tail.py",
+      "line": 22,
+      "classification": "B",
+      "text": "np.testing.assert_allclose(embeddings, vectors[\"expected_split3\"], atol=1e-5, rtol=0)"
+    },
+    {
+      "path": "tests/test_split3_cloud_tail.py",
+      "line": 29,
+      "classification": "B",
+      "text": "request = dict(request_id=\"split3-regression\", device_id=\"esp32-test\", timestamp_ms=0,"
+    },
+    {
+      "path": "tests/test_split_routing.py",
+      "line": 9,
+      "classification": "B",
+      "text": "from server.app.inference import SplitCloudInference, Split2CloudInference"
+    },
+    {
+      "path": "tests/test_split_routing.py",
+      "line": 51,
+      "classification": "B",
+      "text": "def test_split2_rejects_nonfinite(runtime):"
+    },
+    {
+      "path": "tests/test_split_routing.py",
+      "line": 58,
+      "classification": "B",
+      "text": "def test_split2_provenance_rejected(tmp_path, field, value):"
+    },
+    {
+      "path": "tests/test_split_routing.py",
+      "line": 59,
+      "classification": "B",
+      "text": "from ml.models.cloud_tail_split2 import MODEL_DIR"
+    },
+    {
+      "path": "tests/test_split_routing.py",
+      "line": 65,
+      "classification": "B",
+      "text": "Split2CloudInference(metadata_path=path)"
+    },
+    {
+      "path": "tools/policy_dataset/analyze_policy_dataset.py",
+      "line": 94,
+      "classification": "B",
+      "text": "\"source_windows_with_all_four_actions\": sum({r[\"action\"] for r in rows} == set(ACTION_NAMES) for rows in by_window.values()),"
+    },
+    {
+      "path": "tools/policy_dataset/analyze_policy_dataset.py",
+      "line": 96,
+      "classification": "B",
+      "text": "\"unique_selected_states\": len(by_state), \"exact_selected_states_with_all_four_actions\": sum(value == set(ACTION_NAMES) for value in by_state.values()),"
+    },
+    {
+      "path": "tools/policy_dataset/benchmark_report.py",
+      "line": 13,
+      "classification": "B",
+      "text": "for name, action in ((\"ALL_LOCAL\", 0), (\"ALL_CLOUD\", 3), (\"SPLIT1\", 1), (\"SPLIT2\", 2))}"
+    },
+    {
+      "path": "tools/policy_dataset/collector.py",
+      "line": 34,
+      "classification": "B",
+      "text": "\"Actions: 0 ALL_LOCAL, 1 SPLIT1, 2 SPLIT2, 3 ALL_CLOUD. Action 3 is NOT MQTT split=3.\\n\\n\""
+    },
+    {
+      "path": "tools/policy_dataset/conditions/connected_lab_v1.json",
+      "line": 21,
+      "classification": "B",
+      "text": "\"0\": \"ALL_LOCAL\","
+    },
+    {
+      "path": "tools/policy_dataset/conditions/connected_lab_v1.json",
+      "line": 22,
+      "classification": "B",
+      "text": "\"1\": \"SPLIT1\","
+    },
+    {
+      "path": "tools/policy_dataset/conditions/connected_lab_v1.json",
+      "line": 23,
+      "classification": "B",
+      "text": "\"2\": \"SPLIT2\","
+    },
+    {
+      "path": "tools/policy_dataset/conditions/connected_lab_v1.json",
+      "line": 24,
+      "classification": "B",
+      "text": "\"3\": \"ALL_CLOUD\""
+    },
+    {
+      "path": "tools/policy_dataset/host_smoke.py",
+      "line": 25,
+      "classification": "B",
+      "text": "with np.load(directory / \"tflite/splits/split1_parity_vectors.npz\") as vectors:"
+    },
+    {
+      "path": "tools/policy_dataset/instrumentation.py",
+      "line": 136,
+      "classification": "B",
+      "text": "raise ValueError(\"Policy action is not this MQTT split; ALL_CLOUD is not Split3\")"
+    },
+    {
+      "path": "tools/policy_dataset/mqtt_smoke.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Opt-in host/broker smoke test using frozen Split1/2 models; no ESP32 flashing.\"\"\""
+    },
+    {
+      "path": "tools/policy_dataset/reward_engine/config_template.json",
+      "line": 5,
+      "classification": "B",
+      "text": "\"0\": \"ALL_LOCAL\","
+    },
+    {
+      "path": "tools/policy_dataset/reward_engine/config_template.json",
+      "line": 6,
+      "classification": "B",
+      "text": "\"1\": \"SPLIT1\","
+    },
+    {
+      "path": "tools/policy_dataset/reward_engine/config_template.json",
+      "line": 7,
+      "classification": "B",
+      "text": "\"2\": \"SPLIT2\","
+    },
+    {
+      "path": "tools/policy_dataset/reward_engine/config_template.json",
+      "line": 8,
+      "classification": "B",
+      "text": "\"3\": \"ALL_CLOUD\""
+    },
+    {
+      "path": "tools/policy_dataset/reward_engine/engine.py",
+      "line": 30,
+      "classification": "B",
+      "text": "raise ValueError(\"Invalid action mapping; action 3 is ALL_CLOUD\")"
+    },
+    {
+      "path": "tools/policy_dataset/run_campaign.py",
+      "line": 22,
+      "classification": "B",
+      "text": "MODES = {\"local\": 0, \"split1\": 1, \"split2\": 2, \"cloud\": 3}"
+    },
+    {
+      "path": "tools/policy_dataset/run_controlled_campaign.py",
+      "line": 1,
+      "classification": "B",
+      "text": "\"\"\"Simulated controlled-network replay of validated M30 four-action measurements.\"\"\""
+    },
+    {
+      "path": "tools/policy_dataset/run_state_expansion_campaign.py",
+      "line": 72,
+      "classification": "B",
+      "text": "\"all_actions\": {\"0\": \"ALL_LOCAL\", \"1\": \"SPLIT1\", \"2\": \"SPLIT2\", \"3\": \"ALL_CLOUD\"},"
+    },
+    {
+      "path": "tools/policy_dataset/schema.py",
+      "line": 14,
+      "classification": "B",
+      "text": "ALL_LOCAL = 0"
+    },
+    {
+      "path": "tools/policy_dataset/schema.py",
+      "line": 15,
+      "classification": "B",
+      "text": "SPLIT1 = 1"
+    },
+    {
+      "path": "tools/policy_dataset/schema.py",
+      "line": 16,
+      "classification": "B",
+      "text": "SPLIT2 = 2"
+    },
+    {
+      "path": "tools/policy_dataset/schema.py",
+      "line": 17,
+      "classification": "B",
+      "text": "ALL_CLOUD = 3"
+    },
+    {
+      "path": "tools/policy_dataset/schema.py",
+      "line": 179,
+      "classification": "B",
+      "text": "\"warning\": \"Action 3 is ALL_CLOUD, not MQTT split=3. Energy is estimated/simulated only.\"}"
+    },
+    {
+      "path": "tools/policy_dataset/validator.py",
+      "line": 62,
+      "classification": "B",
+      "text": "modes = {\"local\": 0, \"split1\": 1, \"split2\": 2, \"cloud\": 3}"
+    },
+    {
+      "path": "tools/policy_dataset/validator.py",
+      "line": 65,
+      "classification": "B",
+      "text": "expected_remote_versions = {1: \"gesture-cloud-tail-split1-v1.0.0\", 2: \"gesture-cloud-tail-split2-v1.0.0\","
+    }
+  ],
+  "historical_policy_artifacts": [
+    "data/policy/policy_training_dataset_v1/README.md",
+    "data/policy/policy_training_dataset_v1/benchmark_report.json",
+    "data/policy/policy_training_dataset_v1/campaign_report.json",
+    "data/policy/policy_training_dataset_v1/campaigns/cloud/configuration.json",
+    "data/policy/policy_training_dataset_v1/campaigns/cloud/policy_training_dataset_v1.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/cloud/raw_traces.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/cloud/server_events.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/local/configuration.json",
+    "data/policy/policy_training_dataset_v1/campaigns/local_run01/configuration.json",
+    "data/policy/policy_training_dataset_v1/campaigns/local_run01/policy_training_dataset_v1.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/local_run01/raw_traces.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/local_run01/server_events.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/split1/configuration.json",
+    "data/policy/policy_training_dataset_v1/campaigns/split1/policy_training_dataset_v1.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/split1/raw_traces.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/split1/server_events.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/split2/configuration.json",
+    "data/policy/policy_training_dataset_v1/campaigns/split2/policy_training_dataset_v1.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/split2/raw_traces.jsonl",
+    "data/policy/policy_training_dataset_v1/campaigns/split2/server_events.jsonl",
+    "data/policy/policy_training_dataset_v1/dataset_report.json",
+    "data/policy/policy_training_dataset_v1/metadata.json",
+    "data/policy/policy_training_dataset_v1/observations.jsonl",
+    "data/policy/policy_training_dataset_v1/policy_training_dataset_v1.jsonl",
+    "data/policy/policy_training_dataset_v1/sample_000001.json",
+    "data/policy/policy_training_dataset_v1/schema.json",
+    "data/policy/policy_training_dataset_v2/README.md",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run01/configuration.json",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run01/dataset_report.json",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run01/policy_training_dataset_v2.jsonl",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run01/raw_entries.jsonl",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run01/server_events.jsonl",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02/configuration.json",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02/dataset_report.json",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02/policy_training_dataset_v2.jsonl",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02/raw_entries.jsonl",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02/rejected_entries.jsonl",
+    "data/policy/policy_training_dataset_v2/campaigns/connected_lab_run02/server_events.jsonl",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/README.md",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/baseline/configuration.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/baseline/dataset_report.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/baseline/policy_training_dataset_v2.jsonl",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/cloud_favorable/configuration.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/cloud_favorable/dataset_report.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/cloud_favorable/policy_training_dataset_v2.jsonl",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/diversity_report.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/edge_loaded/configuration.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/edge_loaded/dataset_report.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/edge_loaded/policy_training_dataset_v2.jsonl",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/high_latency/configuration.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/high_latency/dataset_report.json",
+    "data/policy/policy_training_dataset_v2/controlled_network_v1/high_latency/policy_training_dataset_v2.jsonl",
+    "data/policy/policy_training_dataset_v2/dataset_report.json",
+    "data/policy/policy_training_dataset_v2/metadata.json",
+    "data/policy/policy_training_dataset_v2/policy_training_dataset_v2.jsonl",
+    "data/policy/policy_training_dataset_v2/reward_sensitivity_report.json",
+    "data/policy/policy_training_dataset_v2/schema_description.json",
+    "data/policy/policy_training_dataset_v3/README.md",
+    "data/policy/policy_training_dataset_v3/metadata.json",
+    "data/policy/policy_training_dataset_v3/policy_training_dataset_v3.jsonl",
+    "data/policy/policy_training_dataset_v3/schema_description.json",
+    "data/policy/policy_training_dataset_v3/state_coverage_report.json",
+    "ml/policy/__init__.py",
+    "ml/policy/benchmark.py",
+    "ml/policy/build_policy_dataset.py",
+    "ml/policy/formulation.py",
+    "ml/policy/policy_config_v1.json",
+    "ml/policy/split_architecture_analysis.py",
+    "ml/policy/train_meta.py",
+    "ml/policy/train_split_controller.py",
+    "tools/network_conditions/__init__.py",
+    "tools/network_conditions/profiles.py",
+    "tools/network_conditions/profiles_v1.json",
+    "tools/policy_dataset/__init__.py",
+    "tools/policy_dataset/analyze_policy_dataset.py",
+    "tools/policy_dataset/analyze_split_sensitivity.py",
+    "tools/policy_dataset/benchmark_report.py",
+    "tools/policy_dataset/campaign_server.py",
+    "tools/policy_dataset/collector.py",
+    "tools/policy_dataset/conditions/connected_lab_v1.json",
+    "tools/policy_dataset/dataset_report.py",
+    "tools/policy_dataset/device_trace.py",
+    "tools/policy_dataset/host_smoke.py",
+    "tools/policy_dataset/instrumentation.py",
+    "tools/policy_dataset/matched_dataset.py",
+    "tools/policy_dataset/mqtt_smoke.py",
+    "tools/policy_dataset/reward_engine/__init__.py",
+    "tools/policy_dataset/reward_engine/__main__.py",
+    "tools/policy_dataset/reward_engine/config_template.json",
+    "tools/policy_dataset/reward_engine/engine.py",
+    "tools/policy_dataset/run_campaign.py",
+    "tools/policy_dataset/run_controlled_campaign.py",
+    "tools/policy_dataset/run_matched_campaign.py",
+    "tools/policy_dataset/run_state_expansion_campaign.py",
+    "tools/policy_dataset/schema.py",
+    "tools/policy_dataset/serializer.py",
+    "tools/policy_dataset/state_expansion.py",
+    "tools/policy_dataset/state_scenarios_v1.json",
+    "tools/policy_dataset/validate_matched_dataset.py",
+    "tools/policy_dataset/validator.py"
+  ],
+  "inventory_scope": "Tracked reference inventory after initial textual cleanup; audit markdown records original production findings."
+}

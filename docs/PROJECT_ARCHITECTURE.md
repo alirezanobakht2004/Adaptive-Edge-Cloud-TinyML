@@ -2,10 +2,56 @@
 ## Canonical Project Architecture & Execution Plan
 
 > **Status:** Canonical architecture document for the project  
-> **Current implementation checkpoint:** Phase 2 / pre-M3 — calibrated IMU stream stable; dataset-v1 not yet collected  
 > **Purpose:** This file is the main technical source of truth for the project. Any implementation, code organization, experiment, report section, or design decision should be checked against this document first.  
 > **Core project title:** سامانه هوشمند تطبیقی لبه–ابر مبتنی بر TinyML  
-> **Case study:** Handheld Movement / Gesture Recognition using ESP32-S3 + GY-521 IMU
+> **Case study:** Handheld Movement / Gesture Recognition using ESP32-S3 + MPU6050
+
+---
+
+## Architecture Revision R1 — 2026-09-08
+
+**Status:** Evidence-driven scope revision after completed Split-Inference and policy-action studies.
+
+The original architecture required a learned split-point controller choosing among Split 1/2/3 after an OFFLOAD decision. The split-inference execution paths (not a learned Split Controller) were implemented and validated end-to-end during Phase 7, then evaluated during the subsequent policy-dataset and action-space studies.
+
+Measured and controlled studies established that, for the current `features-v1` / `gesture-model-v1.1.0` design:
+
+- `ALL_CLOUD` sends the 10-feature vector, while the validated split embeddings are 64, 48, and 32 float32 values.
+- Therefore all current split embeddings are larger than the 10-feature cloud input before serialization overhead is considered.
+- Split actions also add edge-prefix compute before communication and server-tail compute afterward.
+- Matched-condition pilot measurements and controlled replay studies did not produce a state in which Split 1 or Split 2 was optimal.
+- Reward-sensitivity analysis found both Split 1 and Split 2 dominated under the current measured/simulated action space; non-negative reward reweighting could not make either a unique winner.
+- Candidate bottlenecks smaller than the current B3 boundary would require new model parameters and new accuracy/deployment validation, which would materially expand scope.
+
+Per the source-of-truth priority in Section 39, measured project behavior has higher priority than the original architecture assumptions. Therefore the **production adaptive policy is revised to a binary learned decision: `LOCAL` vs `CLOUD`**.
+
+The completed split-inference implementation is **not deleted**. Split 1/2/3 remain:
+
+- validated research artifacts,
+- fixed-split experimental baselines,
+- evidence supporting the architecture revision,
+- optional future work if a new compact bottleneck architecture is investigated.
+
+For the undergraduate MVP, **adaptive split-point selection and the Split Controller are retired from the production decision path**. No further split-architecture optimization is required unless new measured evidence justifies reopening it.
+
+Canonical production policy:
+
+```text
+LOCAL
+or
+CLOUD
+```
+
+Canonical server-heavy path:
+
+```text
+features-v1 (10 values)
+→ MQTT
+→ server full-cloud model
+→ result
+```
+
+This revision narrows scope while preserving the main project contribution: **uncertainty-aware learned Edge–Cloud offloading on a resource-constrained TinyML device**.
 
 ---
 
@@ -14,26 +60,27 @@
 ### 1.1 Core idea
 The project is **not primarily a gesture-recognition project**. Gesture recognition is the practical testbed used to evaluate the main research/engineering contribution:
 
-> **A TinyML edge device that adaptively decides how much inference to perform locally and when/where to offload intermediate representations to a server, using learned decision policies rather than only hand-written rules.**
+> **A TinyML edge device that learns whether to finish inference locally or offload to a server based on uncertainty, network conditions, and device state.**
 
-The system must combine:
+The system combines:
 
 - TinyML inference on ESP32-S3
 - IMU-based gesture recognition
 - uncertainty estimation
-- learned local-vs-cloud decision making
-- learned split-point selection
+- learned `LOCAL` vs `CLOUD` decision making
 - MQTT communication
-- server-side continuation of a split neural network
-- failover to full local inference when Wi-Fi is unavailable
+- server-side cloud inference
+- failover to full local inference when Wi-Fi/server access is unavailable
 - experiment logging
 - dashboard visualization
 - continual learning with EWC
 - model update through OTA
 - comparison against simpler baselines
 
+Split inference was implemented and validated as an experimental branch of the project. However, measured and controlled action-space studies showed that the current 64/48/32-dimensional split embeddings are not competitive with directly offloading the 10-feature vector. Therefore adaptive split-point selection is no longer part of the production MVP policy.
+
 ### 1.2 Case-study framing
-Gesture recognition is selected because it is:
+Gesture recognition remains the case study because it is:
 
 - inexpensive to build
 - easy to demo repeatedly
@@ -44,41 +91,43 @@ Gesture recognition is selected because it is:
 - appropriate for local-vs-cloud adaptive inference
 - compatible with continual learning and model personalization
 
-The final presentation should always frame it as:
+The final presentation should frame the work as:
 
-> **Adaptive Edge–Cloud TinyML architecture, evaluated through a gesture-recognition case study.**
+> **Adaptive Edge–Cloud TinyML architecture with a learned uncertainty-aware LOCAL/CLOUD policy, evaluated through gesture recognition.**
 
 Avoid presenting the project merely as:
 
 > “An intelligent gesture detector.”
 
----
+Also avoid claiming that adaptive split selection is part of the final production policy. The split work should be presented as a validated experimental baseline and an evidence-driven negative result that motivated the binary production policy.
 
 ## 2. Research / Engineering Question
 
-The main question is:
+The revised main question is:
 
-> Can a resource-constrained TinyML device learn, based on prediction uncertainty, network conditions, and device state, whether to finish inference locally or offload computation to a server, and if offloading is selected, which neural-network split point should be used?
+> Can a resource-constrained TinyML device learn, based on prediction uncertainty, network conditions, and device state, whether to finish inference locally or offload the feature vector to a server, while maintaining useful classification quality and reducing unnecessary communication/latency?
+
+The original split-point question was investigated experimentally. For the current network architecture, the validated split actions were dominated by `LOCAL` and/or `CLOUD`, so adaptive split selection is retained as an evaluated baseline rather than a production requirement.
 
 Secondary questions:
 
-1. Does adaptive inference reduce communication cost compared with all-cloud inference?
-2. Does it preserve useful accuracy compared with fully local inference?
-3. Does learned policy selection outperform a simple rule-based adaptive policy?
-4. Can the system remain functional when Wi-Fi is lost?
-5. Can continual learning improve performance on new user motion patterns without catastrophic forgetting?
-6. Can new models be safely distributed to the device through OTA?
-
----
+1. Does learned adaptive LOCAL/CLOUD inference reduce unnecessary communication compared with always-cloud inference?
+2. Does it preserve useful classification quality compared with fully local inference?
+3. Does the learned LOCAL/CLOUD policy outperform a simple rule-based adaptive baseline under the chosen cost function?
+4. Can the system remain functional when Wi-Fi or the server is unavailable?
+5. How does the validated fixed-split implementation compare with LOCAL/CLOUD, and why was it excluded from the final adaptive action space?
+6. Can continual learning improve performance on new-user motion patterns without catastrophic forgetting?
+7. Can new models be safely distributed to the device through OTA?
 
 ## 3. System-Level Architecture
+
+### 3.1 Production adaptive path
 
 ```text
                        ┌──────────────────────┐
                        │      MPU6050         │
                        │ ax ay az gx gy gz    │
                        └──────────┬───────────┘
-                                  │
                                   │ 100 Hz
                                   ▼
                        ┌──────────────────────┐
@@ -92,63 +141,48 @@ Secondary questions:
                        │     10 features      │
                        └──────────┬───────────┘
                                   ▼
-                              NN Block 1
-                                  │
-                              Split #1
+                       ┌──────────────────────┐
+                       │ Local NN + MC path   │
+                       │ prediction + UQ      │
+                       └──────────┬───────────┘
                                   ▼
-                              NN Block 2
-                                  │
-                              Split #2
-                                  ▼
-                              NN Block 3
-                                  │
-                              Split #3
-                                  │
-                      ┌───────────┴────────────┐
-                      │                        │
-                      ▼                        ▼
-               Edge Exit Head          MC-Dropout Path
-                      │                        │
-                      │                        ▼
-                      │                  Uncertainty
-                      │                        │
-                      └─────────────┬──────────┘
-                                    ▼
-                              Meta Learner
-                          LOCAL or OFFLOAD?
-                               │          │
-                         LOCAL │          │ OFFLOAD
-                               ▼          ▼
-                            Result   Split Controller
-                                          │
-                                     1 / 2 / 3
-                                          │
-                                          ▼
-                                        MQTT
-                                          │
-                                          ▼
-                                   FastAPI Server
-                                          │
-                                  NN Tail Continuation
-                                          │
-                                          ▼
-                                     Cloud Result
-                                          │
-                 ┌────────────────────────┼───────────────────────┐
-                 ▼                        ▼                       ▼
-            PostgreSQL                Dashboard             Continual
-                                                             Learning
-                                                                │
-                                                               EWC
-                                                                │
-                                                             TFLite
-                                                                │
-                                                               OTA
-                                                                │
-                                                              ESP32
+                       ┌──────────────────────┐
+                       │ Learned Meta Policy  │
+                       │   LOCAL or CLOUD     │
+                       └──────────┬───────────┘
+                              ┌───┴────┐
+                        LOCAL │        │ CLOUD
+                              ▼        ▼
+                        Edge Result   MQTT
+                                       │
+                                       ▼
+                              ┌──────────────────┐
+                              │ FastAPI / Server │
+                              │ full-cloud model │
+                              └────────┬─────────┘
+                                       ▼
+                                  Cloud Result
+                                       │
+                   ┌───────────────────┼───────────────────┐
+                   ▼                   ▼                   ▼
+              PostgreSQL          Dashboard          Continual
+                                                     Learning / OTA
 ```
 
----
+### 3.2 Experimental split branch
+
+The validated Split 1/2/3 implementation remains in the repository for benchmarking and documentation:
+
+```text
+features-v1
+→ prefix B1 / B1+B2 / B1+B2+B3
+→ 64 / 48 / 32-D embedding
+→ MQTT
+→ matching server tail
+→ result
+```
+
+This branch is **not selected by the final adaptive production policy** unless a future architecture revision explicitly reintroduces split selection.
 
 ## 4. Hardware Baseline
 
@@ -169,9 +203,7 @@ Target hardware characteristics:
 - 3.3 V GPIO logic
 
 ### 4.2 IMU
-**Sensor module:** GY-521 with an MPU6050-compatible register interface
-
-Current project hardware reports a non-standard `WHO_AM_I=0x74`. The register behavior required by this project has been verified on the current unit, but the report and firmware should not claim a confirmed standard MPU6050 identity.
+**Sensor module:** MPU6050 GY-521
 
 Relevant characteristics:
 
@@ -190,8 +222,8 @@ Relevant characteristics:
   - ±1000 °/s
   - ±2000 °/s
 
-### 4.3 Verified electrical connection
-Current project connection:
+### 4.3 Initial electrical connection
+Planned connection:
 
 ```text
 GY-521              ESP32-S3
@@ -204,7 +236,8 @@ SCL       --------> GPIO9
 
 Important:
 
-- GPIO8/GPIO9 are the **verified project I2C pins** on the current physical development board.
+- GPIO8/GPIO9 are the **planned project pins**.
+- Verify the exact dev-board silkscreen/pinout after the physical board arrives.
 - Avoid using ESP32-S3 strapping pins for the IMU unless necessary:
   - GPIO0
   - GPIO3
@@ -214,8 +247,8 @@ Important:
 - The development board is powered through 5 V USB.
 - The GY-521 should be powered from the board’s 3.3 V pin for clean 3.3 V logic compatibility.
 
-### 4.4 Current sensor configuration
-Dataset-v1 baseline:
+### 4.4 Initial sensor configuration
+Project default:
 
 ```text
 I2C frequency          400 kHz
@@ -224,7 +257,7 @@ Accelerometer range    ±4 g
 Gyroscope range        ±500 °/s
 ```
 
-These settings are verified on the current hardware and are frozen for dataset-v1. Any intentional change requires documentation and, when it affects recorded data, a new dataset version.
+These are initial engineering choices and may be changed only after actual data inspection.
 
 ### 4.5 Hardware not required initially
 Do not expand hardware unless the project later proves it necessary.
@@ -273,16 +306,13 @@ These are optional extensions, not initial requirements.
 ### 5.2 Device orientation protocol
 Dataset consistency requires a fixed handheld orientation.
 
-The frozen dataset-v1 convention is `orientation-v1`:
+Before collection begins, define a physical convention, for example:
 
-- component side upward
-- ESP32 / USB end toward the user
-- GY-521 end away from the user
+- USB connectors toward the user
+- board front side upward
 - same grip orientation for all planned sessions
 
-Static gravity measurements define the authoritative sign reference: `+Z` gives `az≈+1 g`, `-Z` gives `az≈-1 g`, `+X` gives `ax≈+1 g`, `-X` gives `ax≈-1 g`, `+Y` gives `ay≈+1 g`, and `-Y` gives `ay≈-1 g`.
-
-Document this orientation with the project reference image/photo and keep it unchanged while collecting dataset-v1.
+Document this orientation with a photo once hardware arrives.
 
 ---
 
@@ -368,8 +398,6 @@ Optional later calibration:
 
 - accelerometer offset correction
 - per-axis scale correction
-
-Current pre-M3 status: `accel-cal-v1` is applied in firmware and has been validated with six static orientations after correction. The active-axis means were `X+=+1.001801 g`, `X-=-1.008400 g`, `Y+=+1.000596 g`, `Y-=-0.998428 g`, `Z+=+0.999007 g`, and `Z-=-1.007722 g`. These validation measurements are not raw calibration coefficients.
 
 Calibration parameters should be stored in configuration and logged with datasets when relevant.
 
@@ -593,9 +621,9 @@ This is the initial architecture and may be tuned after real data becomes availa
 
 ---
 
-## 11. Split Inference
+## 11. Split Inference — Validated Experimental Baseline
 
-### 11.1 Split points
+### 11.1 Validated split points
 
 | Split | ESP32 executes | Server executes | Embedding dimension |
 |---|---|---|---:|
@@ -603,56 +631,46 @@ This is the initial architecture and may be tuned after real data becomes availa
 | 2 | B1+B2 | B3+B4+B5+Cloud Head | 48 |
 | 3 | B1+B2+B3 | B4+B5+Cloud Head | 32 |
 
-### 11.2 Intended trade-off
+All three split paths were implemented and validated end-to-end during Phase 7.
+
+### 11.2 Observed architectural limitation
+
+The production feature representation contains only 10 values. Under the current float32 representation:
 
 ```text
-Split 1:
-less edge compute
-larger communication payload
-
-Split 3:
-more edge compute
-smaller communication payload
+ALL_CLOUD input: 10 values
+Split 1:         64 values
+Split 2:         48 values
+Split 3:         32 values
 ```
 
-### 11.3 Local mode
-When the device chooses full local inference:
+Therefore the existing split embeddings are larger than the direct feature-vector payload, while also requiring edge-prefix compute before transmission.
 
-```text
-Features
-→ B1
-→ B2
-→ B3
-→ Edge Head
-→ Result
-```
+Subsequent matched-condition, controlled-replay, reward-sensitivity, state-expansion, and candidate-architecture studies did not establish a condition in which the current Split 1 or Split 2 action became optimal. Payload reduction alone also did not justify a new bottleneck without retraining and revalidating the model.
 
-### 11.4 Offload mode
-When the device chooses cloud assistance:
+### 11.3 Revised role of split inference
 
-```text
-Features
-→ execute selected prefix
-→ extract embedding
-→ MQTT
-→ server executes remaining tail
-→ cloud result
-```
+For the undergraduate MVP:
 
-The project should send intermediate embeddings rather than raw IMU windows during split inference.
+- Split 1/2/3 remain implemented and testable.
+- Fixed-split execution remains an experimental baseline.
+- Split results are retained as evidence for the design decision.
+- The learned production policy does not choose a split point.
+- No Split Controller is deployed in the production decision path.
 
----
+A future model version may revisit split inference using a deliberately compact bottleneck if there is sufficient time and measured benefit.
 
 ## 12. TFLite / TinyML Deployment
 
 ### 12.1 Edge components
 Expected on-device ML components:
 
-- prefix / split network execution
-- Edge Exit Head
+- validated complete local inference (B3 prefix + Edge Exit Head)
 - uncertainty mechanism
-- Meta Learner
-- Split Controller
+- learned binary Meta Policy: 0 LOCAL / 1 CLOUD
+- features-v1 MQTT client for full-cloud inference
+
+Split prefixes remain isolated fixed-split experimental baselines. The Split Controller is retired from production.
 
 ### 12.2 Quantization
 Prefer int8 quantization for deployment once the float baseline is validated.
@@ -734,45 +752,56 @@ Such a sample is a good candidate for offloading.
 
 ---
 
-## 14. Meta Learner
+## 14. Learned Meta Policy — LOCAL vs CLOUD
 
 ### 14.1 Responsibility
-The Meta Learner answers only:
+
+The production learned policy answers one question:
 
 ```text
 LOCAL
 or
-OFFLOAD
+CLOUD
 ```
+
+`LOCAL` means the ESP32 completes inference using the validated local path.
+
+`CLOUD` means the ESP32 sends the current `features-v1` vector to the server, where the full-cloud inference path returns the result.
 
 ### 14.2 Candidate inputs
 
+The exact versioned training feature contract must be taken from the policy configuration artifact (for example `ml/policy/policy_config_v2.json`).
+
+Candidate state information includes:
+
 ```text
-uncertainty
+uncertainty / entropy
 confidence
+prediction margin
 RSSI
 estimated network RTT
-free heap ratio
-energy budget
+free heap / resource state
+connection / cloud availability
+controlled device/network pressure features when explicitly marked
+energy budget / energy proxy
 ```
 
-### 14.3 Important prototype constraint
-The current hardware setup has no battery sensor.
+Measured and simulated fields must retain explicit provenance.
 
-Therefore:
+### 14.3 Prototype energy constraint
+
+The current hardware setup has no battery/energy measurement hardware.
+
+Therefore energy-related policy inputs and reward components are **estimated/simulated proxies**, not measured battery percentage or measured Joules.
+
+This distinction is mandatory in code, datasets, reports, and the defense.
+
+### 14.4 Initial deployment architecture
+
+Keep the policy deliberately small. A compact binary classifier is preferred, for example:
 
 ```text
-energy_budget
-```
-
-is initially a **software-simulated or estimated state variable**, not a directly measured battery percentage.
-
-This must be stated honestly in the report.
-
-### 14.4 Initial architecture
-
-```text
-Input(6)
+State vector
    ↓
 Dense(8)
 ReLU
@@ -781,19 +810,14 @@ Dense(4)
 ReLU
    ↓
 Output(2)
-LOCAL / OFFLOAD
+LOCAL / CLOUD
 ```
 
-Keep it deliberately small.
+The exact architecture may be adjusted based on the qualified training dataset, but it must remain small enough for ESP32 deployment and easy to defend.
 
----
+## 15. Split Controller — Retired from Production MVP
 
-## 15. Split Controller
-
-### 15.1 Responsibility
-The Split Controller executes only when the Meta Learner selects `OFFLOAD`.
-
-It chooses:
+The original architecture proposed a second learned controller that selected:
 
 ```text
 Split 1
@@ -801,68 +825,65 @@ Split 2
 Split 3
 ```
 
-### 15.2 Candidate inputs
+after an `OFFLOAD` decision.
 
-```text
-RSSI
-RTT
-free heap
-uncertainty
-energy budget
-```
+That component is **retired from the production MVP** because completed action-space studies showed the current split actions to be dominated by `LOCAL` and/or direct `CLOUD` execution.
 
-### 15.3 Initial architecture
+Rules:
 
-```text
-Input(5)
-   ↓
-Dense(8)
-ReLU
-   ↓
-Output(3)
-```
+- Do not train or deploy a Split Controller for the current MVP.
+- Keep existing Split 1/2/3 artifacts and tests as experimental baselines.
+- Do not delete validated split code merely because it is no longer in the production policy.
+- Reopen split-controller work only if a new compact bottleneck architecture is implemented and measured evidence shows a competitive split action.
 
----
+This is an evidence-driven architecture revision, not an implementation failure.
 
 ## 16. Training the Adaptive Policy
 
-### 16.1 No purely hand-written final policy
-The proposed method must be learned.
+### 16.1 Final policy must be learned
 
-A rule-based method is allowed only as a baseline.
+The proposed production method must use a learned binary policy.
 
-### 16.2 Generate policy-training data
+A rule-based LOCAL/CLOUD method is allowed only as a baseline.
+
+### 16.2 Policy-training data
+
 For many combinations of:
 
 ```text
 gesture sample
 uncertainty
-RSSI
-RTT
-free memory
-energy budget
+confidence
+RSSI / RTT
+resource state
+cloud availability
+energy proxy
 ```
 
-benchmark candidate actions:
+evaluate the two production candidate actions:
 
 ```text
-Action 0 = Full Local
-Action 1 = Split 1
-Action 2 = Split 2
-Action 3 = Split 3
+Action 0 = LOCAL
+Action 1 = CLOUD
 ```
 
-Record for each action:
+The historical four-action datasets (`LOCAL`, `Split1`, `Split2`, `ALL_CLOUD`) remain valid research evidence but must not be silently relabeled as binary training data. If reused, conversion/provenance must be explicit and versioned.
+
+For each production action record:
 
 - classification correctness / error
 - end-to-end latency
 - bytes transmitted
 - bytes received
-- estimated energy / computation cost
+- estimated energy / computation proxy
 - failure status
+- measurement provenance
 
-### 16.3 Cost function
-Initial concept:
+### 16.3 Cost / reward function
+
+Use the versioned reward engine and configuration.
+
+Conceptually:
 
 ```text
 J =
@@ -872,69 +893,70 @@ w_latency * normalized_latency
 +
 w_comm * normalized_communication
 +
-w_energy * normalized_energy
+w_energy * normalized_energy_proxy
 ```
 
-Initial experimental weights can start around:
+or the equivalent reward-maximization form.
 
-```text
-w_error   = 0.50
-w_latency = 0.25
-w_comm    = 0.15
-w_energy  = 0.10
-```
-
-These are **initial experiment parameters**, not guaranteed final values.
+Weights and normalization scales must be versioned experimental parameters, not hidden constants.
 
 ### 16.4 Label generation
-The action with minimum cost becomes the supervision label.
 
-Example:
+For matched or explicitly controlled state conditions:
 
 ```text
 state_i
     ↓
-benchmark all actions
+evaluate LOCAL and CLOUD
     ↓
-argmin(J)
+compute comparable reward/cost
     ↓
-best_action label
+best binary action label
 ```
 
-Use these labels to train:
+Do not force class balance by falsifying labels.
 
-- Meta Learner: Local vs Offload
-- Split Controller: 1 vs 2 vs 3
+Controlled/simulated network or device perturbations may be used for training-data diversity only when their provenance is explicit. Final claims must distinguish real measurements from controlled simulation.
 
----
+### 16.5 Training gate
+
+Binary policy training may begin when:
+
+- both LOCAL and CLOUD labels are present,
+- schema/version checks pass,
+- reward configuration is frozen for the experiment,
+- provenance is retained,
+- an evaluation/holdout strategy is defined,
+- no fabricated metrics are introduced.
+
+The training report must state any remaining limitation in real-condition diversity.
 
 ## 17. Rule-Based Baseline
 
-Implement a simple policy baseline such as:
+Implement a simple binary policy baseline such as:
 
 ```text
-if Wi-Fi unavailable:
+if Wi-Fi/server unavailable:
     LOCAL
-else if uncertainty > threshold and RSSI > threshold:
-    OFFLOAD
+else if uncertainty > threshold and network_quality is acceptable:
+    CLOUD
 else:
     LOCAL
-```
-
-And a fixed split selection such as:
-
-```text
-if OFFLOAD:
-    Split 2
 ```
 
 This baseline is essential for answering:
 
 > “Why not just use if/else?”
 
-The project should experimentally compare learned adaptive policy against this rule-based version.
+The final adaptive-policy comparison should include:
 
----
+```text
+Rule-Based LOCAL/CLOUD
+vs
+Learned LOCAL/CLOUD
+```
+
+Fixed Split 1/2/3 strategies remain separate experimental baselines; they are not part of the rule-based production policy.
 
 ## 18. Wi-Fi and MQTT Communication
 
@@ -957,48 +979,50 @@ gesture/{device_id}/status
 gesture/{device_id}/model/update
 ```
 
-### 18.3 Inference request example
+### 18.3 Production R1 inference request example
+
+This is the versioned production contract to implement after policy gates pass.
+Values below are illustrative, not measured evidence. `features` contains exactly
+10 normalized features-v1 values using the gesture-model-v1.1.0 scaler.
 
 ```json
 {
+  "schema_version": "inference-r1-v1",
   "request_id": "abc123",
   "device_id": "esp32-01",
   "timestamp_ms": 123456,
-  "split": 2,
-  "embedding": [0.1, -0.2, 0.4],
-  "rssi": -67,
-  "rtt_ms": 23,
-  "uncertainty": 0.31,
-  "confidence": 0.62,
-  "model_version": "1.0.0"
+  "mode": "CLOUD",
+  "features": [0.1, -0.2, 0.4, 0.0, 0.1, 0.2, -0.1, 0.3, 0.0, 0.5],
+  "feature_version": "features-v1",
+  "feature_encoding": "normalized-float32",
+  "model_version": "gesture-full-cloud-v1.0.0",
+  "policy_version": "meta-policy-v1.0.0",
+  "firmware_version": "example-not-deployed"
 }
 ```
 
-### 18.4 Inference response example
+### 18.4 Production R1 inference response example
 
 ```json
 {
+  "schema_version": "inference-r1-v1",
   "request_id": "abc123",
+  "mode": "CLOUD",
   "predicted_class": "SWIPE_RIGHT",
   "confidence": 0.94,
   "server_latency_ms": 3.8,
-  "model_version": "1.0.0"
+  "model_version": "gesture-full-cloud-v1.0.0",
+  "policy_version": "meta-policy-v1.0.0"
 }
 ```
 
 ### 18.5 Serialization strategy
-Version 1:
 
-- JSON payload
-- embedding as numeric array
-- easy debugging
-
-Later optimization:
-
-- quantized int8 embedding
-- binary serialization if needed
-
-Do not optimize communication before the basic system works.
+- Production R1: JSON with exactly 10 normalized features-v1 values.
+- Retained fixed-split regression requests: separately identifiable `split` and
+  `embedding` (64/48/32 values); these are not production CLOUD requests.
+- No raw 100x6 IMU payload in normal CLOUD inference.
+- Binary serialization is future work; no new quantization is required.
 
 ---
 
@@ -1064,16 +1088,16 @@ PostgreSQL
 Uvicorn
 ```
 
-### 21.2 Responsibilities
+### 21.2 Production responsibilities
 
 ```text
 MQTT Subscriber
       ↓
 Request Validation
       ↓
-Split Router
+LOCAL/CLOUD protocol handling
       ↓
-Split-1 Tail / Split-2 Tail / Split-3 Tail
+Full-cloud model for CLOUD action
       ↓
 Prediction
       ↓
@@ -1084,8 +1108,19 @@ Database Logging
 WebSocket / Dashboard
 ```
 
-### 21.3 Server must not assume raw sensor input
-Normal split inference should operate on intermediate embeddings.
+### 21.3 Retained split support
+
+The server may retain the already validated Split-1 / Split-2 / Split-3 tail routing for:
+
+- fixed-split benchmarks,
+- regression testing,
+- reproducibility of Phase-7 evidence.
+
+These routes are not selected by the final learned production policy.
+
+### 21.4 Server input contract
+
+Normal `CLOUD` inference operates on the 10-value `features-v1` representation rather than raw sensor windows.
 
 Raw sensor data may still be uploaded separately for:
 
@@ -1094,8 +1129,6 @@ Raw sensor data may still be uploaded separately for:
 - continual-learning datasets
 
 Keep those paths conceptually separate.
-
----
 
 ## 22. Database Design
 
@@ -1115,7 +1148,7 @@ confidence
 uncertainty
 
 execution_mode
-split_point
+split_point (nullable; fixed-split experiments only)
 
 rssi
 rtt_ms
@@ -1217,8 +1250,8 @@ Example:
 Detected Gesture: SWIPE_LEFT
 Confidence:       96%
 Uncertainty:      0.08
-Execution:        EDGE
-Split:            -
+Execution:        LOCAL
+Policy:           example-not-deployed
 RSSI:             -62 dBm
 RTT:              19 ms
 Total Latency:    5.1 ms
@@ -1231,7 +1264,7 @@ Required / useful:
 
 - local exit rate
 - cloud-offload rate
-- split-point distribution
+- LOCAL/CLOUD action distribution (fixed-split distribution only in experimental views)
 - latency over time
 - mean latency by strategy
 - P95 latency by strategy
@@ -1309,13 +1342,11 @@ Prefer OTA for **model artifacts** rather than unnecessarily implementing full f
   "feature_version": "features-v1",
   "files": {
     "model": "gesture_model_v1.1.0.tflite",
-    "meta": "meta_v1.1.0.tflite",
-    "split": "split_controller_v1.1.0.tflite"
+    "meta": "meta_policy_v1.1.0.tflite"
   },
   "sha256": {
     "model": "...",
-    "meta": "...",
-    "split": "..."
+    "meta": "..."
   }
 }
 ```
@@ -1357,39 +1388,53 @@ The final system should compare at least:
 
 1. **All Local**
 2. **All Cloud**
-3. **Fixed Split**
-4. **Rule-Based Adaptive**
-5. **Learned Adaptive** — proposed system
+3. **Fixed Split** — one or more validated split baselines
+4. **Rule-Based Adaptive LOCAL/CLOUD**
+5. **Learned Adaptive LOCAL/CLOUD** — proposed production system
 
 ### 26.1 All Local
 
 ```text
-always B1 → B2 → B3 → Edge Head
+always local B1 → B2 → B3 → Edge Head
 ```
 
 ### 26.2 All Cloud
-Always offload using a predefined early split or equivalent server-heavy configuration.
+
+```text
+features-v1 (10 values)
+→ network
+→ server full-cloud model
+```
 
 ### 26.3 Fixed Split
-Always use one split point, e.g.:
+
+Use the already validated split implementation as a baseline, for example:
 
 ```text
-Split 2
+always Split 2
 ```
+
+This mode is retained to demonstrate why split selection was not included in the final adaptive action space.
 
 ### 26.4 Rule-Based Adaptive
-Use threshold logic.
 
-### 26.5 Learned Adaptive
-Use:
+Use binary threshold logic:
 
 ```text
-Meta Learner
-+
-Split Controller
+LOCAL or CLOUD
 ```
 
----
+### 26.5 Learned Adaptive
+
+Use the learned binary Meta Policy:
+
+```text
+state
+→ learned policy
+→ LOCAL or CLOUD
+```
+
+The production system does not require a learned Split Controller.
 
 ## 27. Evaluation Metrics
 
@@ -1406,9 +1451,10 @@ Collect:
 - mean latency
 - median latency
 - P95 latency
-- edge compute latency
+- local compute latency
 - network latency
 - server latency
+- total end-to-end latency
 
 ### Communication
 - bytes transmitted/sample
@@ -1417,11 +1463,12 @@ Collect:
 - cloud-offload percentage
 
 ### Adaptive behavior
-- local exit rate
-- Split 1 rate
-- Split 2 rate
-- Split 3 rate
+- LOCAL rate
+- CLOUD rate
 - policy action distribution
+- policy disagreement vs rule-based baseline
+
+For fixed-split baseline experiments, also report split-specific payload/latency separately.
 
 ### Reliability
 - success under Wi-Fi loss
@@ -1431,6 +1478,7 @@ Collect:
 ### Uncertainty
 - entropy distribution
 - confidence distribution
+- prediction margin
 - calibration curve
 - expected calibration error if implemented
 
@@ -1442,13 +1490,13 @@ Collect:
 - PSRAM usage
 - approximate compute / energy proxy
 
----
+Never present estimated energy as a physical measurement.
 
 ## 28. Experiment Scenarios
 
-### Scenario A — Clear gesture, good network
+### Scenario A — Clear gesture, normal network
 
-Expected behavior:
+Expected tendency:
 
 ```text
 high confidence
@@ -1456,12 +1504,12 @@ low uncertainty
 → likely LOCAL
 ```
 
-### Scenario B — Ambiguous gesture, good network
+### Scenario B — Ambiguous gesture, cloud available
 
 ```text
 higher uncertainty
-good RSSI / RTT
-→ OFFLOAD
+acceptable network state
+→ CLOUD may be selected
 ```
 
 ### Scenario C — Ambiguous gesture, poor network
@@ -1469,16 +1517,25 @@ good RSSI / RTT
 ```text
 high uncertainty
 high network cost
-→ learned policy may prefer deeper local computation
+→ policy may still prefer LOCAL
 ```
 
-### Scenario D — Wi-Fi disconnected
+### Scenario D — Wi-Fi/server unavailable
 
 ```text
-→ force local fallback
+→ force LOCAL fallback
 ```
 
-### Scenario E — Different user
+### Scenario E — Controlled network/device perturbation
+
+```text
+explicitly marked controlled/simulated state
+→ evaluate whether learned LOCAL/CLOUD policy responds appropriately
+```
+
+Such data must not be described as an unmodified real-world network measurement.
+
+### Scenario F — Different user
 
 ```text
 performance shift
@@ -1487,15 +1544,15 @@ performance shift
 → compare naive FT vs EWC
 ```
 
-### Scenario F — Model update
+### Scenario G — Model update
 
 ```text
-server model v1.1.0
+server model N+1
 → OTA
-→ ESP32 activates v1.1.0
+→ ESP32 verifies and activates N+1
 ```
 
----
+Fixed-split scenarios may be replayed as benchmark evidence, not as the production adaptive path.
 
 ## 29. Repository Structure
 
@@ -1556,7 +1613,7 @@ adaptive-edge-cloud-gesture/
 │   ├── policy/
 │   │   ├── build_policy_dataset.py
 │   │   ├── train_meta.py
-│   │   └── train_split_controller.py
+│   │   └── train_split_controller.py  # retired historical placeholder; not production
 │   │
 │   ├── continual/
 │   │   ├── ewc.py
@@ -1593,7 +1650,7 @@ adaptive-edge-cloud-gesture/
 │       │
 │       ├── policy/
 │       │   ├── meta_learner.cpp
-│       │   └── split_controller.cpp
+│       │   └── split_controller.cpp  # retired historical placeholder; not production
 │       │
 │       ├── network/
 │       │   ├── wifi_manager.cpp
@@ -1739,7 +1796,7 @@ dataset-v1
 features-v1
 gesture-model-v1.0.0
 meta-policy-v1.0.0
-split-policy-v1.0.0
+split-policy-v1.0.0 (historical naming only; no production Split Controller)
 firmware-v0.1.0
 server-v0.1.0
 ```
@@ -1800,15 +1857,6 @@ Check:
 ### Phase 0 — Project skeleton
 Complete before hardware is required.
 
-Deliverables:
-
-- repository
-- configuration files
-- architecture document
-- dataset protocol
-- feature-extractor Python skeleton
-- experiment naming convention
-
 Definition of done:
 
 ```text
@@ -1817,21 +1865,7 @@ configs parse correctly
 basic Python tests run
 ```
 
----
-
 ### Phase 1 — Hardware bring-up
-
-Tasks:
-
-1. identify correct USB port
-2. flash Hello World / serial test
-3. confirm board identity
-4. verify Flash/PSRAM configuration
-5. solder MPU6050 header
-6. connect I2C
-7. run I2C scanner
-8. confirm MPU address
-9. read raw sensor values
 
 Definition of done:
 
@@ -1839,19 +1873,7 @@ Definition of done:
 stable ax ay az gx gy gz stream
 ```
 
----
-
 ### Phase 2 — Data collection
-
-Tasks:
-
-- implement 100 Hz acquisition
-- implement timestamps
-- implement serial collector
-- define recording command
-- capture 5 gesture classes
-- validate recordings
-- build session-based split
 
 Definition of done:
 
@@ -1860,19 +1882,7 @@ dataset-v1 complete
 train / validation / test sessions separated
 ```
 
----
-
 ### Phase 3 — Base ML model
-
-Tasks:
-
-- exploratory analysis
-- compute features-v1
-- plot feature distributions
-- train classifier
-- confusion matrix
-- tune only if necessary
-- save preprocessing/model metadata
 
 Definition of done:
 
@@ -1880,18 +1890,7 @@ Definition of done:
 acceptable validation and held-out test performance
 ```
 
----
-
 ### Phase 4 — Local TinyML
-
-Tasks:
-
-- export TFLite
-- quantize if acceptable
-- implement C++ feature extractor
-- verify feature parity
-- execute model on ESP32
-- benchmark latency/memory
 
 Definition of done:
 
@@ -1899,19 +1898,9 @@ Definition of done:
 gesture recognized locally on ESP32
 ```
 
-**Hard rule:** do not begin adaptive cloud work until this phase is stable.
-
----
+**Hard rule:** adaptive cloud work begins only after this phase is stable.
 
 ### Phase 5 — Uncertainty
-
-Tasks:
-
-- train dropout-enabled path
-- implement 5 stochastic passes
-- compute entropy/variance
-- test ambiguous gestures
-- evaluate calibration
 
 Definition of done:
 
@@ -1919,17 +1908,7 @@ Definition of done:
 uncertainty score available per inference
 ```
 
----
-
 ### Phase 6 — Server + MQTT
-
-Tasks:
-
-- install Mosquitto
-- FastAPI server
-- MQTT request/response
-- server tail inference
-- timeout handling
 
 Definition of done:
 
@@ -1939,17 +1918,14 @@ server finishes inference
 ESP32 receives result
 ```
 
----
-
-### Phase 7 — Split inference
+### Phase 7 — Split inference feasibility / baseline
 
 Tasks:
 
-- export split artifacts
-- implement split 1
-- implement split 2
-- implement split 3
-- measure payload/latency
+- export Split 1/2/3 artifacts
+- validate Python/TFLite/ESP32 parity
+- validate MQTT E2E for all split paths
+- record payload/latency behavior
 
 Definition of done:
 
@@ -1957,44 +1933,44 @@ Definition of done:
 all three split points produce correct end-to-end predictions
 ```
 
----
+**Status:** completed. These split paths are retained as baselines; they are no longer production adaptive actions.
 
-### Phase 8 — Benchmark action space
+### Phase 8 — Action-space benchmarking and policy-data infrastructure
 
 Tasks:
 
-- test local
-- test split 1
-- test split 2
-- test split 3
-- vary RSSI / RTT / state
-- build policy dataset
+- benchmark LOCAL / CLOUD / fixed split actions
+- vary network/state conditions
+- build versioned policy datasets
+- calibrate reward/cost infrastructure
+- analyze action dominance
 
 Definition of done:
 
 ```text
-policy-training dataset generated from measured costs
+action-space evidence and policy-data infrastructure available
 ```
 
----
+**Architecture revision trigger:** completed studies showed current split actions dominated; production action space narrowed to `LOCAL` vs `CLOUD`.
 
-### Phase 9 — Learned adaptive policy
+### Phase 9 — Learned binary adaptive policy
 
 Tasks:
 
-- train Meta Learner
-- train Split Controller
-- deploy policies
-- implement rule-based baseline
-- compare actions
+- freeze binary policy dataset/configuration
+- train compact learned Meta Policy
+- implement rule-based binary baseline
+- evaluate learned vs rule-based behavior
+- export/deploy policy to ESP32 if deployment artifact passes parity/resource checks
+- log LOCAL/CLOUD decisions
 
 Definition of done:
 
 ```text
-device adaptively selects local/offload/split
+device adaptively selects LOCAL or CLOUD using a learned policy
 ```
 
----
+No learned Split Controller is required for the current MVP.
 
 ### Phase 10 — Failover
 
@@ -2002,7 +1978,7 @@ Tasks:
 
 - disconnect Wi-Fi
 - simulate server timeout
-- force local
+- force LOCAL
 - log transition
 
 Definition of done:
@@ -2011,17 +1987,7 @@ Definition of done:
 system continues gesture recognition without network
 ```
 
----
-
 ### Phase 11 — Database + Dashboard
-
-Tasks:
-
-- PostgreSQL
-- persist inference events
-- WebSocket live view
-- charts
-- experiment summaries
 
 Definition of done:
 
@@ -2029,17 +1995,7 @@ Definition of done:
 live dashboard reflects device decisions
 ```
 
----
-
 ### Phase 12 — Continual learning
-
-Tasks:
-
-- collect second-user data
-- evaluate model v1
-- naive fine-tuning
-- EWC fine-tuning
-- compare forgetting
 
 Definition of done:
 
@@ -2047,27 +2003,13 @@ Definition of done:
 measured continual-learning experiment completed
 ```
 
----
-
 ### Phase 13 — OTA
-
-Tasks:
-
-- model registry
-- manifest
-- version check
-- download
-- SHA-256
-- activation
-- rollback
 
 Definition of done:
 
 ```text
 ESP32 moves from model version N to N+1 safely
 ```
-
----
 
 ### Phase 14 — Final evaluation
 
@@ -2076,14 +2018,12 @@ Compare:
 ```text
 All Local
 All Cloud
-Fixed Split
-Rule-Based Adaptive
-Learned Adaptive
+Fixed Split baseline
+Rule-Based Adaptive LOCAL/CLOUD
+Learned Adaptive LOCAL/CLOUD
 ```
 
-Generate final tables and plots.
-
----
+Generate final measured tables and plots.
 
 ## 34. Milestones
 
@@ -2095,8 +2035,8 @@ M4  Python gesture classifier works
 M5  ESP32 local gesture classification works
 M6  uncertainty works
 M7  server-assisted inference works
-M8  all split points work
-M9  learned adaptive policy works
+M8  all split points work as validated experimental baselines
+M9  learned adaptive LOCAL/CLOUD policy works
 M10 failover works
 M11 dashboard works
 M12 continual-learning experiment works
@@ -2104,7 +2044,19 @@ M13 OTA works
 M14 final benchmark completed
 ```
 
----
+### Policy-study sub-milestones
+
+The M25–M34 labels used in implementation notes are analysis sub-milestones inside the policy-development work. They do not renumber the canonical Phase 9/10 sequence above.
+
+The key conclusion from those studies is:
+
+```text
+Current adaptive production action space:
+LOCAL
+CLOUD
+```
+
+Split 1/2/3 remain fixed experimental baselines.
 
 ## 35. Scope-Control Rules
 
@@ -2116,14 +2068,16 @@ These rules are mandatory unless there is a strong technical reason to change th
 4. Do not optimize binary MQTT payloads before JSON works.
 5. Do not build a complex frontend.
 6. Do not introduce reinforcement learning unless the supervised policy method clearly fails.
-7. Do not claim battery measurements without battery-measurement hardware.
+7. Do not claim battery/energy measurements without measurement hardware.
 8. Do not invent experiment results.
 9. Do not change feature definitions without versioning them.
 10. Do not change sampling settings without creating a new dataset version.
 11. Every new feature must justify its implementation cost.
 12. Prefer a working end-to-end system over a larger unfinished system.
-
----
+13. Do not force Split 1/2/3 labels merely to obtain action balance.
+14. Do not reopen split-architecture optimization in the MVP unless new measured evidence shows a credible benefit.
+15. Preserve the completed split implementation as baseline evidence rather than deleting it.
+16. The learned production policy is binary `LOCAL`/`CLOUD` unless a later documented architecture revision changes this decision.
 
 ## 36. Known Risks
 
@@ -2135,13 +2089,16 @@ Mitigation:
 - implement explicit stochastic masking if needed
 - verify actual variation across the 5 passes
 
-### Risk 2 — Split-model complexity
-Exporting arbitrary graph splits may become time-consuming.
+### Risk 2 — Split inference is not economically competitive
+The validated split paths increase representation size relative to the 10-feature all-cloud input and add prefix compute.
+
+Measured/controlled project studies found the current split actions dominated.
 
 Mitigation:
 
-- design the network as clearly separable sequential blocks
-- keep split interfaces simple dense vectors
+- keep split paths as fixed experimental baselines
+- use binary LOCAL/CLOUD adaptive policy for the MVP
+- revisit compact bottlenecks only as future work
 
 ### Risk 3 — Dataset leakage
 Random windows from one gesture sequence may leak across train/test.
@@ -2157,84 +2114,97 @@ Mitigation:
 
 - freeze physical orientation protocol for v1
 
-### Risk 5 — Adaptive policy becomes effectively always-local
-If cloud model adds no accuracy/value, offloading is irrational.
+### Risk 5 — Adaptive policy collapses to one action
+A learned policy is not useful if the training/evaluation state space always favors one action.
 
 Mitigation:
 
-- use a meaningful deeper cloud continuation
-- create ambiguous samples
-- benchmark real trade-offs
+- preserve matched-condition measurements
+- use explicitly controlled state perturbations where appropriate
+- keep provenance
+- report limitations honestly
+- never force labels
 
-### Risk 6 — Project scope
-EWC + OTA + dashboard + split inference can expand rapidly.
+### Risk 6 — Simulated-vs-measured state confusion
+Controlled perturbation is useful for policy development but can be mistaken for real-world measurement.
+
+Mitigation:
+
+- retain explicit provenance fields
+- separate measured and simulated analyses
+- make final claims only at the level supported by evidence
+
+### Risk 7 — Project scope
+EWC + OTA + dashboard + policy deployment can expand rapidly.
 
 Mitigation:
 
 - follow phase gates
-- prioritize M1–M10 before polishing late-stage features
-
----
+- stop further split optimization for the MVP
+- prioritize a working binary adaptive system and failover before late-stage polish
 
 ## 37. Final Defense Story
 
-The final demo should not be:
-
-```text
-perform gesture
-→ classifier names gesture
-```
-
-Instead it should show the adaptive system.
+The final demo should show the **adaptive Edge–Cloud decision**, not merely gesture classification.
 
 ### Demo moment 1 — confident local result
 
 ```text
-clear Swipe Right
+clear gesture
 → confidence high
 → uncertainty low
-→ LOCAL
-→ no cloud payload
+→ learned policy selects LOCAL
+→ no cloud request
 ```
 
-### Demo moment 2 — uncertain + network available
+### Demo moment 2 — uncertain + acceptable network
 
 ```text
 ambiguous movement
-→ uncertainty high
-→ OFFLOAD
-→ selected split
-→ embedding sent
+→ uncertainty higher
+→ learned policy may select CLOUD
+→ 10-feature vector sent
 → server result returned
 ```
 
-### Demo moment 3 — degraded network
+### Demo moment 3 — network/state change
 
 ```text
-network quality changes
-→ split selection changes
+network or resource state changes
+→ LOCAL/CLOUD decision changes
 ```
 
-### Demo moment 4 — Wi-Fi loss
+### Demo moment 4 — Wi-Fi/server loss
 
 ```text
-Wi-Fi disconnected
-→ automatic local fallback
+network unavailable
+→ force LOCAL fallback
 → gesture recognition continues
 ```
 
-### Demo moment 5 — model evolution
+### Demo moment 5 — explain the split experiment
+
+Show that Split 1/2/3 were actually implemented and validated, then present the measured design finding:
+
+```text
+current split embeddings > 10-feature cloud input
++
+split prefix compute
+→ split actions dominated in current action-space studies
+→ production policy simplified to LOCAL/CLOUD
+```
+
+This is an evidence-driven engineering decision and should be presented as such.
+
+### Demo moment 6 — model evolution
 
 ```text
 new-user labeled data
-→ continual learning
-→ EWC
-→ model v2
+→ continual learning / EWC
+→ model N+1
 → OTA
-→ device activates new model
+→ device activates verified update
 ```
-
----
 
 ## 38. Expected Final Report Comparisons
 
@@ -2244,17 +2214,17 @@ Suggested central result table:
 |---|---:|---:|---:|---:|---:|---:|---:|
 | All Local | | | | | | | |
 | All Cloud | | | | | | | |
-| Fixed Split | | | | | | | |
-| Rule-Based | | | | | | | |
-| Learned Adaptive | | | | | | | |
+| Fixed Split baseline | | | | | | | |
+| Rule-Based LOCAL/CLOUD | | | | | | | |
+| Learned LOCAL/CLOUD | | | | | | | |
 
-Do not require the proposed method to be best in every single column.
+Do not require the proposed method to be best in every column.
 
-The intended research claim is more reasonably:
+A reasonable final claim is:
 
-> **The learned adaptive system provides a better overall trade-off among classification quality, latency, communication cost, and network resilience.**
+> **The learned uncertainty-aware LOCAL/CLOUD policy provides an evidence-based trade-off among classification quality, latency, communication cost, and resilience, while the validated fixed-split experiments explain why adaptive split selection was excluded from the final MVP.**
 
----
+Do not claim that the learned policy optimizes split points.
 
 ## 39. Source-of-Truth Priority
 
@@ -2269,11 +2239,32 @@ When project decisions conflict, use this priority:
 
 If this document is changed, record the reason.
 
----
+### Current recorded architecture change
+
+Revision R1 narrows the production adaptive action space from:
+
+```text
+LOCAL / Split1 / Split2 / Split3 (or LOCAL + learned split selection)
+```
+
+to:
+
+```text
+LOCAL / CLOUD
+```
+
+Reason:
+
+- the split implementation was completed successfully,
+- subsequent policy-action studies found current split actions dominated,
+- current split embeddings are larger than the direct 10-feature cloud input,
+- further compact-bottleneck redesign would require retraining/revalidation and expand project scope.
+
+This revision follows Priority 1: measured project behavior overrides the earlier architectural expectation.
 
 ## 40. Current Fixed Decisions
 
-As of the creation of this document:
+As of Revision R1:
 
 ```text
 Core project:
@@ -2323,8 +2314,26 @@ Feature count:
 MC stochastic passes:
 5
 
-Split points:
-3
+Production adaptive actions:
+LOCAL
+CLOUD
+
+Cloud offload payload:
+features-v1 (10 values)
+
+Learned production policy:
+binary Meta Policy (LOCAL / CLOUD)
+
+Split Controller:
+retired from production MVP
+
+Validated split points:
+Split1 = 64-D
+Split2 = 48-D
+Split3 = 32-D
+
+Role of split points:
+fixed experimental baselines / negative-result evidence
 
 Server:
 FastAPI + MQTT
@@ -2344,15 +2353,18 @@ EWC
 Update:
 Model OTA
 
+Energy:
+estimated/simulated proxy unless measurement hardware is added
+
 Final comparison:
 All Local
 All Cloud
-Fixed Split
-Rule-Based Adaptive
-Learned Adaptive
+Fixed Split baseline
+Rule-Based LOCAL/CLOUD
+Learned LOCAL/CLOUD
 ```
 
----
+The project must not silently revert to adaptive split selection without a new documented architecture revision supported by measured evidence.
 
 ## 41. References / Project Sources
 
@@ -2368,3 +2380,5 @@ The original project definition describes the Edge–Cloud TinyML concept, learn
 ---
 
 # End of Canonical Architecture Document
+
+R1 example cleanup (2026-09-08): edge components, policy config reference, production MQTT examples, future OTA example and directory/version annotations reconciled with R1. Historical split discussion and measured reports are retained. See docs/phase9_r1_migration_audit.md.

@@ -1,1 +1,1 @@
-// Reserved for its scheduled implementation phase.
+// Retired by Architecture R1; historical placeholder, not a production component.

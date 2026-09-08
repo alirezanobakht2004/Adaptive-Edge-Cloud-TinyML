@@ -1,1 +1,1 @@
-"""Reserved for Phase 9. Intentionally not implemented during Phase 0."""
+"""Retired R1 historical placeholder. No production Split Controller is trained."""

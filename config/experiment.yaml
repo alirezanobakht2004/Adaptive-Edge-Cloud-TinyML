@@ -3,6 +3,8 @@ runtime:
   window_ms: 1000
   step_ms: 500
 
+# Historical Phase-0 illustrative weights; not the M30 calibrated experiment.
+# R1 uses the separately versioned binary policy contract and frozen M30 reward.
 cost_weights:
   error: 0.50
   latency: 0.25
@@ -15,3 +17,9 @@ evaluation_modes:
   - fixed_split
   - rule_based
   - learned_adaptive
+
+# Production action mapping under Architecture R1 (historical datasets unchanged).
+production_policy:
+  architecture_revision: R1
+  actions: {0: LOCAL, 1: CLOUD}
+  status: gated_not_deployed

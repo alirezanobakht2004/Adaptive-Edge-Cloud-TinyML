@@ -4,26 +4,22 @@ Canonical implementation repository for the undergraduate project:
 
 **سامانه هوشمند تطبیقی لبه–ابر مبتنی بر TinyML**
 
-The gesture-recognition pipeline is the testbed. The primary contribution is adaptive
-Edge–Cloud inference with learned offloading and split-point selection.
+The gesture-recognition pipeline is the testbed for a learned binary LOCAL/CLOUD
+policy under Architecture Revision R1. CLOUD sends exactly 10 features-v1 values.
 
 ## Current project phase
 
-**Phase 2 — Data collection / pre-M3**
+Canonical Phase 9 / M9: learned binary adaptive policy, in progress and gated.
+Phase 7 split baselines and Phase 8 policy studies are complete. M25?M34 names in
+older reports are historical study milestones, not the canonical phase sequence.
+Phase 10 / M10 failover has not started.
 
-Current checkpoint:
+Split1/2/3 artifacts and regression suites remain fixed experimental baselines.
+The production firmware currently retains the validated local uncertainty path;
+a learned binary policy is not yet integrated. Historical four-action datasets
+and configurations are immutable evidence, not production policy contracts.
 
-- hardware bring-up is complete,
-- 100 Hz calibrated IMU streaming is stable,
-- boot gyroscope calibration is active,
-- `orientation-v1` is frozen for dataset-v1,
-- `accel-cal-v1` is applied and six-position validated,
-- dataset-v1 gesture collection has not started yet.
-
-M3 is reached only when dataset-v1 is fully collected with session-based
-train/validation/test separation.
-
-Do not start Adaptive Cloud work before Local Gesture Recognition on ESP32 is stable.
+See [R1 migration audit](docs/phase9_r1_migration_audit.md).
 
 ## Fixed v1 choices
 
