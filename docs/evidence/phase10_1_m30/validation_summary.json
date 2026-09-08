@@ -1,0 +1,29 @@
+{
+  "dataset": {
+    "candidate_executions": 384,
+    "diagnostic_run_excluded": true,
+    "executions_per_action": 96,
+    "matched_samples": 24,
+    "rejected_windows": 1,
+    "source_labels_and_server_evidence_validated": true
+  },
+  "git_diff_check": "passed",
+  "hardware": {
+    "matched_prefix_parity_passed": true,
+    "phase7_suites_passed": 6,
+    "port": "COM10",
+    "production_runtime_changed": false
+  },
+  "milestone": "Phase10.1 M30",
+  "protected_v1_runtime_policy_paths_unchanged": true,
+  "pytest": {
+    "passed": 220,
+    "warning_kind": "existing TensorFlow Lite deprecation",
+    "warnings": 4
+  },
+  "python_compile": "passed",
+  "reward_energy_kind": "estimated dimensionless proxy; no measured energy",
+  "timestamp": "2026-09-08T09:51:01.093978+00:00",
+  "training_allowed": false,
+  "training_started": false
+}

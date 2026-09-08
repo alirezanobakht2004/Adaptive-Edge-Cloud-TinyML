@@ -1,0 +1,192 @@
+.venv\Scripts\python.exe : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:2 char:77
++ ... | Out-Null; .venv\Scripts\python.exe -u -m tests.run_phase7_hardware  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+I0000 00:00:1788860049.068284   42084 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1788860054.880663   42084 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1788860056.820753   42084 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available 
+CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with 
+the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if 
+CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+RUN: C:\Users\alire\.platformio\penv\Scripts\platformio.exe test -d firmware -e esp32-s3-n8r2 --upload-port COM10 --test-port COM10 -v -f test_phase7_*
+Collected 27 tests (test_edge_uncertainty_parity, test_edge_uncertainty_stochastic, test_feature_parity, test_input_preprocessing, test_internal_tensor_diagnostic, test_local_inference, test_local_latency, test_local_memory, test_phase10_matched_campaign, test_phase6_mqtt_client, test_phase6_mqtt_publish, test_phase6_mqtt_receive, test_phase6_network_reachability, test_phase6_server_e2e, test_phase6_server_timeout, test_phase6_wifi_manager, test_phase7_split1_e2e, test_phase7_split1_parity, test_phase7_split2_e2e, test_phase7_split2_parity, test_phase7_split3_e2e, test_phase7_split3_parity, test_phase9_campaign, test_tflm_fc1_diagnostic, test_tflm_float32_runtime, test_tflm_logits_diagnostic, test_window_buffer)
+
+Processing test_phase7_split1_e2e in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+MQTT_INFERENCE_OK request_id=split1-e2e-0 device_id=esp32-split1-test split=1 class=IDLE confidence=0.999637 server_ms=104.711300 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=0 RESPONSE={"request_id":"split1-e2e-0","split":1,"predicted_class":"IDLE","confidence":0.9996368885040283,"server_latency_ms":104.7113,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-1 device_id=esp32-split1-test split=1 class=SWIPE_LEFT confidence=0.999905 server_ms=13.414200 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=1 RESPONSE={"request_id":"split1-e2e-1","split":1,"predicted_class":"SWIPE_LEFT","confidence":0.9999047517776489,"server_latency_ms":13.4142,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-2 device_id=esp32-split1-test split=1 class=SWIPE_RIGHT confidence=0.988655 server_ms=15.780100 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=2 RESPONSE={"request_id":"split1-e2e-2","split":1,"predicted_class":"SWIPE_RIGHT","confidence":0.9886553287506104,"server_latency_ms":15.7801,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-3 device_id=esp32-split1-test split=1 class=ROTATE_CW confidence=1.000000 server_ms=24.967300 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=3 RESPONSE={"request_id":"split1-e2e-3","split":1,"predicted_class":"ROTATE_CW","confidence":1.0,"server_latency_ms":24.9673,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split1-e2e-4 device_id=esp32-split1-test split=1 class=SHAKE confidence=1.000000 server_ms=13.444700 response_topic=gesture/esp32-split1-test/inference/response
+SPLIT1_E2E_VECTOR=4 RESPONSE={"request_id":"split1-e2e-4","split":1,"predicted_class":"SHAKE","confidence":0.9999995231628418,"server_latency_ms":13.4447,"model_version":"gesture-cloud-tail-split1-v1.0.0"}
+PHASE7_SPLIT1_E2E_PASS
+test/test_phase7_split1_e2e/test_main.cpp:92:testSplit1EndToEnd:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored 
+OK
+
+------- esp32-s3-n8r2:test_phase7_split1_e2e [PASSED] Took 62.32 seconds -------
+
+Processing test_phase7_split1_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+SPLIT1_VECTOR_COUNT=5
+SPLIT1_MAX_ABS_DIFF=0.000000000
+PHASE7_SPLIT1_PARITY_PASS
+test/test_phase7_split1_parity/test_main.cpp:214:testSplit1Parity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored 
+OK
+
+----- esp32-s3-n8r2:test_phase7_split1_parity [PASSED] Took 35.95 seconds -----
+
+Processing test_phase7_split2_e2e in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+MQTT_INFERENCE_OK request_id=split2-e2e-0 device_id=esp32-split2-test split=2 class=IDLE confidence=0.999188 server_ms=24.886100 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=0 RESPONSE={"request_id":"split2-e2e-0","split":2,"predicted_class":"IDLE","confidence":0.9991884827613831,"server_latency_ms":24.8861,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-1 device_id=esp32-split2-test split=2 class=SWIPE_LEFT confidence=0.999717 server_ms=9.780900 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=1 RESPONSE={"request_id":"split2-e2e-1","split":2,"predicted_class":"SWIPE_LEFT","confidence":0.9997170567512512,"server_latency_ms":9.7809,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-2 device_id=esp32-split2-test split=2 class=SWIPE_RIGHT confidence=0.973221 server_ms=22.896400 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=2 RESPONSE={"request_id":"split2-e2e-2","split":2,"predicted_class":"SWIPE_RIGHT","confidence":0.9732206463813782,"server_latency_ms":22.8964,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-3 device_id=esp32-split2-test split=2 class=ROTATE_CW confidence=0.999999 server_ms=6.334000 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=3 RESPONSE={"request_id":"split2-e2e-3","split":2,"predicted_class":"ROTATE_CW","confidence":0.9999990463256836,"server_latency_ms":6.334,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split2-e2e-4 device_id=esp32-split2-test split=2 class=SHAKE confidence=0.999991 server_ms=21.313900 response_topic=gesture/esp32-split2-test/inference/response
+SPLIT2_E2E_VECTOR=4 RESPONSE={"request_id":"split2-e2e-4","split":2,"predicted_class":"SHAKE","confidence":0.9999911785125732,"server_latency_ms":21.3139,"model_version":"gesture-cloud-tail-split2-v1.0.0"}
+PHASE7_SPLIT2_E2E_PASS
+test/test_phase7_split2_e2e/test_main.cpp:92:testSplit2EndToEnd:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored 
+OK
+
+------- esp32-s3-n8r2:test_phase7_split2_e2e [PASSED] Took 45.93 seconds -------
+
+Processing test_phase7_split2_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+SPLIT2_VECTOR_COUNT=5
+SPLIT2_MAX_ABS_DIFF=0.000000000
+PHASE7_SPLIT2_PARITY_PASS
+test/test_phase7_split2_parity/test_main.cpp:214:testSplit2Parity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored 
+OK
+
+----- esp32-s3-n8r2:test_phase7_split2_parity [PASSED] Took 36.54 seconds -----
+
+Processing test_phase7_split3_e2e in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+MQTT_INFERENCE_OK request_id=split3-e2e-0 device_id=esp32-split3-test split=3 class=IDLE confidence=0.997433 server_ms=15.972600 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=0 RESPONSE={"request_id":"split3-e2e-0","split":3,"predicted_class":"IDLE","confidence":0.9974330067634583,"server_latency_ms":15.9726,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-1 device_id=esp32-split3-test split=3 class=SWIPE_LEFT confidence=0.999468 server_ms=6.487700 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=1 RESPONSE={"request_id":"split3-e2e-1","split":3,"predicted_class":"SWIPE_LEFT","confidence":0.9994677901268005,"server_latency_ms":6.4877,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-2 device_id=esp32-split3-test split=3 class=SWIPE_RIGHT confidence=0.958919 server_ms=10.970600 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=2 RESPONSE={"request_id":"split3-e2e-2","split":3,"predicted_class":"SWIPE_RIGHT","confidence":0.9589192271232605,"server_latency_ms":10.9706,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-3 device_id=esp32-split3-test split=3 class=ROTATE_CW confidence=0.999988 server_ms=6.368400 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=3 RESPONSE={"request_id":"split3-e2e-3","split":3,"predicted_class":"ROTATE_CW","confidence":0.9999876022338867,"server_latency_ms":6.3684,"model_version":"gesture-cloud-tail-v1.0.0"}
+MQTT_INFERENCE_OK request_id=split3-e2e-4 device_id=esp32-split3-test split=3 class=SHAKE confidence=0.999939 server_ms=5.707500 response_topic=gesture/esp32-split3-test/inference/response
+SPLIT3_E2E_VECTOR=4 RESPONSE={"request_id":"split3-e2e-4","split":3,"predicted_class":"SHAKE","confidence":0.9999387264251709,"server_latency_ms":5.7075,"model_version":"gesture-cloud-tail-v1.0.0"}
+PHASE7_SPLIT3_E2E_PASS
+test/test_phase7_split3_e2e/test_main.cpp:87:testSplit3EndToEnd:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored 
+OK
+
+------- esp32-s3-n8r2:test_phase7_split3_e2e [PASSED] Took 44.22 seconds -------
+
+Processing test_phase7_split3_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+
+Building & Uploading...
+
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+SPLIT3_VECTOR_COUNT=5
+SPLIT3_MAX_ABS_DIFF=0.000000000
+PHASE7_SPLIT3_PARITY_PASS
+test/test_phase7_split3_parity/test_main.cpp:29:testSplit3Parity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored 
+OK
+
+----- esp32-s3-n8r2:test_phase7_split3_parity [PASSED] Took 35.06 seconds -----
+
+=================================== SUMMARY ===================================
+Environment    Test                              Status    Duration
+-------------  --------------------------------  --------  ------------
+esp32-s3-n8r2  test_edge_uncertainty_parity      SKIPPED
+esp32-s3-n8r2  test_edge_uncertainty_stochastic  SKIPPED
+esp32-s3-n8r2  test_feature_parity               SKIPPED
+esp32-s3-n8r2  test_input_preprocessing          SKIPPED
+esp32-s3-n8r2  test_internal_tensor_diagnostic   SKIPPED
+esp32-s3-n8r2  test_local_inference              SKIPPED
+esp32-s3-n8r2  test_local_latency                SKIPPED
+esp32-s3-n8r2  test_local_memory                 SKIPPED
+esp32-s3-n8r2  test_phase10_matched_campaign     SKIPPED
+esp32-s3-n8r2  test_phase6_mqtt_client           SKIPPED
+esp32-s3-n8r2  test_phase6_mqtt_publish          SKIPPED
+esp32-s3-n8r2  test_phase6_mqtt_receive          SKIPPED
+esp32-s3-n8r2  test_phase6_network_reachability  SKIPPED
+esp32-s3-n8r2  test_phase6_server_e2e            SKIPPED
+esp32-s3-n8r2  test_phase6_server_timeout        SKIPPED
+esp32-s3-n8r2  test_phase6_wifi_manager          SKIPPED
+esp32-s3-n8r2  test_phase7_split1_e2e            PASSED    00:01:02.325
+esp32-s3-n8r2  test_phase7_split1_parity         PASSED    00:00:35.954
+esp32-s3-n8r2  test_phase7_split2_e2e            PASSED    00:00:45.932
+esp32-s3-n8r2  test_phase7_split2_parity         PASSED    00:00:36.538
+esp32-s3-n8r2  test_phase7_split3_e2e            PASSED    00:00:44.223
+esp32-s3-n8r2  test_phase7_split3_parity         PASSED    00:00:35.058
+esp32-s3-n8r2  test_phase9_campaign              SKIPPED
+esp32-s3-n8r2  test_tflm_fc1_diagnostic          SKIPPED
+esp32-s3-n8r2  test_tflm_float32_runtime         SKIPPED
+esp32-s3-n8r2  test_tflm_logits_diagnostic       SKIPPED
+esp32-s3-n8r2  test_window_buffer                SKIPPED
+================== 6 test cases: 6 succeeded in 00:04:20.029 ==================
