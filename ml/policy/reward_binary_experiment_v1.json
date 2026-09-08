@@ -1,0 +1,32 @@
+{
+  "version": "binary-reward-experiment-v1",
+  "calibration_status": "provisional M30 weights; frozen for historical binary comparison, not recalibrated",
+  "source_path": "tools/policy_dataset/conditions/connected_lab_v1.json",
+  "source_commit": "bc24ed1d48ee619fd10d78c07a325be58dec64bb",
+  "source_reward_sha256": "fac59cd60d8e5c3dc2c0a1d80855871699fbf90014e41cff7d8b57a7cc40c8b7",
+  "configuration": {
+    "version": "reward-calibration-v1",
+    "dataset_version": "policy_training_dataset_v1",
+    "actions": {
+      "0": "ALL_LOCAL",
+      "1": "SPLIT1",
+      "2": "SPLIT2",
+      "3": "ALL_CLOUD"
+    },
+    "weights": {
+      "accuracy": 1.0,
+      "latency": 0.1,
+      "communication": 0.1,
+      "energy_proxy": 0.1
+    },
+    "scales": {
+      "latency_ms": 100,
+      "communication_bytes": 1024,
+      "energy_proxy": 1
+    },
+    "energy_kind": "estimated",
+    "energy_proxy_version": "m30-compute-payload-proxy-v1",
+    "energy_method": "Dimensionless estimated proxy: (preprocessing_ms + state_inference_ms + selected_edge_compute_ms) / 10 + selected_payload_bytes / 1024; excludes radio waiting, cloud energy and probe traffic; not joules or battery measurement",
+    "tie_tolerance": 1e-06
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "version": "policy-config-v2",
+  "architecture_revision": "R1",
+  "policy_type": "binary LOCAL/CLOUD",
+  "policy_version": "binary-policy-contract-v1",
+  "dataset_version": "policy_training_dataset_binary_v1",
+  "feature_version": "features-v1",
+  "gesture_model_version": "gesture-model-v1.1.0",
+  "full_cloud_model_version": "gesture-full-cloud-v1.0.0",
+  "learned_model_version": null,
+  "actions": {
+    "0": "LOCAL",
+    "1": "CLOUD"
+  },
+  "action_execution": {
+    "0": "Reuse completed validated local MC result; no second local inference",
+    "1": "Send exactly 10 normalized features-v1 values; full-cloud model through MQTT"
+  },
+  "state_feature_names": [
+    "state.uncertainty.confidence",
+    "state.uncertainty.entropy",
+    "state.uncertainty.margin",
+    "state.device.free_heap",
+    "state.device.inference_latency_estimate",
+    "state.network.mqtt_rtt_ms"
+  ],
+  "features": [
+    {
+      "name": "state.uncertainty.confidence",
+      "units": "probability",
+      "runtime_source": "inference::UncertaintyResult.confidence after the existing five-pass local MC result",
+      "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "available_before_decision": true,
+      "training_provenance": "measured M30; carried unchanged in replay",
+      "normalization": {
+        "offset": 0,
+        "divisor": 1
+      }
+    },
+    {
+      "name": "state.uncertainty.entropy",
+      "units": "nats",
+      "runtime_source": "inference::UncertaintyResult.predictiveEntropyNats after the existing five-pass local MC result",
+      "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "available_before_decision": true,
+      "training_provenance": "measured M30; carried unchanged in replay",
+      "normalization": {
+        "offset": 0,
+        "divisor": 1.6094379124341003
+      }
+    },
+    {
+      "name": "state.uncertainty.margin",
+      "units": "probability difference",
+      "runtime_source": "Largest minus second-largest UncertaintyResult.meanProbabilities; existing matched campaign calculation",
+      "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "available_before_decision": true,
+      "training_provenance": "measured M30; carried unchanged in replay",
+      "normalization": {
+        "offset": 0,
+        "divisor": 1
+      }
+    },
+    {
+      "name": "state.device.free_heap",
+      "units": "bytes",
+      "runtime_source": "ESP.getFreeHeap() after local inference and before selection; existing matched campaign snapshot",
+      "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "available_before_decision": true,
+      "training_provenance": "measured M30; carried unchanged in replay, not remeasured",
+      "normalization": {
+        "offset": 0,
+        "divisor": 1024
+      }
+    },
+    {
+      "name": "state.device.inference_latency_estimate",
+      "units": "milliseconds",
+      "runtime_source": "micros() difference around existing runPrefixB3 + runStochasticUncertaintyFromEmbedding, divided by 1000; matched harness state_us",
+      "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "available_before_decision": true,
+      "training_provenance": "measured M30; scaled and/or queue-adjusted in simulated replay",
+      "normalization": {
+        "offset": 0,
+        "divisor": 100
+      }
+    },
+    {
+      "name": "state.network.mqtt_rtt_ms",
+      "units": "milliseconds",
+      "runtime_source": "Correlated application MQTT probe elapsed micros()/1000; existing matched harness exchange(); must be integrated before production decision",
+      "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+      "available_before_decision": true,
+      "training_provenance": "measured M30 application probe; transformed by simulated profiles",
+      "normalization": {
+        "offset": 0,
+        "divisor": 100
+      }
+    }
+  ],
+  "normalization": {
+    "version": "binary-state-normalization-v1",
+    "algorithm": "(raw - offset) / divisor in declared feature order; float32 deployment",
+    "calibration": "Fixed unit scaling: probabilities unchanged, entropy / ln(5), heap / 1024 KiB, time / existing M30 100 ms reward reference; no fitted data statistics",
+    "clip": false,
+    "missing": "reject; no zero imputation",
+    "dimension": 6
+  },
+  "reward_reference": {
+    "path": "ml/policy/reward_binary_experiment_v1.json",
+    "version": "binary-reward-experiment-v1",
+    "configuration_sha256": "fac59cd60d8e5c3dc2c0a1d80855871699fbf90014e41cff7d8b57a7cc40c8b7"
+  },
+  "grouping": {
+    "version": "binary-window-groups-v1",
+    "keys": [
+      "source_dataset_version",
+      "feature_version",
+      "source_session",
+      "window_id"
+    ],
+    "algorithm": "SHA256 canonical JSON of original feature window identity; run/profile/repeat not part of group",
+    "partition": "sort group SHA256(seed + group_key); first ceil(0.25 * groups) holdout; remaining train",
+    "seed": 20260908,
+    "holdout_fraction": 0.25,
+    "limitation": "Within-session window-group holdout only; no independent-session claim"
+  },
+  "excluded_features": {
+    "local_compute_pressure": "synthetic-only replay input; no production source",
+    "inference_queue_pressure": "synthetic-only replay input; no production queue monitor",
+    "cloud_availability": "simulated in v3; production availability check not established",
+    "network_quality_score": "simulated score; no production contract",
+    "packet_size_estimate": "missing in historical states",
+    "estimated_bandwidth": "missing in historical states",
+    "rssi_dbm": "sidecar only; not projected into versioned decision state",
+    "tensor_arena_usage": "constant B3-specific resource metric; not selected",
+    "cpu_frequency": "constant in accepted campaign; not selected",
+    "predicted_class": "not selected; uncertainty describes the local prediction",
+    "connection_state": "constant connected in eligible source; record retained, not selected"
+  },
+  "training_enabled": false,
+  "status": "frozen contract; qualification required"
+}
