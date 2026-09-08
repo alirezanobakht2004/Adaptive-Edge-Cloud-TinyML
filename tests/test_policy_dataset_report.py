@@ -50,3 +50,8 @@ def test_campaign_checks_manifest_and_raw_projection(tmp_path):
     (tmp_path / "configuration.json").write_text(json.dumps(config), encoding="utf-8")
     with pytest.raises(ValueError, match="version mismatch"):
         validate_campaign(tmp_path)
+    config.update(feature_version="features-v1", mode="cloud", action=3,
+                  model_versions={"3": "gesture-cloud-tail-v1.0.0"})
+    (tmp_path / "configuration.json").write_text(json.dumps(config), encoding="utf-8")
+    with pytest.raises(ValueError, match="execution model version mismatch"):
+        validate_campaign(tmp_path)

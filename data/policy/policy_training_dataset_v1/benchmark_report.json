@@ -1,0 +1,85 @@
+{
+  "scope": "device",
+  "baselines": {
+    "ALL_LOCAL": {
+      "attempts": 25,
+      "successes": 25,
+      "labeled_count": 25,
+      "accuracy": 1.0,
+      "latency_count": 25,
+      "mean_latency_ms": 15.4792,
+      "bytes_count": 25,
+      "mean_communication_bytes": 0.0,
+      "energy_count": 0,
+      "mean_estimated_energy_proxy": null,
+      "status": "measured"
+    },
+    "ALL_CLOUD": {
+      "attempts": 25,
+      "successes": 25,
+      "labeled_count": 25,
+      "accuracy": 1.0,
+      "latency_count": 25,
+      "mean_latency_ms": 47.4226,
+      "bytes_count": 25,
+      "mean_communication_bytes": 382.64,
+      "energy_count": 0,
+      "mean_estimated_energy_proxy": null,
+      "status": "measured"
+    },
+    "SPLIT1": {
+      "attempts": 25,
+      "successes": 25,
+      "labeled_count": 25,
+      "accuracy": 1.0,
+      "latency_count": 25,
+      "mean_latency_ms": 41.608599999999996,
+      "bytes_count": 25,
+      "mean_communication_bytes": 754.56,
+      "energy_count": 0,
+      "mean_estimated_energy_proxy": null,
+      "status": "measured"
+    },
+    "SPLIT2": {
+      "attempts": 25,
+      "successes": 25,
+      "labeled_count": 25,
+      "accuracy": 1.0,
+      "latency_count": 25,
+      "mean_latency_ms": 45.911,
+      "bytes_count": 25,
+      "mean_communication_bytes": 655.32,
+      "energy_count": 0,
+      "mean_estimated_energy_proxy": null,
+      "status": "measured"
+    },
+    "RULE_BASED_ADAPTIVE": {
+      "attempts": 0,
+      "successes": 0,
+      "labeled_count": 0,
+      "accuracy": null,
+      "latency_count": 0,
+      "mean_latency_ms": null,
+      "bytes_count": 0,
+      "mean_communication_bytes": null,
+      "energy_count": 0,
+      "mean_estimated_energy_proxy": null,
+      "status": "missing",
+      "reason": "No rule-based execution campaign; fixed-action traces are not substitute measurements."
+    }
+  },
+  "policy_trained": false,
+  "input_sha256_lf_utf8": "fd5c9557de9d903bfd7f53979bcd1a3a2c41aebb204c4b77ea46679978f9b897",
+  "metric_definitions": {
+    "accuracy": "Correct successful predictions / labeled attempts, only this replay subset.",
+    "mean_latency_ms": "total_latency_ms as recorded; Phase9 device campaigns include preparation + pre-decision B3/MC + MQTT probe + selected action, excluding serial transfer and feature extraction.",
+    "mean_communication_bytes": "Selected action JSON request + response payload bytes; excludes probe, MQTT framing and link overhead.",
+    "mean_estimated_energy_proxy": "Null until explicit estimated/simulated proxy assumptions are configured; never measured energy."
+  },
+  "limitations": [
+    "Fixed modes execute sequentially; uncontrolled host/network conditions and cold starts are included.",
+    "Existing validation features replayed on device; not new live sensor acquisition.",
+    "Local stochastic edge head and separately trained cloud tails differ; results reflect model and placement.",
+    "No rule-based campaign, network sweep, or training qualification claimed."
+  ]
+}

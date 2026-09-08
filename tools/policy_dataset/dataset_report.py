@@ -18,7 +18,7 @@ def generate_report(paths, output):
             from .validator import validate_campaign
             try:
                 validate_campaign(path.parent)
-            except (ValueError, KeyError, OSError) as exc:
+            except (ValueError, TypeError, KeyError, OSError) as exc:
                 errors.append({"path": path.parent.as_posix(), "error": str(exc)})
         for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
             if not line.strip():

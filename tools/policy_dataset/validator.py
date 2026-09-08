@@ -62,6 +62,11 @@ def validate_campaign(directory):
     modes = {"local": 0, "split1": 1, "split2": 2, "cloud": 3}
     if configuration.get("mode") not in modes or configuration.get("action") != modes[configuration["mode"]]:
         raise ValueError("Campaign mode/action mismatch")
+    expected_remote_versions = {1: "gesture-cloud-tail-split1-v1.0.0", 2: "gesture-cloud-tail-split2-v1.0.0",
+                                3: "gesture-full-cloud-v1.0.0"}
+    action = configuration["action"]
+    if action and configuration.get("model_versions", {}).get(str(action)) != expected_remote_versions[action]:
+        raise ValueError("Campaign execution model version mismatch")
     records = read_records(directory / f"{VERSION}.jsonl")
     traces = [json.loads(line) for line in (directory / "raw_traces.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
     if len(records) != len(traces) or len(records) != configuration["samples_collected"]:
