@@ -1,0 +1,89 @@
+{
+  "version": "phase9-r1-validation-v1",
+  "timestamp": "2026-09-08T20:00:48.200336+00:00",
+  "baseline_commit": "4548d5601709fecb2b4584ad99fbb6d8f969e7b5",
+  "python_full_suite_runs": [
+    {
+      "stage": "baseline",
+      "passed": 255,
+      "failed": 0,
+      "warnings": 4,
+      "seconds": 61.67
+    },
+    {
+      "stage": "migration",
+      "passed": 255,
+      "failed": 0,
+      "warnings": 4,
+      "seconds": 29.57
+    },
+    {
+      "stage": "binary_contract",
+      "passed": 270,
+      "failed": 0,
+      "warnings": 4,
+      "seconds": 32.08
+    },
+    {
+      "stage": "qualification",
+      "passed": 282,
+      "failed": 0,
+      "warnings": 4,
+      "seconds": 40.38
+    },
+    {
+      "stage": "final",
+      "passed": 282,
+      "failed": 0,
+      "warnings": 4,
+      "seconds": 39.4
+    }
+  ],
+  "pytest_command": ".venv/Scripts/python.exe -m pytest -q",
+  "compilation": {
+    "command": "python -m py_compile",
+    "passed": true,
+    "files": [
+      "ml/policy/binary_contract.py",
+      "ml/policy/binary_policy_dataset.py",
+      "ml/policy/train_split_controller.py",
+      "tests/test_binary_policy_contract.py",
+      "tests/test_binary_policy_dataset.py"
+    ]
+  },
+  "dataset_validation": {
+    "command": "python -m ml.policy.binary_policy_dataset --validate data/policy/policy_training_dataset_binary_v1",
+    "structural_validation": "passed",
+    "training_allowed": false,
+    "production_eligible_records": 0
+  },
+  "new_python_tests": 27,
+  "diff_check": "passed",
+  "protected_paths_checked": [
+    "server",
+    "firmware/src/main.cpp",
+    "firmware/src/inference",
+    "firmware/test",
+    "ml/models",
+    "ml/export",
+    "data/processed",
+    "data/raw",
+    "data/policy/policy_training_dataset_v1",
+    "data/policy/policy_training_dataset_v2",
+    "data/policy/policy_training_dataset_v3"
+  ],
+  "protected_paths_changed": [],
+  "hardware_tests_this_migration": {
+    "run": false,
+    "reason": "Stopped at training qualification; no learned model or executable firmware changes"
+  },
+  "known_historical_hardware_diagnostics": [
+    "test_internal_tensor_diagnostic: incompatible TFLM introspection API",
+    "test_tflm_logits_diagnostic: known INT8 desktop class mismatch"
+  ],
+  "learned_model": null,
+  "policy_tflite": null,
+  "policy_esp32_parity": null,
+  "production_binary_e2e": null,
+  "reward_configuration_sha256": "fac59cd60d8e5c3dc2c0a1d80855871699fbf90014e41cff7d8b57a7cc40c8b7"
+}

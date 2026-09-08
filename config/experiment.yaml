@@ -23,3 +23,5 @@ production_policy:
   architecture_revision: R1
   actions: {0: LOCAL, 1: CLOUD}
   status: gated_not_deployed
+  policy_contract: ml/policy/policy_config_v2.json
+  reward_contract: ml/policy/reward_binary_experiment_v1.json

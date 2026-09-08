@@ -19,7 +19,9 @@ The production firmware currently retains the validated local uncertainty path;
 a learned binary policy is not yet integrated. Historical four-action datasets
 and configurations are immutable evidence, not production policy contracts.
 
-See [R1 migration audit](docs/phase9_r1_migration_audit.md).
+See [canonical Phase 9 status](docs/phase9_learned_binary_policy.md) and
+[R1 migration audit](docs/phase9_r1_migration_audit.md). Training is blocked because
+historical LOCAL candidates rerun inference, while R1 must reuse the local result.
 
 ## Fixed v1 choices
 

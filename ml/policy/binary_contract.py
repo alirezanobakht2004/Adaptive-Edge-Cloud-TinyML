@@ -1,12 +1,12 @@
 """Architecture R1 contracts; historical action enums/configurations are immutable."""
 
 from copy import deepcopy
-import json
 import math
 from pathlib import Path
 from statistics import mean
 
 from tools.policy_dataset.reward_engine.engine import digest, number, validate_config
+from tools.policy_dataset.reward_engine.__main__ import strict_json
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG = ROOT / "ml/policy/policy_config_v2.json"
@@ -20,17 +20,7 @@ FEATURES = (
 
 
 def read_json(path):
-    def reject(value):
-        raise ValueError(f"Nonfinite JSON constant: {value}")
-    def unique(pairs):
-        result = {}
-        for key, value in pairs:
-            if key in result:
-                raise ValueError(f"Duplicate JSON key: {key}")
-            result[key] = value
-        return result
-    return json.loads(Path(path).read_text(encoding="utf-8"),
-                      parse_constant=reject, object_pairs_hook=unique)
+    return strict_json(Path(path).read_text(encoding="utf-8"))
 
 
 def load_contract(path=CONFIG):

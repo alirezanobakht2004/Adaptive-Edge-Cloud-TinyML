@@ -1,0 +1,33 @@
+{
+  "action_mapping": {
+    "0": "LOCAL",
+    "1": "CLOUD"
+  },
+  "dataset_version": "policy_training_dataset_binary_v1",
+  "required_fields": [
+    "dataset_version",
+    "sample_id",
+    "state",
+    "normalized_state",
+    "source",
+    "group_key",
+    "partition",
+    "provenance",
+    "original_candidate_outcomes",
+    "candidates",
+    "label",
+    "feature_contract_sha256",
+    "reward_configuration_sha256",
+    "production_eligible"
+  ],
+  "scope": "Historical binary candidate comparison; production eligibility is separately gated",
+  "state_order": [
+    "state.uncertainty.confidence",
+    "state.uncertainty.entropy",
+    "state.uncertainty.margin",
+    "state.device.free_heap",
+    "state.device.inference_latency_estimate",
+    "state.network.mqtt_rtt_ms"
+  ],
+  "validator": "ml.policy.binary_policy_dataset.validate_output"
+}

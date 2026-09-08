@@ -1,0 +1,289 @@
+{
+  "blockers": [
+    "Historical LOCAL latency and proxy charge a second inference that R1 forbids; derived labels cannot be asserted to optimize production LOCAL reuse."
+  ],
+  "by_partition": {
+    "holdout": {
+      "groups": 6,
+      "labels": {
+        "CLOUD": 18,
+        "LOCAL": 24
+      },
+      "records": 42
+    },
+    "train": {
+      "groups": 18,
+      "labels": {
+        "CLOUD": 54,
+        "LOCAL": 72
+      },
+      "records": 126
+    }
+  },
+  "by_profile": {
+    "A_normal_poor_network": {
+      "LOCAL": 24
+    },
+    "B_pressure_good_network": {
+      "CLOUD": 24
+    },
+    "baseline": {
+      "LOCAL": 24
+    },
+    "cloud_favorable": {
+      "CLOUD": 24
+    },
+    "connected-lab-pilot-v1": {
+      "LOCAL": 24
+    },
+    "edge_loaded": {
+      "CLOUD": 24
+    },
+    "high_latency": {
+      "LOCAL": 24
+    }
+  },
+  "by_provenance": {
+    "measured": {
+      "LOCAL": 24
+    },
+    "simulated": {
+      "CLOUD": 72,
+      "LOCAL": 72
+    }
+  },
+  "dataset_version": "policy_training_dataset_binary_v1",
+  "duplicate_feature_vectors": 48,
+  "exact_feature_vectors": 120,
+  "feature_statistics": {
+    "state.device.free_heap": {
+      "maximum": 164608,
+      "mean": 164590,
+      "minimum": 164576,
+      "missing": 0,
+      "present": 168,
+      "provenance": {
+        "carried_from_measured_source_not_remeasured": 144,
+        "measured": 24
+      },
+      "unique_values": 3
+    },
+    "state.device.inference_latency_estimate": {
+      "maximum": 73.34,
+      "mean": 16.1055,
+      "minimum": 0.907,
+      "missing": 0,
+      "present": 168,
+      "provenance": {
+        "carried_from_measured_source_not_remeasured": 72,
+        "measured": 24,
+        "simulated": 72
+      },
+      "unique_values": 84
+    },
+    "state.network.mqtt_rtt_ms": {
+      "maximum": 174.423,
+      "mean": 52.376824404761905,
+      "minimum": 2.32825,
+      "missing": 0,
+      "present": 168,
+      "provenance": {
+        "carried_from_measured_source_not_remeasured": 48,
+        "measured": 24,
+        "simulated": 96
+      },
+      "unique_values": 72
+    },
+    "state.uncertainty.confidence": {
+      "maximum": 0.999999046,
+      "mean": 0.98117028675,
+      "minimum": 0.766576886,
+      "missing": 0,
+      "present": 168,
+      "provenance": {
+        "carried_from_measured_source_not_remeasured": 144,
+        "measured": 24
+      },
+      "unique_values": 24
+    },
+    "state.uncertainty.entropy": {
+      "maximum": 0.667137444,
+      "mean": 0.06787215128345833,
+      "minimum": 1.45865888e-05,
+      "missing": 0,
+      "present": 168,
+      "provenance": {
+        "carried_from_measured_source_not_remeasured": 144,
+        "measured": 24
+      },
+      "unique_values": 24
+    },
+    "state.uncertainty.margin": {
+      "maximum": 0.999998152,
+      "mean": 0.9650908584583333,
+      "minimum": 0.576300383,
+      "missing": 0,
+      "present": 168,
+      "provenance": {
+        "carried_from_measured_source_not_remeasured": 144,
+        "measured": 24
+      },
+      "unique_values": 24
+    }
+  },
+  "feature_vectors_with_conflicting_labels": 0,
+  "gates": {
+    "binary_schema_valid": true,
+    "both_binary_labels": true,
+    "candidate_execution_matches_production_action_contract": false,
+    "frozen_feature_contract": true,
+    "group_holdout_exists": true,
+    "historical_labels_recomputed_without_fabrication": true,
+    "no_source_group_overlap": true,
+    "real_diversity_limitations_documented": true,
+    "reward_exactly_reproducible_and_frozen": true,
+    "runtime_sources_defined": true,
+    "source_provenance_validated": true
+  },
+  "label_counts": {
+    "CLOUD": 72,
+    "LOCAL": 96
+  },
+  "limitations": [
+    "One physical session/run and 24 source windows; replay records are dependent variants.",
+    "CLOUD labels arise only in simulated conditions; no real network-diversity claim.",
+    "Identical replay vectors are retained with explicit grouping, not independent samples.",
+    "All recorded gesture outcomes are correct; no uncertainty-driven accuracy benefit demonstrated.",
+    "Energy is a dimensionless estimated/simulated proxy, never measured joules.",
+    "MQTT probe source exists in isolated harness; production integration not yet done.",
+    "Historical CLOUD payload bytes describe benchmark JSON, not future R1 versioned request overhead."
+  ],
+  "missing_unselected_fields": {
+    "estimated_bandwidth": 168,
+    "packet_size_estimate": 168
+  },
+  "normalization": {
+    "algorithm": "(raw - offset) / divisor in declared feature order; float32 deployment",
+    "calibration": "Fixed unit scaling: probabilities unchanged, entropy / ln(5), heap / 1024 KiB, time / existing M30 100 ms reward reference; no fitted data statistics",
+    "clip": false,
+    "dimension": 6,
+    "missing": "reject; no zero imputation",
+    "version": "binary-state-normalization-v1"
+  },
+  "partition_groups": {
+    "holdout": [
+      "2762152f434b8f1108857003f95de300f3133acab2954f01dc2955393f4514cd",
+      "3a831595e429d297bc32c3422b1ad035e904418ddcb9e5927fe30fcab0990ca8",
+      "9925bf4d616f359d0f1bea63593c516237249d533b27c70e3bcd4f1f704cf4d3",
+      "c4f4c8305b875a726bdac97fc9bae369807b7771bc708721bec850ceb068865c",
+      "ee7ee2f9526816c5bf710061818a41831162918addada8601032ed43c3eb2af6",
+      "fe5966c2c4a56c24df220a7aa760dd90e88059e3134d03a7333229fe5c9d73cf"
+    ],
+    "train": [
+      "27497c791090ee6c8dcca573c8f0798d1d56ee4ee844180b52a55dc7b9ef206c",
+      "39485a1087e32a1c3ab555f8411e9bc5f82ebebe4c9f3fc26f241eb131775835",
+      "3b5b833149557dce2c18d04f741454746e00355bf38e575db13ea46b023c5780",
+      "3ce0ad5d4f84dec9791fb0bfb670e467fac1a1ad9dfd0f37daae6c26d14585c3",
+      "438eb9716d8cdc792b19d521d7a6e6b1fdaad27a06c65016bc509a38dd3e86a6",
+      "441cb434515bf8e38a49cb739027b54b6fa139ab6d3c80104d5d513bc5cdb3c6",
+      "56373256ca0bb45e425deac4883a495468e862c43266e9d7bf94d3979eae2d09",
+      "8404d8873ac03b89060104fc0ae032f5945e3908c4cc72ac1706e1ffad032978",
+      "8f05efa1c87db34aa860d50bb28c4eca22c5b69e26367ea91dc0f1365e5d794a",
+      "a0ea21ee7f22ab70d0772e3fae203992de66c623a0857155672683f643937ef2",
+      "a56b56ff195dc0724d8baf1538085d2875f1c447c05bc5991cae4f103b350e29",
+      "abfd8d1f90f6f222e7dfd8c29dc04327bb39650d81c95a1c69ae941af13ebd7f",
+      "b5f28fe8d60c69108df5b36975f5d16639862351a9fa7c97196b11f72c5242cd",
+      "be538df1e11f32e95c09b63d33da6e79d3e0484cda61e35e436837516db28103",
+      "d00f6daaba3ab8199c9fdc0cef5e063b5eb62938bb83bf81589260985135217a",
+      "daca885cbcba8e49ea99b488a65e84625d9bb64531ff8d8c04b83ec56f8979d6",
+      "dbe06486310d83c743d52569addc0d4e38c23df729286a782ba9e96e8a9cc0b4",
+      "f062fd4df13f2bc17135d9da52971c6158f3241b80f6454b60b6d96858218fc6"
+    ]
+  },
+  "production_action_semantics": {
+    "algebraic_observation_not_measurement": "With already-correct local results, common predecision work is sunk. CLOUD adds positive communication and compute; removing redundant LOCAL inference requires a new action-cost contract, not silent reward relabeling.",
+    "code_evidence": [
+      {
+        "line": 100,
+        "text": "if (!local(normalized, state)) return;"
+      },
+      {
+        "line": 131,
+        "text": "if (action == 0)"
+      },
+      {
+        "line": 134,
+        "text": "success = local(normalized, result);"
+      },
+      {
+        "line": 155,
+        "text": "totalUs = sharedUs + actionUs"
+      }
+    ],
+    "conclusion": "Historical LOCAL latency and proxy charge a second inference that R1 forbids; derived labels cannot be asserted to optimize production LOCAL reuse.",
+    "extra_local_execution_ms": {
+      "maximum": 2.322,
+      "mean": 1.7986875,
+      "minimum": 0.954
+    },
+    "harness_path": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+    "harness_text_sha256": "9ccf1aa3901ce86c68c1e42ccb30a52ad4084af85db730bc726292677a7837c1",
+    "historical_local_definition": "state = local(normalized); action0 = local(normalized) again",
+    "measured_local_repeat_count": 96,
+    "predecision_local_prediction_correct_in_all_source_entries": true,
+    "production_local_definition": "Reuse completed validated local MC result; no second local inference",
+    "r1_reuse_result_action_measurements_available": 0
+  },
+  "production_eligible_records": 0,
+  "profile_counts": {
+    "A_normal_poor_network": 24,
+    "B_pressure_good_network": 24,
+    "baseline": 24,
+    "cloud_favorable": 24,
+    "connected-lab-pilot-v1": 24,
+    "edge_loaded": 24,
+    "high_latency": 24
+  },
+  "provenance_counts": {
+    "measured": 24,
+    "simulated": 144
+  },
+  "record_count": 168,
+  "repeated_records_beyond_one_per_window": 144,
+  "reward_configuration": {
+    "actions": {
+      "0": "ALL_LOCAL",
+      "1": "SPLIT1",
+      "2": "SPLIT2",
+      "3": "ALL_CLOUD"
+    },
+    "dataset_version": "policy_training_dataset_v1",
+    "energy_kind": "estimated",
+    "energy_method": "Dimensionless estimated proxy: (preprocessing_ms + state_inference_ms + selected_edge_compute_ms) / 10 + selected_payload_bytes / 1024; excludes radio waiting, cloud energy and probe traffic; not joules or battery measurement",
+    "energy_proxy_version": "m30-compute-payload-proxy-v1",
+    "scales": {
+      "communication_bytes": 1024,
+      "energy_proxy": 1,
+      "latency_ms": 100
+    },
+    "tie_tolerance": 1e-06,
+    "version": "reward-calibration-v1",
+    "weights": {
+      "accuracy": 1.0,
+      "communication": 0.1,
+      "energy_proxy": 0.1,
+      "latency": 0.1
+    }
+  },
+  "source_acquisition_runs": [
+    "48d1e9e3cb0747fd9e571ba760f19910"
+  ],
+  "source_group_overlap": [],
+  "source_sessions": [
+    "session_02"
+  ],
+  "training_allowed": false,
+  "underlying_states_with_multiple_records": 24,
+  "unique_underlying_windows": 24,
+  "version": "binary-dataset-qualification-v1"
+}
