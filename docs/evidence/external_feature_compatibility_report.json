@@ -1,0 +1,98 @@
+{
+  "source_sha256": "839fbe1de07f180f0434288f73fe0ef42b5e5a3a23dd6548efd54bdab2bd575b",
+  "conversion_version": "external-recordings-v1",
+  "feature_version": "features-v1",
+  "expected_feature_dimension": 10,
+  "native_window_requirement": [
+    100,
+    6
+  ],
+  "native_sampling_hz_requirement": 100,
+  "external_sampling_hz": 50.0,
+  "external_samples_per_recording": {
+    "50": 1100
+  },
+  "recordings": 1100,
+  "native_compatible_recordings": 0,
+  "native_compatible": false,
+  "axis_orientation": "unknown",
+  "unit_evidence_available": true,
+  "diagnostic_adapter": "linear-50-to-100hz-endpoint-hold-v1",
+  "adapter_details": "Linear interpolation at 0..990 ms every 10 ms; last 990 ms value holds observed 980 ms endpoint. No axis rotation or unit scaling.",
+  "interpolation_is_not_new_measurement": true,
+  "rejected_recordings": [],
+  "feature_dimension": 10,
+  "evaluated_feature_recordings": 1100,
+  "limitations": [
+    "Upsampling does not recover motion above the original sampling bandwidth.",
+    "Orientation and exact capture firmware/calibration remain unverified.",
+    "Normalization is frozen; dimension compatibility is not distribution compatibility."
+  ],
+  "feature_archive_sha256": "ff582d77fdb8f3a9d1b27324b2a357ef1c7a7765a3faf9013535ed8403a1e4a1",
+  "model_version": "gesture-model-v1.1.0",
+  "model_sha256": "4891b4b6d453d96852ddcaea35d847ff8eea4ef1349ae999d7594925dabc5d6c",
+  "normalization_refitted": false,
+  "maximum_absolute_normalized_feature": 42.350536278160256,
+  "feature_statistics": {
+    "std_ax": {
+      "mean": 0.21947108209133148,
+      "std": 0.16451478004455566,
+      "normalized_mean": 1.8361896762062286,
+      "fraction_abs_normalized_above_3": 0.3009090909090909
+    },
+    "max_abs_ax": {
+      "mean": 1.0935620069503784,
+      "std": 0.31654107570648193,
+      "normalized_mean": 3.2646218961778573,
+      "fraction_abs_normalized_above_3": 0.5881818181818181
+    },
+    "ax_half_mean_delta": {
+      "mean": 0.002931725000962615,
+      "std": 0.3168129622936249,
+      "normalized_mean": -0.14262848824161134,
+      "fraction_abs_normalized_above_3": 0.5172727272727272
+    },
+    "std_ay": {
+      "mean": 0.2440636157989502,
+      "std": 0.2214922457933426,
+      "normalized_mean": 8.990987907715377,
+      "fraction_abs_normalized_above_3": 0.6218181818181818
+    },
+    "std_az": {
+      "mean": 0.23500782251358032,
+      "std": 0.15972274541854858,
+      "normalized_mean": 13.11020421669454,
+      "fraction_abs_normalized_above_3": 0.74
+    },
+    "rms_acc_mag_deviation": {
+      "mean": 0.11245012283325195,
+      "std": 0.08058452606201172,
+      "normalized_mean": 4.0541367676722215,
+      "fraction_abs_normalized_above_3": 0.65
+    },
+    "mean_gz": {
+      "mean": 2.4137940406799316,
+      "std": 30.340545654296875,
+      "normalized_mean": 0.6536250309533693,
+      "fraction_abs_normalized_above_3": 0.24818181818181817
+    },
+    "std_gz": {
+      "mean": 43.84017562866211,
+      "std": 35.8088264465332,
+      "normalized_mean": 3.348105923721406,
+      "fraction_abs_normalized_above_3": 0.4909090909090909
+    },
+    "rms_gyro_mag": {
+      "mean": 106.33895874023438,
+      "std": 65.11546325683594,
+      "normalized_mean": 6.2582595453485546,
+      "fraction_abs_normalized_above_3": 0.7345454545454545
+    },
+    "max_gyro_mag": {
+      "mean": 221.39906311035156,
+      "std": 132.19107055664062,
+      "normalized_mean": 7.3232377702116285,
+      "fraction_abs_normalized_above_3": 0.7381818181818182
+    }
+  }
+}
