@@ -19,7 +19,7 @@ def isolated_output(path):
     return resolved
 
 
-def convert(source=SOURCE, output=OUTPUT, source_context=None):
+def convert(source=SOURCE, output=OUTPUT, source_context=None, *, rebuild=False):
     output = isolated_output(output)
     report = inspect(source, source_context)
     if (report["missing_columns"] or any(report["missing_values"].values())
@@ -35,7 +35,12 @@ def convert(source=SOURCE, output=OUTPUT, source_context=None):
         values.extend([[float(row[key]) for key in SENSORS] for row in group])
         times.extend([int(row["timestamp_ms"]) for row in group])
         offsets.append(len(values))
-    output.mkdir(parents=True, exist_ok=False)
+    if output.exists() and rebuild:
+        existing = json.loads((output / "external_dataset_metadata.json").read_text(encoding="utf-8"))
+        if existing.get("conversion_version") != CONVERSION_VERSION or existing.get("source_sha256") != report["source_sha256"]:
+            raise ValueError("Rebuild requires matching source and conversion metadata")
+    else:
+        output.mkdir(parents=True, exist_ok=False)
     archive = output / "recordings.npz"
     np.savez_compressed(archive, sensor_values=np.asarray(values, dtype=np.float64),
                         timestamps_ms=np.asarray(times, dtype=np.int64), offsets=np.asarray(offsets, dtype=np.int64),
@@ -81,8 +86,9 @@ def main():
     parser.add_argument("--input", type=Path, default=SOURCE)
     parser.add_argument("--output", type=Path, default=OUTPUT)
     parser.add_argument("--source-context", type=Path)
+    parser.add_argument("--rebuild", action="store_true", help="Regenerate only derived conversion files for the same source hash/version")
     args = parser.parse_args()
-    metadata = convert(args.input, args.output, args.source_context)
+    metadata = convert(args.input, args.output, args.source_context, rebuild=args.rebuild)
     print(json.dumps({"converted_recordings": metadata["recording_count"], "output": str(args.output)}))
 
 

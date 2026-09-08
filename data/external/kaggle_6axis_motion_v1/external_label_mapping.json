@@ -1,0 +1,16 @@
+{
+  "mapping_version": "external-label-mapping-v1",
+  "source_dataset": "kaggle_6axis_motion_v1",
+  "target_dataset": "dataset-v1",
+  "source_sha256": "839fbe1de07f180f0434288f73fe0ef42b5e5a3a23dd6548efd54bdab2bd575b",
+  "mapping": {
+    "idle": {"target": "IDLE", "basis": "Source README defines idle as resting hand positions; docs/dataset_protocol.md defines IDLE as held still with no intended gesture. Broad non-motion correspondence only; orientation is not established."},
+    "wave_left": {"target": null, "basis": "A left wave is not documented to match dataset-v1's single left translation protocol."},
+    "wave_right": {"target": null, "basis": "A right wave is not documented to match dataset-v1's single right translation protocol."},
+    "flick_up": {"target": null, "basis": "No corresponding production gesture class."},
+    "flick_down": {"target": null, "basis": "No corresponding production gesture class."}
+  },
+  "source_definition_reference": "https://github.com/Dilharajay/gesture-cmd/blob/0f1e63bad76366c7d415e1e42649841b72635dbc/README.md",
+  "target_definition_reference": "docs/dataset_protocol.md",
+  "accuracy_scope": "Mapped idle subset only, conditional on diagnostic adaptation; never overall five-class accuracy."
+}

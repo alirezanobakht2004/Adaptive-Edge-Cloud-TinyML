@@ -20,6 +20,9 @@ def test_conversion_preserves_axes_times_labels_and_input(tmp_path, monkeypatch)
     assert original == hashlib.sha256(path.read_bytes()).hexdigest()
     with pytest.raises(FileExistsError):
         conversion.convert(path, output)
+    conversion.convert(path, output, rebuild=True)
+    rebuilt, _ = conversion.load_converted(output)
+    np.testing.assert_array_equal(rebuilt["sensor_values"], data["sensor_values"])
 
 
 def test_production_output_rejected_before_writing(tmp_path):
