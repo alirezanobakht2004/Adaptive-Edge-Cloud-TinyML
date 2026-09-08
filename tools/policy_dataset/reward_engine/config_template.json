@@ -1,0 +1,25 @@
+{
+  "version": "reward-calibration-v1",
+  "dataset_version": "policy_training_dataset_v1",
+  "actions": {
+    "0": "ALL_LOCAL",
+    "1": "SPLIT1",
+    "2": "SPLIT2",
+    "3": "ALL_CLOUD"
+  },
+  "weights": {
+    "accuracy": null,
+    "latency": null,
+    "communication": null,
+    "energy_proxy": null
+  },
+  "scales": {
+    "latency_ms": null,
+    "communication_bytes": null,
+    "energy_proxy": null
+  },
+  "energy_kind": "estimated",
+  "energy_proxy_version": "unconfigured",
+  "energy_method": null,
+  "tie_tolerance": null
+}
