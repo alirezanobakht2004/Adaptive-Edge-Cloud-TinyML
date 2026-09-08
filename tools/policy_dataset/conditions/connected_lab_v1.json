@@ -1,0 +1,42 @@
+{
+  "version": "matched-condition-v1",
+  "name": "connected-lab-pilot-v1",
+  "description": "Exploratory connected ESP32/hotspot/LAN condition; provisional reward weights, not final policy calibration. One physical snapshot with bounded drift, not simultaneous identical physics.",
+  "limits": {
+    "maximum_rtt_ms": 50,
+    "rtt_drift_ms": 20,
+    "heap_drift_bytes": 4096,
+    "psram_drift_bytes": 4096,
+    "rssi_drift_db": 8,
+    "maximum_snapshot_age_ms": 10000
+  },
+  "energy_proxy": {
+    "compute_reference_ms": 10,
+    "payload_reference_bytes": 1024
+  },
+  "reward": {
+    "version": "reward-calibration-v1",
+    "dataset_version": "policy_training_dataset_v1",
+    "actions": {
+      "0": "ALL_LOCAL",
+      "1": "SPLIT1",
+      "2": "SPLIT2",
+      "3": "ALL_CLOUD"
+    },
+    "weights": {
+      "accuracy": 1.0,
+      "latency": 0.1,
+      "communication": 0.1,
+      "energy_proxy": 0.1
+    },
+    "scales": {
+      "latency_ms": 100,
+      "communication_bytes": 1024,
+      "energy_proxy": 1
+    },
+    "energy_kind": "estimated",
+    "energy_proxy_version": "m30-compute-payload-proxy-v1",
+    "energy_method": "Dimensionless estimated proxy: (preprocessing_ms + state_inference_ms + selected_edge_compute_ms) / 10 + selected_payload_bytes / 1024; excludes radio waiting, cloud energy and probe traffic; not joules or battery measurement",
+    "tie_tolerance": 1e-06
+  }
+}
