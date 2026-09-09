@@ -1,0 +1,17 @@
+{
+  "policy_version": "meta-policy-v1.0.0",
+  "board": "ESP32-S3",
+  "port": "COM10",
+  "vectors": 10,
+  "local_vectors": 5,
+  "cloud_vectors": 5,
+  "action_parity": 10,
+  "max_absolute_difference": 2.98023224e-08,
+  "tolerance": 1e-05,
+  "total_invoke_us": 372,
+  "tensor_arena_used_bytes": 960,
+  "free_heap_bytes": 359716,
+  "scope": "One isolated diagnostic run; not general runtime performance",
+  "status": "PASS",
+  "serial_log": "docs/evidence/phase9_r1_policy_parity_serial.log"
+}

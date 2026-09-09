@@ -1,0 +1,17 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x2b (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+[   341][I][esp32-hal-psram.c:96] psramInit(): PSRAM enabled
+R1_POLICY_PARITY vectors=10 local=5 cloud=5 max_abs_diff=2.98023224e-08 total_invoke_us=372 arena_used=960 heap=359716
+R1_POLICY_PARITY_PASS
+test/test_phase9_meta_policy_parity/test_main.cpp:32:testPolicyParity:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK

@@ -1,0 +1,17 @@
+Verbosity level can be increased via `-v, -vv, or -vvv` option
+Collected 28 tests
+
+Processing test_phase9_meta_policy_parity in esp32-s3-n8r2 environment
+--------------------------------------------------------------------------------
+Building & Uploading...
+Testing...
+If you don't see any output for the first 10 secs, please reset board (press reset button)
+
+test/test_phase9_meta_policy_parity/test_main.cpp:32: testPolicyParity	[PASSED]
+-- esp32-s3-n8r2:test_phase9_meta_policy_parity [PASSED] Took 437.31 seconds --
+
+=================================== SUMMARY ===================================
+Environment    Test                            Status    Duration
+-------------  ------------------------------  --------  ------------
+esp32-s3-n8r2  test_phase9_meta_policy_parity  PASSED    00:07:17.314
+================== 1 test cases: 1 succeeded in 00:07:17.314 ==================
