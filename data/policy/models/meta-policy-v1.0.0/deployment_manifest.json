@@ -21,7 +21,7 @@
     "data/policy/models/meta-policy-v1.0.0/meta-policy-v1.0.0.tflite": "2e18cb33f3ac9fa9867675be141d811f5126ad7d6d31aa67f65e3a85e29e23c9",
     "data/policy/models/meta-policy-v1.0.0/input_contract.json": "58c59af1afe9531a85437f12fbe91fde775345f385c1d7b90094f4b26c7d45f7",
     "data/policy/policy_training_dataset_binary_r1_v2/manifest.json": "dcf2f8518e07e367b704ceb50f99f44e337373af570751a22f5192ebe48b0112",
-    "ml/policy/reward_binary_experiment_v2_r1_reuse.json": "2838d0f41979891a30507f090ba6e19ee9ebcafd08edd890fe21dd9fb8b1f46f"
+    "ml/policy/reward_binary_experiment_v2_r1_reuse.json": "947ec68f7483990280ed176da9aa41c574bf349d046f65700edcbf083d3718c2"
   },
   "actual_training_provenance": {
     "uncertainty": "24 M30 measured rows; 2400 rows with actual desktop model outputs",
@@ -34,5 +34,6 @@
     "Near-constant training heap is poorly representative of production allocations; live state can be outside training range",
     "Energy is an estimated dimensionless proxy, never measured Joules"
   ],
-  "historical_contract_note": "Frozen input_contract descriptions inherit historical source lineage; actual row provenance and this deployment annotation distinguish new oracle/simulated assignments. The pre-training learned_model_version null does not override this explicit deployment version."
+  "historical_contract_note": "Frozen input_contract descriptions inherit historical source lineage; actual row provenance and this deployment annotation distinguish new oracle/simulated assignments. The pre-training learned_model_version null does not override this explicit deployment version.",
+  "artifact_hash_convention": "Exact file bytes; versioned JSON references use LF per .gitattributes. Reward values unchanged by line-ending normalization."
 }

@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "committed_blob_hash_checks": {
+    "data/policy/models/meta-policy-v1.0.0/meta-policy-v1.0.0.keras": true,
+    "data/policy/models/meta-policy-v1.0.0/meta-policy-v1.0.0.tflite": true,
+    "data/policy/models/meta-policy-v1.0.0/input_contract.json": true,
+    "data/policy/policy_training_dataset_binary_r1_v2/manifest.json": true,
+    "ml/policy/reward_binary_experiment_v2_r1_reuse.json": true
+  },
+  "dataset_requalification": "PASS",
+  "targeted_post_fix_tests": "5 passed",
+  "correction": "Deployment reward-file byte hash now refers to LF Git bytes, not CRLF working-copy bytes. No reward value, source record, model or policy output changed."
+}
