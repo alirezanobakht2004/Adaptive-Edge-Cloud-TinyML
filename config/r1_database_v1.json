@@ -1,0 +1,13 @@
+{
+  "version": "r1-database-v1",
+  "production_database": "PostgreSQL",
+  "database_url_env": "TINYML_DATABASE_URL",
+  "development_url_example": "postgresql+psycopg://tinyml:tinyml_dev@127.0.0.1:5432/tinyml",
+  "telemetry_schema": "decision-r1-v1",
+  "telemetry_topic": "gesture/{device_id}/telemetry",
+  "checkpoint_tables": [
+    "inference_events"
+  ],
+  "scope_note": "Phase 11 checkpoint 11.1 only. devices/model_versions/labeled_samples/training_runs are deferred until inference-event persistence is hardware-validated.",
+  "energy_note": "No measured energy or battery fields are populated in this checkpoint."
+}

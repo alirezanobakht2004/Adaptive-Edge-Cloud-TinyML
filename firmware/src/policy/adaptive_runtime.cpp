@@ -3,6 +3,7 @@
 #include <cmath>
 #include <cstring>
 #include <cstdlib>
+#include "esp_system.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 #include "freertos/task.h"
@@ -19,6 +20,9 @@ constexpr const char* requestTopic = "gesture/esp32-r1/inference/request";
 constexpr const char* responseTopic = "gesture/esp32-r1/inference/response";
 constexpr const char* probeRequest = "gesture/esp32-r1/policy/probe/request";
 constexpr const char* probeResponse = "gesture/esp32-r1/policy/probe/response";
+constexpr const char* telemetryTopic = "gesture/esp32-r1/telemetry";
+constexpr const char* telemetrySchema = "decision-r1-v1";
+constexpr const char* localVersion = "gesture-model-v1.1.0";
 constexpr const char* cloudVersion = "gesture-full-cloud-v1.0.0";
 struct Work {
     float features[10]; inference::UncertaintyResult cached;
@@ -41,6 +45,7 @@ float lastRttMs = NAN;
 uint32_t lastRttAtMs = 0, probeStartedUs = 0, lastProbeMs = 0;
 bool probeActive = false, probeTimedOut = false;
 char probeId[96]{};
+uint32_t bootSessionNonce = 0;
 
 bool stringField(const char* json, const char* key, const char* value) {
     String token = String("\"") + key + "\":\"" + value + "\"";
@@ -60,6 +65,65 @@ String array(const float* values, unsigned count) {
     String result = "[";
     for (unsigned i = 0; i < count; ++i) { if (i) result += ','; appendNumber(result, values[i]); }
     return result + ']';
+}
+String nullableNumber(float value, bool available) {
+    if (!available || !std::isfinite(value)) return "null";
+    String result;
+    appendNumber(result, value);
+    return result;
+}
+void publishDecisionTelemetry(const Pending& p) {
+    const auto& r = p.result;
+    const auto& cached = p.work.cached;
+    const char* requested = r.policy.action == 0 ? "LOCAL" : r.policy.action == 1 ? "CLOUD" : "NOT_EVALUATED";
+    const char* effective = r.effectiveAction == 0 ? "LOCAL" : "CLOUD";
+    const char* modelVersion = r.effectiveAction == 1 && r.success ? cloudVersion : localVersion;
+    const char* rttSource = p.controlled ? "CONTROLLED" : p.stateValid ? "last_successful_probe" : "unavailable";
+    const uint32_t freeHeap = p.stateValid && p.state[3] >= 0 ? uint32_t(p.state[3]) : ESP.getFreeHeap();
+    const float networkMs = r.roundTripUs / 1000.f;
+
+    String payload = String("{\"schema_version\":\"") + telemetrySchema;
+    payload += "\",\"request_id\":\""; payload += p.id;
+    payload += "\",\"device_id\":\""; payload += device;
+    payload += "\",\"timestamp_ms\":"; payload += millis();
+    payload += ",\"window_id\":"; payload += p.work.window;
+    payload += ",\"requested_action\":\""; payload += requested;
+    payload += "\",\"effective_action\":\""; payload += effective;
+    payload += "\",\"failover\":"; payload += r.failover ? "true" : "false";
+    payload += ",\"failover_reason\":\""; payload += reasonName(r.failoverReason);
+    payload += "\",\"failure_stage\":\""; payload += p.failureStage;
+    payload += "\",\"wifi_connected\":"; payload += r.wifiConnected ? "true" : "false";
+    payload += ",\"mqtt_connected\":"; payload += r.mqttConnected ? "true" : "false";
+    payload += ",\"predicted_class_id\":"; payload += r.finalPrediction;
+    payload += ",\"confidence\":"; appendNumber(payload, r.finalConfidence);
+    payload += ",\"uncertainty\":"; appendNumber(payload, cached.normalizedPredictiveEntropy);
+    payload += ",\"rtt_ms\":"; payload += nullableNumber(p.stateValid ? p.state[5] : NAN, p.stateValid);
+    payload += ",\"rtt_source\":\""; payload += rttSource;
+    payload += "\",\"rtt_age_ms\":"; payload += p.rttAgeMs;
+    payload += ",\"free_heap_bytes\":"; payload += freeHeap;
+    payload += ",\"local_inference_ms\":"; appendNumber(payload, p.work.localMs);
+    payload += ",\"request_elapsed_ms\":"; payload += nullableNumber(networkMs, r.requestIssued);
+    payload += ",\"server_compute_ms\":";
+    payload += nullableNumber(r.serverComputeMs, r.effectiveAction == 1 && r.success);
+    payload += ",\"bytes_tx\":"; payload += r.txBytes;
+    payload += ",\"bytes_rx\":"; payload += r.rxBytes;
+    payload += ",\"model_version\":\""; payload += modelVersion;
+    payload += "\",\"policy_version\":\""; payload += meta_policy_data::VERSION;
+    payload += "\",\"firmware_version\":\""; payload += FIRMWARE_VERSION;
+    payload += "\",\"success\":"; payload += r.success ? "true" : "false";
+    payload += ",\"controlled\":"; payload += p.controlled ? "true" : "false";
+    payload += '}';
+
+    if (!network::isMqttConnected()) return;
+    if (payload.length() + strlen(telemetryTopic) + 7 >= network::DEFAULT_MQTT_BUFFER_BYTES) {
+        Serial.printf("R1_TELEMETRY_DROPPED request_id=%s reason=PAYLOAD_TOO_LARGE bytes=%u\n",
+                      p.id, unsigned(payload.length()));
+        return;
+    }
+    if (!network::publishMqtt(telemetryTopic, payload.c_str())) {
+        Serial.printf("R1_TELEMETRY_DROPPED request_id=%s reason=PUBLISH_FAILED bytes=%u\n",
+                      p.id, unsigned(payload.length()));
+    }
 }
 void logDecision(const Pending& p) {
     const auto& r = p.result;
@@ -91,6 +155,7 @@ void logDecision(const Pending& p) {
     if (r.effectiveAction == 1 && r.success)
         line += ",\"e2e_latency_ms\":" + String(r.roundTripUs / 1000.f, 3) + ",\"server_compute_latency_ms\":" + String(r.serverComputeMs, 6);
     Serial.print(line + "}\n");
+    publishDecisionTelemetry(p);
 }
 void finish(Pending& p) {
     auto& r = p.result;
@@ -213,7 +278,9 @@ void worker(void*) {
         }
         if (network::isWifiConnected() && network::isMqttConnected() && !probeActive
             && (lastProbeMs == 0 || uint32_t(millis()-lastProbeMs) >= failover_config::RTT_PROBE_INTERVAL_MS)) {
-            lastProbeMs = millis(); snprintf(probeId, sizeof(probeId), "r1-probe-%lu", (unsigned long)lastProbeMs);
+            lastProbeMs = millis();
+            snprintf(probeId, sizeof(probeId), "r1-probe-%08lx-%lu",
+                     (unsigned long)bootSessionNonce, (unsigned long)lastProbeMs);
             String payload = String("{\"schema_version\":\"r1-probe-v1\",\"request_id\":\"") + probeId + "\",\"device_id\":\"" + device + "\"}";
             probeStartedUs = micros(); probeActive = network::publishMqtt(probeRequest, payload.c_str());
             if (!probeActive) probeTimedOut = true;
@@ -230,10 +297,15 @@ void worker(void*) {
             unsigned slot = 0; while (slot < failover_config::PENDING_CAPACITY && slots[slot].occupied) ++slot;
             if (slot < failover_config::PENDING_CAPACITY) {
                 auto& p = slots[slot]; p = Pending{}; p.work = work; p.occupied = true;
-                snprintf(p.id, sizeof(p.id), "r1-%lu-%lu", (unsigned long)work.cachedAtMs, (unsigned long)work.window);
+                snprintf(p.id, sizeof(p.id), "r1-%08lx-%lu-%lu",
+                         (unsigned long)bootSessionNonce,
+                         (unsigned long)work.cachedAtMs,
+                         (unsigned long)work.window);
                 active[slot] = &p; prepareState(p);
             } else {
-                Pending p; p.work = work; snprintf(p.id, sizeof(p.id), "r1-capacity-%lu", (unsigned long)work.window);
+                Pending p; p.work = work;
+                snprintf(p.id, sizeof(p.id), "r1-capacity-%08lx-%lu",
+                         (unsigned long)bootSessionNonce, (unsigned long)work.window);
                 updateConnectivity(p); p.transition.begin(-1, true, true, work.cached.predictedClass, work.localCalls);
                 fallback(p, FailoverReason::LOCAL_QUEUE_SAFETY, "PENDING_CAPACITY");
             }
@@ -269,6 +341,12 @@ bool processCachedDecision(const float features[10], const inference::Uncertaint
 bool startAdaptiveRuntime() {
     if (queue) return true;
     if (!initializeMeta()) return false;
+    // Request IDs are persisted under a (device_id, request_id) uniqueness constraint.
+    // millis()/window counters restart after every reboot, so add a per-boot nonce to
+    // prevent normal device restarts from colliding with prior persisted sessions.
+    bootSessionNonce = esp_random();
+    if (bootSessionNonce == 0) bootSessionNonce = uint32_t(micros()) ^ 0xA5C31F27u;
+    Serial.printf("R1_SESSION {\"boot_nonce\":\"%08lx\"}\n", (unsigned long)bootSessionNonce);
     queue = xQueueCreate(failover_config::WORK_QUEUE_CAPACITY, sizeof(Work));
     if (!queue) return false;
     workerRunning = true;
@@ -284,7 +362,9 @@ bool submitCachedDecision(const float features[10], const inference::Uncertainty
     work.localMs = localMs; work.window = window; work.cachedAtMs = millis(); work.localCalls = localCalls;
     if (xQueueSend(queue, &work, 0) == pdTRUE) return true;
     // Defensive result delivery even if an unexpected scheduler stall exhausts capacity.
-    Pending p; p.work = work; snprintf(p.id, sizeof(p.id), "r1-queue-%lu", (unsigned long)window);
+    Pending p; p.work = work;
+    snprintf(p.id, sizeof(p.id), "r1-queue-%08lx-%lu",
+             (unsigned long)bootSessionNonce, (unsigned long)window);
     p.result.wifiConnected = wifiSnapshot; p.result.mqttConnected = mqttSnapshot;
     p.transition.begin(-1, true, true, cached.predictedClass, localCalls);
     fallback(p, FailoverReason::LOCAL_QUEUE_SAFETY, "WORK_QUEUE");

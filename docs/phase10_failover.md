@@ -1,6 +1,6 @@
 # Phase 10 / M10 - Failover
 
-Status: IN PROGRESS. No Phase11+ implementation is authorized in this milestone.
+Status: CLOSED. This file is retained as the original Phase-10 implementation plan. Completion status and measured controlled-hardware evidence are canonicalized in `docs/phase10_m10_completion.md`. Phase 11 may proceed without reopening this plan.
 
 ## Baseline audit
 

@@ -3,15 +3,19 @@
 import argparse
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 import threading
 
 import paho.mqtt.client as mqtt
+from sqlalchemy.exc import SQLAlchemyError
 
 from .cloud_full import FullCloudInference
 from .inference import SplitCloudInference
 from .mqtt import REQUEST_TOPIC, ServerState, on_message as legacy_message, device_id_from_topic, response_topic
 from .r1_schema import parse_cloud_request, encode, SCHEMA_VERSION, POLICY_VERSION
+from .database import DATABASE_URL_ENV, Database, database_url_from_env
+from .telemetry_schema import TELEMETRY_TOPIC, parse_decision_event
 
 PROBE_TOPIC = "gesture/+/policy/probe/request"
 
@@ -26,7 +30,7 @@ def build_response(request, runtime):
 
 
 class R1Service:
-    def __init__(self, host="127.0.0.1", port=1883, event_path=None):
+    def __init__(self, host="127.0.0.1", port=1883, event_path=None, database_url=None):
         self.cloud = FullCloudInference()
         self.legacy = ServerState(SplitCloudInference())
         self.host, self.port = host, port
@@ -34,6 +38,10 @@ class R1Service:
         if self.event_path:
             self.event_path.parent.mkdir(parents=True, exist_ok=True)
         self.events, self.errors = [], []
+        resolved_database_url = database_url if database_url is not None else database_url_from_env()
+        self.database = Database(resolved_database_url) if resolved_database_url else None
+        if self.database is not None:
+            self.database.create_schema()
         self.ready = threading.Event()
         self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id="phase9-r1-server")
         self.client.on_connect = self._connect
@@ -42,7 +50,7 @@ class R1Service:
 
     def _connect(self, client, userdata, flags, reason, properties):
         if reason == 0:
-            client.subscribe([(REQUEST_TOPIC, 0), (PROBE_TOPIC, 0)])
+            client.subscribe([(REQUEST_TOPIC, 0), (PROBE_TOPIC, 0), (TELEMETRY_TOPIC, 0)])
 
     def _message(self, client, userdata, message):
         received = datetime.now(timezone.utc).isoformat()
@@ -50,6 +58,24 @@ class R1Service:
             data = json.loads(message.payload)
             if not isinstance(data, dict):
                 raise ValueError("MQTT request must be an object")
+            if message.topic.endswith("/telemetry"):
+                parts = message.topic.split("/")
+                event = parse_decision_event(data)
+                if len(parts) != 3 or event["device_id"] != parts[1]:
+                    raise ValueError("Telemetry topic/payload device mismatch")
+                database = getattr(self, "database", None)
+                if database is not None:
+                    database.save_decision_event(event)
+                record = {"kind": "decision", "receive_time": received, "event": event,
+                          "request_bytes": len(message.payload), "persisted": database is not None}
+                self.events.append(record)
+                if len(self.events) > 1000:
+                    del self.events[:-1000]
+                if self.event_path:
+                    with self.event_path.open("a", encoding="utf-8") as stream:
+                        stream.write(encode(record).decode() + "\n")
+                print(f"R1_DECISION_EVENT request_id={event['request_id']} action={event['effective_action']} persisted={database is not None}", flush=True)
+                return
             if message.topic.endswith("/policy/probe/request"):
                 parts = message.topic.split("/")
                 if (len(parts) != 5 or set(data) != {"schema_version", "request_id", "device_id"}
@@ -83,7 +109,7 @@ class R1Service:
                     stream.write(encode(event).decode() + "\n")
             if kind == "CLOUD":
                 print(f"R1_CLOUD_OK request_id={data['request_id']} features={len(data['features'])} policy={POLICY_VERSION}", flush=True)
-        except (ValueError, TypeError, KeyError, RuntimeError) as exc:
+        except (ValueError, TypeError, KeyError, RuntimeError, SQLAlchemyError) as exc:
             self.errors.append(str(exc))
             if len(self.errors) > 1000:
                 del self.errors[:-1000]
@@ -100,6 +126,9 @@ class R1Service:
     def __exit__(self, *args):
         self.client.disconnect()
         self.client.loop_stop()
+        database = getattr(self, "database", None)
+        if database is not None:
+            database.close()
 
 
 def main():
@@ -107,8 +136,10 @@ def main():
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=1883)
     parser.add_argument("--events", type=Path, default=Path("data/policy/runtime/r1_server_events.jsonl"))
+    parser.add_argument("--database-url", default=os.getenv(DATABASE_URL_ENV),
+                        help=f"SQLAlchemy URL; defaults to ${DATABASE_URL_ENV}. Omit to preserve no-database Phase-10 behavior.")
     args = parser.parse_args()
-    with R1Service(args.host, args.port, args.events):
+    with R1Service(args.host, args.port, args.events, args.database_url):
         print("R1_SERVER_READY", flush=True)
         threading.Event().wait()
 

@@ -1,0 +1,187 @@
+# Phase 11 / M11 — Database + Dashboard
+
+## Canonical status
+
+**IN PROGRESS — Checkpoint 11.1: production decision telemetry + PostgreSQL persistence.**
+
+Phase 10 / M10 is closed by `docs/phase10_m10_completion.md` and its controlled
+ESP32 hardware evidence. This phase does not reopen learned-policy or failover work.
+
+## Checkpoint 11.1 scope
+
+The first Phase-11 checkpoint deliberately implements only the minimum persistent
+path needed before a dashboard can be trusted:
+
+```text
+ESP32 final decision
+    ↓
+gesture/{device_id}/telemetry
+    ↓
+decision-r1-v1 validation
+    ↓
+R1 MQTT service
+    ↓
+PostgreSQL inference_events
+```
+
+The dashboard UI is **not** implemented in this checkpoint. FastAPI read endpoints,
+WebSocket fan-out and Chart.js are the next checkpoint only after hardware database
+persistence is stable.
+
+## Production telemetry contract
+
+Version: `decision-r1-v1`
+
+Topic:
+
+```text
+gesture/{device_id}/telemetry
+```
+
+The event carries final decision/result telemetry only. It does **not** send:
+
+- raw 100×6 IMU windows,
+- Split1/2/3 embeddings,
+- features-v1 values.
+
+The canonical uncertainty field is the **normalized predictive entropy** in `[0,1]`.
+The exact learned-policy state contract is not changed by Phase 11.
+
+Stored fields include:
+
+- request/window/device identity,
+- requested and effective `LOCAL/CLOUD` action,
+- failover state/reason/stage,
+- final class, confidence and uncertainty,
+- Wi-Fi/MQTT state,
+- last RTT value/source/age when available,
+- free heap and measured local prefix+uncertainty inference time,
+- application-level CLOUD request elapsed time for issued requests,
+- server compute latency when a CLOUD response succeeds,
+- CLOUD inference request/response TX/RX bytes (telemetry overhead is not folded into these fields),
+- model/policy/firmware versions,
+- controlled-vs-production provenance.
+
+Fields that are not actually measured in the current runtime remain `NULL` in the
+database. In particular this checkpoint does **not** populate measured energy,
+battery, RSSI, free-heap ratio, pure network latency, a full edge-compute total, or
+a fabricated total E2E latency. `request_elapsed_ms` includes the server turn and is
+therefore not mislabeled as `network_ms`.
+
+## Database schema
+
+Configuration: `config/r1_database_v1.json`
+
+Checkpoint table:
+
+```text
+inference_events
+```
+
+`split_point` is nullable and stays `NULL` for production R1 rows. Fixed-split
+benchmark storage is outside this production decision stream.
+
+The database layer uses SQLAlchemy 2.x and is PostgreSQL-compatible. SQLite is used
+only by automated unit tests; it is not the production database claim.
+
+## Local PostgreSQL startup
+
+```powershell
+docker compose up -d postgres
+$env:TINYML_DATABASE_URL="postgresql+psycopg://tinyml:tinyml_dev@127.0.0.1:5432/tinyml"
+```
+
+Install/update Python dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+Start the existing R1 server with persistence enabled:
+
+```powershell
+python -m server.app.r1_mqtt --database-url $env:TINYML_DATABASE_URL
+```
+
+The server remains backward-compatible with Phase 10: if no database URL is supplied
+and `TINYML_DATABASE_URL` is absent, R1 inference/failover service runs without
+persistence.
+
+## Validation commands
+
+Desktop contract/database tests:
+
+```powershell
+pytest -q tests/test_phase11_telemetry_schema.py tests/test_phase11_database.py tests/test_r1_mqtt_routing.py tests/test_r1_schema.py
+```
+
+After flashing the updated production firmware and allowing inference windows to run:
+
+```powershell
+python tools/phase11/validate_database.py --min-events 5
+```
+
+For a controlled run where both actions are deliberately exercised:
+
+```powershell
+python tools/phase11/validate_database.py --min-events 2 --require-actions LOCAL CLOUD
+```
+
+Do not claim both actions were observed unless the actual run produces both.
+
+## Checkpoint 11.1 Definition of Done
+
+Implementation-side:
+
+- [x] versioned `decision-r1-v1` telemetry contract
+- [x] production firmware publishes final decision telemetry when MQTT is available
+- [x] no raw window / split embedding / features-v1 in telemetry
+- [x] PostgreSQL-compatible `inference_events` model
+- [x] idempotent `(device_id, request_id)` persistence
+- [x] existing R1 service remains usable with database disabled
+- [x] desktop telemetry/database tests
+
+Hardware-side (must be measured before checkpoint closure):
+
+- [ ] updated firmware builds and uploads on ESP32-S3
+- [ ] at least several live decision events persist to PostgreSQL
+- [ ] persisted row fields match serial `R1_DECISION` evidence for sampled windows
+- [ ] no Phase-9 policy or Phase-10 failover regression
+
+## Known limitation
+
+When Wi-Fi/MQTT is unavailable, the ESP32 cannot publish live dashboard telemetry.
+The final decision is still emitted on serial and failover still completes locally.
+Offline-event buffering/replay is not added in this checkpoint because it would add
+state/memory complexity and is not required to validate the basic Phase-11 path.
+
+## Checkpoint 11.1b — reboot-safe request identity
+
+Live hardware persistence exposed an identity issue that desktop-only tests could not
+show: continuous runtime request IDs were derived from `millis()` plus `window_id`,
+both of which restart after an ESP32 reboot. Because PostgreSQL correctly enforces
+`(device_id, request_id)` uniqueness, a later boot could collide with rows from an
+earlier boot and be rejected as `conflicting duplicate decision telemetry`.
+
+The firmware now prefixes continuous-runtime and probe request IDs with a per-boot
+`esp_random()` nonce. This is an engineering collision-avoidance identifier, not a
+cryptographic-randomness claim. The database uniqueness constraint and conflicting-
+duplicate protection remain unchanged. Firmware version is bumped to `0.3.1-r1`.
+
+For hardware closure, validate only the production device stream rather than allowing
+a synthetic test row to satisfy the event-count gate:
+
+```powershell
+$env:TINYML_DATABASE_URL="postgresql+psycopg://tinyml:tinyml_dev@127.0.0.1:5432/tinyml"
+python tools/phase11/validate_database.py --min-events 5 --device-id esp32-r1 --production-only
+```
+
+A successful run should have no new `conflicting duplicate decision telemetry` after
+a normal device reboot. Historical conflicting-duplicate log lines from the pre-fix
+firmware are retained as measured evidence for why this correction was made.
+
+## Next checkpoint after closure
+
+**Checkpoint 11.2 — FastAPI read API + WebSocket stream** backed by the validated
+`inference_events` table. Only then should the live HTML/JavaScript/Chart.js dashboard
+be built.

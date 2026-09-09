@@ -9,21 +9,20 @@ policy under Architecture Revision R1. CLOUD sends exactly 10 features-v1 values
 
 ## Current project phase
 
-Canonical Phase 9 / M9: learned binary adaptive policy, CLOSED (controlled MVP).
-Phase 7 split baselines and Phase 8 policy studies are complete. M25?M34 names in
-older reports are historical study milestones, not the canonical phase sequence.
-Phase 10 / M10 failover has not started.
+Canonical Phase 11 / M11: Database + Dashboard, **IN PROGRESS**.
+Phase 9 / M9 learned binary LOCAL/CLOUD policy is closed and Phase 10 / M10
+failover is closed with controlled ESP32 hardware evidence. The current Phase-11
+checkpoint is the versioned decision-telemetry → PostgreSQL persistence path; the
+dashboard UI follows only after the reboot-safe persistence path is hardware-validated.
 
 Split1/2/3 artifacts and regression suites remain fixed experimental baselines.
-Production firmware integrates meta-policy-v1.0.0: LOCAL reuses the validated
-local uncertainty result; CLOUD sends exactly ten features. Historical four-action datasets
-and configurations are immutable evidence, not production policy contracts.
+Production adaptive action space remains exactly `LOCAL` / `CLOUD`; CLOUD sends
+exactly ten `features-v1` values. Historical four-action datasets/configurations are
+immutable evidence, not production policy contracts.
 
-See [canonical Phase 9 status](docs/phase9_learned_binary_policy.md) and
-[R1 migration audit](docs/phase9_r1_migration_audit.md). The reuse-LOCAL blocker is
-resolved. Both learned actions pass controlled hardware E2E; a live run passes
-50 LOCAL decisions. Policy generalization is limited by one CLOUD-benefit window
-and zero CLOUD-optimal holdout support. Next: Phase 10 / M10 - Failover.
+See [Phase 10 completion](docs/phase10_m10_completion.md),
+[Phase 11 plan](docs/phase11_database_dashboard.md), and
+[R1 migration audit](docs/phase9_r1_migration_audit.md).
 
 ## Fixed v1 choices
 
@@ -40,7 +39,7 @@ and zero CLOUD-optimal holdout support. Next: Phase 10 / M10 - Failover.
 - Gesture classes: IDLE, SWIPE_LEFT, SWIPE_RIGHT, ROTATE_CW, SHAKE
 - Feature version: features-v1
 - Dataset version: dataset-v1
-- Firmware version: 0.2.0-r1
+- Firmware version: 0.3.1-r1
 - Accelerometer calibration: accel-cal-v1
 - Orientation protocol: orientation-v1
 
