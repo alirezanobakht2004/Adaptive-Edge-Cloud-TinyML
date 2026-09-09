@@ -1,6 +1,7 @@
 #pragma once
 #include "meta_learner.h"
 #include "uncertainty.h"
+#include "failover.h"
 
 namespace policy {
 struct DecisionResult {
@@ -11,12 +12,18 @@ struct DecisionResult {
     unsigned txBytes = 0, rxBytes = 0;
     uint32_t roundTripUs = 0;
     float serverComputeMs = 0;
+    int effectiveAction = 0;
+    bool failover = false, wifiConnected = false, mqttConnected = false, requestIssued = false;
+    FailoverReason failoverReason = FailoverReason::NONE;
+    unsigned localInferenceCount = 1;
+    float finalConfidence = 0;
+    const char* requestStatus = "NOT_ISSUED";
 };
 bool connectAdaptiveNetwork();
 bool processCachedDecision(const float features[10], const inference::UncertaintyResult& cached,
                           const float state[6], const char* requestId, uint32_t windowId,
-                          DecisionResult& result, bool controlled = false);
+                          DecisionResult& result, bool controlled = false, unsigned localInferenceCount = 1);
 bool startAdaptiveRuntime();
 bool submitCachedDecision(const float features[10], const inference::UncertaintyResult& cached,
-                          float localInferenceMs, uint32_t windowId);
+                          float localInferenceMs, uint32_t windowId, unsigned localInferenceCount = 1);
 }

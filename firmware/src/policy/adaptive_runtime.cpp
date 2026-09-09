@@ -9,6 +9,8 @@
 #include "network/mqtt_client.h"
 #include "network/wifi_manager.h"
 #include "meta_policy_data.h"
+#include "failover_config.h"
+#include "version.h"
 
 namespace policy {
 namespace {
@@ -18,13 +20,27 @@ constexpr const char* responseTopic = "gesture/esp32-r1/inference/response";
 constexpr const char* probeRequest = "gesture/esp32-r1/policy/probe/request";
 constexpr const char* probeResponse = "gesture/esp32-r1/policy/probe/response";
 constexpr const char* cloudVersion = "gesture-full-cloud-v1.0.0";
-constexpr const char* firmwareVersion = "0.2.0-r1";
-char response[1024], expectedId[96];
-bool received = false, probing = false;
-uint32_t receivedUs;
-unsigned responseBytes;
+struct Work {
+    float features[10]; inference::UncertaintyResult cached;
+    float localMs; uint32_t window, cachedAtMs; unsigned localCalls;
+};
+struct Pending {
+    Work work{}; float state[6]{}; char id[96]{};
+    DecisionResult result; FailoverState transition;
+    bool occupied = false, waitingState = false, waitingCloud = false, done = false;
+    bool controlled = false, stateValid = false;
+    uint32_t startedUs = 0, rttAgeMs = 0;
+    const char* failureStage = "NONE";
+};
 QueueHandle_t queue = nullptr;
-struct Work { float features[10]; inference::UncertaintyResult cached; float localMs; uint32_t window; };
+bool workerRunning = false;
+Pending slots[failover_config::PENDING_CAPACITY];
+Pending* active[failover_config::PENDING_CAPACITY]{};
+volatile bool wifiSnapshot = false, mqttSnapshot = false;
+float lastRttMs = NAN;
+uint32_t lastRttAtMs = 0, probeStartedUs = 0, lastProbeMs = 0;
+bool probeActive = false, probeTimedOut = false;
+char probeId[96]{};
 
 bool stringField(const char* json, const char* key, const char* value) {
     String token = String("\"") + key + "\":\"" + value + "\"";
@@ -34,31 +50,8 @@ bool numberField(const char* json, const char* key, float& value) {
     String token = String("\"") + key + "\":";
     const char* start = strstr(json, token.c_str());
     if (!start) return false;
-    start += token.length();
-    char* end = nullptr;
-    value = strtof(start, &end);
+    start += token.length(); char* end = nullptr; value = strtof(start, &end);
     return end != start && (*end == ',' || *end == '}') && std::isfinite(value);
-}
-void onResponse(const char* topic, const uint8_t* payload, unsigned length) {
-    if (strcmp(topic, probing ? probeResponse : responseTopic) || length >= sizeof(response)) return;
-    memcpy(response, payload, length); response[length] = '\0';
-    if (!stringField(response, "request_id", expectedId)) return;
-    if (!stringField(response, "schema_version", probing ? "r1-probe-v1" : "inference-r1-v1")) return;
-    receivedUs = micros(); responseBytes = length; received = true;
-}
-bool exchange(const char* topic, const String& payload, const char* id, bool probe, uint32_t& elapsed,
-              unsigned* publishedBytes = nullptr) {
-    if (payload.length() + strlen(topic) + 7 >= network::DEFAULT_MQTT_BUFFER_BYTES) return false;
-    snprintf(expectedId, sizeof(expectedId), "%s", id);
-    probing = probe; received = false;
-    const uint32_t started = micros();
-    if (!network::publishMqtt(topic, payload.c_str())) return false;
-    if (publishedBytes) *publishedBytes = payload.length();
-    while (!received && uint32_t(micros() - started) < 3000000UL) {
-        network::mqttLoop(); delay(1);
-    }
-    if (received) elapsed = receivedUs - started;
-    return received;
 }
 void appendNumber(String& target, float value) {
     char number[32]; snprintf(number, sizeof(number), "%.9g", double(value)); target += number;
@@ -68,44 +61,184 @@ String array(const float* values, unsigned count) {
     for (unsigned i = 0; i < count; ++i) { if (i) result += ','; appendNumber(result, values[i]); }
     return result + ']';
 }
-void logDecision(const float state[6], const inference::UncertaintyResult& cached, const char* id,
-                 uint32_t window, const DecisionResult& result, bool controlled) {
-    String line = String("R1_DECISION {\"request_id\":\"") + id + "\",\"window_id\":" + window
-        + ",\"timestamp_ms\":" + millis() + ",\"policy_version\":\"" + meta_policy_data::VERSION
-        + "\",\"firmware_version\":\"" + firmwareVersion + "\",\"local_model_version\":\"gesture-model-v1.1.0\""
-        + ",\"cloud_model_version\":\"" + cloudVersion + "\",\"selected_action\":\""
-        + (result.policy.action == 0 ? "LOCAL" : result.policy.action == 1 ? "CLOUD" : "INVALID")
-        + "\",\"local_prediction\":" + cached.predictedClass + ",\"final_prediction\":" + result.finalPrediction
-        + ",\"policy_state\":" + array(state, 6) + ",\"policy_input\":" + array(result.policy.normalized, 6)
-        + ",\"confidence\":" + String(state[0], 9) + ",\"entropy\":" + String(state[1], 9)
-        + ",\"margin\":" + String(state[2], 9) + ",\"success\":" + (result.success ? "true" : "false")
-        + ",\"controlled\":" + (controlled ? "true" : "false") + ",\"second_inference_count\":0"
-        + ",\"policy_inference_us\":" + result.policy.inferenceUs
-        + ",\"bytes_tx\":" + result.txBytes + ",\"bytes_rx\":" + result.rxBytes;
-    if (result.policy.action == 1 && result.success) {
-        line += ",\"e2e_latency_ms\":" + String(result.roundTripUs / 1000.0f, 3)
-            + ",\"server_compute_latency_ms\":" + String(result.serverComputeMs, 6);
-    }
+void logDecision(const Pending& p) {
+    const auto& r = p.result;
+    const auto& cached = p.work.cached;
+    String line = String("R1_DECISION {\"request_id\":\"") + p.id + "\",\"window_id\":" + p.work.window
+        + ",\"timestamp_ms\":" + millis() + ",\"cached_at_ms\":" + p.work.cachedAtMs
+        + ",\"policy_version\":\"" + meta_policy_data::VERSION + "\",\"firmware_version\":\"" + FIRMWARE_VERSION
+        + "\",\"failover_config_version\":\"" + failover_config::VERSION
+        + "\",\"local_model_version\":\"gesture-model-v1.1.0\",\"cloud_model_version\":\"" + cloudVersion
+        + "\",\"requested_action\":\"" + (r.policy.action == 0 ? "LOCAL" : r.policy.action == 1 ? "CLOUD" : "NOT_EVALUATED")
+        + "\",\"effective_action\":\"" + (r.effectiveAction == 0 ? "LOCAL" : "CLOUD")
+        + "\",\"selected_action\":\"" + (r.effectiveAction == 0 ? "LOCAL" : "CLOUD")
+        + "\",\"failover\":" + (r.failover ? "true" : "false")
+        + ",\"failover_reason\":\"" + reasonName(r.failoverReason) + "\",\"failure_stage\":\"" + p.failureStage
+        + "\",\"wifi_connected\":" + (r.wifiConnected ? "true" : "false")
+        + ",\"mqtt_connected\":" + (r.mqttConnected ? "true" : "false")
+        + ",\"local_prediction\":" + cached.predictedClass + ",\"final_prediction\":" + r.finalPrediction
+        + ",\"confidence\":" + String(cached.confidence, 9) + ",\"entropy\":" + String(cached.predictiveEntropyNats, 9)
+        + ",\"final_confidence\":" + String(r.finalConfidence, 9)
+        + ",\"policy_state\":" + (p.stateValid ? array(p.state, 6) : String("null"))
+        + ",\"policy_input\":" + (r.policy.action >= 0 ? array(r.policy.normalized, 6) : String("null"))
+        + ",\"rtt_source\":\"" + (p.controlled ? "CONTROLLED" : p.stateValid ? "last_successful_probe" : "unavailable")
+        + "\",\"rtt_age_ms\":" + p.rttAgeMs + ",\"success\":" + (r.success ? "true" : "false")
+        + ",\"controlled\":" + (p.controlled ? "true" : "false")
+        + ",\"local_inference_count\":" + r.localInferenceCount + ",\"second_inference_count\":" + r.secondInferenceCount
+        + ",\"policy_inference_us\":" + r.policy.inferenceUs + ",\"bytes_tx\":" + r.txBytes + ",\"bytes_rx\":" + r.rxBytes
+        + ",\"request_issued\":" + (r.requestIssued ? "true" : "false") + ",\"request_status\":\"" + r.requestStatus + "\"";
+    if (r.requestIssued) line += ",\"request_elapsed_ms\":" + String(r.roundTripUs / 1000.f, 3);
+    if (r.effectiveAction == 1 && r.success)
+        line += ",\"e2e_latency_ms\":" + String(r.roundTripUs / 1000.f, 3) + ",\"server_compute_latency_ms\":" + String(r.serverComputeMs, 6);
     Serial.print(line + "}\n");
 }
+void finish(Pending& p) {
+    auto& r = p.result;
+    r.effectiveAction = p.transition.effectiveAction; r.finalPrediction = p.transition.finalClass;
+    r.failover = p.transition.failover; r.failoverReason = p.transition.reason;
+    r.localInferenceCount = p.work.localCalls;
+    r.secondInferenceCount = p.work.localCalls > 0 ? p.work.localCalls - 1 : 0;
+    r.success = p.transition.complete && r.finalPrediction >= 0 && r.finalPrediction < 5 && r.localInferenceCount == 1;
+    if (r.effectiveAction == 0) r.finalConfidence = p.work.cached.confidence;
+    p.waitingCloud = false; p.waitingState = false; p.done = true;
+    logDecision(p);
+}
+void fallback(Pending& p, FailoverReason reason, const char* stage) {
+    p.failureStage = stage;
+    if (p.result.requestIssued) p.result.roundTripUs = micros() - p.startedUs;
+    p.transition.fallback(reason); finish(p);
+}
+void updateConnectivity(Pending& p) {
+    p.result.wifiConnected = network::isWifiConnected();
+    p.result.mqttConnected = p.result.wifiConnected && network::isMqttConnected();
+}
+void onResponse(const char* topic, const uint8_t* payload, unsigned length) {
+    if (length >= 1024) return;
+    char response[1024]; memcpy(response, payload, length); response[length] = '\0';
+    if (strcmp(topic, probeResponse) == 0 && probeActive
+        && stringField(response, "request_id", probeId) && stringField(response, "schema_version", "r1-probe-v1")
+        && strstr(response, "\"probe\":true")) {
+        lastRttMs = (micros() - probeStartedUs) / 1000.f; lastRttAtMs = millis();
+        probeActive = false; probeTimedOut = false; return;
+    }
+    if (strcmp(topic, responseTopic)) return;
+    for (auto* p : active) {
+        if (!p || !p->waitingCloud || !stringField(response, "request_id", p->id)) continue;
+        float predicted, confidence, serverMs;
+        if (!stringField(response, "schema_version", "inference-r1-v1") || !stringField(response, "mode", "CLOUD")
+            || !strstr(response, "\"success\":true") || !stringField(response, "model_version", cloudVersion)
+            || !stringField(response, "policy_version", meta_policy_data::VERSION)
+            || !numberField(response, "predicted_class_id", predicted) || predicted < 0 || predicted > 4 || floorf(predicted) != predicted
+            || !numberField(response, "confidence", confidence) || confidence < 0 || confidence > 1
+            || !numberField(response, "server_latency_ms", serverMs) || serverMs < 0) return;
+        // Deadline wins even if a late message is delivered before the next timer poll.
+        if (requestExpired(micros(), p->startedUs, failover_config::CLOUD_RESPONSE_TIMEOUT_MS)) return;
+        p->result.roundTripUs = micros() - p->startedUs;
+        p->result.rxBytes = length; p->result.serverComputeMs = serverMs;
+        p->result.finalConfidence = confidence; p->result.requestStatus = "SUCCESS";
+        p->transition.cloudSuccess(int(predicted)); finish(*p); return;
+    }
+}
+void begin(Pending& p) {
+    updateConnectivity(p);
+    if (!runMeta(p.state, p.result.policy)) {
+        p.transition.begin(-1, p.result.wifiConnected, p.result.mqttConnected, p.work.cached.predictedClass, p.work.localCalls);
+        fallback(p, FailoverReason::LOCAL_QUEUE_SAFETY, "POLICY_INPUT_INVALID"); return;
+    }
+    if (!p.transition.begin(p.result.policy.action, p.result.wifiConnected, p.result.mqttConnected,
+                            p.work.cached.predictedClass, p.work.localCalls)) { p.done = true; return; }
+    if (p.transition.complete) { p.failureStage = p.transition.failover ? "CONNECTIVITY_GATE" : "NONE"; finish(p); return; }
+    String payload = String("{\"schema_version\":\"inference-r1-v1\",\"request_id\":\"") + p.id
+        + "\",\"device_id\":\"" + device + "\",\"timestamp_ms\":" + millis()
+        + ",\"mode\":\"CLOUD\",\"features\":" + array(p.work.features, 10)
+        + ",\"feature_version\":\"features-v1\",\"feature_encoding\":\"normalized-float32\""
+        + ",\"model_version\":\"" + cloudVersion + "\",\"policy_version\":\"" + meta_policy_data::VERSION
+        + "\",\"firmware_version\":\"" + FIRMWARE_VERSION + "\",\"confidence\":";
+    appendNumber(payload, p.state[0]); payload += ",\"entropy\":"; appendNumber(payload, p.state[1]);
+    payload += ",\"margin\":"; appendNumber(payload, p.state[2]); payload += ",\"policy_state\":" + array(p.state, 6) + '}';
+    p.startedUs = micros();
+    if (payload.length() + strlen(requestTopic) + 7 >= network::DEFAULT_MQTT_BUFFER_BYTES
+        || !network::publishMqtt(requestTopic, payload.c_str())) {
+        p.result.requestStatus = "PUBLISH_FAILED"; fallback(p, FailoverReason::CLOUD_PUBLISH_FAILED, "PUBLISH"); return;
+    }
+    p.result.txBytes = payload.length(); p.result.requestIssued = true;
+    p.result.requestStatus = "PENDING"; p.waitingCloud = true;
+}
+void poll(Pending& p) {
+    if (!p.waitingCloud) return;
+    updateConnectivity(p);
+    if (!p.result.wifiConnected) { p.result.requestStatus = "DISCONNECTED"; fallback(p, FailoverReason::WIFI_UNAVAILABLE, "WAIT_RESPONSE"); }
+    else if (!p.result.mqttConnected) { p.result.requestStatus = "DISCONNECTED"; fallback(p, FailoverReason::MQTT_UNAVAILABLE, "WAIT_RESPONSE"); }
+    else if (requestExpired(micros(), p.startedUs, failover_config::CLOUD_RESPONSE_TIMEOUT_MS)) {
+        p.result.requestStatus = "TIMEOUT"; fallback(p, FailoverReason::CLOUD_RESPONSE_TIMEOUT, "WAIT_RESPONSE");
+    }
+}
+void prepareState(Pending& p) {
+    updateConnectivity(p);
+    if (!std::isfinite(lastRttMs)) {
+        p.transition.begin(-1, p.result.wifiConnected, p.result.mqttConnected, p.work.cached.predictedClass, p.work.localCalls);
+        if (p.transition.complete) { p.failureStage = "PRE_POLICY_CONNECTIVITY"; finish(p); }
+        else if (probeTimedOut) fallback(p, FailoverReason::CLOUD_RESPONSE_TIMEOUT, "PRE_POLICY_RTT_PROBE");
+        else p.waitingState = true;
+        return;
+    }
+    float first = 0, second = 0;
+    for (float v : p.work.cached.meanProbabilities) { if (v > first) { second = first; first = v; } else if (v > second) second = v; }
+    const float state[6] = {p.work.cached.confidence, p.work.cached.predictiveEntropyNats, first-second,
+        float(ESP.getFreeHeap()), p.work.localMs, lastRttMs};
+    memcpy(p.state, state, sizeof(state)); p.stateValid = true; p.rttAgeMs = millis() - lastRttAtMs;
+    p.waitingState = false; begin(p);
+}
 void worker(void*) {
-    Work work;
+    uint32_t lastRetryMs = 0;
+    bool firstConnect = true, oldWifi = false, oldMqtt = false;
     for (;;) {
-        if (xQueueReceive(queue, &work, portMAX_DELAY) != pdTRUE) continue;
-        char id[80]; snprintf(id, sizeof(id), "r1-%lu-%lu", (unsigned long)millis(), (unsigned long)work.window);
-        if (!connectAdaptiveNetwork()) { Serial.printf("R1_STATE_UNAVAILABLE window=%lu network=disconnected\n", (unsigned long)work.window); continue; }
-        const String payload = String("{\"schema_version\":\"r1-probe-v1\",\"request_id\":\"") + id
-            + "\",\"device_id\":\"" + device + "\"}";
-        uint32_t probeUs = 0;
-        if (!exchange(probeRequest, payload, id, true, probeUs)) {
-            Serial.printf("R1_STATE_UNAVAILABLE window=%lu probe=timeout\n", (unsigned long)work.window); continue;
+        bool wifi = network::isWifiConnected(), mqtt = wifi && network::isMqttConnected();
+        if (wifi != oldWifi || mqtt != oldMqtt) {
+            Serial.printf("R1_CONNECTIVITY {\"timestamp_ms\":%lu,\"wifi_connected\":%s,\"mqtt_connected\":%s}\n",
+                (unsigned long)millis(), wifi ? "true" : "false", mqtt ? "true" : "false");
+            // Back off after loss; do not hold the inference queue during reconnect.
+            if (!wifi || !mqtt) lastRetryMs = millis();
+            oldWifi = wifi; oldMqtt = mqtt;
         }
-        float first = 0, second = 0;
-        for (float p : work.cached.meanProbabilities) { if (p > first) { second = first; first = p; } else if (p > second) second = p; }
-        const float state[6] = {work.cached.confidence, work.cached.predictiveEntropyNats, first - second,
-            float(ESP.getFreeHeap()), work.localMs, probeUs / 1000.0f};
-        DecisionResult result;
-        processCachedDecision(work.features, work.cached, state, id, work.window, result);
+        wifiSnapshot = wifi; mqttSnapshot = mqtt;
+        if ((!wifi || !mqtt) && (firstConnect || uint32_t(millis()-lastRetryMs) >= failover_config::RECONNECT_INTERVAL_MS)) {
+            firstConnect = false; lastRetryMs = millis();
+            if (!wifi) network::connectWifi(0); // Existing helper starts association without its 20s wait.
+            if (network::isWifiConnected()) connectAdaptiveNetwork();
+        }
+        network::mqttLoop();
+        if (probeActive && requestExpired(micros(), probeStartedUs, failover_config::RTT_PROBE_TIMEOUT_MS)) {
+            probeActive = false; probeTimedOut = true;
+        }
+        if (network::isWifiConnected() && network::isMqttConnected() && !probeActive
+            && (lastProbeMs == 0 || uint32_t(millis()-lastProbeMs) >= failover_config::RTT_PROBE_INTERVAL_MS)) {
+            lastProbeMs = millis(); snprintf(probeId, sizeof(probeId), "r1-probe-%lu", (unsigned long)lastProbeMs);
+            String payload = String("{\"schema_version\":\"r1-probe-v1\",\"request_id\":\"") + probeId + "\",\"device_id\":\"" + device + "\"}";
+            probeStartedUs = micros(); probeActive = network::publishMqtt(probeRequest, payload.c_str());
+            if (!probeActive) probeTimedOut = true;
+        }
+        for (unsigned i=0; i<failover_config::PENDING_CAPACITY; ++i) {
+            auto& p = slots[i];
+            if (!p.occupied) continue;
+            if (p.waitingState) prepareState(p);
+            poll(p);
+            if (p.done) { active[i] = nullptr; p.occupied = false; }
+        }
+        Work work;
+        if (xQueueReceive(queue, &work, 0) == pdTRUE) {
+            unsigned slot = 0; while (slot < failover_config::PENDING_CAPACITY && slots[slot].occupied) ++slot;
+            if (slot < failover_config::PENDING_CAPACITY) {
+                auto& p = slots[slot]; p = Pending{}; p.work = work; p.occupied = true;
+                snprintf(p.id, sizeof(p.id), "r1-%lu-%lu", (unsigned long)work.cachedAtMs, (unsigned long)work.window);
+                active[slot] = &p; prepareState(p);
+            } else {
+                Pending p; p.work = work; snprintf(p.id, sizeof(p.id), "r1-capacity-%lu", (unsigned long)work.window);
+                updateConnectivity(p); p.transition.begin(-1, true, true, work.cached.predictedClass, work.localCalls);
+                fallback(p, FailoverReason::LOCAL_QUEUE_SAFETY, "PENDING_CAPACITY");
+            }
+        }
+        delay(1);
     }
 }
 }
@@ -113,66 +246,48 @@ void worker(void*) {
 bool connectAdaptiveNetwork() {
     if (!network::isWifiConnected() && !network::connectWifi()) return false;
     if (network::isMqttConnected()) return true;
-    return network::configureMqtt("192.168.137.1", 1883)
-        && network::setMqttMessageHandler(onResponse) && network::connectMqtt(device)
+    if (!network::configureMqtt("192.168.137.1", 1883)) return false;
+    network::setMqttSocketTimeoutSeconds(failover_config::MQTT_SOCKET_TIMEOUT_SECONDS);
+    return network::setMqttMessageHandler(onResponse) && network::connectMqtt(device)
         && network::subscribeMqtt(responseTopic) && network::subscribeMqtt(probeResponse);
 }
 
 bool processCachedDecision(const float features[10], const inference::UncertaintyResult& cached,
                           const float state[6], const char* id, uint32_t window,
-                          DecisionResult& result, bool controlled) {
-    result = DecisionResult{};
-    if (!features || !state || !id || strlen(id) >= sizeof(expectedId)) return false;
-    for (unsigned i = 0; i < 10; ++i) if (!std::isfinite(features[i])) return false;
-    if (!runMeta(state, result.policy)) return false;
-    if (result.policy.action == 0) {
-        result.finalPrediction = cached.predictedClass;
-        result.success = cached.predictedClass >= 0 && cached.predictedClass < 5;
-    } else {
-        String payload = String("{\"schema_version\":\"inference-r1-v1\",\"request_id\":\"") + id
-            + "\",\"device_id\":\"" + device + "\",\"timestamp_ms\":" + millis()
-            + ",\"mode\":\"CLOUD\",\"features\":" + array(features, 10)
-            + ",\"feature_version\":\"features-v1\",\"feature_encoding\":\"normalized-float32\""
-            + ",\"model_version\":\"" + cloudVersion + "\",\"policy_version\":\"" + meta_policy_data::VERSION
-            + "\",\"firmware_version\":\"" + firmwareVersion + "\",\"confidence\":";
-        appendNumber(payload, state[0]); payload += ",\"entropy\":"; appendNumber(payload, state[1]);
-        payload += ",\"margin\":"; appendNumber(payload, state[2]); payload += ",\"policy_state\":" + array(state, 6) + '}';
-        // Application payload bytes; MQTT/TCP/Wi-Fi framing is not included.
-        if (exchange(requestTopic, payload, id, false, result.roundTripUs, &result.txBytes)) {
-            result.rxBytes = responseBytes;
-            float prediction, confidence;
-            if (stringField(response, "mode", "CLOUD") && strstr(response, "\"success\":true")
-                && stringField(response, "model_version", cloudVersion)
-                && stringField(response, "policy_version", meta_policy_data::VERSION)
-                && numberField(response, "predicted_class_id", prediction) && prediction >= 0 && prediction < 5
-                && prediction == floorf(prediction) && numberField(response, "confidence", confidence)
-                && confidence >= 0 && confidence <= 1
-                && numberField(response, "server_latency_ms", result.serverComputeMs) && result.serverComputeMs >= 0) {
-                result.finalPrediction = int(prediction); result.success = true;
-            }
-        }
-    }
-    logDecision(state, cached, id, window, result, controlled);
-    return result.success;
+                          DecisionResult& result, bool controlled, unsigned localCalls) {
+    if (workerRunning || !features || !state || !id || strlen(id) >= 96 || localCalls != 1) return false;
+    for (unsigned i=0; i<10; ++i) if (!std::isfinite(features[i])) return false;
+    Pending p; memcpy(p.work.features, features, sizeof(p.work.features)); p.work.cached = cached;
+    p.work.window = window; p.work.cachedAtMs = millis(); p.work.localCalls = localCalls;
+    memcpy(p.state, state, sizeof(p.state)); snprintf(p.id, sizeof(p.id), "%s", id);
+    p.stateValid = true; p.controlled = controlled; active[0] = &p;
+    begin(p);
+    while (!p.done) { network::mqttLoop(); poll(p); delay(1); }
+    active[0] = nullptr; result = p.result; return result.success;
 }
 
 bool startAdaptiveRuntime() {
     if (queue) return true;
     if (!initializeMeta()) return false;
-    queue = xQueueCreate(2, sizeof(Work));
+    queue = xQueueCreate(failover_config::WORK_QUEUE_CAPACITY, sizeof(Work));
     if (!queue) return false;
+    workerRunning = true;
     if (xTaskCreatePinnedToCore(worker, "r1-policy", 12288, nullptr, 1, nullptr, 0) != pdPASS) {
-        vQueueDelete(queue); queue = nullptr; return false;
+        vQueueDelete(queue); queue = nullptr; workerRunning = false; return false;
     }
     return true;
 }
 bool submitCachedDecision(const float features[10], const inference::UncertaintyResult& cached,
-                          float localMs, uint32_t window) {
-    if (!queue) return false;
-    Work work; memcpy(work.features, features, sizeof(work.features));
-    work.cached = cached; work.localMs = localMs; work.window = window;
+                          float localMs, uint32_t window, unsigned localCalls) {
+    if (!queue || localCalls != 1) return false;
+    Work work; memcpy(work.features, features, sizeof(work.features)); work.cached = cached;
+    work.localMs = localMs; work.window = window; work.cachedAtMs = millis(); work.localCalls = localCalls;
     if (xQueueSend(queue, &work, 0) == pdTRUE) return true;
-    Serial.printf("R1_QUEUE_FULL window=%lu cached_local=%d\n", (unsigned long)window, cached.predictedClass);
-    return false;
+    // Defensive result delivery even if an unexpected scheduler stall exhausts capacity.
+    Pending p; p.work = work; snprintf(p.id, sizeof(p.id), "r1-queue-%lu", (unsigned long)window);
+    p.result.wifiConnected = wifiSnapshot; p.result.mqttConnected = mqttSnapshot;
+    p.transition.begin(-1, true, true, cached.predictedClass, localCalls);
+    fallback(p, FailoverReason::LOCAL_QUEUE_SAFETY, "WORK_QUEUE");
+    return p.result.success;
 }
 }

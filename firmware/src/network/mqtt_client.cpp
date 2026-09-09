@@ -163,6 +163,10 @@ int mqttState() {
     return client.state();
 }
 
+void setMqttSocketTimeoutSeconds(uint16_t seconds) {
+    client.setSocketTimeout(seconds);
+}
+
 
 void disconnectMqtt() {
     if (client.connected()) {

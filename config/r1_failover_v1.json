@@ -1,0 +1,13 @@
+{
+  "version": "r1-failover-v1",
+  "cloud_response_timeout_ms": 3000,
+  "timeout_source": "Preserves the 3000000us production exchange deadline in Phase9 adaptive_runtime.cpp at a7b5394; engineering budget, not optimized latency threshold",
+  "rtt_probe_timeout_ms": 3000,
+  "rtt_probe_interval_ms": 5000,
+  "reconnect_interval_ms": 5000,
+  "mqtt_socket_timeout_seconds": 1,
+  "pending_capacity": 16,
+  "work_queue_capacity": 16,
+  "rtt_rule": "Use last successfully measured application probe RTT, log its age; never invent an RTT if none exists",
+  "energy": "No energy measurement or new proxy in this phase"
+}

@@ -91,6 +91,7 @@ uint32_t successfulSamples = 0;
 uint32_t readFailures = 0;
 uint32_t fullPeriodOverruns = 0;
 uint32_t windowCount = 0;
+uint32_t localInferenceCalls = 0;
 
 uint64_t periodSumUs = 0;
 uint32_t periodCount = 0;
@@ -206,6 +207,7 @@ void runWindowInference(
     // compute pipeline.
     const uint32_t pipelineStartUs =
         micros();
+    const uint32_t localCallsBefore = localInferenceCalls;
 
     const uint32_t featureStartUs =
         pipelineStartUs;
@@ -240,6 +242,7 @@ void runWindowInference(
         micros();
 
 
+    ++localInferenceCalls; // One logical B3 + five-pass local inference for this window.
     if (
         !inference::runPrefixB3(
             normalized,
@@ -314,7 +317,7 @@ void runWindowInference(
     // R1: copy the existing result to a separate network worker. No second
     // gesture inference and no MQTT waits in the 100 Hz sensor loop.
     policy::submitCachedDecision(normalized, uncertaintyResult,
-        (prefixUs + uncertaintyUs) / 1000.0f, windowCount);
+        (prefixUs + uncertaintyUs) / 1000.0f, windowCount, localInferenceCalls - localCallsBefore);
 
 
     float meanPeriodMs = 0.0f;
@@ -640,7 +643,7 @@ void setup() {
     Serial.println();
 
     Serial.println(
-        "=== Phase 9 / M9 - Learned LOCAL/CLOUD Runtime ==="
+        "=== Phase 10 / M10 - Cached LOCAL Failover Runtime ==="
     );
 
     Serial.printf(

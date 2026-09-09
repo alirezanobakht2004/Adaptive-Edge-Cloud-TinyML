@@ -44,6 +44,8 @@ bool publishMqtt(
 bool mqttLoop();
 
 int mqttState();
+// Production opt-in; retained test/benchmark defaults are unchanged.
+void setMqttSocketTimeoutSeconds(uint16_t seconds);
 
 void disconnectMqtt();
 
