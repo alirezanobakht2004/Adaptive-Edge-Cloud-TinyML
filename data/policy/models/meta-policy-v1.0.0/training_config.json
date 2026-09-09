@@ -1,0 +1,21 @@
+{
+  "architecture": [
+    6,
+    8,
+    4,
+    2
+  ],
+  "batch_size": 32,
+  "class_weight_source": "inverse training class frequency; no relabeling or oversampled independent windows",
+  "class_weights": [
+    0.5005512679162073,
+    454.0
+  ],
+  "dataset_manifest_sha256": "dcf2f8518e07e367b704ceb50f99f44e337373af570751a22f5192ebe48b0112",
+  "epochs": 200,
+  "holdout_use": "evaluation only after fixed 200 epochs; no tuning/early stopping",
+  "learning_rate": 0.001,
+  "optimizer": "Adam",
+  "seed": 42,
+  "version": "meta-policy-v1.0.0"
+}

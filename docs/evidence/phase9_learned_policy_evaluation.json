@@ -1,0 +1,261 @@
+{
+  "by_profile": {
+    "M30-salvaged": {
+      "accuracy": 1.0,
+      "binary_oracle_reward": 1.0,
+      "cloud_selection_rate": 0.0,
+      "confusion_matrix": [
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "local_selection_rate": 1.0,
+      "macro_f1": 0.5,
+      "mean_regret": 0.0,
+      "mean_reward": 1.0,
+      "per_class": {
+        "CLOUD": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": null,
+          "support": 0
+        },
+        "LOCAL": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 8
+        }
+      },
+      "samples": 8,
+      "zero_support_convention": "undefined recall is null; zero division F1=0 included in macro F1"
+    },
+    "baseline": {
+      "accuracy": 0.995,
+      "binary_oracle_reward": 0.995,
+      "cloud_selection_rate": 0.005,
+      "confusion_matrix": [
+        [
+          199,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "local_selection_rate": 0.995,
+      "macro_f1": 0.49874686716791977,
+      "mean_regret": 0.0010832733124999999,
+      "mean_reward": 0.9939167266875001,
+      "per_class": {
+        "CLOUD": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": null,
+          "support": 0
+        },
+        "LOCAL": {
+          "f1": 0.9974937343358395,
+          "precision": 1.0,
+          "recall": 0.995,
+          "support": 200
+        }
+      },
+      "samples": 200,
+      "zero_support_convention": "undefined recall is null; zero division F1=0 included in macro F1"
+    },
+    "high_latency": {
+      "accuracy": 0.995,
+      "binary_oracle_reward": 0.995,
+      "cloud_selection_rate": 0.005,
+      "confusion_matrix": [
+        [
+          199,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "local_selection_rate": 0.995,
+      "macro_f1": 0.49874686716791977,
+      "mean_regret": 0.0018420623749999998,
+      "mean_reward": 0.9931579376249999,
+      "per_class": {
+        "CLOUD": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": null,
+          "support": 0
+        },
+        "LOCAL": {
+          "f1": 0.9974937343358395,
+          "precision": 1.0,
+          "recall": 0.995,
+          "support": 200
+        }
+      },
+      "samples": 200,
+      "zero_support_convention": "undefined recall is null; zero division F1=0 included in macro F1"
+    },
+    "severe_latency": {
+      "accuracy": 1.0,
+      "binary_oracle_reward": 0.995,
+      "cloud_selection_rate": 0.0,
+      "confusion_matrix": [
+        [
+          200,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "local_selection_rate": 1.0,
+      "macro_f1": 0.5,
+      "mean_regret": 0.0,
+      "mean_reward": 0.995,
+      "per_class": {
+        "CLOUD": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": null,
+          "support": 0
+        },
+        "LOCAL": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 200
+        }
+      },
+      "samples": 200,
+      "zero_support_convention": "undefined recall is null; zero division F1=0 included in macro F1"
+    }
+  },
+  "by_provenance": {
+    "measured": {
+      "accuracy": 1.0,
+      "binary_oracle_reward": 1.0,
+      "cloud_selection_rate": 0.0,
+      "confusion_matrix": [
+        [
+          8,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "local_selection_rate": 1.0,
+      "macro_f1": 0.5,
+      "mean_regret": 0.0,
+      "mean_reward": 1.0,
+      "per_class": {
+        "CLOUD": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": null,
+          "support": 0
+        },
+        "LOCAL": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 8
+        }
+      },
+      "samples": 8,
+      "zero_support_convention": "undefined recall is null; zero division F1=0 included in macro F1"
+    },
+    "simulated": {
+      "accuracy": 0.9966666666666667,
+      "binary_oracle_reward": 0.995,
+      "cloud_selection_rate": 0.0033333333333333335,
+      "confusion_matrix": [
+        [
+          598,
+          2
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "local_selection_rate": 0.9966666666666667,
+      "macro_f1": 0.49916527545909856,
+      "mean_regret": 0.0009751118958333333,
+      "mean_reward": 0.9940248881041667,
+      "per_class": {
+        "CLOUD": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": null,
+          "support": 0
+        },
+        "LOCAL": {
+          "f1": 0.9983305509181971,
+          "precision": 1.0,
+          "recall": 0.9966666666666667,
+          "support": 600
+        }
+      },
+      "samples": 600,
+      "zero_support_convention": "undefined recall is null; zero division F1=0 included in macro F1"
+    }
+  },
+  "holdout": {
+    "accuracy": 0.9967105263157895,
+    "binary_oracle_reward": 0.9950657894736842,
+    "cloud_selection_rate": 0.003289473684210526,
+    "confusion_matrix": [
+      [
+        606,
+        2
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "local_selection_rate": 0.9967105263157895,
+    "macro_f1": 0.49917627677100496,
+    "mean_regret": 0.0009622814761513157,
+    "mean_reward": 0.9941035079975329,
+    "per_class": {
+      "CLOUD": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": null,
+        "support": 0
+      },
+      "LOCAL": {
+        "f1": 0.9983525535420099,
+        "precision": 1.0,
+        "recall": 0.9967105263157895,
+        "support": 608
+      }
+    },
+    "samples": 608,
+    "zero_support_convention": "undefined recall is null; zero division F1=0 included in macro F1"
+  },
+  "limitations": [
+    "One CLOUD-benefit source window; replay does not create independent evidence.",
+    "The singleton CLOUD group is reserved for fitting; no held-out CLOUD-optimal support exists.",
+    "No final TEST used. Gesture classifiers previously used development data for fitting/selection.",
+    "Simulated network/resources are not physical measurements; no natural CLOUD-optimal hardware claim.",
+    "M31 edge/cloud compute multipliers and M33 hidden queue/availability fields are excluded."
+  ],
+  "model_sha256": "ba59d5431a1b3e40280f1e7b47ad28b3141b41503d9b7a20873c6a50431cf634",
+  "model_version": "meta-policy-v1.0.0",
+  "partition": "group-held-out development policy data; not final gesture TEST"
+}

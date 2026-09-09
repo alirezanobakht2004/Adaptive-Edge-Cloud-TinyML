@@ -1,0 +1,25 @@
+{
+  "action_parity_count": 10,
+  "bytes": 2660,
+  "format": "float32",
+  "input_preprocessing": "float32 raw state then double-precision frozen affine transform, cast to float32",
+  "max_abs_diff": 1.4901161193847656e-08,
+  "note": "Chosen by learned output to exercise both actions; not a classification accuracy evaluation",
+  "sample_ids": [
+    "m30-6d589fbe38adb367f2b61105db209227202b026f53801b063d4e1c4ae3ae5081",
+    "m30-9059e99b0e28528ee4f0c547e560a7139e9d63ac3c3635607524ece77b409090",
+    "m30-5a2a8c752511a97db7b765fd56a8856b6002f927e567a7d97ceaae32c8e92fa8",
+    "m30-6229c5a6ef04148d83da0f2bcb39c50eef020423dc7ec0d2153e2828a0c2edc4",
+    "m30-e99baab720eb9388278a1bc078d4bf2b717a5dcd9d29bfb2003cbfc6814f9d6f",
+    "controlled-session_01-29-baseline",
+    "controlled-session_01-29-high_latency",
+    "controlled-session_01-332-baseline",
+    "controlled-session_01-332-high_latency",
+    "controlled-session_01-481-baseline"
+  ],
+  "sha256": "2e18cb33f3ac9fa9867675be141d811f5126ad7d6d31aa67f65e3a85e29e23c9",
+  "tolerance": 1e-05,
+  "tolerance_source": "existing Phase7 float32 parity convention",
+  "vector_count": 10,
+  "version": "meta-policy-v1.0.0"
+}

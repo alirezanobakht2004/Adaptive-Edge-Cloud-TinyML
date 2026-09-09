@@ -1,0 +1,9 @@
+{
+  "calibration_records": 1816,
+  "cloud_availability_source": "connected MQTT and successful pre-decision application probe",
+  "entropy_threshold_nats": 0.988824612544067,
+  "maximum_rtt_ms": 10.7475,
+  "source": "training-group empirical thresholds maximizing mean R1 reward; ties prefer fewer cloud calls, higher entropy threshold, lower RTT",
+  "training_mean_reward": 0.983671421606553,
+  "version": "rule-based-binary-v1"
+}
