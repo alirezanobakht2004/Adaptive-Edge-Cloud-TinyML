@@ -1,6 +1,6 @@
-"""Benchmark-only complete cloud network: 10 features -> B1..B5 -> head.
+"""Complete cloud network for R1 production and retained benchmarks: 10 features -> B1..B5 -> head.
 
-Uses frozen existing weights. This is not a Split3 request or production route.
+Uses frozen existing weights. The production R1 route calls this complete network with ten features.
 """
 import time
 from pathlib import Path

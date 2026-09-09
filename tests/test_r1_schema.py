@@ -24,3 +24,18 @@ def test_reject_malformed_production_request(change):
     elif change == "missing": del value["firmware_version"]
     else: value["device_id"] = "a/other-device"
     with pytest.raises(ValueError): parse_cloud_request(value)
+
+
+def test_full_cloud_response_correlation_and_versions():
+    from server.app.r1_mqtt import build_response
+    class Runtime:
+        def infer(self, features):
+            assert len(features) == 10
+            return {"model_version": "gesture-full-cloud-v1.0.0", "predicted_class_id": 2,
+                    "confidence": .9, "server_latency_ms": 1.25}
+    incoming = request()
+    result = build_response(incoming, Runtime())
+    assert result["request_id"] == incoming["request_id"]
+    assert result["policy_version"] == incoming["policy_version"]
+    assert result["mode"] == "CLOUD" and result["success"] is True
+    assert result["server_latency_ms"] == 1.25
