@@ -87,3 +87,17 @@ and annotations were reconciled: edge deployment list, v2 config reference,
 experimental split DB annotation, future OTA manifest, policy tree/version names.
 The initial R1 wording now distinguishes validated split execution from a learned
 Split Controller that never existed. No historical measured report was rewritten.
+
+
+## R1 reuse-LOCAL migration outcome
+
+The original audit above is retained as baseline evidence. The cached M30 local
+result was salvageable; new binary_r1_v2 records compare incremental costs under
+binary-reward-experiment-v2-r1-reuse. Historical data and reward versions were not
+rewritten. policy_config_v3.json and the explicit meta-policy-v1.0.0 deployment
+manifest supersede the initial v2 deployment target. R1 production schema/server,
+cached decision worker, learned artifact and versioned logging are now integrated.
+All six fixed-split hardware suites were rerun and passed. Canonical results and
+limits are in phase9_learned_binary_policy.md; M9 is closed as a controlled MVP.
+The external canonical architecture itself required no additional revision.
+Phase10 Failover, dashboard and OTA remain unstarted.

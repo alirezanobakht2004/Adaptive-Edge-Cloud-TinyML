@@ -1,3 +1,6 @@
+> Historical initial binary-v1 qualification. Its blocked result below is preserved.
+> Current R1-reuse v2 qualification and M9 outcome are in [the canonical Phase 9 report](phase9_learned_binary_policy.md) and `docs/evidence/phase9_r1_reuse_dataset_qualification.json`.
+
 # Phase 9 binary dataset qualification
 
 **Training blocked: candidate execution does not match the R1 LOCAL contract.**

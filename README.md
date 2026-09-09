@@ -9,19 +9,21 @@ policy under Architecture Revision R1. CLOUD sends exactly 10 features-v1 values
 
 ## Current project phase
 
-Canonical Phase 9 / M9: learned binary adaptive policy, in progress and gated.
+Canonical Phase 9 / M9: learned binary adaptive policy, CLOSED (controlled MVP).
 Phase 7 split baselines and Phase 8 policy studies are complete. M25?M34 names in
 older reports are historical study milestones, not the canonical phase sequence.
 Phase 10 / M10 failover has not started.
 
 Split1/2/3 artifacts and regression suites remain fixed experimental baselines.
-The production firmware currently retains the validated local uncertainty path;
-a learned binary policy is not yet integrated. Historical four-action datasets
+Production firmware integrates meta-policy-v1.0.0: LOCAL reuses the validated
+local uncertainty result; CLOUD sends exactly ten features. Historical four-action datasets
 and configurations are immutable evidence, not production policy contracts.
 
 See [canonical Phase 9 status](docs/phase9_learned_binary_policy.md) and
-[R1 migration audit](docs/phase9_r1_migration_audit.md). Training is blocked because
-historical LOCAL candidates rerun inference, while R1 must reuse the local result.
+[R1 migration audit](docs/phase9_r1_migration_audit.md). The reuse-LOCAL blocker is
+resolved. Both learned actions pass controlled hardware E2E; a live run passes
+50 LOCAL decisions. Policy generalization is limited by one CLOUD-benefit window
+and zero CLOUD-optimal holdout support. Next: Phase 10 / M10 - Failover.
 
 ## Fixed v1 choices
 
@@ -38,7 +40,7 @@ historical LOCAL candidates rerun inference, while R1 must reuse the local resul
 - Gesture classes: IDLE, SWIPE_LEFT, SWIPE_RIGHT, ROTATE_CW, SHAKE
 - Feature version: features-v1
 - Dataset version: dataset-v1
-- Firmware version: 0.1.0
+- Firmware version: 0.2.0-r1
 - Accelerometer calibration: accel-cal-v1
 - Orientation protocol: orientation-v1
 
