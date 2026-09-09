@@ -1,0 +1,6 @@
+{
+  "status": "invalid_no_trainable_weights",
+  "classification": "implementation diagnostic; not a completed capability experiment",
+  "reason": "Nested cloned model retained frozen variables; weights did not train. Fresh flat Dense copy required.",
+  "settings_changed": false
+}

@@ -1,0 +1,26 @@
+{
+  "acceptance": "validation accuracy >= previous cloud and at least one LOCAL-wrong/CLOUD-correct validation window",
+  "architecture": [
+    10,
+    64,
+    48,
+    32,
+    64,
+    32,
+    5
+  ],
+  "batch_size": 32,
+  "change": "Unfreeze private copy of existing full-cloud B1..B5/head; no architecture change",
+  "dataset_version": "dataset-v1",
+  "feature_version": "features-v1",
+  "fit_split": "train/session_01",
+  "learning_rate": 0.0001,
+  "max_epochs": 200,
+  "model_version": "gesture-full-cloud-v1.1.0",
+  "patience": 20,
+  "seed": 42,
+  "selection": "minimum validation cross entropy; restore best weights",
+  "selection_split": "validation/session_02",
+  "test_used": false,
+  "version": "r1-cloud-candidate-experiment-v1"
+}
