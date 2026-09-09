@@ -1,128 +1,71 @@
-# Canonical Phase 9 / M9 — learned binary adaptive policy
+# Canonical Phase 9 / M9 ? learned binary adaptive policy
 
-**Status: BLOCKED at the training qualification gate. Not complete.**
+Status: IN PROGRESS. R1 reuse-LOCAL qualification now passes; model/export/device
+and production integration gates are being completed. M9 is not yet closed.
+Phase 10 / M10 Failover is not started.
 
-Architecture R1 requires `0 LOCAL / 1 CLOUD`. LOCAL reuses the validated local
-prediction and MC uncertainty result; CLOUD sends exactly 10 normalized features-v1
-values to the full-cloud model through MQTT. No policy was trained or deployed.
+## Original blocker and correction
 
-## Migration and production status
+The historical M30 LOCAL action reran the network after state/UQ computation.
+R1 instead reuses that completed prediction. The old binary comparison and its
+blocked qualification remain immutable historical evidence. New accounting is
+`binary-reward-experiment-v2-r1-reuse`: compare incremental post-decision costs.
+Shared preprocessing, local MC/UQ, state acquisition and policy work are excluded
+identically. LOCAL performs zero additional inference and sends zero bytes.
+Its zero incremental cost is an accounting convention, not a physical timing claim.
+CLOUD uses action time plus application payload cost. Energy is a dimensionless
+estimated/simulated endpoint-payload proxy; no measured energy claim.
 
-The [migration audit](phase9_r1_migration_audit.md) records the clean baseline,
-reference classification and external canonical cleanup. README, canonical
-architecture, current protocol documentation, configuration annotation and
-retired Split Controller placeholders now distinguish R1 production from history.
+M30 raw evidence retained the cached prediction/UQ and separate cloud action
+measurements. All 24 accepted windows were salvageable and choose LOCAL after
+correction. Their old records, labels and split artifacts were not edited.
 
-Production inference behavior is unchanged. The local ESP32 B3/MC path remains
-validated; existing server routes remain fixed-split services. The documented R1
-request schema is a target, not a deployed endpoint. `cloud_full.py` already
-provides real 10-feature full-cloud inference for the historical benchmark and
-can be reused after gates pass. No raw IMU or split embedding is proposed for the
-normal production CLOUD request.
+## Oracle and bounded cloud experiment
 
-Split1/2/3 artifacts, models, prefix runtime, cloud-tail routing, fixed-split
-benchmarks and parity/E2E regressions remain intact. Historical four-action
-datasets, configs and reports retain their original labels and phase names.
-No learned Split Controller, split redesign, RL, EWC, OTA, database, dashboard or
-failover work was performed.
+`docs/phase9_local_cloud_oracle_audit.md` and its JSON record every development
+prediction. No final TEST data was used. TRAIN has A/B/C/D = 592/0/1/7;
+VALIDATION has 197/0/0/3, where C means LOCAL wrong / CLOUD correct. Both existing
+paths score 98.5% on validation. These are development results, not final test
+accuracy. Server resources alone establish no accuracy advantage.
 
-## Dataset and frozen contracts
+One private end-to-end fine-tune of the unchanged full-cloud architecture was
+performed using TRAIN only and validation-loss early stopping (seed 42, Adam
+1e-4, batch 32, maximum 200 epochs, patience 20). The initial frozen-variable
+clone was an invalid no-training diagnostic, retained separately. The valid run
+completed 26 epochs and retained 98.5% validation accuracy with zero C cases.
+Candidate gesture-full-cloud-v1.1.0 was rejected; the selected server model
+remains gesture-full-cloud-v1.0.0. No further search or gesture collection occurred.
 
-See [binary qualification](phase9_binary_dataset_qualification.md) and its
-[machine-readable report](evidence/phase9_binary_dataset_qualification.json).
+## Qualified dataset and limitations
 
-- Dataset: `policy_training_dataset_binary_v1`, derived from accepted M30 v2,
-  M31 controlled v2 and eligible M33 v3 records; all four original outcomes retained.
-- 168 comparison records, 24 original windows, one session/acquisition run.
-- 24 measured records with estimated proxy energy; 144 simulated records.
-- 96 LOCAL / 72 CLOUD historical binary labels; all CLOUD labels are simulated.
-- 24 unavailable-LOCAL M33 rows excluded. Unmatched v1 observations and duplicate
-  canonical mirrors are not imported as counterfactual evidence.
-- Contract: `policy-config-v2` / `binary-policy-contract-v1`. Frozen order:
-  confidence, entropy, margin, free heap, local inference estimate, MQTT RTT.
-- Normalization: `binary-state-normalization-v1`; explicit fixed unit divisors,
-  six inputs with documented pre-decision ESP32 sources. No synthetic-only input.
-- Reward: `binary-reward-experiment-v1`, exact provisional M30
-  `reward-calibration-v1` weights/scales, immutable provenance and SHA-256.
-- Group holdout: seed 20260908; 18 train windows / 126 records and six holdout
-  windows / 42 records. No underlying window appears in both partitions.
+`policy_training_dataset_binary_r1_v2`: 2424 records, 800 underlying windows,
+sessions 01 and 02. Measured: 24 LOCAL / 0 CLOUD. Simulated: 2398 LOCAL / 2 CLOUD.
+Both CLOUD labels arise from one actual model-disagreement window in TRAIN under
+baseline/+150ms controlled networking. A 1500ms stress RTT instead favors LOCAL.
+Only RTT varies as a controlled label-generating parameter, and it is an ESP32
+observable. Synthetic hidden pressure/queue/cloud multipliers were excluded.
 
-These are reserved partitions, not completed training or test evaluations.
+The singleton positive source group is reserved for fitting. Group-stratified
+holdout uses seed 20260908: 600 training groups / 1816 records, 200 held-out groups
+/ 608 records, zero overlap. Holdout contains zero CLOUD-optimal examples. It can
+measure false cloud selections and achieved reward, but cannot establish CLOUD
+recall or generalization to new cloud-benefit states. Replays are not independent
+hardware evidence. These limitations do not fail the user-authorized MVP gate.
 
-## Gate result and exact blocker
+## Frozen policy and reward contracts
 
-Binary comparison schema, reward arithmetic, runtime feature sources, provenance
-and leakage checks pass. **Production action-cost compatibility fails.** M30
-executes local inference once for policy state and again for action 0; its
-controlled descendants penalize the second execution. R1 LOCAL must reuse the
-first result. There are zero measurements of that result-reuse candidate in the
-source campaigns. The new historical labels cannot be claimed to optimize the
-required production branch. No labels or costs were silently corrected.
+`policy-config-v3`, binary-policy-contract-v2-r1-reuse, keeps exact input order:
+confidence, entropy (nats), margin, free_heap (bytes), inference_latency_estimate
+(ms), mqtt_rtt_ms (ms). Each has an existing pre-decision ESP32 source. Population
+mean/std normalization is fitted on training groups only and frozen in the config.
+No synthetic-only state is used. Weights remain accuracy 1.0 and latency,
+communication, proxy energy 0.1 each; scales remain 100ms, 1024 bytes, proxy 1.
 
-The existing 96 local repeats measure an extra pass averaging 1.7986875 ms.
-All source pre-decision local predictions are correct. Merely using simulated
-edge pressure to increase this redundant pass's penalty is not evidence of a
-production cloud advantage. Energy remains estimated/simulated, never measured.
+## Pending deployment evidence
 
-## Learned model and rule-based baseline
-
-No learned model version exists. The architectural candidate remains
-`Input(6) → Dense(8, ReLU) → Dense(4, ReLU) → Dense(2, softmax)`, **not trained**.
-No seed-driven training run, fitted weights, history, model hash or evaluation
-metrics exist. No rule-based binary thresholds were invented or fitted; its
-same-holdout result is unavailable. Historical four-action rule-based study
-results are not binary baseline results.
-
-All-LOCAL, all-CLOUD, rule-based and learned comparisons on a qualified production
-dataset remain pending. No accuracy, F1, regret, oracle reward or selection-rate
-claim for a learned policy is made.
-
-## Export, device parity and production E2E
-
-| Required result | Status |
-|---|---|
-| Learned TFLite size / SHA-256 / desktop parity | Not generated; training gate blocked |
-| Isolated ESP32 policy output/action parity | Not run; no learned artifact |
-| Learned LOCAL branch with no cloud request | Not run |
-| Learned CLOUD branch transmitting 10 features | Not run |
-| Production correlated response and policy-version decision logging | Not integrated |
-| Existing split regressions | Retained; Python suite exercises desktop parity/routing; historical six-suite hardware evidence retained |
-
-No ESP32 was flashed for this migration. A comment marking a retired placeholder
-does not alter firmware execution. Known old INT8/introspection diagnostics remain
-separate in the migration audit and are not new regressions.
-
-## Validation executed
-
-| Check | Result |
-|---|---|
-| Initial full Python baseline | 255 passed, 0 failed, four deprecation warnings |
-| R1 documentation/configuration migration regression | 255 passed, 0 failed |
-| Binary contract regression | 270 passed, 0 failed |
-| Dataset qualification regression | 282 passed, 0 failed |
-| Final full Python regression | **282 passed, 0 failed**, four deprecation warnings, 39.40 s |
-| `python -m py_compile` on both new utilities, both new test files and retired Python placeholder | Passed |
-| Binary dataset reconstruction/qualification CLI | Passed structurally; training eligibility correctly false |
-| `git diff --check` | Passed |
-| Historical model/dataset/runtime preservation diff | Only retired controller placeholder comment changed under firmware; no runtime, model or historical dataset changes |
-
-Commands used `.venv\Scripts\python.exe`; new tests account for 27 additional
-cases. The full suite includes existing split desktop Keras/TFLite parity, server
-routing and MQTT service tests. No new policy TFLite, hardware or production E2E
-tests ran because the training gate stopped artifact creation. Historical hardware
-evidence is explicitly not counted as a new passing run. Validation details are in
-`docs/evidence/phase9_r1/validation.json`.
-
-## Definition of Done and next work
-
-R1 documentation and versioned contract: done. Historical binary derivation,
-provenance, reward freeze, group isolation and qualification: done. Production
-training qualification: **blocked**. Training, baseline calibration, export,
-isolated parity, production integration and adaptive E2E: not started.
-
-The device does not yet choose LOCAL/CLOUD through a learned policy, so **Phase 9
-/ M9 is not closed**. The next task remains in Phase 9: obtain R1-compatible
-matched outcomes for reuse-LOCAL versus full-cloud, including actual request-byte
-overhead and explicit measured/simulated provenance; reassess useful action
-diversity without forcing labels. Only then revisit training and deployment gates.
-Canonical Phase 10 / M10 — Failover remains **not started**.
+One compact Input(6)?8 ReLU?4 ReLU?2 softmax policy uses fixed training settings,
+training-only inverse-class-frequency loss weights, and untouched group holdout.
+Evaluation, rule-based calibration, export, isolated parity and production E2E
+results will be recorded here as each gate completes. No claimed result may be
+inferred merely from the planned architecture. Split1/2/3 models, runtime and
+regression suites remain experimental baselines.

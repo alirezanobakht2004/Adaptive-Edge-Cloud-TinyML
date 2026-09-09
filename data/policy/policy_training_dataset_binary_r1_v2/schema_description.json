@@ -1,0 +1,28 @@
+{
+  "version": "policy_training_dataset_binary_r1_v2",
+  "actions": {
+    "0": "LOCAL",
+    "1": "CLOUD"
+  },
+  "validator": "ml.policy.r1_dataset.validate",
+  "local_semantics": "reuse cached result; second_inference_count=0",
+  "record_fields": [
+    "dataset_version",
+    "sample_id",
+    "group_key",
+    "source",
+    "state",
+    "true_class",
+    "candidates",
+    "label",
+    "provenance",
+    "versions",
+    "partition",
+    "policy_input"
+  ],
+  "controlled_only_optional_fields": [
+    "normalized_features"
+  ],
+  "grouping": "original session/window; all variants in one partition",
+  "energy": "estimated/simulated proxy only"
+}

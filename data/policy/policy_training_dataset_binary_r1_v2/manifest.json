@@ -1,0 +1,280 @@
+{
+  "anchors": {
+    "heap": 164592.0,
+    "local_ms": 1.665,
+    "rtt_ms": 10.7475,
+    "server_ms": 9.6181
+  },
+  "dataset_version": "policy_training_dataset_binary_r1_v2",
+  "excluded": [
+    "Historical redundant action-0 executions",
+    "M31 hidden edge/cloud multipliers",
+    "M33 hidden pressure, queue and availability outcomes",
+    "final TEST partition"
+  ],
+  "gate": {
+    "by_partition": {
+      "holdout": {
+        "labels": {
+          "0": 608,
+          "1": 0
+        },
+        "records": 608
+      },
+      "train": {
+        "labels": {
+          "0": 1814,
+          "1": 2
+        },
+        "records": 1816
+      }
+    },
+    "by_provenance": {
+      "measured": {
+        "labels": {
+          "0": 24,
+          "1": 0
+        },
+        "records": 24
+      },
+      "simulated": {
+        "labels": {
+          "0": 2398,
+          "1": 2
+        },
+        "records": 2400
+      }
+    },
+    "cloud_benefit_source_groups": 1,
+    "dataset_version": "policy_training_dataset_binary_r1_v2",
+    "energy": "estimated/simulated incremental proxy only",
+    "gates": {
+      "both_labels": true,
+      "group_holdout_no_overlap": true,
+      "input_order_frozen": true,
+      "no_hidden_controlled_state": true,
+      "provenance_explicit": true,
+      "reuse_local_no_duplicate_charge": true,
+      "reward_frozen_reproducible": true,
+      "rewards_reconstructed": true,
+      "runtime_sources_defined": true,
+      "schema_valid": true,
+      "selected_inputs_available": true,
+      "versions_explicit": true
+    },
+    "holdout_groups": 200,
+    "label_counts": {
+      "0": 2422,
+      "1": 2
+    },
+    "limitations": [
+      "One CLOUD-benefit source window; replay does not create independent evidence.",
+      "The singleton CLOUD group is reserved for fitting; no held-out CLOUD-optimal support exists.",
+      "No final TEST used. Gesture classifiers previously used development data for fitting/selection.",
+      "Simulated network/resources are not physical measurements; no natural CLOUD-optimal hardware claim.",
+      "M31 edge/cloud compute multipliers and M33 hidden queue/availability fields are excluded."
+    ],
+    "overlap_count": 0,
+    "records": 2424,
+    "sessions": [
+      "session_01",
+      "session_02"
+    ],
+    "train_groups": 600,
+    "training_allowed": true,
+    "unique_windows": 800
+  },
+  "oracle_sha256": "520befbb3b419024b19e47ce5a9d6cee8986cf893ab5615f82bc49a48dc479d5",
+  "policy_contract": {
+    "action_execution": {
+      "0": "Reuse completed validated local MC result; no second local inference",
+      "1": "Send exactly 10 normalized features-v1 values; full-cloud model through MQTT"
+    },
+    "actions": {
+      "0": "LOCAL",
+      "1": "CLOUD"
+    },
+    "architecture_revision": "R1",
+    "dataset_version": "policy_training_dataset_binary_r1_v2",
+    "excluded_features": {
+      "cloud_availability": "simulated in v3; production availability check not established",
+      "connection_state": "constant connected in eligible source; record retained, not selected",
+      "cpu_frequency": "constant in accepted campaign; not selected",
+      "estimated_bandwidth": "missing in historical states",
+      "inference_queue_pressure": "synthetic-only replay input; no production queue monitor",
+      "local_compute_pressure": "synthetic-only replay input; no production source",
+      "network_quality_score": "simulated score; no production contract",
+      "packet_size_estimate": "missing in historical states",
+      "predicted_class": "not selected; uncertainty describes the local prediction",
+      "rssi_dbm": "sidecar only; not projected into versioned decision state",
+      "tensor_arena_usage": "constant B3-specific resource metric; not selected"
+    },
+    "feature_version": "features-v1",
+    "features": [
+      {
+        "available_before_decision": true,
+        "name": "state.uncertainty.confidence",
+        "normalization": {
+          "divisor": 0.06290343716280504,
+          "offset": 0.9782803697503137
+        },
+        "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+        "runtime_source": "inference::UncertaintyResult.confidence after the existing five-pass local MC result",
+        "training_provenance": "measured M30; carried unchanged in replay",
+        "units": "probability"
+      },
+      {
+        "available_before_decision": true,
+        "name": "state.uncertainty.entropy",
+        "normalization": {
+          "divisor": 0.15936103584998726,
+          "offset": 0.07840375610062635
+        },
+        "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+        "runtime_source": "inference::UncertaintyResult.predictiveEntropyNats after the existing five-pass local MC result",
+        "training_provenance": "measured M30; carried unchanged in replay",
+        "units": "nats"
+      },
+      {
+        "available_before_decision": true,
+        "name": "state.uncertainty.margin",
+        "normalization": {
+          "divisor": 0.1112088056015998,
+          "offset": 0.9613550182857024
+        },
+        "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+        "runtime_source": "Largest minus second-largest UncertaintyResult.meanProbabilities; existing matched campaign calculation",
+        "training_provenance": "measured M30; carried unchanged in replay",
+        "units": "probability difference"
+      },
+      {
+        "available_before_decision": true,
+        "name": "state.device.free_heap",
+        "normalization": {
+          "divisor": 0.6497760023785721,
+          "offset": 164591.97356828194
+        },
+        "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+        "runtime_source": "ESP.getFreeHeap() after local inference and before selection; existing matched campaign snapshot",
+        "training_provenance": "measured M30; carried unchanged in replay, not remeasured",
+        "units": "bytes"
+      },
+      {
+        "available_before_decision": true,
+        "name": "state.device.inference_latency_estimate",
+        "normalization": {
+          "divisor": 0.05471482965222928,
+          "offset": 1.6636723568281653
+        },
+        "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+        "runtime_source": "micros() difference around existing runPrefixB3 + runStochasticUncertaintyFromEmbedding, divided by 1000; matched harness state_us",
+        "training_provenance": "measured M30; scaled and/or queue-adjusted in simulated replay",
+        "units": "milliseconds"
+      },
+      {
+        "available_before_decision": true,
+        "name": "state.network.mqtt_rtt_ms",
+        "normalization": {
+          "divisor": 668.4818674802972,
+          "offset": 552.3594014317349
+        },
+        "runtime_evidence": "firmware/test/test_phase10_matched_campaign/test_main.cpp",
+        "runtime_source": "Correlated application MQTT probe elapsed micros()/1000; existing matched harness exchange(); must be integrated before production decision",
+        "training_provenance": "measured M30 application probe; transformed by simulated profiles",
+        "units": "milliseconds"
+      }
+    ],
+    "full_cloud_model_version": "gesture-full-cloud-v1.0.0",
+    "gesture_model_version": "gesture-model-v1.1.0",
+    "grouping": {
+      "algorithm": "Group-stratified 25% holdout by presence of CLOUD oracle; singleton positive group retained for training; no record splitting",
+      "seed": 20260908,
+      "version": "r1-window-groups-v2"
+    },
+    "learned_model_version": null,
+    "normalization": {
+      "algorithm": "(raw - train mean) / train population std; constant fields divide by one",
+      "clip": false,
+      "dimension": 6,
+      "fit_partition": "train groups only",
+      "missing": "reject",
+      "version": "binary-state-normalization-v2"
+    },
+    "policy_type": "binary LOCAL/CLOUD",
+    "policy_version": "binary-policy-contract-v2-r1-reuse",
+    "reward_reference": {
+      "path": "ml/policy/reward_binary_experiment_v2_r1_reuse.json",
+      "sha256": "72e5a84486e22730ed5e16e34208add8f4d3c06b4b64ada8348e3bc423f54e00",
+      "version": "binary-reward-experiment-v2-r1-reuse"
+    },
+    "state_feature_names": [
+      "state.uncertainty.confidence",
+      "state.uncertainty.entropy",
+      "state.uncertainty.margin",
+      "state.device.free_heap",
+      "state.device.inference_latency_estimate",
+      "state.network.mqtt_rtt_ms"
+    ],
+    "status": "qualified with explicit singleton-positive limitation",
+    "training_enabled": true,
+    "version": "policy-config-v3"
+  },
+  "profile_rationale": "baseline and +150ms follow M31; severe RTT is 1.5 times accuracy/latency reward break-even, not a cloud bonus",
+  "profiles": {
+    "baseline": 10.7475,
+    "high_latency": 160.7475,
+    "severe_latency": 1500.0
+  },
+  "provenance": "Raw source IDs and hashes per row; actual desktop predictions; simulated network/device assignments; no fake measured energy",
+  "records_sha256": "7296d12dc4e172fc1ea8194a80e5c9cb85c3b39e54e829b668f47e4f357228bf",
+  "reward": {
+    "actions": {
+      "0": "LOCAL",
+      "1": "CLOUD"
+    },
+    "calibration": "provisional inherited M30 weights; no tuning",
+    "cloud": {
+      "energy_kind": "estimated_or_simulated_proxy_only",
+      "energy_proxy_method": "incremental endpoint-payload proxy: request-plus-response application bytes / 1024; serialization CPU, radio waiting and cloud compute energy are not measured and excluded",
+      "latency_source": "M30 action_us / 1000 includes serialization, MQTT roundtrip and result handling; simulated alternatives explicitly tagged"
+    },
+    "cost_convention": "incremental-post-decision-v1",
+    "energy_proxy_version": "r1-incremental-payload-proxy-v1",
+    "local": {
+      "communication_bytes": 0,
+      "energy_proxy": 0,
+      "latency_ms": 0,
+      "provenance": "accounting zero for returning an already available result; not a measured zero-duration operation",
+      "second_inference_count": 0
+    },
+    "parent_configuration_sha256": "fac59cd60d8e5c3dc2c0a1d80855871699fbf90014e41cff7d8b57a7cc40c8b7",
+    "parent_version": "binary-reward-experiment-v1",
+    "scales": {
+      "communication_bytes": 1024,
+      "energy_proxy": 1,
+      "latency_ms": 100
+    },
+    "shared_costs_excluded": [
+      "features preprocessing",
+      "local prediction and five MC passes",
+      "policy state acquisition and probe",
+      "policy inference and common logging"
+    ],
+    "tie_tolerance": 1e-06,
+    "version": "binary-reward-experiment-v2-r1-reuse",
+    "weights": {
+      "accuracy": 1.0,
+      "communication": 0.1,
+      "energy_proxy": 0.1,
+      "latency": 0.1
+    }
+  },
+  "source_commit": "1572430",
+  "source_versions": [
+    "policy_training_dataset_v2",
+    "dataset-v1",
+    "features-v1"
+  ],
+  "transformation_version": "r1-reuse-raw-and-oracle-v1",
+  "version": "r1-binary-manifest-v2"
+}
