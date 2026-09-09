@@ -75,6 +75,9 @@ class R1Service:
                      "publish_rc": int(result.rc), "request": data, "response": response,
                      "request_bytes": len(message.payload), "response_bytes": len(payload), "response_topic": topic}
             self.events.append(event)
+            # Keep diagnostics bounded during the long-running production service.
+            if len(self.events) > 1000:
+                del self.events[:-1000]
             if self.event_path:
                 with self.event_path.open("a", encoding="utf-8") as stream:
                     stream.write(encode(event).decode() + "\n")
@@ -82,6 +85,8 @@ class R1Service:
                 print(f"R1_CLOUD_OK request_id={data['request_id']} features={len(data['features'])} policy={POLICY_VERSION}", flush=True)
         except (ValueError, TypeError, KeyError, RuntimeError) as exc:
             self.errors.append(str(exc))
+            if len(self.errors) > 1000:
+                del self.errors[:-1000]
             print(f"R1_REQUEST_REJECTED {exc}", flush=True)
 
     def __enter__(self):

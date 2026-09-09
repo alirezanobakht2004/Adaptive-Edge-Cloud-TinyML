@@ -12,6 +12,7 @@
 #include "prefix_runner.h"
 #include "uncertainty.h"
 #include "window_buffer.h"
+#include "policy/adaptive_runtime.h"
 
 
 namespace {
@@ -309,6 +310,11 @@ void runWindowInference(
     const uint32_t pipelineUs =
         uncertaintyEndUs
         - pipelineStartUs;
+
+    // R1: copy the existing result to a separate network worker. No second
+    // gesture inference and no MQTT waits in the 100 Hz sensor loop.
+    policy::submitCachedDecision(normalized, uncertaintyResult,
+        (prefixUs + uncertaintyUs) / 1000.0f, windowCount);
 
 
     float meanPeriodMs = 0.0f;
@@ -634,7 +640,7 @@ void setup() {
     Serial.println();
 
     Serial.println(
-        "=== Phase 5 / M6 — Continuous On-Device Uncertainty Runtime ==="
+        "=== Phase 9 / M9 - Learned LOCAL/CLOUD Runtime ==="
     );
 
     Serial.printf(
@@ -692,13 +698,14 @@ void setup() {
     );
 
     Serial.println(
-        "Offload threshold/policy: NONE"
+        "Adaptive policy: meta-policy-v1.0.0; LOCAL reuses result; CLOUD sends 10 features"
     );
 
 
     initializeSensor();
     calibrateGyroscope();
     initializeUncertaintyModel();
+    if (!policy::startAdaptiveRuntime()) fatal("R1 policy initialization failed.");
 
 
     runtimeBuffer.reset();

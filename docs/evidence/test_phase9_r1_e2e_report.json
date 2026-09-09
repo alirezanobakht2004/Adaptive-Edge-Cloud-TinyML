@@ -1,0 +1,29 @@
+{
+  "suite": "test_phase9_r1_e2e",
+  "command": [
+    "C:\\Users\\alire\\.platformio\\penv\\Scripts\\pio.exe",
+    "test",
+    "-e",
+    "esp32-s3-n8r2",
+    "-f",
+    "test_phase9_r1_e2e",
+    "--upload-port",
+    "COM10",
+    "--test-port",
+    "COM10",
+    "-v"
+  ],
+  "checks": {
+    "platformio_pass": true,
+    "server_errors_empty": true,
+    "one_cloud_request": true,
+    "correlated_cloud": true,
+    "exactly_ten_features": true,
+    "no_local_request": true,
+    "version_logged": true
+  },
+  "errors": [],
+  "controlled": true,
+  "events_file": "test_phase9_r1_e2e_server_events.jsonl",
+  "status": "PASS"
+}

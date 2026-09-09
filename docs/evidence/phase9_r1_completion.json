@@ -1,0 +1,28 @@
+{
+  "status": "Phase 9 / M9 CLOSED",
+  "scope": "Controlled undergraduate MVP; no claim of generalized cloud recall or learned superiority",
+  "checks": {
+    "qualified_binary_dataset": true,
+    "keras_policy_exists": true,
+    "learned_evaluation": true,
+    "baseline_comparison": true,
+    "tflite_parity": true,
+    "esp32_parity": true,
+    "production_core_local_cloud_e2e": true,
+    "ten_features": true,
+    "normal_production_run": true,
+    "split_regressions": true
+  },
+  "python_tests_passed": 309,
+  "python_tests_failed": 0,
+  "python_warnings": 5,
+  "compile_files": 21,
+  "hardware_unity_cases_passed": 8,
+  "live_decisions": 50,
+  "live_actions": {
+    "LOCAL": 50,
+    "CLOUD": 0
+  },
+  "next_phase": "Phase 10 / M10 - Failover",
+  "next_phase_started": false
+}

@@ -1,0 +1,8 @@
+# Preserve the byte-level dataset-manifest reference frozen at policy training.
+/data/policy/policy_training_dataset_binary_r1_v2/*.json text eol=lf
+/data/policy/policy_training_dataset_binary_r1_v2/*.jsonl text eol=lf
+/data/policy/models/meta-policy-v1.0.0/*.json text eol=lf
+/data/policy/models/meta-policy-v1.0.0/*.keras -text
+/data/policy/models/meta-policy-v1.0.0/*.tflite -text
+/data/policy/models/meta-policy-v1.0.0/*.npz -text
+/ml/policy/reward_binary_experiment_v2_r1_reuse.json text eol=lf

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "files": [
+    "ml/policy/binary_baseline.py",
+    "ml/policy/export_meta_binary.py",
+    "ml/policy/generate_meta_firmware.py",
+    "ml/policy/local_cloud_oracle.py",
+    "ml/policy/r1_dataset.py",
+    "ml/policy/r1_reuse.py",
+    "ml/policy/train_cloud_candidate.py",
+    "ml/policy/train_meta_binary.py",
+    "server/app/cloud_full.py",
+    "server/app/r1_mqtt.py",
+    "server/app/r1_schema.py",
+    "tests/test_cloud_candidate_experiment.py",
+    "tests/test_learned_binary_policy.py",
+    "tests/test_local_cloud_oracle.py",
+    "tests/test_r1_dataset.py",
+    "tests/test_r1_deployment_manifest.py",
+    "tests/test_r1_mqtt_routing.py",
+    "tests/test_r1_reuse.py",
+    "tests/test_r1_schema.py",
+    "tools/policy_dataset/capture_r1_runtime.py",
+    "tools/policy_dataset/validate_r1_hardware.py"
+  ],
+  "count": 21
+}

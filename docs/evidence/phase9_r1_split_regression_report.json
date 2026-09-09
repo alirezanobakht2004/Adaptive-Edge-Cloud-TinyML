@@ -1,0 +1,16 @@
+{
+  "hardware_status": "PASS",
+  "suites": {
+    "test_phase7_split1_parity": "PASS",
+    "test_phase7_split1_e2e": "PASS",
+    "test_phase7_split2_parity": "PASS",
+    "test_phase7_split2_e2e": "PASS",
+    "test_phase7_split3_parity": "PASS",
+    "test_phase7_split3_e2e": "PASS"
+  },
+  "passed": 6,
+  "failed": 0,
+  "raw_console": "docs/evidence/phase9_split_regression_console.log",
+  "wrapper_status": "Post-test artifact naming error: wildcard * invalid in Windows filename; fixed by sanitizing report stem. This report recovers actual completed PIO results from preserved console. No repeat flash needed.",
+  "old_unrelated_diagnostics": "Not run: internal tensor introspection and rejected INT8 logits diagnostics remain historical known failures."
+}

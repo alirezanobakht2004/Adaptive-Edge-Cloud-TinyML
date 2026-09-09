@@ -1,0 +1,14 @@
+{
+  "baseline_commit": "b6cdc4d",
+  "protected_prefixes": [
+    "firmware/src/inference/",
+    "firmware/test/test_phase7_",
+    "data/raw/",
+    "data/policy/policy_training_dataset_v1/",
+    "data/policy/policy_training_dataset_v2/",
+    "data/policy/policy_training_dataset_v3/",
+    "data/policy/policy_training_dataset_binary_v1/"
+  ],
+  "modified_protected_files": [],
+  "status": "PASS"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "firmware_version": "0.2.0-r1",
+  "policy_version": "meta-policy-v1.0.0",
+  "image_bytes": 824848,
+  "image_sha256": "ccdb18238ad900b74cb292a06623c0e8d5221e29c11785216df4412a71355d8b",
+  "port": "COM10",
+  "command": "pio run -e esp32-s3-n8r2 -t upload --upload-port COM10",
+  "working_directory": "firmware",
+  "build_upload_seconds": 508.29,
+  "resource_lines": [
+    "RAM:   [====      ]  38.3% (used 125388 bytes from 327680 bytes)",
+    "Flash: [==        ]  24.7% (used 824477 bytes from 3342336 bytes)"
+  ]
+}

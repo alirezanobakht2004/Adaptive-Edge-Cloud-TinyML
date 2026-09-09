@@ -30,3 +30,6 @@ firmware/.pio/
 
 # Local firmware credentials
 firmware/include/secrets.h
+
+# Uncurated running-service telemetry; committed evidence lives in docs/evidence.
+data/policy/runtime/

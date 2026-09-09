@@ -1,0 +1,38 @@
+{
+  "deployment_version": "r1-deployment-v1",
+  "policy_version": "meta-policy-v1.0.0",
+  "firmware_version": "0.2.0-r1",
+  "local_model_version": "gesture-model-v1.1.0",
+  "cloud_model_version": "gesture-full-cloud-v1.0.0",
+  "schema_version": "inference-r1-v1",
+  "contract_version": "binary-policy-contract-v2-r1-reuse",
+  "input_order": [
+    "confidence",
+    "entropy",
+    "margin",
+    "free_heap",
+    "inference_latency_estimate",
+    "mqtt_rtt_ms"
+  ],
+  "runtime_implementation": "firmware/src/policy/adaptive_runtime.cpp",
+  "reward_version": "binary-reward-experiment-v2-r1-reuse",
+  "artifacts_sha256": {
+    "data/policy/models/meta-policy-v1.0.0/meta-policy-v1.0.0.keras": "ba59d5431a1b3e40280f1e7b47ad28b3141b41503d9b7a20873c6a50431cf634",
+    "data/policy/models/meta-policy-v1.0.0/meta-policy-v1.0.0.tflite": "2e18cb33f3ac9fa9867675be141d811f5126ad7d6d31aa67f65e3a85e29e23c9",
+    "data/policy/models/meta-policy-v1.0.0/input_contract.json": "58c59af1afe9531a85437f12fbe91fde775345f385c1d7b90094f4b26c7d45f7",
+    "data/policy/policy_training_dataset_binary_r1_v2/manifest.json": "dcf2f8518e07e367b704ceb50f99f44e337373af570751a22f5192ebe48b0112",
+    "ml/policy/reward_binary_experiment_v2_r1_reuse.json": "2838d0f41979891a30507f090ba6e19ee9ebcafd08edd890fe21dd9fb8b1f46f"
+  },
+  "actual_training_provenance": {
+    "uncertainty": "24 M30 measured rows; 2400 rows with actual desktop model outputs",
+    "resources": "M30 measured heap/local timing; controlled rows use pooled M30 median anchors explicitly simulated",
+    "network": "M30 measured RTT; controlled profiles explicitly simulate observable RTT"
+  },
+  "limitations": [
+    "Singleton CLOUD-optimal underlying window",
+    "Zero CLOUD-optimal holdout support",
+    "Near-constant training heap is poorly representative of production allocations; live state can be outside training range",
+    "Energy is an estimated dimensionless proxy, never measured Joules"
+  ],
+  "historical_contract_note": "Frozen input_contract descriptions inherit historical source lineage; actual row provenance and this deployment annotation distinguish new oracle/simulated assignments. The pre-training learned_model_version null does not override this explicit deployment version."
+}
