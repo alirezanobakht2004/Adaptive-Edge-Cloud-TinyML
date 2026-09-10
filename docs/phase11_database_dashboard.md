@@ -2,7 +2,7 @@
 
 ## Canonical status
 
-**IN PROGRESS — Checkpoint 11.1: production decision telemetry + PostgreSQL persistence.**
+**IN PROGRESS — Checkpoint 11.2: FastAPI read API + WebSocket + live dashboard UI.**
 
 Phase 10 / M10 is closed by `docs/phase10_m10_completion.md` and its controlled
 ESP32 hardware evidence. This phase does not reopen learned-policy or failover work.
@@ -24,9 +24,10 @@ R1 MQTT service
 PostgreSQL inference_events
 ```
 
-The dashboard UI is **not** implemented in this checkpoint. FastAPI read endpoints,
-WebSocket fan-out and Chart.js are the next checkpoint only after hardware database
-persistence is stable.
+Checkpoint 11.1/11.1b is closed. Hardware persistence is stable and production
+`esp32-r1` rows are available in PostgreSQL. Checkpoint 11.2 now adds the read-side
+API, live WebSocket stream and dashboard UI without changing the production telemetry
+contract or the learned LOCAL/CLOUD policy.
 
 ## Production telemetry contract
 
@@ -143,10 +144,10 @@ Implementation-side:
 
 Hardware-side (must be measured before checkpoint closure):
 
-- [ ] updated firmware builds and uploads on ESP32-S3
-- [ ] at least several live decision events persist to PostgreSQL
-- [ ] persisted row fields match serial `R1_DECISION` evidence for sampled windows
-- [ ] no Phase-9 policy or Phase-10 failover regression
+- [x] updated firmware builds and uploads on ESP32-S3
+- [x] at least several live decision events persist to PostgreSQL
+- [x] persisted row fields match serial `R1_DECISION` evidence for sampled windows
+- [x] no Phase-9 policy or Phase-10 failover regression
 
 ## Known limitation
 
@@ -180,8 +181,87 @@ A successful run should have no new `conflicting duplicate decision telemetry` a
 a normal device reboot. Historical conflicting-duplicate log lines from the pre-fix
 firmware are retained as measured evidence for why this correction was made.
 
-## Next checkpoint after closure
+## Checkpoint 11.2 — FastAPI read API + WebSocket + live dashboard
 
-**Checkpoint 11.2 — FastAPI read API + WebSocket stream** backed by the validated
-`inference_events` table. Only then should the live HTML/JavaScript/Chart.js dashboard
-be built.
+### Technology choice
+
+The canonical architecture says to avoid React unless there is a clear need. This
+checkpoint has that clear need: the requested dashboard combines a live WebSocket
+stream, several synchronized charts, filters, an event inspector, and an interactive
+3D representation of the ESP32-S3 + GY-521 device. The implementation therefore uses:
+
+```text
+FastAPI + PostgreSQL
+React + TypeScript + Vite
+React Three Fiber / Three.js
+Recharts
+WebSocket
+```
+
+This is an implementation-level choice inside Phase 11, not a new policy or split
+architecture revision. The repository keeps the canonical `dashboard/` directory.
+
+### Data integrity rules
+
+The dashboard only visualizes fields actually persisted by `decision-r1-v1`. In
+particular it does not synthesize RSSI, energy, pure network latency, edge-compute
+total, or total E2E latency. CLOUD request elapsed and server compute remain separate
+channels. Production R1 remains binary LOCAL/CLOUD and live split-point distribution
+is intentionally absent because Split1/2/3 are experimental fixed-split baselines,
+not production actions.
+
+The 3D device twin is representative geometry for ESP32-S3 + GY-521/MPU6050. It can
+reflect operational state (LOCAL/CLOUD/failover/connectivity), but current decision
+telemetry does not carry measured roll/pitch/yaw. The UI therefore labels physical pose
+as not measured instead of animating a fabricated orientation.
+
+### Read API
+
+Endpoints:
+
+```text
+GET /api/dashboard/health
+GET /api/dashboard/devices
+GET /api/dashboard/events
+GET /api/dashboard/events/{id}
+GET /api/dashboard/latest
+GET /api/dashboard/summary
+WS  /ws/dashboard/events
+```
+
+The WebSocket is database-backed so the MQTT persistence service and FastAPI dashboard
+can remain separate laptop-side processes. New rows are streamed without coupling the
+MQTT callback directly to UI clients.
+
+### Dashboard panels
+
+The English-only dark command UI includes:
+
+- latest gesture / confidence / uncertainty / execution mode,
+- Wi-Fi/MQTT and telemetry freshness,
+- representative interactive 3D device twin,
+- LOCAL/CLOUD distribution,
+- confidence vs uncertainty history,
+- measured latency channels kept semantically separate,
+- RTT and free-heap history,
+- observed gesture distribution,
+- failover/success summary,
+- firmware/model/policy versions,
+- searchable production event table and CSV export,
+- per-event inspector with measurement provenance.
+
+### Checkpoint 11.2 Definition of Done
+
+- [x] PostgreSQL-backed read API
+- [x] production-only/device/action filters
+- [x] database-backed live WebSocket stream
+- [x] English dark dashboard implementation
+- [x] interactive representative 3D device twin
+- [x] charts do not relabel unavailable metrics
+- [x] backend API/database tests
+- [ ] frontend dependencies install on the project machine
+- [ ] `npm run build` succeeds on the project machine
+- [ ] live browser dashboard receives ESP32 events through WebSocket
+- [ ] sampled dashboard values match PostgreSQL rows
+
+Checkpoint 11.2 remains open until those project-machine/browser checks pass.

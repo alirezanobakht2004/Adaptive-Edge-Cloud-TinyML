@@ -1,0 +1,13 @@
+Phase 11 / M11.2 frontend build fix
+
+Change:
+- dashboard/tsconfig.node.json: add compilerOptions.noEmit=true
+
+Reason:
+TypeScript TS5096 requires allowImportingTsExtensions to be used with noEmit or emitDeclarationOnly.
+This configuration is appropriate for the Vite config type-check project because Vite handles bundling/emission.
+
+After extracting at repository root:
+  cd dashboard
+  npm run typecheck
+  npm run build

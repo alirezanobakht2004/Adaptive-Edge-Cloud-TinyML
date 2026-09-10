@@ -33,3 +33,7 @@ firmware/include/secrets.h
 
 # Uncurated running-service telemetry; committed evidence lives in docs/evidence.
 data/policy/runtime/
+
+# Phase 11 React dashboard
+dashboard/node_modules/
+dashboard/dist/

@@ -1,0 +1,23 @@
+Phase 11 / M11 — Checkpoint M11.2 Live Dashboard Patch
+
+Extract this archive at the repository root. Existing matching files are intended to be replaced.
+
+Backend validation performed in the build sandbox:
+- 12 Phase-11 telemetry/database/dashboard API tests passed.
+- 10 TypeScript source files parsed successfully with the TypeScript compiler frontend.
+
+Frontend npm dependency installation/build could not be executed in the sandbox because outbound package-registry access is unavailable. Validate locally with:
+  cd dashboard
+  npm install
+  npm run build
+
+Then run:
+  $env:TINYML_DATABASE_URL="postgresql+psycopg://tinyml:tinyml_dev@127.0.0.1:5432/tinyml"
+  python -m server.app.main --database-url $env:TINYML_DATABASE_URL
+
+For development UI:
+  cd dashboard
+  npm run dev
+  # open http://127.0.0.1:5173
+
+Keep server.app.r1_mqtt running in a separate terminal so new ESP32 telemetry continues to persist.

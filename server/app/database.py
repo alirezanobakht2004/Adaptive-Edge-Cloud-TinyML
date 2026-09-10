@@ -1,4 +1,4 @@
-"""Minimal PostgreSQL-compatible persistence layer for Phase 11 / M11."""
+"""PostgreSQL-compatible persistence/read layer for Phase 11 / M11."""
 
 from __future__ import annotations
 
@@ -95,14 +95,75 @@ class Database:
             return int(session.scalar(select(func.count()).select_from(InferenceEvent)) or 0)
 
     def recent_inference_events(self, limit: int = 50) -> list[InferenceEvent]:
-        if type(limit) is not int or not 1 <= limit <= 1000:
-            raise ValueError("limit must be in [1, 1000]")
+        return self.query_inference_events(limit=limit)
+
+    def query_inference_events(
+        self,
+        *,
+        limit: int = 100,
+        device_id: str | None = None,
+        action: str | None = None,
+        gesture: str | None = None,
+        production_only: bool = True,
+        after_id: int | None = None,
+        before_id: int | None = None,
+        ascending: bool = False,
+    ) -> list[InferenceEvent]:
+        if type(limit) is not int or not 1 <= limit <= 2000:
+            raise ValueError("limit must be in [1, 2000]")
+        if action is not None and action not in {"LOCAL", "CLOUD"}:
+            raise ValueError("action must be LOCAL or CLOUD")
+
+        statement = select(InferenceEvent)
+        if device_id:
+            statement = statement.where(InferenceEvent.device_id == device_id)
+        if action:
+            statement = statement.where(InferenceEvent.execution_mode == action)
+        if gesture:
+            statement = statement.where(InferenceEvent.predicted_class == gesture)
+        if production_only:
+            statement = statement.where(InferenceEvent.controlled.is_(False))
+        if after_id is not None:
+            statement = statement.where(InferenceEvent.id > after_id)
+        if before_id is not None:
+            statement = statement.where(InferenceEvent.id < before_id)
+
+        order = InferenceEvent.id.asc() if ascending else InferenceEvent.id.desc()
+        statement = statement.order_by(order).limit(limit)
         with self.sessions() as session:
-            return list(
-                session.scalars(
-                    select(InferenceEvent).order_by(InferenceEvent.id.desc()).limit(limit)
-                )
-            )
+            return list(session.scalars(statement))
+
+    def latest_inference_event(
+        self, *, device_id: str | None = None, production_only: bool = True
+    ) -> InferenceEvent | None:
+        rows = self.query_inference_events(
+            limit=1,
+            device_id=device_id,
+            production_only=production_only,
+        )
+        return rows[0] if rows else None
+
+    def list_devices(self, *, production_only: bool = True) -> list[dict[str, object]]:
+        statement = select(
+            InferenceEvent.device_id,
+            func.count(InferenceEvent.id),
+            func.max(InferenceEvent.id),
+            func.max(InferenceEvent.received_at),
+        )
+        if production_only:
+            statement = statement.where(InferenceEvent.controlled.is_(False))
+        statement = statement.group_by(InferenceEvent.device_id).order_by(func.max(InferenceEvent.id).desc())
+        with self.sessions() as session:
+            rows = session.execute(statement).all()
+        return [
+            {
+                "device_id": device_id,
+                "event_count": int(event_count),
+                "latest_event_id": int(latest_event_id),
+                "last_seen": last_seen.isoformat() if last_seen is not None else None,
+            }
+            for device_id, event_count, latest_event_id, last_seen in rows
+        ]
 
     def close(self) -> None:
         self.engine.dispose()

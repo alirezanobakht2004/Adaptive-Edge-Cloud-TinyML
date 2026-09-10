@@ -9,11 +9,11 @@ policy under Architecture Revision R1. CLOUD sends exactly 10 features-v1 values
 
 ## Current project phase
 
-Canonical Phase 11 / M11: Database + Dashboard, **IN PROGRESS**.
-Phase 9 / M9 learned binary LOCAL/CLOUD policy is closed and Phase 10 / M10
-failover is closed with controlled ESP32 hardware evidence. The current Phase-11
-checkpoint is the versioned decision-telemetry → PostgreSQL persistence path; the
-dashboard UI follows only after the reboot-safe persistence path is hardware-validated.
+Canonical Phase 11 / M11: Database + Dashboard, **IN PROGRESS — Checkpoint M11.2**.
+Phase 9 / M9 learned binary LOCAL/CLOUD policy and Phase 10 / M10 failover are closed.
+Phase 11 Checkpoints 11.1/11.1b (versioned decision telemetry → PostgreSQL persistence
+and reboot-safe request identity) are closed with live ESP32/PostgreSQL evidence. The
+current checkpoint implements the read API, WebSocket stream and live dashboard UI.
 
 Split1/2/3 artifacts and regression suites remain fixed experimental baselines.
 Production adaptive action space remains exactly `LOCAL` / `CLOUD`; CLOUD sends
@@ -23,6 +23,19 @@ immutable evidence, not production policy contracts.
 See [Phase 10 completion](docs/phase10_m10_completion.md),
 [Phase 11 plan](docs/phase11_database_dashboard.md), and
 [R1 migration audit](docs/phase9_r1_migration_audit.md).
+
+## Phase 11 live dashboard
+
+The dashboard stack is React + TypeScript + Vite + React Three Fiber + Recharts on top
+of the canonical FastAPI + PostgreSQL backend. React is used under the explicit
+"clear need" exception in the architecture because this UI contains a live WebSocket
+stream, coordinated charts, an interactive 3D device twin, filters and event inspection.
+All displayed runtime values come from persisted production telemetry; unavailable RSSI,
+energy, pure network latency and total E2E latency remain unavailable rather than being
+estimated. Physical device pose is not currently part of `decision-r1-v1`, so the 3D
+twin represents device geometry and operational state without claiming live roll/pitch/yaw.
+
+See [dashboard setup](dashboard/README.md).
 
 ## Fixed v1 choices
 
