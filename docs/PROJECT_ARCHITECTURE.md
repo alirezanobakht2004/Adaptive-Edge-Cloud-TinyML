@@ -1276,6 +1276,24 @@ Required / useful:
 - continual-learning history
 - model version history
 
+### 23.4 Sensor-driven 3D device twin
+
+Phase 11 may use a separate auxiliary visualization stream for the 3D device twin:
+
+```text
+gesture/{device_id}/pose
+pose-v1
+```
+
+This stream is **not** part of the learned policy input contract and does not change the
+R1 `LOCAL`/`CLOUD` production action space. It must reuse the already-acquired IMU
+samples and must not transmit raw 100x6 windows, split embeddings, or features-v1.
+
+For the current MPU6050-only hardware, dashboard attitude values must be labeled as
+estimates. Roll/pitch may be gravity-corrected with a lightweight complementary filter.
+Without a magnetometer, yaw must be reported only as a boot-relative/drift-prone
+estimate and must not be described as absolute heading.
+
 ---
 
 ## 24. Continual Learning with EWC
@@ -1963,6 +1981,7 @@ Tasks:
 - evaluate learned vs rule-based behavior
 - export/deploy policy to ESP32 if deployment artifact passes parity/resource checks
 - log LOCAL/CLOUD decisions
+
 
 Definition of done:
 

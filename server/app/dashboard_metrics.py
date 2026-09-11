@@ -11,10 +11,10 @@ from datetime import datetime
 from math import ceil
 from typing import Any, Iterable
 
-from .models import InferenceEvent
+from .models import DevicePoseEvent, InferenceEvent
 
-DASHBOARD_API_VERSION = "dashboard-api-r1-v1"
-DASHBOARD_UI_VERSION = "dashboard-ui-r1-v1"
+DASHBOARD_API_VERSION = "dashboard-api-r1-v2"
+DASHBOARD_UI_VERSION = "dashboard-ui-r1-v2"
 
 
 def event_to_dict(event: InferenceEvent, *, include_raw: bool = False) -> dict[str, Any]:
@@ -64,6 +64,30 @@ def event_to_dict(event: InferenceEvent, *, include_raw: bool = False) -> dict[s
         result["raw_event"] = event.raw_event
     return result
 
+
+
+
+def pose_to_dict(pose: DevicePoseEvent, *, include_raw: bool = False) -> dict[str, Any]:
+    result: dict[str, Any] = {
+        "id": pose.id,
+        "received_at": pose.received_at.isoformat() if isinstance(pose.received_at, datetime) else str(pose.received_at),
+        "pose_schema_version": pose.pose_schema_version,
+        "pose_id": pose.pose_id,
+        "device_id": pose.device_id,
+        "timestamp_ms": pose.timestamp_ms,
+        "sequence": pose.sequence,
+        "roll_deg_est": pose.roll_deg_est,
+        "pitch_deg_est": pose.pitch_deg_est,
+        "yaw_rel_deg_est": pose.yaw_rel_deg_est,
+        "estimator_version": pose.estimator_version,
+        "orientation_version": pose.orientation_version,
+        "firmware_version": pose.firmware_version,
+        "source": pose.source,
+        "yaw_reference": pose.yaw_reference,
+    }
+    if include_raw:
+        result["raw_event"] = pose.raw_event
+    return result
 
 def _mean(values: list[float]) -> float | None:
     return (sum(values) / len(values)) if values else None

@@ -12,6 +12,7 @@
 #include "meta_policy_data.h"
 #include "failover_config.h"
 #include "version.h"
+#include "sensors/attitude_estimator.h"
 
 namespace policy {
 namespace {
@@ -22,6 +23,8 @@ constexpr const char* probeRequest = "gesture/esp32-r1/policy/probe/request";
 constexpr const char* probeResponse = "gesture/esp32-r1/policy/probe/response";
 constexpr const char* telemetryTopic = "gesture/esp32-r1/telemetry";
 constexpr const char* telemetrySchema = "decision-r1-v1";
+constexpr const char* poseTopic = "gesture/esp32-r1/pose";
+constexpr uint32_t POSE_PUBLISH_INTERVAL_MS = 200;
 constexpr const char* localVersion = "gesture-model-v1.1.0";
 constexpr const char* cloudVersion = "gesture-full-cloud-v1.0.0";
 struct Work {
@@ -37,6 +40,7 @@ struct Pending {
     const char* failureStage = "NONE";
 };
 QueueHandle_t queue = nullptr;
+QueueHandle_t poseQueue = nullptr;
 bool workerRunning = false;
 Pending slots[failover_config::PENDING_CAPACITY];
 Pending* active[failover_config::PENDING_CAPACITY]{};
@@ -46,6 +50,11 @@ uint32_t lastRttAtMs = 0, probeStartedUs = 0, lastProbeMs = 0;
 bool probeActive = false, probeTimedOut = false;
 char probeId[96]{};
 uint32_t bootSessionNonce = 0;
+attitude::PoseEstimate latestPose{};
+bool poseAvailable = false;
+uint32_t lastPosePublishedSequence = 0;
+uint32_t lastPosePublishMs = 0;
+uint32_t lastPoseLogMs = 0;
 
 bool stringField(const char* json, const char* key, const char* value) {
     String token = String("\"") + key + "\":\"" + value + "\"";
@@ -72,6 +81,61 @@ String nullableNumber(float value, bool available) {
     appendNumber(result, value);
     return result;
 }
+void publishPoseIfDue() {
+    if (!poseAvailable || !network::isMqttConnected()) return;
+    // Preserve policy-network measurements and CLOUD response priority. Pose is
+    // visualization-only and must never compete with an active RTT probe/request.
+    if (probeActive) return;
+    for (const auto& pending : slots) {
+        if (pending.occupied && pending.waitingCloud) return;
+    }
+    if (latestPose.sequence == 0 || latestPose.sequence == lastPosePublishedSequence) return;
+
+    const uint32_t nowMs = millis();
+    if (lastPosePublishMs != 0
+        && uint32_t(nowMs - lastPosePublishMs) < POSE_PUBLISH_INTERVAL_MS) return;
+
+    String payload = String("{\"schema_version\":\"") + attitude::POSE_SCHEMA_VERSION;
+    payload += "\",\"pose_id\":\"r1-pose-";
+    char identity[48];
+    snprintf(identity, sizeof(identity), "%08lx-%lu",
+             (unsigned long)bootSessionNonce, (unsigned long)latestPose.sequence);
+    payload += identity;
+    payload += "\",\"device_id\":\""; payload += device;
+    payload += "\",\"timestamp_ms\":"; payload += latestPose.timestampMs;
+    payload += ",\"sequence\":"; payload += latestPose.sequence;
+    payload += ",\"roll_deg_est\":"; appendNumber(payload, latestPose.rollDeg);
+    payload += ",\"pitch_deg_est\":"; appendNumber(payload, latestPose.pitchDeg);
+    payload += ",\"yaw_rel_deg_est\":"; appendNumber(payload, latestPose.yawRelativeDeg);
+    payload += ",\"estimator_version\":\""; payload += attitude::ESTIMATOR_VERSION;
+    payload += "\",\"orientation_version\":\""; payload += ORIENTATION_VERSION;
+    payload += "\",\"firmware_version\":\""; payload += FIRMWARE_VERSION;
+    payload += "\",\"source\":\""; payload += attitude::POSE_SOURCE;
+    payload += "\",\"yaw_reference\":\""; payload += attitude::YAW_REFERENCE;
+    payload += "\"}";
+
+    lastPosePublishMs = nowMs;
+    if (payload.length() + strlen(poseTopic) + 7 >= network::DEFAULT_MQTT_BUFFER_BYTES) {
+        Serial.printf("R1_POSE_DROPPED sequence=%lu reason=PAYLOAD_TOO_LARGE bytes=%u\n",
+                      (unsigned long)latestPose.sequence, unsigned(payload.length()));
+        return;
+    }
+    if (!network::publishMqtt(poseTopic, payload.c_str())) {
+        Serial.printf("R1_POSE_DROPPED sequence=%lu reason=PUBLISH_FAILED bytes=%u\n",
+                      (unsigned long)latestPose.sequence, unsigned(payload.length()));
+        return;
+    }
+
+    lastPosePublishedSequence = latestPose.sequence;
+    if (lastPoseLogMs == 0 || uint32_t(nowMs - lastPoseLogMs) >= 1000) {
+        lastPoseLogMs = nowMs;
+        Serial.printf(
+            "R1_POSE {\"sequence\":%lu,\"roll_deg_est\":%.3f,\"pitch_deg_est\":%.3f,\"yaw_rel_deg_est\":%.3f,\"yaw_reference\":\"boot-relative\"}\n",
+            (unsigned long)latestPose.sequence, latestPose.rollDeg, latestPose.pitchDeg, latestPose.yawRelativeDeg
+        );
+    }
+}
+
 void publishDecisionTelemetry(const Pending& p) {
     const auto& r = p.result;
     const auto& cached = p.work.cached;
@@ -273,6 +337,11 @@ void worker(void*) {
             if (network::isWifiConnected()) connectAdaptiveNetwork();
         }
         network::mqttLoop();
+        attitude::PoseEstimate poseUpdate;
+        while (poseQueue && xQueueReceive(poseQueue, &poseUpdate, 0) == pdTRUE) {
+            latestPose = poseUpdate;
+            poseAvailable = latestPose.sequence > 0;
+        }
         if (probeActive && requestExpired(micros(), probeStartedUs, failover_config::RTT_PROBE_TIMEOUT_MS)) {
             probeActive = false; probeTimedOut = true;
         }
@@ -310,6 +379,9 @@ void worker(void*) {
                 fallback(p, FailoverReason::LOCAL_QUEUE_SAFETY, "PENDING_CAPACITY");
             }
         }
+        // Pose is auxiliary dashboard telemetry, so publish it only after policy,
+        // failover, cloud-response and work-queue handling for this iteration.
+        publishPoseIfDue();
         delay(1);
     }
 }
@@ -349,8 +421,19 @@ bool startAdaptiveRuntime() {
     Serial.printf("R1_SESSION {\"boot_nonce\":\"%08lx\"}\n", (unsigned long)bootSessionNonce);
     queue = xQueueCreate(failover_config::WORK_QUEUE_CAPACITY, sizeof(Work));
     if (!queue) return false;
+    poseQueue = xQueueCreate(1, sizeof(attitude::PoseEstimate));
+    if (!poseQueue) {
+        vQueueDelete(queue); queue = nullptr;
+        return false;
+    }
+    latestPose = attitude::PoseEstimate{};
+    poseAvailable = false;
+    lastPosePublishedSequence = 0;
+    lastPosePublishMs = 0;
+    lastPoseLogMs = 0;
     workerRunning = true;
     if (xTaskCreatePinnedToCore(worker, "r1-policy", 12288, nullptr, 1, nullptr, 0) != pdPASS) {
+        vQueueDelete(poseQueue); poseQueue = nullptr;
         vQueueDelete(queue); queue = nullptr; workerRunning = false; return false;
     }
     return true;
@@ -369,5 +452,15 @@ bool submitCachedDecision(const float features[10], const inference::Uncertainty
     p.transition.begin(-1, true, true, cached.predictedClass, localCalls);
     fallback(p, FailoverReason::LOCAL_QUEUE_SAFETY, "WORK_QUEUE");
     return p.result.success;
+}
+
+bool submitPoseEstimate(const attitude::PoseEstimate& pose) {
+    if (!poseQueue || pose.sequence == 0
+        || !std::isfinite(pose.rollDeg)
+        || !std::isfinite(pose.pitchDeg)
+        || !std::isfinite(pose.yawRelativeDeg)) return false;
+    // Queue length is exactly one: overwrite keeps only the freshest 100 Hz pose
+    // without ever blocking the sampling/inference loop.
+    return xQueueOverwrite(poseQueue, &pose) == pdPASS;
 }
 }

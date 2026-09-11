@@ -2,6 +2,7 @@
 #include "meta_learner.h"
 #include "uncertainty.h"
 #include "failover.h"
+#include "sensors/attitude_estimator.h"
 
 namespace policy {
 struct DecisionResult {
@@ -26,4 +27,6 @@ bool processCachedDecision(const float features[10], const inference::Uncertaint
 bool startAdaptiveRuntime();
 bool submitCachedDecision(const float features[10], const inference::UncertaintyResult& cached,
                           float localInferenceMs, uint32_t windowId, unsigned localInferenceCount = 1);
+// Non-blocking latest-value handoff from the 100 Hz sensor loop to the network worker.
+bool submitPoseEstimate(const attitude::PoseEstimate& pose);
 }

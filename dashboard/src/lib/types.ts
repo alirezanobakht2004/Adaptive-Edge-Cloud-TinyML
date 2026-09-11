@@ -44,6 +44,26 @@ export interface InferenceEvent {
   raw_event?: Record<string, unknown>
 }
 
+
+export interface DevicePose {
+  id: number
+  received_at: string
+  pose_schema_version: string
+  pose_id: string
+  device_id: string
+  timestamp_ms: number
+  sequence: number
+  roll_deg_est: number
+  pitch_deg_est: number
+  yaw_rel_deg_est: number
+  estimator_version: string
+  orientation_version: string
+  firmware_version: string
+  source: string
+  yaw_reference: string
+  raw_event?: Record<string, unknown>
+}
+
 export interface DashboardSummary {
   api_version: string
   window_event_count: number
@@ -86,4 +106,5 @@ export interface DashboardHealth {
   ui_version: string
   database_configured: boolean
   event_count: number | null
+  pose_event_count: number | null
 }

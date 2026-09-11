@@ -113,7 +113,7 @@ persistence.
 Desktop contract/database tests:
 
 ```powershell
-pytest -q tests/test_phase11_telemetry_schema.py tests/test_phase11_database.py tests/test_r1_mqtt_routing.py tests/test_r1_schema.py
+pytest -q tests/test_phase11_telemetry_schema.py tests/test_phase11_database.py tests/test_phase11_dashboard_api.py tests/test_phase11_pose.py tests/test_r1_mqtt_routing.py tests/test_r1_schema.py
 ```
 
 After flashing the updated production firmware and allowing inference windows to run:
@@ -210,10 +210,13 @@ channels. Production R1 remains binary LOCAL/CLOUD and live split-point distribu
 is intentionally absent because Split1/2/3 are experimental fixed-split baselines,
 not production actions.
 
-The 3D device twin is representative geometry for ESP32-S3 + GY-521/MPU6050. It can
-reflect operational state (LOCAL/CLOUD/failover/connectivity), but current decision
-telemetry does not carry measured roll/pitch/yaw. The UI therefore labels physical pose
-as not measured instead of animating a fabricated orientation.
+The 3D device twin is representative geometry for ESP32-S3 + GY-521/MPU6050 and now
+uses a separate auxiliary `pose-v1` stream. The stream is derived from the same already-
+acquired 100 Hz IMU samples; it does not add a second sensor read, does not enter the
+learned policy, and does not contain raw windows/features-v1. Roll/pitch are lightweight
+complementary-filter estimates. Yaw is explicitly boot-relative and drift-prone because
+the current MPU6050 path has no magnetometer. These values are therefore never labeled
+as absolute/measured heading.
 
 ### Read API
 
@@ -227,6 +230,9 @@ GET /api/dashboard/events/{id}
 GET /api/dashboard/latest
 GET /api/dashboard/summary
 WS  /ws/dashboard/events
+GET /api/dashboard/pose/latest
+GET /api/dashboard/pose
+WS  /ws/dashboard/pose
 ```
 
 The WebSocket is database-backed so the MQTT persistence service and FastAPI dashboard
@@ -239,7 +245,7 @@ The English-only dark command UI includes:
 
 - latest gesture / confidence / uncertainty / execution mode,
 - Wi-Fi/MQTT and telemetry freshness,
-- representative interactive 3D device twin,
+- sensor-driven interactive 3D device twin with estimated roll/pitch and boot-relative yaw,
 - LOCAL/CLOUD distribution,
 - confidence vs uncertainty history,
 - measured latency channels kept semantically separate,
@@ -259,9 +265,51 @@ The English-only dark command UI includes:
 - [x] interactive representative 3D device twin
 - [x] charts do not relabel unavailable metrics
 - [x] backend API/database tests
-- [ ] frontend dependencies install on the project machine
-- [ ] `npm run build` succeeds on the project machine
-- [ ] live browser dashboard receives ESP32 events through WebSocket
+- [x] frontend dependencies install on the project machine
+- [x] `npm run build` succeeds on the project machine
+- [x] live browser dashboard receives ESP32 decision events through WebSocket
 - [ ] sampled dashboard values match PostgreSQL rows
 
-Checkpoint 11.2 remains open until those project-machine/browser checks pass.
+The decision-dashboard portion of Checkpoint 11.2 passed project-machine build and live-WebSocket checks. The checkpoint remains open for the M11.2c sensor-driven 3D twin hardware/browser validation below and the sampled dashboard-vs-database value check.
+
+
+## Checkpoint 11.2c — sensor-driven 3D device twin
+
+The earlier M11.2 UI correctly updated decision telemetry but the 3D board itself had a fixed transform. Hardware diagnosis showed this was not a WebSocket rendering defect: the decision stream did not contain orientation data and `DeviceTwin.tsx` intentionally used a constant rotation.
+
+The correction adds a separate, versioned visualization path:
+
+```text
+existing MPU6050 100 Hz sample
+  -> attitude-complementary-v1
+  -> latest-value non-blocking queue
+  -> gesture/{device_id}/pose (pose-v1, 5 Hz publish target)
+  -> R1 MQTT validation/persistence
+  -> PostgreSQL device_pose_events
+  -> FastAPI pose read API / pose WebSocket
+  -> React Three Fiber quaternion interpolation
+```
+
+Integrity constraints:
+
+- production inference remains binary `LOCAL` / `CLOUD`;
+- the exact learned-policy state is unchanged;
+- no second MPU6050 read is introduced;
+- pose MQTT publishing is lower priority than active RTT probes/CLOUD response waits so visualization traffic does not intentionally contaminate policy-network timing;
+- no raw 100x6 window, split embedding, or features-v1 is sent in `pose-v1`;
+- roll/pitch/yaw are explicitly estimates;
+- yaw reference is `boot-relative`, not absolute heading;
+- when pose telemetry becomes stale the 3D twin is marked stale/offline instead of pretending the last orientation is live.
+
+Firmware version for this checkpoint: `0.3.2-r1`. Pose configuration is frozen in `config/r1_pose_v1.json`.
+
+Hardware Definition of Done remains measured rather than assumed:
+
+- [ ] firmware builds/uploads on ESP32-S3;
+- [ ] serial emits periodic finite `R1_POSE` estimates while normal 100 Hz inference continues;
+- [ ] `device_pose_events` receives at least 10 real rows;
+- [ ] `python tools/phase11/validate_pose.py --device-id esp32-r1 --min-events 10` passes;
+- [ ] browser reports `LIVE ATTITUDE`;
+- [ ] physical tilt/rotation produces a smooth corresponding change in the 3D twin;
+- [ ] stationary home pose remains visually stable;
+- [ ] no sampling/inference regression is observed in the existing runtime diagnostics.

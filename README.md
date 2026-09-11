@@ -9,11 +9,11 @@ policy under Architecture Revision R1. CLOUD sends exactly 10 features-v1 values
 
 ## Current project phase
 
-Canonical Phase 11 / M11: Database + Dashboard, **IN PROGRESS — Checkpoint M11.2**.
+Canonical Phase 11 / M11: Database + Dashboard, **IN PROGRESS — Checkpoint M11.2c (Sensor-Driven 3D Device Twin)**.
 Phase 9 / M9 learned binary LOCAL/CLOUD policy and Phase 10 / M10 failover are closed.
 Phase 11 Checkpoints 11.1/11.1b (versioned decision telemetry → PostgreSQL persistence
 and reboot-safe request identity) are closed with live ESP32/PostgreSQL evidence. The
-current checkpoint implements the read API, WebSocket stream and live dashboard UI.
+current checkpoint completes the sensor-driven 3D device-twin path on top of the validated read API, WebSocket stream and live dashboard UI.
 
 Split1/2/3 artifacts and regression suites remain fixed experimental baselines.
 Production adaptive action space remains exactly `LOCAL` / `CLOUD`; CLOUD sends
@@ -32,8 +32,10 @@ of the canonical FastAPI + PostgreSQL backend. React is used under the explicit
 stream, coordinated charts, an interactive 3D device twin, filters and event inspection.
 All displayed runtime values come from persisted production telemetry; unavailable RSSI,
 energy, pure network latency and total E2E latency remain unavailable rather than being
-estimated. Physical device pose is not currently part of `decision-r1-v1`, so the 3D
-twin represents device geometry and operational state without claiming live roll/pitch/yaw.
+estimated. The 3D twin uses a separate auxiliary `pose-v1` stream derived from the already-sampled
+MPU6050 channels. Roll/pitch are complementary-filter estimates and yaw is explicitly
+boot-relative/drift-prone. This visualization stream is not a policy input and never
+carries raw 100x6 windows or features-v1 values.
 
 See [dashboard setup](dashboard/README.md).
 
@@ -52,7 +54,7 @@ See [dashboard setup](dashboard/README.md).
 - Gesture classes: IDLE, SWIPE_LEFT, SWIPE_RIGHT, ROTATE_CW, SHAKE
 - Feature version: features-v1
 - Dataset version: dataset-v1
-- Firmware version: 0.3.1-r1
+- Firmware version: 0.3.2-r1
 - Accelerometer calibration: accel-cal-v1
 - Orientation protocol: orientation-v1
 

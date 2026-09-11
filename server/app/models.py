@@ -76,3 +76,34 @@ class InferenceEvent(Base):
     success: Mapped[bool] = mapped_column(Boolean, nullable=False)
     controlled: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     raw_event: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
+
+
+class DevicePoseEvent(Base):
+    """Auxiliary Phase-11 pose stream for the sensor-driven 3D device twin."""
+
+    __tablename__ = "device_pose_events"
+    __table_args__ = (
+        UniqueConstraint("device_id", "pose_id", name="uq_device_pose_events_device_pose"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    received_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    pose_schema_version: Mapped[str] = mapped_column(String(32), nullable=False)
+    pose_id: Mapped[str] = mapped_column(String(96), nullable=False)
+    device_id: Mapped[str] = mapped_column(String(96), nullable=False, index=True)
+    timestamp_ms: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    sequence: Mapped[int] = mapped_column(BigInteger, nullable=False)
+
+    # All three are estimates. Roll/pitch are gravity-corrected by a complementary
+    # filter. Yaw is explicitly boot-relative because MPU6050 has no magnetometer.
+    roll_deg_est: Mapped[float] = mapped_column(Float, nullable=False)
+    pitch_deg_est: Mapped[float] = mapped_column(Float, nullable=False)
+    yaw_rel_deg_est: Mapped[float] = mapped_column(Float, nullable=False)
+
+    estimator_version: Mapped[str] = mapped_column(String(96), nullable=False)
+    orientation_version: Mapped[str] = mapped_column(String(96), nullable=False)
+    firmware_version: Mapped[str] = mapped_column(String(96), nullable=False)
+    source: Mapped[str] = mapped_column(String(48), nullable=False)
+    yaw_reference: Mapped[str] = mapped_column(String(48), nullable=False)
+    raw_event: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)

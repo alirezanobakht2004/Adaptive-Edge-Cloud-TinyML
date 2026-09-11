@@ -1,15 +1,24 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, RoundedBox } from '@react-three/drei'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
-import type { InferenceEvent } from '../lib/types'
+import type { DevicePose, InferenceEvent } from '../lib/types'
 
-function StatusHalo({ state }: { state: 'local' | 'cloud' | 'failover' | 'offline' }) {
+type DeviceState = 'local' | 'cloud' | 'failover' | 'tracking' | 'offline'
+
+function ageMs(receivedAt?: string | null): number {
+  if (!receivedAt) return Number.POSITIVE_INFINITY
+  const parsed = new Date(receivedAt).getTime()
+  return Number.isFinite(parsed) ? Math.max(0, Date.now() - parsed) : Number.POSITIVE_INFINITY
+}
+
+function StatusHalo({ state }: { state: DeviceState }) {
   const ring = useRef<THREE.Mesh>(null)
-  const palette = {
+  const palette: Record<DeviceState, string> = {
     local: '#47e6a5',
     cloud: '#7c9cff',
     failover: '#ff9f66',
+    tracking: '#55c9ff',
     offline: '#5f6b7a',
   }
   useFrame(({ clock }) => {
@@ -38,20 +47,9 @@ function PinRow({ z }: { z: number }) {
   )
 }
 
-function DeviceModel({ latest }: { latest: InferenceEvent | null }) {
-  const state: 'local' | 'cloud' | 'failover' | 'offline' = !latest
-    ? 'offline'
-    : latest.failover
-      ? 'failover'
-      : latest.execution_mode === 'CLOUD'
-        ? 'cloud'
-        : 'local'
-
-  const accent = state === 'cloud' ? '#7c9cff' : state === 'failover' ? '#ff9f66' : '#47e6a5'
-
+function BoardGeometry({ accent }: { accent: string }) {
   return (
-    <group rotation={[-0.12, -0.22, 0]}>
-      <StatusHalo state={state} />
+    <>
       <RoundedBox args={[4.7, 0.24, 2.55]} radius={0.12} smoothness={4} position={[0, 0, 0]}>
         <meshStandardMaterial color="#0f4c3f" roughness={0.48} metalness={0.22} />
       </RoundedBox>
@@ -86,11 +84,107 @@ function DeviceModel({ latest }: { latest: InferenceEvent | null }) {
         <sphereGeometry args={[0.06, 18, 18]} />
         <meshStandardMaterial color={accent} emissive={accent} emissiveIntensity={3} />
       </mesh>
+    </>
+  )
+}
+
+function PoseDrivenBoard({ pose, accent }: { pose: DevicePose | null; accent: string }) {
+  const poseGroup = useRef<THREE.Group>(null)
+  const targetQuaternion = useRef(new THREE.Quaternion())
+
+  useEffect(() => {
+    if (!pose) {
+      targetQuaternion.current.identity()
+      return
+    }
+
+    // orientation-v1 home pose has sensor +Z upward. The rendered board lies in
+    // Three.js X/Z with +Y as its normal, so sensor axes map to scene rotations as:
+    // roll(+X) -> scene X, pitch(+Y) -> -scene Z, yaw(+Z) -> scene Y.
+    const roll = THREE.MathUtils.degToRad(pose.roll_deg_est)
+    const pitch = THREE.MathUtils.degToRad(pose.pitch_deg_est)
+    const yaw = THREE.MathUtils.degToRad(pose.yaw_rel_deg_est)
+    const targetEuler = new THREE.Euler(roll, yaw, -pitch, 'YXZ')
+    targetQuaternion.current.setFromEuler(targetEuler)
+  }, [pose])
+
+  useFrame((_, delta) => {
+    if (!poseGroup.current) return
+    const blend = 1 - Math.exp(-10 * delta)
+    poseGroup.current.quaternion.slerp(targetQuaternion.current, blend)
+  })
+
+  return (
+    <group ref={poseGroup}>
+      <BoardGeometry accent={accent} />
     </group>
   )
 }
 
-export function DeviceTwin({ latest }: { latest: InferenceEvent | null }) {
+function DeviceModel({ latest, pose, poseFresh }: {
+  latest: InferenceEvent | null
+  pose: DevicePose | null
+  poseFresh: boolean
+}) {
+  const decisionFresh = latest ? ageMs(latest.received_at) <= 5000 : false
+  const deviceFresh = poseFresh || decisionFresh
+  const state: DeviceState = !deviceFresh
+    ? 'offline'
+    : !latest
+      ? 'tracking'
+      : latest.failover
+        ? 'failover'
+        : latest.execution_mode === 'CLOUD'
+          ? 'cloud'
+          : 'local'
+
+  const accent = state === 'cloud'
+    ? '#7c9cff'
+    : state === 'failover'
+      ? '#ff9f66'
+      : state === 'offline'
+        ? '#5f6b7a'
+        : state === 'tracking'
+          ? '#55c9ff'
+          : '#47e6a5'
+
+  return (
+    <group rotation={[-0.12, -0.22, 0]}>
+      <StatusHalo state={state} />
+      <PoseDrivenBoard pose={pose} accent={accent} />
+    </group>
+  )
+}
+
+function formatAngle(value?: number | null): string {
+  if (value == null || !Number.isFinite(value)) return '—'
+  return `${value >= 0 ? '+' : ''}${value.toFixed(1)}°`
+}
+
+function formatAge(milliseconds: number): string {
+  if (!Number.isFinite(milliseconds)) return '—'
+  if (milliseconds < 1000) return `${Math.round(milliseconds)} ms`
+  return `${(milliseconds / 1000).toFixed(1)} s`
+}
+
+export function DeviceTwin({ latest, pose, poseConnected }: {
+  latest: InferenceEvent | null
+  pose: DevicePose | null
+  poseConnected: boolean
+}) {
+  const [clockTick, setClockTick] = useState(0)
+  useEffect(() => {
+    const timer = window.setInterval(() => setClockTick((value) => value + 1), 250)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  // clockTick intentionally participates in this calculation so pose freshness is
+  // reevaluated even when no new telemetry arrives.
+  void clockTick
+  const poseAge = ageMs(pose?.received_at)
+  const poseFresh = pose != null && poseAge <= 2000
+  const poseStatus = poseFresh ? 'LIVE ATTITUDE' : pose ? 'POSE STALE' : 'AWAITING POSE'
+
   return (
     <div className="device-twin-canvas">
       <Canvas camera={{ position: [5.5, 4.4, 6.2], fov: 38 }} dpr={[1, 1.7]} shadows>
@@ -99,7 +193,7 @@ export function DeviceTwin({ latest }: { latest: InferenceEvent | null }) {
         <directionalLight position={[4, 6, 4]} intensity={2.5} color="#dfe8ff" />
         <pointLight position={[-5, 1, -3]} intensity={16} distance={12} color="#2e76ff" />
         <pointLight position={[4, 2, 4]} intensity={12} distance={10} color="#3effbc" />
-        <DeviceModel latest={latest} />
+        <DeviceModel latest={latest} pose={pose} poseFresh={poseFresh} />
         <OrbitControls
           enablePan={false}
           minDistance={5.5}
@@ -109,7 +203,22 @@ export function DeviceTwin({ latest }: { latest: InferenceEvent | null }) {
           autoRotate={false}
         />
       </Canvas>
-      <div className="twin-note">Interactive digital twin · geometry is representative, not to scale · physical pose is not measured</div>
+
+      <div className={`pose-stream-badge ${poseFresh ? 'live' : pose ? 'stale' : 'offline'}`}>
+        <span>{poseStatus}</span>
+        <strong>{poseConnected ? 'POSE WS' : 'REST FALLBACK'}</strong>
+        <small>{pose ? `age ${formatAge(poseAge)}` : 'no pose rows yet'}</small>
+      </div>
+
+      <div className="pose-readout">
+        <div><span>Roll est.</span><strong>{formatAngle(pose?.roll_deg_est)}</strong></div>
+        <div><span>Pitch est.</span><strong>{formatAngle(pose?.pitch_deg_est)}</strong></div>
+        <div><span>Yaw rel.</span><strong>{formatAngle(pose?.yaw_rel_deg_est)}</strong></div>
+      </div>
+
+      <div className="twin-note">
+        Sensor-driven attitude · roll/pitch complementary estimate · yaw is boot-relative and drift-prone · geometry is representative
+      </div>
     </div>
   )
 }

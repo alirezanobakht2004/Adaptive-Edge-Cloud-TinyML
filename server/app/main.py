@@ -15,14 +15,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from .dashboard_metrics import DASHBOARD_API_VERSION, DASHBOARD_UI_VERSION, build_summary, event_to_dict
+from .dashboard_metrics import DASHBOARD_API_VERSION, DASHBOARD_UI_VERSION, build_summary, event_to_dict, pose_to_dict
 from .database import DATABASE_URL_ENV, Database, database_url_from_env
 
-APP_VERSION = "0.2.0"
+APP_VERSION = "0.3.0"
 PHASE = "11"
 MILESTONE = "M11"
 CHECKPOINT = "M11.2"
 DEFAULT_WS_POLL_MS = 750
+DEFAULT_POSE_WS_POLL_MS = 80
 
 
 def create_app(database_url: str | None = None) -> FastAPI:
@@ -74,6 +75,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
             "ui_version": DASHBOARD_UI_VERSION,
             "database_configured": db is not None,
             "event_count": db.count_inference_events() if db is not None else None,
+            "pose_event_count": db.count_pose_events() if db is not None else None,
         }
 
     @app.get("/api/dashboard/devices")
@@ -121,6 +123,28 @@ def create_app(database_url: str | None = None) -> FastAPI:
         if row is None:
             return JSONResponse(status_code=404, content={"detail": "No matching events"})
         return event_to_dict(row, include_raw=True)
+
+    @app.get("/api/dashboard/pose/latest")
+    def latest_pose(device_id: str | None = None):
+        db = require_db()
+        row = db.latest_pose_event(device_id=device_id)
+        if row is None:
+            return JSONResponse(status_code=404, content={"detail": "No matching pose telemetry"})
+        return pose_to_dict(row, include_raw=True)
+
+    @app.get("/api/dashboard/pose")
+    def pose_history(
+        limit: int = Query(default=120, ge=1, le=2000),
+        device_id: str | None = None,
+        before_id: int | None = Query(default=None, ge=1),
+    ) -> dict[str, Any]:
+        db = require_db()
+        rows = db.query_pose_events(limit=limit, device_id=device_id, before_id=before_id)
+        return {
+            "poses": [pose_to_dict(row) for row in rows],
+            "count": len(rows),
+            "next_before_id": rows[-1].id if rows else None,
+        }
 
     @app.get("/api/dashboard/summary")
     def summary(
@@ -178,6 +202,42 @@ def create_app(database_url: str | None = None) -> FastAPI:
                     cursor = max(cursor, row.id)
                     await websocket.send_json({"type": "event", "event": event_to_dict(row)})
                 await asyncio.sleep(DEFAULT_WS_POLL_MS / 1000.0)
+        except WebSocketDisconnect:
+            return
+
+    @app.websocket("/ws/dashboard/pose")
+    async def websocket_pose(
+        websocket: WebSocket,
+        device_id: str | None = None,
+        after_id: int = 0,
+    ) -> None:
+        db = getattr(app.state, "database", None)
+        await websocket.accept()
+        if db is None:
+            await websocket.send_json({"type": "error", "detail": "database_not_configured"})
+            await websocket.close(code=1011)
+            return
+
+        cursor = max(0, after_id)
+        await websocket.send_json({
+            "type": "ready",
+            "api_version": DASHBOARD_API_VERSION,
+            "device_id": device_id,
+            "after_id": cursor,
+        })
+        try:
+            while True:
+                rows = await asyncio.to_thread(
+                    db.query_pose_events,
+                    limit=100,
+                    device_id=device_id,
+                    after_id=cursor,
+                    ascending=True,
+                )
+                for row in rows:
+                    cursor = max(cursor, row.id)
+                    await websocket.send_json({"type": "pose", "pose": pose_to_dict(row)})
+                await asyncio.sleep(DEFAULT_POSE_WS_POLL_MS / 1000.0)
         except WebSocketDisconnect:
             return
 

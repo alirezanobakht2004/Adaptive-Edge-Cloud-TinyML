@@ -8,8 +8,9 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from .models import Base, InferenceEvent
+from .models import Base, DevicePoseEvent, InferenceEvent
 from .telemetry_schema import class_name, parse_decision_event
+from .pose_schema import parse_pose_event
 
 DATABASE_URL_ENV = "TINYML_DATABASE_URL"
 DEFAULT_POSTGRES_URL = "postgresql+psycopg://tinyml:tinyml_dev@127.0.0.1:5432/tinyml"
@@ -89,6 +90,76 @@ class Database:
             session.commit()
             session.refresh(event)
             return event
+
+
+    def save_pose_event(self, payload) -> DevicePoseEvent:
+        data = parse_pose_event(payload)
+        with self.sessions() as session:
+            existing = session.scalar(
+                select(DevicePoseEvent).where(
+                    DevicePoseEvent.device_id == data["device_id"],
+                    DevicePoseEvent.pose_id == data["pose_id"],
+                )
+            )
+            if existing is not None:
+                if existing.raw_event != data:
+                    raise ValueError("conflicting duplicate pose telemetry")
+                return existing
+
+            event = DevicePoseEvent(
+                pose_schema_version=data["schema_version"],
+                pose_id=data["pose_id"],
+                device_id=data["device_id"],
+                timestamp_ms=data["timestamp_ms"],
+                sequence=data["sequence"],
+                roll_deg_est=data["roll_deg_est"],
+                pitch_deg_est=data["pitch_deg_est"],
+                yaw_rel_deg_est=data["yaw_rel_deg_est"],
+                estimator_version=data["estimator_version"],
+                orientation_version=data["orientation_version"],
+                firmware_version=data["firmware_version"],
+                source=data["source"],
+                yaw_reference=data["yaw_reference"],
+                raw_event=dict(data),
+            )
+            session.add(event)
+            session.commit()
+            session.refresh(event)
+            return event
+
+    def count_pose_events(self, *, device_id: str | None = None) -> int:
+        statement = select(func.count()).select_from(DevicePoseEvent)
+        if device_id:
+            statement = statement.where(DevicePoseEvent.device_id == device_id)
+        with self.sessions() as session:
+            return int(session.scalar(statement) or 0)
+
+    def query_pose_events(
+        self,
+        *,
+        limit: int = 100,
+        device_id: str | None = None,
+        after_id: int | None = None,
+        before_id: int | None = None,
+        ascending: bool = False,
+    ) -> list[DevicePoseEvent]:
+        if type(limit) is not int or not 1 <= limit <= 2000:
+            raise ValueError("limit must be in [1, 2000]")
+        statement = select(DevicePoseEvent)
+        if device_id:
+            statement = statement.where(DevicePoseEvent.device_id == device_id)
+        if after_id is not None:
+            statement = statement.where(DevicePoseEvent.id > after_id)
+        if before_id is not None:
+            statement = statement.where(DevicePoseEvent.id < before_id)
+        order = DevicePoseEvent.id.asc() if ascending else DevicePoseEvent.id.desc()
+        statement = statement.order_by(order).limit(limit)
+        with self.sessions() as session:
+            return list(session.scalars(statement))
+
+    def latest_pose_event(self, *, device_id: str | None = None) -> DevicePoseEvent | None:
+        rows = self.query_pose_events(limit=1, device_id=device_id)
+        return rows[0] if rows else None
 
     def count_inference_events(self) -> int:
         with self.sessions() as session:

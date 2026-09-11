@@ -16,6 +16,7 @@ from .mqtt import REQUEST_TOPIC, ServerState, on_message as legacy_message, devi
 from .r1_schema import parse_cloud_request, encode, SCHEMA_VERSION, POLICY_VERSION
 from .database import DATABASE_URL_ENV, Database, database_url_from_env
 from .telemetry_schema import TELEMETRY_TOPIC, parse_decision_event
+from .pose_schema import POSE_TOPIC, parse_pose_event
 
 PROBE_TOPIC = "gesture/+/policy/probe/request"
 
@@ -38,6 +39,7 @@ class R1Service:
         if self.event_path:
             self.event_path.parent.mkdir(parents=True, exist_ok=True)
         self.events, self.errors = [], []
+        self.pose_event_count = 0
         resolved_database_url = database_url if database_url is not None else database_url_from_env()
         self.database = Database(resolved_database_url) if resolved_database_url else None
         if self.database is not None:
@@ -50,7 +52,7 @@ class R1Service:
 
     def _connect(self, client, userdata, flags, reason, properties):
         if reason == 0:
-            client.subscribe([(REQUEST_TOPIC, 0), (PROBE_TOPIC, 0), (TELEMETRY_TOPIC, 0)])
+            client.subscribe([(REQUEST_TOPIC, 0), (PROBE_TOPIC, 0), (TELEMETRY_TOPIC, 0), (POSE_TOPIC, 0)])
 
     def _message(self, client, userdata, message):
         received = datetime.now(timezone.utc).isoformat()
@@ -58,6 +60,29 @@ class R1Service:
             data = json.loads(message.payload)
             if not isinstance(data, dict):
                 raise ValueError("MQTT request must be an object")
+            if message.topic.endswith("/pose"):
+                parts = message.topic.split("/")
+                pose = parse_pose_event(data)
+                if len(parts) != 3 or pose["device_id"] != parts[1]:
+                    raise ValueError("Pose topic/payload device mismatch")
+                database = getattr(self, "database", None)
+                if database is not None:
+                    database.save_pose_event(pose)
+                record = {"kind": "pose", "receive_time": received, "event": pose,
+                          "request_bytes": len(message.payload), "persisted": database is not None}
+                self.events.append(record)
+                if len(self.events) > 1000:
+                    del self.events[:-1000]
+                # Pose is high-rate visualization telemetry. PostgreSQL is its shared
+                # cross-process transport; do not inflate the policy JSONL event artifact.
+                pose_count = getattr(self, "pose_event_count", 0) + 1
+                self.pose_event_count = pose_count
+                if pose_count == 1 or pose_count % 50 == 0:
+                    print(
+                        f"R1_POSE_EVENT pose_id={pose['pose_id']} sequence={pose['sequence']} persisted={database is not None}",
+                        flush=True,
+                    )
+                return
             if message.topic.endswith("/telemetry"):
                 parts = message.topic.split("/")
                 event = parse_decision_event(data)

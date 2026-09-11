@@ -79,6 +79,20 @@ h2 { margin:5px 0 0; font-size:15px; letter-spacing:-.01em; }
 .device-twin-canvas { position:relative; height:388px; background:radial-gradient(circle at 50% 44%, rgba(44,81,120,.18), transparent 44%),#0a0f18; }
 .device-twin-canvas canvas { display:block; }
 .twin-note { position:absolute; left:14px; bottom:11px; font-size:9px; color:#607087; padding:6px 8px; background:rgba(7,11,18,.72); border:1px solid rgba(255,255,255,.06); border-radius:8px; backdrop-filter:blur(8px); }
+.pose-stream-badge { position:absolute; top:14px; right:14px; min-width:138px; padding:9px 10px; border:1px solid var(--border); border-radius:10px; background:rgba(7,11,18,.78); backdrop-filter:blur(10px); box-shadow:0 10px 30px rgba(0,0,0,.2); }
+.pose-stream-badge span,.pose-stream-badge strong,.pose-stream-badge small { display:block; }
+.pose-stream-badge span { font-size:8px; letter-spacing:.12em; font-weight:800; color:#93a2b7; }
+.pose-stream-badge strong { margin-top:4px; font-size:10px; color:#d8e7f8; }
+.pose-stream-badge small { margin-top:3px; font-size:8px; color:#617086; }
+.pose-stream-badge.live { border-color:rgba(69,224,161,.3); box-shadow:inset 0 0 24px rgba(69,224,161,.05),0 10px 30px rgba(0,0,0,.2); }
+.pose-stream-badge.live span { color:var(--local); }
+.pose-stream-badge.stale span { color:#ffbd69; }
+.pose-stream-badge.offline span { color:#7e8ca1; }
+.pose-readout { position:absolute; right:14px; bottom:12px; display:grid; grid-template-columns:repeat(3,minmax(72px,1fr)); overflow:hidden; border:1px solid rgba(255,255,255,.07); border-radius:10px; background:rgba(7,11,18,.78); backdrop-filter:blur(10px); }
+.pose-readout div { padding:7px 9px; border-right:1px solid rgba(255,255,255,.06); text-align:right; }
+.pose-readout div:last-child { border-right:0; }
+.pose-readout span { display:block; color:#5f6f85; font-size:7px; text-transform:uppercase; letter-spacing:.08em; }
+.pose-readout strong { display:block; margin-top:3px; color:#d8e7f8; font-size:10px; font-variant-numeric:tabular-nums; }
 .twin-state-row { display:grid; grid-template-columns:1fr 1fr 1.5fr 1.4fr; border-top:1px solid rgba(255,255,255,.055); }
 .twin-state-row div { padding:12px 15px; border-right:1px solid rgba(255,255,255,.055); min-width:0; }
 .twin-state-row div:last-child { border-right:0; }

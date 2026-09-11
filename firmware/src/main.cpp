@@ -7,6 +7,7 @@
 
 #include "version.h"
 #include "sensors/mpu6050.h"
+#include "sensors/attitude_estimator.h"
 #include "feature_extractor.h"
 #include "input_preprocessor.h"
 #include "prefix_runner.h"
@@ -75,6 +76,7 @@ static_assert(
 
 
 sampling::WindowBuffer runtimeBuffer;
+attitude::ComplementaryAttitudeEstimator attitudeEstimator;
 
 float inferenceWindow[
     sampling::WINDOW_SAMPLES
@@ -459,6 +461,12 @@ bool sampleOnce() {
         sampleTimestampUs
     );
 
+    attitude::PoseEstimate poseEstimate;
+    if (attitudeEstimator.update(sample, sampleTimestampUs, millis(), poseEstimate)) {
+        // Latest-value handoff only; this never waits for Wi-Fi/MQTT in the 100 Hz loop.
+        policy::submitPoseEstimate(poseEstimate);
+    }
+
     ++successfulSamples;
 
 
@@ -643,7 +651,7 @@ void setup() {
     Serial.println();
 
     Serial.println(
-        "=== Phase 10 / M10 - Cached LOCAL Failover Runtime ==="
+        "=== R1 Production Runtime + Phase 11 Sensor-Driven Device Twin ==="
     );
 
     Serial.printf(
@@ -704,9 +712,14 @@ void setup() {
         "Adaptive policy: meta-policy-v1.0.0; LOCAL reuses result; CLOUD sends 10 features"
     );
 
+    Serial.println(
+        "Attitude telemetry: pose-v1; complementary roll/pitch; boot-relative yaw; 5 Hz publish target"
+    );
+
 
     initializeSensor();
     calibrateGyroscope();
+    attitudeEstimator.reset();
     initializeUncertaintyModel();
     if (!policy::startAdaptiveRuntime()) fatal("R1 policy initialization failed.");
 

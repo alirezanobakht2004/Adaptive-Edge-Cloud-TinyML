@@ -1,0 +1,21 @@
+{
+  "version": "r1-pose-v1",
+  "schema_version": "pose-v1",
+  "topic": "gesture/{device_id}/pose",
+  "source": "mpu6050-6axis",
+  "source_sampling_hz": 100,
+  "publish_interval_ms_target": 200,
+  "estimator_version": "attitude-complementary-v1",
+  "orientation_version": "orientation-v1",
+  "roll_pitch_semantics": "gravity-corrected complementary-filter estimates",
+  "yaw_semantics": "boot-relative gyroscope-integrated estimate; drift-prone; not absolute heading",
+  "production_policy_input": false,
+  "contains_features_v1": false,
+  "contains_raw_window": false,
+  "postgres_table": "device_pose_events",
+  "dashboard_axis_mapping": {
+    "sensor_roll_x": "scene_x",
+    "sensor_pitch_y": "scene_negative_z",
+    "sensor_yaw_z": "scene_y"
+  }
+}
