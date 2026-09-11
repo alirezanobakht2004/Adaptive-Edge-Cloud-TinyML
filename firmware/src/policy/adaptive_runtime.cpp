@@ -24,7 +24,7 @@ constexpr const char* probeResponse = "gesture/esp32-r1/policy/probe/response";
 constexpr const char* telemetryTopic = "gesture/esp32-r1/telemetry";
 constexpr const char* telemetrySchema = "decision-r1-v1";
 constexpr const char* poseTopic = "gesture/esp32-r1/pose";
-constexpr uint32_t POSE_PUBLISH_INTERVAL_MS = 200;
+constexpr uint32_t POSE_PUBLISH_INTERVAL_MS = 100;
 constexpr const char* localVersion = "gesture-model-v1.1.0";
 constexpr const char* cloudVersion = "gesture-full-cloud-v1.0.0";
 struct Work {

@@ -6,7 +6,7 @@ namespace attitude {
 namespace {
 
 constexpr float RADIANS_TO_DEGREES = 57.29577951308232f;
-constexpr float COMPLEMENTARY_ALPHA = 0.98f;
+constexpr float COMPLEMENTARY_ALPHA = 0.95f;
 constexpr float MIN_VALID_DT_SECONDS = 0.001f;
 constexpr float MAX_VALID_DT_SECONDS = 0.100f;
 constexpr float MIN_GRAVITY_GATE_G = 0.75f;

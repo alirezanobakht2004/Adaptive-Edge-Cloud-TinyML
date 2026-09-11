@@ -713,7 +713,7 @@ void setup() {
     );
 
     Serial.println(
-        "Attitude telemetry: pose-v1; complementary roll/pitch; boot-relative yaw; 5 Hz publish target"
+        "Attitude telemetry: pose-v1; complementary roll/pitch; boot-relative yaw; 10 Hz publish target"
     );
 
 

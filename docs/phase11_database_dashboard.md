@@ -283,7 +283,7 @@ The correction adds a separate, versioned visualization path:
 existing MPU6050 100 Hz sample
   -> attitude-complementary-v1
   -> latest-value non-blocking queue
-  -> gesture/{device_id}/pose (pose-v1, 5 Hz publish target)
+  -> gesture/{device_id}/pose (pose-v1, 10 Hz publish target)
   -> R1 MQTT validation/persistence
   -> PostgreSQL device_pose_events
   -> FastAPI pose read API / pose WebSocket
@@ -301,7 +301,7 @@ Integrity constraints:
 - yaw reference is `boot-relative`, not absolute heading;
 - when pose telemetry becomes stale the 3D twin is marked stale/offline instead of pretending the last orientation is live.
 
-Firmware version for this checkpoint: `0.3.2-r1`. Pose configuration is frozen in `config/r1_pose_v1.json`.
+Firmware version for the responsiveness-tuned checkpoint: `0.3.3-r1`. The original 5 Hz pose contract remains preserved in `config/r1_pose_v1.json`; the active tuned configuration is versioned separately as `config/r1_pose_v1_1.json` with a 100 ms / 10 Hz publish target. Pose schema and estimator semantics are unchanged.
 
 Hardware Definition of Done remains measured rather than assumed:
 

@@ -14,7 +14,7 @@ from typing import Any, Iterable
 from .models import DevicePoseEvent, InferenceEvent
 
 DASHBOARD_API_VERSION = "dashboard-api-r1-v2"
-DASHBOARD_UI_VERSION = "dashboard-ui-r1-v2"
+DASHBOARD_UI_VERSION = "dashboard-ui-r1-v4"
 
 
 def event_to_dict(event: InferenceEvent, *, include_raw: bool = False) -> dict[str, Any]:

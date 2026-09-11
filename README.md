@@ -54,7 +54,7 @@ See [dashboard setup](dashboard/README.md).
 - Gesture classes: IDLE, SWIPE_LEFT, SWIPE_RIGHT, ROTATE_CW, SHAKE
 - Feature version: features-v1
 - Dataset version: dataset-v1
-- Firmware version: 0.3.2-r1
+- Firmware version: 0.3.3-r1
 - Accelerometer calibration: accel-cal-v1
 - Orientation protocol: orientation-v1
 

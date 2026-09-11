@@ -6,7 +6,7 @@
 
 namespace attitude {
 
-constexpr const char* ESTIMATOR_VERSION = "attitude-complementary-v1";
+constexpr const char* ESTIMATOR_VERSION = "attitude-complementary-v2";
 constexpr const char* POSE_SCHEMA_VERSION = "pose-v1";
 constexpr const char* POSE_SOURCE = "mpu6050-6axis";
 constexpr const char* YAW_REFERENCE = "boot-relative";

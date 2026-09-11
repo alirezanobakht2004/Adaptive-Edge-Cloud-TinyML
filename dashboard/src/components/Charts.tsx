@@ -24,6 +24,8 @@ const tooltipStyle = {
   color: '#eef4ff',
 }
 
+const GESTURE_CLASSES = ['IDLE', 'SWIPE_LEFT', 'SWIPE_RIGHT', 'ROTATE_CW', 'SHAKE'] as const
+
 function shortTime(value: string) {
   const date = new Date(value)
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
@@ -53,8 +55,9 @@ export function ConfidenceChart({ events }: { events: InferenceEvent[] }) {
         <XAxis dataKey="time" minTickGap={40} tick={{ fill: '#697a91', fontSize: 11 }} axisLine={false} tickLine={false} />
         <YAxis domain={[0, 100]} tick={{ fill: '#697a91', fontSize: 11 }} axisLine={false} tickLine={false} />
         <Tooltip contentStyle={tooltipStyle} formatter={(value: number | string) => `${Number(value).toFixed(1)}%`} />
-        <Area type="monotone" dataKey="confidence" stroke="#45e0a1" fill="url(#confidenceFill)" strokeWidth={2} />
-        <Area type="monotone" dataKey="uncertainty" stroke="#7f97ff" fill="url(#uncertaintyFill)" strokeWidth={2} />
+        <Legend wrapperStyle={{ fontSize: 12, color: '#8c9bb0' }} />
+        <Area type="monotone" dataKey="confidence" name="Confidence" stroke="#45e0a1" fill="url(#confidenceFill)" strokeWidth={2} />
+        <Area type="monotone" dataKey="uncertainty" name="Uncertainty" stroke="#7f97ff" fill="url(#uncertaintyFill)" strokeWidth={2} />
       </AreaChart>
     </ResponsiveContainer>
   )
@@ -70,13 +73,13 @@ export function ActionDonut({ summary }: { summary: DashboardSummary | null }) {
     <div className="donut-wrap">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
-          <Pie data={data} dataKey="value" innerRadius="67%" outerRadius="88%" paddingAngle={3} stroke="none">
+          <Pie data={data} dataKey="value" innerRadius="67%" outerRadius="88%" paddingAngle={total > 0 ? 3 : 0} stroke="none">
             {data.map((item) => <Cell key={item.name} fill={item.color} />)}
           </Pie>
           <Tooltip contentStyle={tooltipStyle} />
         </PieChart>
       </ResponsiveContainer>
-      <div className="donut-center"><strong>{total}</strong><span>decisions</span></div>
+      <div className="donut-center"><strong>{total > 0 ? total : '—'}</strong><span>{total > 0 ? 'decisions' : 'no events'}</span></div>
     </div>
   )
 }
@@ -127,12 +130,15 @@ export function RttHeapChart({ events }: { events: InferenceEvent[] }) {
 }
 
 export function GestureChart({ summary }: { summary: DashboardSummary | null }) {
-  const data = Object.entries(summary?.gesture_counts ?? {}).map(([gesture, value]) => ({ gesture, value }))
+  const data = GESTURE_CLASSES.map((gesture) => ({
+    gesture,
+    value: summary?.gesture_counts[gesture] ?? 0,
+  }))
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 2 }}>
         <CartesianGrid stroke="rgba(255,255,255,.05)" vertical={false} />
-        <XAxis dataKey="gesture" tick={{ fill: '#697a91', fontSize: 10 }} axisLine={false} tickLine={false} />
+        <XAxis dataKey="gesture" interval={0} tick={{ fill: '#697a91', fontSize: 9 }} axisLine={false} tickLine={false} />
         <YAxis allowDecimals={false} tick={{ fill: '#697a91', fontSize: 11 }} axisLine={false} tickLine={false} />
         <Tooltip contentStyle={tooltipStyle} />
         <Bar dataKey="value" name="Observed windows" radius={[7, 7, 2, 2]} fill="#55c9ff" />

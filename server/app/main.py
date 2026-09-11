@@ -23,7 +23,7 @@ PHASE = "11"
 MILESTONE = "M11"
 CHECKPOINT = "M11.2"
 DEFAULT_WS_POLL_MS = 750
-DEFAULT_POSE_WS_POLL_MS = 80
+DEFAULT_POSE_WS_POLL_MS = 50
 
 
 def create_app(database_url: str | None = None) -> FastAPI:
