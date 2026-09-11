@@ -13,7 +13,11 @@ from typing import Any
 
 POSE_SCHEMA_VERSION = "pose-v1"
 POSE_TOPIC = "gesture/+/pose"
-ESTIMATOR_VERSION = "attitude-complementary-v1"
+ESTIMATOR_VERSION = "attitude-complementary-v2"
+SUPPORTED_ESTIMATOR_VERSIONS = {
+    "attitude-complementary-v1",
+    ESTIMATOR_VERSION,
+}
 ORIENTATION_VERSION = "orientation-v1"
 POSE_SOURCE = "mpu6050-6axis"
 YAW_REFERENCE = "boot-relative"
@@ -71,7 +75,7 @@ def parse_pose_event(payload: bytes | str | dict[str, Any]) -> dict[str, Any]:
     data["pitch_deg_est"] = _finite_number(data, "pitch_deg_est", minimum=-180.0, maximum=180.0)
     data["yaw_rel_deg_est"] = _finite_number(data, "yaw_rel_deg_est", minimum=-180.0, maximum=180.0)
 
-    if data["estimator_version"] != ESTIMATOR_VERSION:
+    if data["estimator_version"] not in SUPPORTED_ESTIMATOR_VERSIONS:
         raise ValueError("unsupported estimator_version")
     if data["orientation_version"] != ORIENTATION_VERSION:
         raise ValueError("unsupported orientation_version")

@@ -190,6 +190,8 @@ void publishDecisionTelemetry(const Pending& p) {
     }
 }
 void logDecision(const Pending& p) {
+    constexpr bool VERBOSE_DECISION_SERIAL_LOG = false;
+
     const auto& r = p.result;
     const auto& cached = p.work.cached;
     String line = String("R1_DECISION {\"request_id\":\"") + p.id + "\",\"window_id\":" + p.work.window
@@ -218,7 +220,9 @@ void logDecision(const Pending& p) {
     if (r.requestIssued) line += ",\"request_elapsed_ms\":" + String(r.roundTripUs / 1000.f, 3);
     if (r.effectiveAction == 1 && r.success)
         line += ",\"e2e_latency_ms\":" + String(r.roundTripUs / 1000.f, 3) + ",\"server_compute_latency_ms\":" + String(r.serverComputeMs, 6);
-    Serial.print(line + "}\n");
+    if (VERBOSE_DECISION_SERIAL_LOG) {
+        Serial.print(line + "}\n");
+    }
     publishDecisionTelemetry(p);
 }
 void finish(Pending& p) {

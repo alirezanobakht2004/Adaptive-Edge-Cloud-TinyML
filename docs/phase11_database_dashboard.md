@@ -281,7 +281,7 @@ The correction adds a separate, versioned visualization path:
 
 ```text
 existing MPU6050 100 Hz sample
-  -> attitude-complementary-v1
+  -> attitude-complementary-v2
   -> latest-value non-blocking queue
   -> gesture/{device_id}/pose (pose-v1, 10 Hz publish target)
   -> R1 MQTT validation/persistence
@@ -301,7 +301,13 @@ Integrity constraints:
 - yaw reference is `boot-relative`, not absolute heading;
 - when pose telemetry becomes stale the 3D twin is marked stale/offline instead of pretending the last orientation is live.
 
-Firmware version for the responsiveness-tuned checkpoint: `0.3.3-r1`. The original 5 Hz pose contract remains preserved in `config/r1_pose_v1.json`; the active tuned configuration is versioned separately as `config/r1_pose_v1_1.json` with a 100 ms / 10 Hz publish target. Pose schema and estimator semantics are unchanged.
+Firmware version for the validated M11.2d pose-responsiveness checkpoint: `0.3.5-r1`. The original 5 Hz pose contract remains preserved in `config/r1_pose_v1.json`, and the earlier 10 Hz estimator-v1 configuration remains preserved in `config/r1_pose_v1_1.json`. The validated estimator-v2 configuration is versioned separately as `config/r1_pose_v1_2.json`: the pose publish target remains 100 ms / 10 Hz while the complementary-filter alpha is 0.95 under `attitude-complementary-v2`. The `pose-v1` schema remains visualization-only and is not a production policy input.
+
+Measured M11.2d validation showed stationary stability with roll standard deviation `0.020 deg`, pitch standard deviation `0.022 deg`, roll peak-to-peak `0.099 deg`, and pitch peak-to-peak `0.126 deg`. No material stationary jitter regression was observed. The alpha change from 0.98 to 0.95 was not independently isolated with a fully controlled equal-trial A/B experiment, so no claim is made that alpha alone caused the responsiveness improvement.
+
+The primary confirmed pose-cadence bottleneck was verbose `R1_DECISION` UART logging at 115200 baud. In a measured 30-second A/B test, disabling only that verbose Serial output while preserving MQTT/DB decision telemetry improved effective persisted pose cadence from `7.13 Hz` to `9.74 Hz`, reduced mean pose interval from `140.3 ms` to `102.7 ms`, and reduced intervals >=200 ms from `62` to `5`. The final Home +Z -> +X step test on firmware `0.3.5-r1` measured `9.21 Hz` effective pose cadence, `27.1 ms` mean persisted pose age, and `203.8 ms` from the measured 10-degree departure point to the 80% pitch-response point. This step metric includes physical hand motion and is not reported as pure estimator latency.
+
+Final hardware sanity checks passed for Home +Z, +X, -X, +Y, -Y, and -Z orientations. Dashboard stale-state semantics and MQTT-ingestion recovery were also validated: stale decision/pose data was explicitly marked stale after ingestion stopped, and live state recovered after `r1_mqtt` restarted. Decision telemetry continued to persist successfully with firmware `0.3.5-r1`.
 
 Hardware Definition of Done remains measured rather than assumed:
 
