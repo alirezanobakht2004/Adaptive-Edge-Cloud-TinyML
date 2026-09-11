@@ -45,7 +45,7 @@ BOOT_PREFIXES = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Record labeled 1-second IMU windows for dataset-v1."
+        description="Record labeled 1-second IMU windows with explicit dataset provenance."
     )
     parser.add_argument("--gesture", required=True, help="Gesture class name.")
     parser.add_argument("--user", default="user_01", help="Dataset user id.")
@@ -55,6 +55,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--baud", type=int, default=115200, help="Serial baud rate.")
     parser.add_argument("--countdown", type=int, default=3, help="Countdown seconds before each capture.")
     parser.add_argument("--notes", default="", help="Optional note stored in metadata.")
+    parser.add_argument(
+        "--dataset-version",
+        default=None,
+        help=(
+            "Collection dataset version. Defaults to firmware/include/version.h. "
+            "Use dataset-v2 for the Phase-12 new-user continual-learning dataset."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -100,6 +108,15 @@ def load_expected_versions() -> dict[str, str]:
         versions[key] = match.group(1)
 
     return versions
+
+
+def sanitize_dataset_version(value: str) -> str:
+    value = value.strip()
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", value):
+        raise ValueError(
+            "dataset-version must contain only letters, numbers, '_', '-', or '.'."
+        )
+    return value
 
 
 def sanitize_id(value: str, field_name: str) -> str:
@@ -225,7 +242,7 @@ def validate_timing(rows: list[list[str]], sample_rate_hz: int) -> None:
 
     if any(delta != expected_period_ms for delta in deltas):
         raise ValueError(
-            f"Dataset-v1 timing check failed: expected every delta to be "
+            f"Gesture-capture timing check failed: expected every delta to be "
             f"{expected_period_ms} ms."
         )
 
@@ -274,9 +291,16 @@ def main() -> int:
 
         hardware = load_hardware_config()
         versions = load_expected_versions()
+        collection_dataset_version = sanitize_dataset_version(
+            args.dataset_version or versions["dataset_version"]
+        )
+        boot_versions = dict(versions)
+        boot_versions["dataset_version"] = collection_dataset_version
 
         if hardware["sample_rate_hz"] != 100:
-            raise ValueError("dataset-v1 recorder requires sampling_rate_hz=100.")
+            raise ValueError(
+                "Gesture recorder requires sampling_rate_hz=100 for the current contract."
+            )
 
         gesture_slug = gesture.lower()
         raw_dir = RAW_ROOT / user_id / session_id
@@ -290,7 +314,7 @@ def main() -> int:
         ) as ser:
             read_boot_and_verify(
                 ser=ser,
-                expected_versions=versions,
+                expected_versions=boot_versions,
                 expected_who_am_i=hardware["who_am_i"],
             )
 
@@ -316,7 +340,7 @@ def main() -> int:
                 validate_timing(rows, hardware["sample_rate_hz"])
 
                 metadata = {
-                    "dataset_version": versions["dataset_version"],
+                    "dataset_version": collection_dataset_version,
                     "gesture": gesture,
                     "user": user_id,
                     "session": session_id,

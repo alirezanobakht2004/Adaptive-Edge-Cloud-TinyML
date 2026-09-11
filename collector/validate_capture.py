@@ -29,7 +29,7 @@ VERSION_DEFINE_NAMES = {
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Validate one dataset-v1 gesture capture and its metadata."
+        description="Validate one versioned gesture capture and its metadata."
     )
     parser.add_argument("csv_path", type=Path, help="Path to one raw gesture CSV file.")
     parser.add_argument(
@@ -37,6 +37,14 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=None,
         help="Optional metadata JSON path. By default it is inferred from data/raw/...",
+    )
+    parser.add_argument(
+        "--dataset-version",
+        default=None,
+        help=(
+            "Expected collection dataset version. Defaults to firmware/include/version.h. "
+            "Use dataset-v2 for Phase-12 new-user captures."
+        ),
     )
     return parser.parse_args()
 
@@ -152,6 +160,7 @@ def validate_metadata(
     expected_versions: dict[str, str],
     hardware: dict,
     gestures: set[str],
+    expected_dataset_version: str,
 ) -> dict:
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
 
@@ -177,7 +186,7 @@ def validate_metadata(
         raise ValueError("Metadata is missing fields: " + ", ".join(missing))
 
     expected_values = {
-        "dataset_version": expected_versions["dataset_version"],
+        "dataset_version": expected_dataset_version,
         "firmware_version": expected_versions["firmware_version"],
         "accel_calibration_version": expected_versions["accel_calibration_version"],
         "orientation_version": expected_versions["orientation_version"],
@@ -216,7 +225,7 @@ def validate_metadata(
     try:
         relative = csv_path.resolve().relative_to(raw_root)
     except ValueError as exc:
-        raise ValueError("CSV must be stored under data/raw for dataset-v1.") from exc
+        raise ValueError("CSV must be stored under data/raw for a versioned gesture dataset.") from exc
 
     if len(relative.parts) != 3:
         raise ValueError(
@@ -262,6 +271,15 @@ def main() -> int:
             raise FileNotFoundError(metadata_path)
 
         versions = load_expected_versions()
+        expected_dataset_version = (
+            args.dataset_version.strip()
+            if args.dataset_version is not None
+            else versions["dataset_version"]
+        )
+        if not re.fullmatch(r"[A-Za-z0-9._-]+", expected_dataset_version):
+            raise ValueError(
+                "dataset-version must contain only letters, numbers, '_', '-', or '.'."
+            )
         hardware = load_expected_hardware()
         gestures = load_gestures()
 
@@ -272,12 +290,14 @@ def main() -> int:
             expected_versions=versions,
             hardware=hardware,
             gestures=gestures,
+            expected_dataset_version=expected_dataset_version,
         )
 
-        print("PASS: dataset-v1 capture is structurally valid.")
+        print("PASS: versioned gesture capture is structurally valid.")
         print(f"CSV: {csv_path.relative_to(REPO_ROOT)}")
         print(f"Metadata: {metadata_path.relative_to(REPO_ROOT)}")
         print(f"Gesture: {metadata['gesture']}")
+        print(f"Dataset version: {metadata['dataset_version']}")
         print(f"Samples: {csv_result['rows']}")
         print(f"Period: {csv_result['period_ms']} ms")
         print(f"Duration: {csv_result['duration_ms']} ms")

@@ -1,0 +1,59 @@
+{
+  "version": "continual-learning-v1",
+  "phase": 12,
+  "milestone": "M12",
+  "base_model_version": "gesture-model-v1.1.0",
+  "old_dataset_version": "dataset-v1",
+  "new_dataset_version": "dataset-v2",
+  "feature_version": "features-v1",
+  "gesture_classes": [
+    "IDLE",
+    "SWIPE_LEFT",
+    "SWIPE_RIGHT",
+    "ROTATE_CW",
+    "SHAKE"
+  ],
+  "preprocessing_contract": {
+    "sample_rate_hz": 100,
+    "window_samples": 100,
+    "window_ms": 1000,
+    "accel_range_g": 4,
+    "gyro_range_dps": 500,
+    "orientation_version": "orientation-v1",
+    "feature_version": "features-v1",
+    "normalization": "reuse frozen statistics embedded in gesture-model-v1.1.0; do not refit on user_02"
+  },
+  "old_user": {
+    "user_id": "user_01",
+    "fisher_source_session": "session_01",
+    "validation_session": "session_02",
+    "test_session": "session_03"
+  },
+  "new_user": {
+    "user_id": "user_02",
+    "must_be_distinct_person_from_old_user": true,
+    "train_session": "session_01",
+    "validation_session": "session_02",
+    "test_session": "session_03",
+    "samples_per_class": {
+      "train": 120,
+      "validation": 40,
+      "test": 40
+    }
+  },
+  "methods": [
+    "BASE_BEFORE_ADAPTATION",
+    "NAIVE_FINE_TUNING",
+    "EWC_FINE_TUNING"
+  ],
+  "evaluation": {
+    "inference_mode": "deterministic training=false",
+    "old_test": "user_01/session_03",
+    "new_test": "user_02/session_03",
+    "test_sets_must_not_be_used_for_training_or_model_selection": true
+  },
+  "policy_scope": {
+    "production_actions": ["LOCAL", "CLOUD"],
+    "pose_v1_is_policy_input": false
+  }
+}
