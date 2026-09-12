@@ -2,7 +2,7 @@
 
 ## Canonical status
 
-**IN PROGRESS — Checkpoint 11.2: FastAPI read API + WebSocket + live dashboard UI.**
+**COMPLETED — Phase 11 / M11: PostgreSQL persistence, FastAPI read API, WebSocket, live dashboard UI, and sensor-driven 3D device twin.**
 
 Phase 10 / M10 is closed by `docs/phase10_m10_completion.md` and its controlled
 ESP32 hardware evidence. This phase does not reopen learned-policy or failover work.
@@ -268,9 +268,11 @@ The English-only dark command UI includes:
 - [x] frontend dependencies install on the project machine
 - [x] `npm run build` succeeds on the project machine
 - [x] live browser dashboard receives ESP32 decision events through WebSocket
-- [ ] sampled dashboard values match PostgreSQL rows
+- [x] sampled dashboard values match PostgreSQL rows
 
-The decision-dashboard portion of Checkpoint 11.2 passed project-machine build and live-WebSocket checks. The checkpoint remains open for the M11.2c sensor-driven 3D twin hardware/browser validation below and the sampled dashboard-vs-database value check.
+The decision-dashboard portion of Checkpoint 11.2 passed project-machine build,
+live-WebSocket, and sampled dashboard-vs-database checks. The sensor-driven 3D twin
+hardware/browser validation below completed the Phase 11 / M11 scope.
 
 
 ## Checkpoint 11.2c — sensor-driven 3D device twin
@@ -311,11 +313,14 @@ Final hardware sanity checks passed for Home +Z, +X, -X, +Y, -Y, and -Z orientat
 
 Hardware Definition of Done remains measured rather than assumed:
 
-- [ ] firmware builds/uploads on ESP32-S3;
-- [ ] serial emits periodic finite `R1_POSE` estimates while normal 100 Hz inference continues;
-- [ ] `device_pose_events` receives at least 10 real rows;
-- [ ] `python tools/phase11/validate_pose.py --device-id esp32-r1 --min-events 10` passes;
-- [ ] browser reports `LIVE ATTITUDE`;
-- [ ] physical tilt/rotation produces a smooth corresponding change in the 3D twin;
-- [ ] stationary home pose remains visually stable;
-- [ ] no sampling/inference regression is observed in the existing runtime diagnostics.
+- [x] firmware builds/uploads on ESP32-S3;
+- [x] serial emits periodic finite `R1_POSE` estimates while normal 100 Hz inference continues;
+- [x] `device_pose_events` receives at least 10 real rows;
+- [x] `python tools/phase11/validate_pose.py --device-id esp32-r1 --min-events 10` passes;
+- [x] browser reports `LIVE ATTITUDE`;
+- [x] physical tilt/rotation produces a smooth corresponding change in the 3D twin;
+- [x] stationary home pose remains visually stable;
+- [x] no sampling/inference regression is observed in the existing runtime diagnostics.
+
+Final implementation scope completed through Phase 11. Phases 12–14 are future work,
+not incomplete requirements of the defense-ready undergraduate system.

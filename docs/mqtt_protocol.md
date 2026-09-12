@@ -25,7 +25,10 @@ Application RTT probes use `gesture/{device_id}/policy/probe/request` and
 `.../response`, schema `r1-probe-v1`. This is shared pre-decision state acquisition,
 not a CLOUD inference request. LOCAL sends no inference request and reuses the
 already-computed five-pass local result. Probe overhead is not charged a second
-time as LOCAL action cost. No formal failover behavior is introduced.
+time as LOCAL action cost. In the completed production runtime, Wi-Fi, MQTT,
+publish, or server-response failure changes the effective action to LOCAL, reuses
+the already-computed local result, and records the transition/failure. It does not
+execute duplicate local inference for that window.
 
 The ESP32 logs `R1_DECISION` JSON with raw and normalized policy state, selected
 action, cached/final predictions, versions, result status and zero second inference

@@ -9,18 +9,18 @@ policy under Architecture Revision R1. CLOUD sends exactly 10 features-v1 values
 
 ## Current project phase
 
-Canonical Phase 11 / M11: Database + Dashboard, **IN PROGRESS — Checkpoint M11.2c (Sensor-Driven 3D Device Twin)**.
-Phase 9 / M9 learned binary LOCAL/CLOUD policy and Phase 10 / M10 failover are closed.
-Phase 11 Checkpoints 11.1/11.1b (versioned decision telemetry → PostgreSQL persistence
-and reboot-safe request identity) are closed with live ESP32/PostgreSQL evidence. The
-current checkpoint completes the sensor-driven 3D device-twin path on top of the validated read API, WebSocket stream and live dashboard UI.
+**Final implementation scope completed through Phase 11.** Phase 11 / M11 Database +
+Dashboard, including the sensor-driven 3D device twin, is completed and defense-ready.
+Phases 12–14 (continual learning with EWC, model OTA, and extended final evaluation)
+are documented future work outside the frozen undergraduate implementation scope.
 
 Split1/2/3 artifacts and regression suites remain fixed experimental baselines.
 Production adaptive action space remains exactly `LOCAL` / `CLOUD`; CLOUD sends
 exactly ten `features-v1` values. Historical four-action datasets/configurations are
 immutable evidence, not production policy contracts.
 
-See [Phase 10 completion](docs/phase10_m10_completion.md),
+See [defense readiness](DEFENSE_READINESS_REPORT.md),
+[Phase 10 completion](docs/phase10_m10_completion.md),
 [Phase 11 plan](docs/phase11_database_dashboard.md), and
 [R1 migration audit](docs/phase9_r1_migration_audit.md).
 

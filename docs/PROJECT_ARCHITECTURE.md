@@ -8,6 +8,32 @@
 
 ---
 
+## Architecture Revision R2 — 2026-09-12
+
+**Status:** Final undergraduate scope frozen; defense-ready.
+
+Final implementation scope completed through Phase 11. Phases 0–11 are completed;
+Phases 12–14 are future work and are not completion requirements for the undergraduate
+project. This revision does not change the R1 production architecture or add features.
+
+The completed contribution set is:
+
+- Adaptive Edge–Cloud Inference
+- Local TinyML inference
+- Uncertainty Estimation
+- Learned Binary LOCAL/CLOUD Policy
+- MQTT / Server-Assisted Inference
+- Failover
+- PostgreSQL telemetry persistence
+- Live Dashboard / Observability
+- Validated Split-Inference baselines
+
+Continual learning with EWC, model OTA, and extended final evaluation remain future
+work only. They must not be presented as implemented contributions or as missing work
+that makes the current project incomplete.
+
+---
+
 ## Architecture Revision R1 — 2026-09-08
 
 **Status:** Evidence-driven scope revision after completed Split-Inference and policy-action studies.
@@ -73,9 +99,10 @@ The system combines:
 - failover to full local inference when Wi-Fi/server access is unavailable
 - experiment logging
 - dashboard visualization
-- continual learning with EWC
-- model update through OTA
 - comparison against simpler baselines
+
+Continual learning with EWC and model update through OTA are documented future work
+outside the frozen undergraduate implementation scope.
 
 Split inference was implemented and validated as an experimental branch of the project. However, measured and controlled action-space studies showed that the current 64/48/32-dimensional split embeddings are not competitive with directly offloading the 10-feature vector. Therefore adaptive split-point selection is no longer part of the production MVP policy.
 
@@ -164,9 +191,8 @@ Secondary questions:
                                   Cloud Result
                                        │
                    ┌───────────────────┼───────────────────┐
-                   ▼                   ▼                   ▼
-              PostgreSQL          Dashboard          Continual
-                                                     Learning / OTA
+                   ▼                   ▼
+              PostgreSQL          Dashboard
 ```
 
 ### 3.2 Experimental split branch
@@ -1982,7 +2008,6 @@ Tasks:
 - export/deploy policy to ESP32 if deployment artifact passes parity/resource checks
 - log LOCAL/CLOUD decisions
 
-
 Definition of done:
 
 ```text
@@ -2016,6 +2041,8 @@ live dashboard reflects device decisions
 
 ### Phase 12 — Continual learning
 
+**Status:** future work; outside the frozen undergraduate implementation scope.
+
 Definition of done:
 
 ```text
@@ -2024,6 +2051,8 @@ measured continual-learning experiment completed
 
 ### Phase 13 — OTA
 
+**Status:** future work; outside the frozen undergraduate implementation scope.
+
 Definition of done:
 
 ```text
@@ -2031,6 +2060,8 @@ ESP32 moves from model version N to N+1 safely
 ```
 
 ### Phase 14 — Final evaluation
+
+**Status:** future work; outside the frozen undergraduate implementation scope.
 
 Compare:
 
@@ -2215,7 +2246,7 @@ split prefix compute
 
 This is an evidence-driven engineering decision and should be presented as such.
 
-### Demo moment 6 — model evolution
+### Future-work illustration — model evolution (not part of the defense demo)
 
 ```text
 new-user labeled data
@@ -2258,7 +2289,7 @@ When project decisions conflict, use this priority:
 
 If this document is changed, record the reason.
 
-### Current recorded architecture change
+### Current recorded architecture changes
 
 Revision R1 narrows the production adaptive action space from:
 
@@ -2280,6 +2311,10 @@ Reason:
 - further compact-bottleneck redesign would require retraining/revalidation and expand project scope.
 
 This revision follows Priority 1: measured project behavior overrides the earlier architectural expectation.
+
+Revision R2 freezes the completed undergraduate implementation scope at Phase 11.
+Phases 12–14 remain documented future work. This is a scope-status correction only;
+it does not alter measured behavior or the R1 binary production architecture.
 
 ## 40. Current Fixed Decisions
 
@@ -2367,10 +2402,10 @@ Dashboard:
 FastAPI + HTML/JS + Chart.js + WebSocket
 
 Continual learning:
-EWC
+Future work: EWC
 
 Update:
-Model OTA
+Future work: Model OTA
 
 Energy:
 estimated/simulated proxy unless measurement hardware is added
