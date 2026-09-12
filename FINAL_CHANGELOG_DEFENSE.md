@@ -16,14 +16,16 @@ changed. Historical evidence was preserved.
 | Corrected the MQTT protocol's obsolete “no failover” statement | Match completed Phase 10 behavior: effective LOCAL, logged transition, cached-result reuse, no duplicate inference | `docs/mqtt_protocol.md` |
 | Added the final audit, limitations, demo checklist, claims checklist, and traffic-light state | Provide the required defense handoff | `DEFENSE_READINESS_REPORT.md` |
 | Added this complete modification record | Provide traceability for defense-only changes | `FINAL_CHANGELOG_DEFENSE.md` |
+| Added final live system and hardware verification record | Freeze the actual software, stack, firmware, telemetry, dashboard, and failover results used for packaging | `FINAL_DEFENSE_VERIFICATION.md` |
 
 ## Verification record
 
 - `pytest -q`: 343 passed; 7 third-party deprecation warnings.
 - `npm run build`: passed; Vite emitted a non-blocking bundle-size warning.
 - `docker compose config --quiet`: passed.
-- PlatformIO firmware build: not rerun because `pio` is unavailable in the current PATH;
-  existing build/upload and hardware evidence were not modified.
+- PlatformIO was located at the standard user installation path. The production firmware
+  build and COM10 upload passed; the coordinated on-device failover suite passed all six
+  Unity cases. See `FINAL_DEFENSE_VERIFICATION.md` for the wrapper compatibility note.
 
 ## Deliberately unchanged artifacts
 
